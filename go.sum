@@ -229,6 +229,9 @@ github.com/saas-mingyang/mingyang-admin-common v1.7.4/go.mod h1:s2b/YYCU8K0Mdx9g
 github.com/saas-mingyang/mingyang-admin-job v0.0.1/go.mod h1:vgerCCgDi+goLW4RG497IwIU9E10bIzTe9doSdd07/E=
 github.com/saas-mingyang/mingyang-admin-job v1.7.4 h1:mUCSa6TGdyIRqqTRBEvS/3Hn7eiFRPJhEArDo47Eehw=
 github.com/saas-mingyang/mingyang-admin-job v1.7.4/go.mod h1:Z6QFJ1Md79uUtWRLyHo9NS6yDuL7JT0A45fN4P7dY5I=
+github.com/saas-mingyang/mingyang-admin-message-center v0.0.3/go.mod h1:vWvDvGCGWmE+MOOxDJ4vu6mLr0sLGK0p+zfl1MF8lTQ=
+github.com/saas-mingyang/mingyang-admin-message-center v1.7.4 h1:e3yqYfy7K92iVwIBeTpIN9jOL9nSFU5Dc2x/F4VXKeM=
+github.com/saas-mingyang/mingyang-admin-message-center v1.7.4/go.mod h1:zP2WnDE6NfPVkD1GleN7t+fIxJEGW7ZwCGgrt5xk+2Y=
 github.com/spaolacci/murmur3 v1.1.0 h1:7c1g84S4BPRrfL5Xrdp6fOJ206sU9y293DDHaoy0bLI=
 github.com/spaolacci/murmur3 v1.1.0/go.mod h1:JwIasOWyU6f++ZhiEuf87xNszmSA2myDM2Kzu9HwQUA=
 github.com/spf13/pflag v1.0.6 h1:jFzHGLGAlb3ruxLB8MhbI6A8+AQX/2eW4qeyNZXNp2o=
@@ -242,8 +245,6 @@ github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/suyuan32/base64Captcha v1.3.8 h1:ru0hyiGN3MfFc6X9RBLrs/7byrHhf+yw9HgT3NzjNq0=
 github.com/suyuan32/base64Captcha v1.3.8/go.mod h1:tzL9xK/DMSYjDVvJn9rni+5txn46LTgDoS1bhxA3Qng=
-github.com/saas-mingyang/mingyang-admin-message-center v1.7.4 h1:e3yqYfy7K92iVwIBeTpIN9jOL9nSFU5Dc2x/F4VXKeM=
-github.com/saas-mingyang/mingyang-admin-message-center v1.7.4/go.mod h1:zP2WnDE6NfPVkD1GleN7t+fIxJEGW7ZwCGgrt5xk+2Y=
 github.com/suyuan32/simple-admin-tools v1.9.1 h1:RRFT2Dn22H/b0A4aB+ixul/6xzmTFXG10ER64DuCS0A=
 github.com/suyuan32/simple-admin-tools v1.9.1/go.mod h1:v3y8WAJTCt+g/+Ve0BZuSga38gwdDh/2WNuvve9Tz2Y=
 github.com/x448/float16 v0.8.4 h1:qLwI1I70+NjRFUR3zs1JPUCgaCXSh3SW62uAKT1mSBM=

@@ -13,7 +13,7 @@ require (
 	github.com/redis/go-redis/v9 v9.16.0
 	github.com/saas-mingyang/mingyang-admin-common v0.0.1
 	github.com/saas-mingyang/mingyang-admin-job v0.0.1
-	github.com/saas-mingyang/mingyang-admin-message-center v0.0.1
+	github.com/saas-mingyang/mingyang-admin-message-center v0.0.3
 	github.com/zeromicro/go-zero v1.9.2
 	golang.org/x/oauth2 v0.32.0
 	google.golang.org/grpc v1.76.0
