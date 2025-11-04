@@ -11,10 +11,10 @@ require (
 	github.com/larksuite/oapi-sdk-go/v3 v3.4.25
 	github.com/mojocn/base64Captcha v1.3.8
 	github.com/redis/go-redis/v9 v9.16.0
-	github.com/saas-mingyang/mingyang-admin-common v0.0.1
-	github.com/saas-mingyang/mingyang-admin-job v0.0.1
-	github.com/saas-mingyang/mingyang-admin-message-center v0.0.3
-	github.com/zeromicro/go-zero v1.9.2
+	github.com/saas-mingyang/mingyang-admin-common v0.0.2
+	github.com/saas-mingyang/mingyang-admin-job v0.0.2
+	github.com/saas-mingyang/mingyang-admin-message-center v0.0.5
+	github.com/zeromicro/go-zero v1.9.1
 	golang.org/x/oauth2 v0.32.0
 	google.golang.org/grpc v1.76.0
 	google.golang.org/protobuf v1.36.10

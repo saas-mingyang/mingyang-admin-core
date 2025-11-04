@@ -2,14 +2,14 @@ Name: core.rpc
 ListenOn: 0.0.0.0:9101
 
 DatabaseConf:
-  Type: mysql
-  Host: 127.0.0.1
-  Port: 3306
-  DBName: simple_admin
-  Username: # set your username
-  Password: # set your password
+  Type: postgres
+  Host: 192.168.201.188
+  Port: 5432
+  DBName: mingyang_admin
+  Username: postgres
+  Password: AM38xymTdFree4Fh
   MaxOpenConn: 100
-  SSLMode: disable # disable or require
+  SSLMode: disable
   CacheTime: 5
 
 Log:
@@ -23,7 +23,8 @@ Log:
   StackCoolDownMillis: 100
 
 RedisConf:
-  Host: 127.0.0.1:6379
+  Host: 192.168.201.58:6379
+  Db: 0
 
 Prometheus:
   Host: 0.0.0.0
