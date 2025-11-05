@@ -49,6 +49,20 @@ func (_c *DictionaryDetailCreate) SetNillableUpdatedAt(v *time.Time) *Dictionary
 	return _c
 }
 
+// SetTenantID sets the "tenant_id" field.
+func (_c *DictionaryDetailCreate) SetTenantID(v uint64) *DictionaryDetailCreate {
+	_c.mutation.SetTenantID(v)
+	return _c
+}
+
+// SetNillableTenantID sets the "tenant_id" field if the given value is not nil.
+func (_c *DictionaryDetailCreate) SetNillableTenantID(v *uint64) *DictionaryDetailCreate {
+	if v != nil {
+		_c.SetTenantID(*v)
+	}
+	return _c
+}
+
 // SetStatus sets the "status" field.
 func (_c *DictionaryDetailCreate) SetStatus(v uint8) *DictionaryDetailCreate {
 	_c.mutation.SetStatus(v)
@@ -177,6 +191,10 @@ func (_c *DictionaryDetailCreate) defaults() {
 		v := dictionarydetail.DefaultUpdatedAt()
 		_c.mutation.SetUpdatedAt(v)
 	}
+	if _, ok := _c.mutation.TenantID(); !ok {
+		v := dictionarydetail.DefaultTenantID
+		_c.mutation.SetTenantID(v)
+	}
 	if _, ok := _c.mutation.Status(); !ok {
 		v := dictionarydetail.DefaultStatus
 		_c.mutation.SetStatus(v)
@@ -194,6 +212,9 @@ func (_c *DictionaryDetailCreate) check() error {
 	}
 	if _, ok := _c.mutation.UpdatedAt(); !ok {
 		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "DictionaryDetail.updated_at"`)}
+	}
+	if _, ok := _c.mutation.TenantID(); !ok {
+		return &ValidationError{Name: "tenant_id", err: errors.New(`ent: missing required field "DictionaryDetail.tenant_id"`)}
 	}
 	if _, ok := _c.mutation.Sort(); !ok {
 		return &ValidationError{Name: "sort", err: errors.New(`ent: missing required field "DictionaryDetail.sort"`)}
@@ -246,6 +267,10 @@ func (_c *DictionaryDetailCreate) createSpec() (*DictionaryDetail, *sqlgraph.Cre
 	if value, ok := _c.mutation.UpdatedAt(); ok {
 		_spec.SetField(dictionarydetail.FieldUpdatedAt, field.TypeTime, value)
 		_node.UpdatedAt = value
+	}
+	if value, ok := _c.mutation.TenantID(); ok {
+		_spec.SetField(dictionarydetail.FieldTenantID, field.TypeUint64, value)
+		_node.TenantID = value
 	}
 	if value, ok := _c.mutation.Status(); ok {
 		_spec.SetField(dictionarydetail.FieldStatus, field.TypeUint8, value)

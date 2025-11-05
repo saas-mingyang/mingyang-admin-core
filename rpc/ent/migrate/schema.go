@@ -67,6 +67,7 @@ var (
 		{Name: "id", Type: field.TypeUint64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
+		{Name: "tenant_id", Type: field.TypeUint64, Comment: "Tenant ID | 租户 ID", Default: 1},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
 		{Name: "sort", Type: field.TypeUint32, Comment: "Sort Number | 排序编号", Default: 1},
 		{Name: "name", Type: field.TypeString, Comment: "Department name | 部门名称"},
@@ -86,7 +87,7 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "sys_departments_sys_departments_children",
-				Columns:    []*schema.Column{SysDepartmentsColumns[11]},
+				Columns:    []*schema.Column{SysDepartmentsColumns[12]},
 				RefColumns: []*schema.Column{SysDepartmentsColumns[0]},
 				OnDelete:   schema.SetNull,
 			},
@@ -98,6 +99,7 @@ var (
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
+		{Name: "tenant_id", Type: field.TypeUint64, Comment: "Tenant ID | 租户 ID", Default: 1},
 		{Name: "title", Type: field.TypeString, Comment: "The title shown in the ui | 展示名称 （建议配合i18n）"},
 		{Name: "name", Type: field.TypeString, Unique: true, Comment: "The name of dictionary for search | 字典搜索名称"},
 		{Name: "desc", Type: field.TypeString, Nullable: true, Comment: "The description of dictionary | 字典的描述"},
@@ -115,6 +117,7 @@ var (
 		{Name: "id", Type: field.TypeUint64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
+		{Name: "tenant_id", Type: field.TypeUint64, Comment: "Tenant ID | 租户 ID", Default: 1},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
 		{Name: "sort", Type: field.TypeUint32, Comment: "Sort Number | 排序编号", Default: 1},
 		{Name: "title", Type: field.TypeString, Comment: "The title shown in the ui | 展示名称 （建议配合i18n）"},
@@ -131,7 +134,7 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "sys_dictionary_details_sys_dictionaries_dictionary_details",
-				Columns:    []*schema.Column{SysDictionaryDetailsColumns[8]},
+				Columns:    []*schema.Column{SysDictionaryDetailsColumns[9]},
 				RefColumns: []*schema.Column{SysDictionariesColumns[0]},
 				OnDelete:   schema.SetNull,
 			},
@@ -220,6 +223,7 @@ var (
 		{Name: "id", Type: field.TypeUint64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
+		{Name: "tenant_id", Type: field.TypeUint64, Comment: "Tenant ID | 租户 ID", Default: 1},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
 		{Name: "sort", Type: field.TypeUint32, Comment: "Sort Number | 排序编号", Default: 1},
 		{Name: "name", Type: field.TypeString, Comment: "Position Name | 职位名称"},
@@ -236,7 +240,7 @@ var (
 			{
 				Name:    "position_code",
 				Unique:  true,
-				Columns: []*schema.Column{SysPositionsColumns[6]},
+				Columns: []*schema.Column{SysPositionsColumns[7]},
 			},
 		},
 	}
@@ -262,6 +266,37 @@ var (
 				Name:    "role_code",
 				Unique:  true,
 				Columns: []*schema.Column{SysRolesColumns[5]},
+			},
+		},
+	}
+	// SysTenantsColumns holds the columns for the "sys_tenants" table.
+	SysTenantsColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
+		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
+		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
+		{Name: "deleted_at", Type: field.TypeTime, Nullable: true, Comment: "Delete Time | 删除日期"},
+		{Name: "name", Type: field.TypeString, Unique: true, Size: 128, Comment: "名称，不能为空"},
+		{Name: "code", Type: field.TypeString, Unique: true, Size: 128, Comment: "编码，不能为空"},
+		{Name: "admin_id", Type: field.TypeInt64, Comment: "管理员id，不能为空，创建租户的时候顺便创建用户"},
+		{Name: "parent_id", Type: field.TypeInt64, Comment: "父级id，不能为空,0为第一级", Default: 0},
+	}
+	// SysTenantsTable holds the schema information for the "sys_tenants" table.
+	SysTenantsTable = &schema.Table{
+		Name:       "sys_tenants",
+		Comment:    "tenant Table | 租户表",
+		Columns:    SysTenantsColumns,
+		PrimaryKey: []*schema.Column{SysTenantsColumns[0]},
+		Indexes: []*schema.Index{
+			{
+				Name:    "tenant_id_status",
+				Unique:  false,
+				Columns: []*schema.Column{SysTenantsColumns[0], SysTenantsColumns[3]},
+			},
+			{
+				Name:    "tenant_parent_id_status",
+				Unique:  false,
+				Columns: []*schema.Column{SysTenantsColumns[8], SysTenantsColumns[3]},
 			},
 		},
 	}
@@ -360,6 +395,31 @@ var (
 			},
 		},
 	}
+	// TenantRolesColumns holds the columns for the "tenant_roles" table.
+	TenantRolesColumns = []*schema.Column{
+		{Name: "tenant_id", Type: field.TypeUint64},
+		{Name: "role_id", Type: field.TypeUint64},
+	}
+	// TenantRolesTable holds the schema information for the "tenant_roles" table.
+	TenantRolesTable = &schema.Table{
+		Name:       "tenant_roles",
+		Columns:    TenantRolesColumns,
+		PrimaryKey: []*schema.Column{TenantRolesColumns[0], TenantRolesColumns[1]},
+		ForeignKeys: []*schema.ForeignKey{
+			{
+				Symbol:     "tenant_roles_tenant_id",
+				Columns:    []*schema.Column{TenantRolesColumns[0]},
+				RefColumns: []*schema.Column{SysTenantsColumns[0]},
+				OnDelete:   schema.Cascade,
+			},
+			{
+				Symbol:     "tenant_roles_role_id",
+				Columns:    []*schema.Column{TenantRolesColumns[1]},
+				RefColumns: []*schema.Column{SysRolesColumns[0]},
+				OnDelete:   schema.Cascade,
+			},
+		},
+	}
 	// UserPositionsColumns holds the columns for the "user_positions" table.
 	UserPositionsColumns = []*schema.Column{
 		{Name: "user_id", Type: field.TypeUUID},
@@ -421,9 +481,11 @@ var (
 		SysOauthProvidersTable,
 		SysPositionsTable,
 		SysRolesTable,
+		SysTenantsTable,
 		SysTokensTable,
 		SysUsersTable,
 		RoleMenusTable,
+		TenantRolesTable,
 		UserPositionsTable,
 		UserRolesTable,
 	}
@@ -460,6 +522,9 @@ func init() {
 	SysRolesTable.Annotation = &entsql.Annotation{
 		Table: "sys_roles",
 	}
+	SysTenantsTable.Annotation = &entsql.Annotation{
+		Table: "sys_tenants",
+	}
 	SysTokensTable.Annotation = &entsql.Annotation{
 		Table: "sys_tokens",
 	}
@@ -469,6 +534,8 @@ func init() {
 	}
 	RoleMenusTable.ForeignKeys[0].RefTable = SysRolesTable
 	RoleMenusTable.ForeignKeys[1].RefTable = SysMenusTable
+	TenantRolesTable.ForeignKeys[0].RefTable = SysTenantsTable
+	TenantRolesTable.ForeignKeys[1].RefTable = SysRolesTable
 	UserPositionsTable.ForeignKeys[0].RefTable = SysUsersTable
 	UserPositionsTable.ForeignKeys[1].RefTable = SysPositionsTable
 	UserRolesTable.ForeignKeys[0].RefTable = SysUsersTable

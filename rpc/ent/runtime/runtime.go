@@ -16,6 +16,7 @@ import (
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/position"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/role"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/schema"
+	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenant"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/token"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/user"
 )
@@ -85,6 +86,8 @@ func init() {
 	_ = departmentMixinFields1
 	departmentMixinFields2 := departmentMixin[2].Fields()
 	_ = departmentMixinFields2
+	departmentMixinFields3 := departmentMixin[3].Fields()
+	_ = departmentMixinFields3
 	departmentFields := schema.Department{}.Fields()
 	_ = departmentFields
 	// departmentDescCreatedAt is the schema descriptor for created_at field.
@@ -97,12 +100,16 @@ func init() {
 	department.DefaultUpdatedAt = departmentDescUpdatedAt.Default.(func() time.Time)
 	// department.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
 	department.UpdateDefaultUpdatedAt = departmentDescUpdatedAt.UpdateDefault.(func() time.Time)
+	// departmentDescTenantID is the schema descriptor for tenant_id field.
+	departmentDescTenantID := departmentMixinFields1[0].Descriptor()
+	// department.DefaultTenantID holds the default value on creation for the tenant_id field.
+	department.DefaultTenantID = departmentDescTenantID.Default.(uint64)
 	// departmentDescStatus is the schema descriptor for status field.
-	departmentDescStatus := departmentMixinFields1[0].Descriptor()
+	departmentDescStatus := departmentMixinFields2[0].Descriptor()
 	// department.DefaultStatus holds the default value on creation for the status field.
 	department.DefaultStatus = departmentDescStatus.Default.(uint8)
 	// departmentDescSort is the schema descriptor for sort field.
-	departmentDescSort := departmentMixinFields2[0].Descriptor()
+	departmentDescSort := departmentMixinFields3[0].Descriptor()
 	// department.DefaultSort holds the default value on creation for the sort field.
 	department.DefaultSort = departmentDescSort.Default.(uint32)
 	// departmentDescParentID is the schema descriptor for parent_id field.
@@ -114,6 +121,8 @@ func init() {
 	_ = dictionaryMixinFields0
 	dictionaryMixinFields1 := dictionaryMixin[1].Fields()
 	_ = dictionaryMixinFields1
+	dictionaryMixinFields2 := dictionaryMixin[2].Fields()
+	_ = dictionaryMixinFields2
 	dictionaryFields := schema.Dictionary{}.Fields()
 	_ = dictionaryFields
 	// dictionaryDescCreatedAt is the schema descriptor for created_at field.
@@ -130,6 +139,10 @@ func init() {
 	dictionaryDescStatus := dictionaryMixinFields1[0].Descriptor()
 	// dictionary.DefaultStatus holds the default value on creation for the status field.
 	dictionary.DefaultStatus = dictionaryDescStatus.Default.(uint8)
+	// dictionaryDescTenantID is the schema descriptor for tenant_id field.
+	dictionaryDescTenantID := dictionaryMixinFields2[0].Descriptor()
+	// dictionary.DefaultTenantID holds the default value on creation for the tenant_id field.
+	dictionary.DefaultTenantID = dictionaryDescTenantID.Default.(uint64)
 	// dictionaryDescIsPublic is the schema descriptor for is_public field.
 	dictionaryDescIsPublic := dictionaryFields[3].Descriptor()
 	// dictionary.DefaultIsPublic holds the default value on creation for the is_public field.
@@ -141,6 +154,8 @@ func init() {
 	_ = dictionarydetailMixinFields1
 	dictionarydetailMixinFields2 := dictionarydetailMixin[2].Fields()
 	_ = dictionarydetailMixinFields2
+	dictionarydetailMixinFields3 := dictionarydetailMixin[3].Fields()
+	_ = dictionarydetailMixinFields3
 	dictionarydetailFields := schema.DictionaryDetail{}.Fields()
 	_ = dictionarydetailFields
 	// dictionarydetailDescCreatedAt is the schema descriptor for created_at field.
@@ -153,12 +168,16 @@ func init() {
 	dictionarydetail.DefaultUpdatedAt = dictionarydetailDescUpdatedAt.Default.(func() time.Time)
 	// dictionarydetail.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
 	dictionarydetail.UpdateDefaultUpdatedAt = dictionarydetailDescUpdatedAt.UpdateDefault.(func() time.Time)
+	// dictionarydetailDescTenantID is the schema descriptor for tenant_id field.
+	dictionarydetailDescTenantID := dictionarydetailMixinFields1[0].Descriptor()
+	// dictionarydetail.DefaultTenantID holds the default value on creation for the tenant_id field.
+	dictionarydetail.DefaultTenantID = dictionarydetailDescTenantID.Default.(uint64)
 	// dictionarydetailDescStatus is the schema descriptor for status field.
-	dictionarydetailDescStatus := dictionarydetailMixinFields1[0].Descriptor()
+	dictionarydetailDescStatus := dictionarydetailMixinFields2[0].Descriptor()
 	// dictionarydetail.DefaultStatus holds the default value on creation for the status field.
 	dictionarydetail.DefaultStatus = dictionarydetailDescStatus.Default.(uint8)
 	// dictionarydetailDescSort is the schema descriptor for sort field.
-	dictionarydetailDescSort := dictionarydetailMixinFields2[0].Descriptor()
+	dictionarydetailDescSort := dictionarydetailMixinFields3[0].Descriptor()
 	// dictionarydetail.DefaultSort holds the default value on creation for the sort field.
 	dictionarydetail.DefaultSort = dictionarydetailDescSort.Default.(uint32)
 	menuMixin := schema.Menu{}.Mixin()
@@ -268,6 +287,8 @@ func init() {
 	_ = positionMixinFields1
 	positionMixinFields2 := positionMixin[2].Fields()
 	_ = positionMixinFields2
+	positionMixinFields3 := positionMixin[3].Fields()
+	_ = positionMixinFields3
 	positionFields := schema.Position{}.Fields()
 	_ = positionFields
 	// positionDescCreatedAt is the schema descriptor for created_at field.
@@ -280,12 +301,16 @@ func init() {
 	position.DefaultUpdatedAt = positionDescUpdatedAt.Default.(func() time.Time)
 	// position.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
 	position.UpdateDefaultUpdatedAt = positionDescUpdatedAt.UpdateDefault.(func() time.Time)
+	// positionDescTenantID is the schema descriptor for tenant_id field.
+	positionDescTenantID := positionMixinFields1[0].Descriptor()
+	// position.DefaultTenantID holds the default value on creation for the tenant_id field.
+	position.DefaultTenantID = positionDescTenantID.Default.(uint64)
 	// positionDescStatus is the schema descriptor for status field.
-	positionDescStatus := positionMixinFields1[0].Descriptor()
+	positionDescStatus := positionMixinFields2[0].Descriptor()
 	// position.DefaultStatus holds the default value on creation for the status field.
 	position.DefaultStatus = positionDescStatus.Default.(uint8)
 	// positionDescSort is the schema descriptor for sort field.
-	positionDescSort := positionMixinFields2[0].Descriptor()
+	positionDescSort := positionMixinFields3[0].Descriptor()
 	// position.DefaultSort holds the default value on creation for the sort field.
 	position.DefaultSort = positionDescSort.Default.(uint32)
 	roleMixin := schema.Role{}.Mixin()
@@ -317,6 +342,77 @@ func init() {
 	roleDescSort := roleFields[3].Descriptor()
 	// role.DefaultSort holds the default value on creation for the sort field.
 	role.DefaultSort = roleDescSort.Default.(uint32)
+	tenantMixin := schema.Tenant{}.Mixin()
+	tenantMixinHooks2 := tenantMixin[2].Hooks()
+	tenant.Hooks[0] = tenantMixinHooks2[0]
+	tenantMixinInters2 := tenantMixin[2].Interceptors()
+	tenant.Interceptors[0] = tenantMixinInters2[0]
+	tenantMixinFields0 := tenantMixin[0].Fields()
+	_ = tenantMixinFields0
+	tenantMixinFields1 := tenantMixin[1].Fields()
+	_ = tenantMixinFields1
+	tenantFields := schema.Tenant{}.Fields()
+	_ = tenantFields
+	// tenantDescCreatedAt is the schema descriptor for created_at field.
+	tenantDescCreatedAt := tenantMixinFields0[1].Descriptor()
+	// tenant.DefaultCreatedAt holds the default value on creation for the created_at field.
+	tenant.DefaultCreatedAt = tenantDescCreatedAt.Default.(func() time.Time)
+	// tenantDescUpdatedAt is the schema descriptor for updated_at field.
+	tenantDescUpdatedAt := tenantMixinFields0[2].Descriptor()
+	// tenant.DefaultUpdatedAt holds the default value on creation for the updated_at field.
+	tenant.DefaultUpdatedAt = tenantDescUpdatedAt.Default.(func() time.Time)
+	// tenant.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
+	tenant.UpdateDefaultUpdatedAt = tenantDescUpdatedAt.UpdateDefault.(func() time.Time)
+	// tenantDescStatus is the schema descriptor for status field.
+	tenantDescStatus := tenantMixinFields1[0].Descriptor()
+	// tenant.DefaultStatus holds the default value on creation for the status field.
+	tenant.DefaultStatus = tenantDescStatus.Default.(uint8)
+	// tenantDescName is the schema descriptor for name field.
+	tenantDescName := tenantFields[0].Descriptor()
+	// tenant.NameValidator is a validator for the "name" field. It is called by the builders before save.
+	tenant.NameValidator = func() func(string) error {
+		validators := tenantDescName.Validators
+		fns := [...]func(string) error{
+			validators[0].(func(string) error),
+			validators[1].(func(string) error),
+		}
+		return func(name string) error {
+			for _, fn := range fns {
+				if err := fn(name); err != nil {
+					return err
+				}
+			}
+			return nil
+		}
+	}()
+	// tenantDescCode is the schema descriptor for code field.
+	tenantDescCode := tenantFields[1].Descriptor()
+	// tenant.CodeValidator is a validator for the "code" field. It is called by the builders before save.
+	tenant.CodeValidator = func() func(string) error {
+		validators := tenantDescCode.Validators
+		fns := [...]func(string) error{
+			validators[0].(func(string) error),
+			validators[1].(func(string) error),
+		}
+		return func(code string) error {
+			for _, fn := range fns {
+				if err := fn(code); err != nil {
+					return err
+				}
+			}
+			return nil
+		}
+	}()
+	// tenantDescAdminID is the schema descriptor for admin_id field.
+	tenantDescAdminID := tenantFields[2].Descriptor()
+	// tenant.AdminIDValidator is a validator for the "admin_id" field. It is called by the builders before save.
+	tenant.AdminIDValidator = tenantDescAdminID.Validators[0].(func(int64) error)
+	// tenantDescParentID is the schema descriptor for parent_id field.
+	tenantDescParentID := tenantFields[3].Descriptor()
+	// tenant.DefaultParentID holds the default value on creation for the parent_id field.
+	tenant.DefaultParentID = tenantDescParentID.Default.(int64)
+	// tenant.ParentIDValidator is a validator for the "parent_id" field. It is called by the builders before save.
+	tenant.ParentIDValidator = tenantDescParentID.Validators[0].(func(int64) error)
 	tokenMixin := schema.Token{}.Mixin()
 	tokenMixinFields0 := tokenMixin[0].Fields()
 	_ = tokenMixinFields0

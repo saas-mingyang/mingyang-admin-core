@@ -22,6 +22,8 @@ type DictionaryDetail struct {
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	// Update Time | 修改日期
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
+	// Tenant ID | 租户 ID
+	TenantID uint64 `json:"tenant_id,omitempty"`
 	// Status 1: normal 2: ban | 状态 1 正常 2 禁用
 	Status uint8 `json:"status,omitempty"`
 	// Sort Number | 排序编号
@@ -65,7 +67,7 @@ func (*DictionaryDetail) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case dictionarydetail.FieldID, dictionarydetail.FieldStatus, dictionarydetail.FieldSort, dictionarydetail.FieldDictionaryID:
+		case dictionarydetail.FieldID, dictionarydetail.FieldTenantID, dictionarydetail.FieldStatus, dictionarydetail.FieldSort, dictionarydetail.FieldDictionaryID:
 			values[i] = new(sql.NullInt64)
 		case dictionarydetail.FieldTitle, dictionarydetail.FieldKey, dictionarydetail.FieldValue:
 			values[i] = new(sql.NullString)
@@ -103,6 +105,12 @@ func (_m *DictionaryDetail) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field updated_at", values[i])
 			} else if value.Valid {
 				_m.UpdatedAt = value.Time
+			}
+		case dictionarydetail.FieldTenantID:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field tenant_id", values[i])
+			} else if value.Valid {
+				_m.TenantID = uint64(value.Int64)
 			}
 		case dictionarydetail.FieldStatus:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -186,6 +194,9 @@ func (_m *DictionaryDetail) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("updated_at=")
 	builder.WriteString(_m.UpdatedAt.Format(time.ANSIC))
+	builder.WriteString(", ")
+	builder.WriteString("tenant_id=")
+	builder.WriteString(fmt.Sprintf("%v", _m.TenantID))
 	builder.WriteString(", ")
 	builder.WriteString("status=")
 	builder.WriteString(fmt.Sprintf("%v", _m.Status))

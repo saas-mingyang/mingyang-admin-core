@@ -23,6 +23,8 @@ type Dictionary struct {
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
 	// Status 1: normal 2: ban | 状态 1 正常 2 禁用
 	Status uint8 `json:"status,omitempty"`
+	// Tenant ID | 租户 ID
+	TenantID uint64 `json:"tenant_id,omitempty"`
 	// The title shown in the ui | 展示名称 （建议配合i18n）
 	Title string `json:"title,omitempty"`
 	// The name of dictionary for search | 字典搜索名称
@@ -62,7 +64,7 @@ func (*Dictionary) scanValues(columns []string) ([]any, error) {
 		switch columns[i] {
 		case dictionary.FieldIsPublic:
 			values[i] = new(sql.NullBool)
-		case dictionary.FieldID, dictionary.FieldStatus:
+		case dictionary.FieldID, dictionary.FieldStatus, dictionary.FieldTenantID:
 			values[i] = new(sql.NullInt64)
 		case dictionary.FieldTitle, dictionary.FieldName, dictionary.FieldDesc:
 			values[i] = new(sql.NullString)
@@ -106,6 +108,12 @@ func (_m *Dictionary) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field status", values[i])
 			} else if value.Valid {
 				_m.Status = uint8(value.Int64)
+			}
+		case dictionary.FieldTenantID:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field tenant_id", values[i])
+			} else if value.Valid {
+				_m.TenantID = uint64(value.Int64)
 			}
 		case dictionary.FieldTitle:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -180,6 +188,9 @@ func (_m *Dictionary) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("status=")
 	builder.WriteString(fmt.Sprintf("%v", _m.Status))
+	builder.WriteString(", ")
+	builder.WriteString("tenant_id=")
+	builder.WriteString(fmt.Sprintf("%v", _m.TenantID))
 	builder.WriteString(", ")
 	builder.WriteString("title=")
 	builder.WriteString(_m.Title)

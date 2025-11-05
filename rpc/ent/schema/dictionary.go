@@ -30,6 +30,7 @@ func (Dictionary) Mixin() []ent.Mixin {
 	return []ent.Mixin{
 		mixins.IDMixin{},
 		mixins.StatusMixin{},
+		mixins.TenantMixin{},
 	}
 }
 

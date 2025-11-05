@@ -9,6 +9,7 @@ require (
 	github.com/duke-git/lancet/v2 v2.3.7
 	github.com/gofrs/uuid/v5 v5.4.0
 	github.com/larksuite/oapi-sdk-go/v3 v3.4.25
+	github.com/lib/pq v1.10.9
 	github.com/mojocn/base64Captcha v1.3.8
 	github.com/redis/go-redis/v9 v9.16.0
 	github.com/saas-mingyang/mingyang-admin-common v0.0.2
@@ -82,7 +83,6 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.18.1 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
-	github.com/lib/pq v1.10.9 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-sqlite3 v1.14.32 // indirect

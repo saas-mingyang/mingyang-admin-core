@@ -5,7 +5,7 @@ DatabaseConf:
   Type: postgres
   Host: 192.168.201.188
   Port: 5432
-  DBName: mingyang_admin
+  DBName: zero_demo
   Username: postgres
   Password: AM38xymTdFree4Fh
   MaxOpenConn: 100

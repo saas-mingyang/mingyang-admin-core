@@ -13,6 +13,7 @@ import (
 	uuid "github.com/gofrs/uuid/v5"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/menu"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/role"
+	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenant"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/user"
 )
 
@@ -139,6 +140,21 @@ func (_c *RoleCreate) AddUsers(v ...*User) *RoleCreate {
 		ids[i] = v[i].ID
 	}
 	return _c.AddUserIDs(ids...)
+}
+
+// AddTenantIDs adds the "tenants" edge to the Tenant entity by IDs.
+func (_c *RoleCreate) AddTenantIDs(ids ...uint64) *RoleCreate {
+	_c.mutation.AddTenantIDs(ids...)
+	return _c
+}
+
+// AddTenants adds the "tenants" edges to the Tenant entity.
+func (_c *RoleCreate) AddTenants(v ...*Tenant) *RoleCreate {
+	ids := make([]uint64, len(v))
+	for i := range v {
+		ids[i] = v[i].ID
+	}
+	return _c.AddTenantIDs(ids...)
 }
 
 // Mutation returns the RoleMutation object of the builder.
@@ -303,6 +319,22 @@ func (_c *RoleCreate) createSpec() (*Role, *sqlgraph.CreateSpec) {
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
 				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+			},
+		}
+		for _, k := range nodes {
+			edge.Target.Nodes = append(edge.Target.Nodes, k)
+		}
+		_spec.Edges = append(_spec.Edges, edge)
+	}
+	if nodes := _c.mutation.TenantsIDs(); len(nodes) > 0 {
+		edge := &sqlgraph.EdgeSpec{
+			Rel:     sqlgraph.M2M,
+			Inverse: true,
+			Table:   role.TenantsTable,
+			Columns: role.TenantsPrimaryKey,
+			Bidi:    false,
+			Target: &sqlgraph.EdgeTarget{
+				IDSpec: sqlgraph.NewFieldSpec(tenant.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {

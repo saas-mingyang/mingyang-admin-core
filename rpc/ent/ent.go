@@ -21,6 +21,7 @@ import (
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/oauthprovider"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/position"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/role"
+	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenant"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/token"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/user"
 )
@@ -92,6 +93,7 @@ func checkColumn(t, c string) error {
 			oauthprovider.Table:    oauthprovider.ValidColumn,
 			position.Table:         position.ValidColumn,
 			role.Table:             role.ValidColumn,
+			tenant.Table:           tenant.ValidColumn,
 			token.Table:            token.ValidColumn,
 			user.Table:             user.ValidColumn,
 		})

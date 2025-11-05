@@ -63,6 +63,20 @@ func (_c *DictionaryCreate) SetNillableStatus(v *uint8) *DictionaryCreate {
 	return _c
 }
 
+// SetTenantID sets the "tenant_id" field.
+func (_c *DictionaryCreate) SetTenantID(v uint64) *DictionaryCreate {
+	_c.mutation.SetTenantID(v)
+	return _c
+}
+
+// SetNillableTenantID sets the "tenant_id" field if the given value is not nil.
+func (_c *DictionaryCreate) SetNillableTenantID(v *uint64) *DictionaryCreate {
+	if v != nil {
+		_c.SetTenantID(*v)
+	}
+	return _c
+}
+
 // SetTitle sets the "title" field.
 func (_c *DictionaryCreate) SetTitle(v string) *DictionaryCreate {
 	_c.mutation.SetTitle(v)
@@ -171,6 +185,10 @@ func (_c *DictionaryCreate) defaults() {
 		v := dictionary.DefaultStatus
 		_c.mutation.SetStatus(v)
 	}
+	if _, ok := _c.mutation.TenantID(); !ok {
+		v := dictionary.DefaultTenantID
+		_c.mutation.SetTenantID(v)
+	}
 	if _, ok := _c.mutation.IsPublic(); !ok {
 		v := dictionary.DefaultIsPublic
 		_c.mutation.SetIsPublic(v)
@@ -184,6 +202,9 @@ func (_c *DictionaryCreate) check() error {
 	}
 	if _, ok := _c.mutation.UpdatedAt(); !ok {
 		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "Dictionary.updated_at"`)}
+	}
+	if _, ok := _c.mutation.TenantID(); !ok {
+		return &ValidationError{Name: "tenant_id", err: errors.New(`ent: missing required field "Dictionary.tenant_id"`)}
 	}
 	if _, ok := _c.mutation.Title(); !ok {
 		return &ValidationError{Name: "title", err: errors.New(`ent: missing required field "Dictionary.title"`)}
@@ -237,6 +258,10 @@ func (_c *DictionaryCreate) createSpec() (*Dictionary, *sqlgraph.CreateSpec) {
 	if value, ok := _c.mutation.Status(); ok {
 		_spec.SetField(dictionary.FieldStatus, field.TypeUint8, value)
 		_node.Status = value
+	}
+	if value, ok := _c.mutation.TenantID(); ok {
+		_spec.SetField(dictionary.FieldTenantID, field.TypeUint64, value)
+		_node.TenantID = value
 	}
 	if value, ok := _c.mutation.Title(); ok {
 		_spec.SetField(dictionary.FieldTitle, field.TypeString, value)

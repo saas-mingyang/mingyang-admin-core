@@ -65,6 +65,11 @@ func UpdatedAt(v time.Time) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldEQ(FieldUpdatedAt, v))
 }
 
+// TenantID applies equality check predicate on the "tenant_id" field. It's identical to TenantIDEQ.
+func TenantID(v uint64) predicate.DictionaryDetail {
+	return predicate.DictionaryDetail(sql.FieldEQ(FieldTenantID, v))
+}
+
 // Status applies equality check predicate on the "status" field. It's identical to StatusEQ.
 func Status(v uint8) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldEQ(FieldStatus, v))
@@ -173,6 +178,46 @@ func UpdatedAtLT(v time.Time) predicate.DictionaryDetail {
 // UpdatedAtLTE applies the LTE predicate on the "updated_at" field.
 func UpdatedAtLTE(v time.Time) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldLTE(FieldUpdatedAt, v))
+}
+
+// TenantIDEQ applies the EQ predicate on the "tenant_id" field.
+func TenantIDEQ(v uint64) predicate.DictionaryDetail {
+	return predicate.DictionaryDetail(sql.FieldEQ(FieldTenantID, v))
+}
+
+// TenantIDNEQ applies the NEQ predicate on the "tenant_id" field.
+func TenantIDNEQ(v uint64) predicate.DictionaryDetail {
+	return predicate.DictionaryDetail(sql.FieldNEQ(FieldTenantID, v))
+}
+
+// TenantIDIn applies the In predicate on the "tenant_id" field.
+func TenantIDIn(vs ...uint64) predicate.DictionaryDetail {
+	return predicate.DictionaryDetail(sql.FieldIn(FieldTenantID, vs...))
+}
+
+// TenantIDNotIn applies the NotIn predicate on the "tenant_id" field.
+func TenantIDNotIn(vs ...uint64) predicate.DictionaryDetail {
+	return predicate.DictionaryDetail(sql.FieldNotIn(FieldTenantID, vs...))
+}
+
+// TenantIDGT applies the GT predicate on the "tenant_id" field.
+func TenantIDGT(v uint64) predicate.DictionaryDetail {
+	return predicate.DictionaryDetail(sql.FieldGT(FieldTenantID, v))
+}
+
+// TenantIDGTE applies the GTE predicate on the "tenant_id" field.
+func TenantIDGTE(v uint64) predicate.DictionaryDetail {
+	return predicate.DictionaryDetail(sql.FieldGTE(FieldTenantID, v))
+}
+
+// TenantIDLT applies the LT predicate on the "tenant_id" field.
+func TenantIDLT(v uint64) predicate.DictionaryDetail {
+	return predicate.DictionaryDetail(sql.FieldLT(FieldTenantID, v))
+}
+
+// TenantIDLTE applies the LTE predicate on the "tenant_id" field.
+func TenantIDLTE(v uint64) predicate.DictionaryDetail {
+	return predicate.DictionaryDetail(sql.FieldLTE(FieldTenantID, v))
 }
 
 // StatusEQ applies the EQ predicate on the "status" field.

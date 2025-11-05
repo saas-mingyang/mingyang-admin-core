@@ -35,6 +35,7 @@ func (Department) Fields() []ent.Field {
 func (Department) Mixin() []ent.Mixin {
 	return []ent.Mixin{
 		mixins.IDMixin{},
+		mixins.TenantMixin{},
 		mixins.StatusMixin{},
 		mixins.SortMixin{},
 	}
