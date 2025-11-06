@@ -6,8 +6,6 @@ import (
 	"entgo.io/ent/schema"
 	"entgo.io/ent/schema/field"
 	"entgo.io/ent/schema/index"
-	"github.com/gofrs/uuid/v5"
-
 	"github.com/saas-mingyang/mingyang-admin-common/orm/ent/mixins"
 )
 
@@ -17,8 +15,8 @@ type Token struct {
 
 func (Token) Fields() []ent.Field {
 	return []ent.Field{
-		field.UUID("uuid", uuid.UUID{}).
-			Comment(" User's UUID | 用户的UUID"),
+		field.Uint64("user_id").Optional().Default(1).
+			Comment(" User's ID | 用户的ID"),
 		field.String("username").
 			Comment("Username | 用户名").
 			Default("unknown"),
@@ -44,7 +42,7 @@ func (Token) Edges() []ent.Edge {
 
 func (Token) Indexes() []ent.Index {
 	return []ent.Index{
-		index.Fields("uuid"),
+		index.Fields("user_id"),
 		index.Fields("expired_at"),
 	}
 }

@@ -19,8 +19,8 @@ func (Department) Fields() []ent.Field {
 			Comment("Department name | 部门名称"),
 		field.String("ancestors").Optional().
 			Comment("Parents' IDs | 父级列表"),
-		field.String("leader").
-			Comment("Department leader | 部门负责人").Optional(),
+		field.Uint64("leader").Optional().Default(1).
+			Comment("Department leader | 部门负责人"),
 		field.String("phone").
 			Comment("Leader's phone number | 负责人电话").Optional(),
 		field.String("email").

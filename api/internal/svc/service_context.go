@@ -39,10 +39,10 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	trans := i18n.NewTranslator(c.I18nConf, i18n2.LocaleFS)
 
 	return &ServiceContext{
-		Config:    c,
-		CoreRpc:   coreclient.NewCore(zrpc.NewClientIfEnable(c.CoreRpc)),
-		JobRpc:    jobclient.NewJob(zrpc.NewClientIfEnable(c.JobRpc)),
-		McmsRpc:   mcmsclient.NewMcms(zrpc.NewClientIfEnable(c.McmsRpc)),
+		Config:  c,
+		CoreRpc: coreclient.NewCore(zrpc.NewClientIfEnable(c.CoreRpc)),
+		//JobRpc:    jobclient.NewJob(zrpc.NewClientIfEnable(c.JobRpc)),
+		//McmsRpc:   mcmsclient.NewMcms(zrpc.NewClientIfEnable(c.McmsRpc)),
 		Captcha:   captcha.MustNewOriginalRedisCaptcha(c.Captcha, rds),
 		Redis:     rds,
 		Casbin:    cbn,
