@@ -9,7 +9,6 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	uuid "github.com/gofrs/uuid/v5"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/token"
 )
 
@@ -17,16 +16,15 @@ import (
 type Token struct {
 	config `json:"-"`
 	// ID of the ent.
-	// UUID
-	ID uuid.UUID `json:"id,omitempty"`
+	ID uint64 `json:"id,omitempty"`
 	// Create Time | 创建日期
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	// Update Time | 修改日期
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
 	// Status 1: normal 2: ban | 状态 1 正常 2 禁用
 	Status uint8 `json:"status,omitempty"`
-	//  User's UUID | 用户的UUID
-	UUID uuid.UUID `json:"uuid,omitempty"`
+	//  User's ID | 用户的ID
+	UserID uint64 `json:"user_id,omitempty"`
 	// Username | 用户名
 	Username string `json:"username,omitempty"`
 	// Token string | Token 字符串
@@ -43,14 +41,12 @@ func (*Token) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case token.FieldStatus:
+		case token.FieldID, token.FieldStatus, token.FieldUserID:
 			values[i] = new(sql.NullInt64)
 		case token.FieldUsername, token.FieldToken, token.FieldSource:
 			values[i] = new(sql.NullString)
 		case token.FieldCreatedAt, token.FieldUpdatedAt, token.FieldExpiredAt:
 			values[i] = new(sql.NullTime)
-		case token.FieldID, token.FieldUUID:
-			values[i] = new(uuid.UUID)
 		default:
 			values[i] = new(sql.UnknownType)
 		}
@@ -67,11 +63,11 @@ func (_m *Token) assignValues(columns []string, values []any) error {
 	for i := range columns {
 		switch columns[i] {
 		case token.FieldID:
-			if value, ok := values[i].(*uuid.UUID); !ok {
-				return fmt.Errorf("unexpected type %T for field id", values[i])
-			} else if value != nil {
-				_m.ID = *value
+			value, ok := values[i].(*sql.NullInt64)
+			if !ok {
+				return fmt.Errorf("unexpected type %T for field id", value)
 			}
+			_m.ID = uint64(value.Int64)
 		case token.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
@@ -90,11 +86,11 @@ func (_m *Token) assignValues(columns []string, values []any) error {
 			} else if value.Valid {
 				_m.Status = uint8(value.Int64)
 			}
-		case token.FieldUUID:
-			if value, ok := values[i].(*uuid.UUID); !ok {
-				return fmt.Errorf("unexpected type %T for field uuid", values[i])
-			} else if value != nil {
-				_m.UUID = *value
+		case token.FieldUserID:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field user_id", values[i])
+			} else if value.Valid {
+				_m.UserID = uint64(value.Int64)
 			}
 		case token.FieldUsername:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -165,8 +161,8 @@ func (_m *Token) String() string {
 	builder.WriteString("status=")
 	builder.WriteString(fmt.Sprintf("%v", _m.Status))
 	builder.WriteString(", ")
-	builder.WriteString("uuid=")
-	builder.WriteString(fmt.Sprintf("%v", _m.UUID))
+	builder.WriteString("user_id=")
+	builder.WriteString(fmt.Sprintf("%v", _m.UserID))
 	builder.WriteString(", ")
 	builder.WriteString("username=")
 	builder.WriteString(_m.Username)

@@ -10,7 +10,6 @@ import (
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	uuid "github.com/gofrs/uuid/v5"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/menu"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/role"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenant"
@@ -128,14 +127,14 @@ func (_c *RoleCreate) AddMenus(v ...*Menu) *RoleCreate {
 }
 
 // AddUserIDs adds the "users" edge to the User entity by IDs.
-func (_c *RoleCreate) AddUserIDs(ids ...uuid.UUID) *RoleCreate {
+func (_c *RoleCreate) AddUserIDs(ids ...uint64) *RoleCreate {
 	_c.mutation.AddUserIDs(ids...)
 	return _c
 }
 
 // AddUsers adds the "users" edges to the User entity.
 func (_c *RoleCreate) AddUsers(v ...*User) *RoleCreate {
-	ids := make([]uuid.UUID, len(v))
+	ids := make([]uint64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -318,7 +317,7 @@ func (_c *RoleCreate) createSpec() (*Role, *sqlgraph.CreateSpec) {
 			Columns: role.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {

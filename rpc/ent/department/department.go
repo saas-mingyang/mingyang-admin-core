@@ -103,6 +103,8 @@ var (
 	DefaultStatus uint8
 	// DefaultSort holds the default value on creation for the "sort" field.
 	DefaultSort uint32
+	// DefaultLeader holds the default value on creation for the "leader" field.
+	DefaultLeader uint64
 	// DefaultParentID holds the default value on creation for the "parent_id" field.
 	DefaultParentID uint64
 )

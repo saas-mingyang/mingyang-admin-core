@@ -3,15 +3,21 @@ syntax = "proto3";
 // Token message
 
 message TokenInfo {
-  optional string id = 1;
+  optional uint64 id = 1;
   optional int64 created_at = 2;
   optional int64 updated_at = 3;
+  // Status 1: normal 2: ban | 状态 1 正常 2 禁用
   optional uint32 status = 4;
-  optional string uuid = 5;
-  optional string token = 6;
-  optional string source = 7;
-  optional int64  expired_at = 8;
-  optional string username = 9;
+  //  User's ID | 用户的ID
+  optional uint64 user_id = 5;
+  // Username | 用户名
+  optional string username = 6;
+  // Token string | Token 字符串
+  optional string token = 7;
+  // Log in source such as GitHub | Token 来源 （本地为core, 第三方如github等）
+  optional string source = 8;
+  //  Expire time | 过期时间
+  optional int64  expired_at = 9;
 }
 
 message TokenListResp {
@@ -25,7 +31,7 @@ message TokenListReq {
   optional string username = 3;
   optional string nickname = 4;
   optional string email = 5;
-  optional string uuid = 6;
+  optional uint64 user_id = 6;
 }
 
 
@@ -33,15 +39,15 @@ service Core {
 
   // Token management
   // group: token
-  rpc createToken (TokenInfo) returns (BaseUUIDResp);
+  rpc createToken (TokenInfo) returns (BaseIDResp);
   // group: token
-  rpc deleteToken (UUIDsReq) returns (BaseResp);
+  rpc deleteToken (IDsReq) returns (BaseResp);
   // group: token
   rpc getTokenList (TokenListReq) returns (TokenListResp);
   // group: token
-  rpc getTokenById (UUIDReq) returns (TokenInfo);
+  rpc getTokenById (IDReq) returns (TokenInfo);
   // group: token
-  rpc blockUserAllToken (UUIDReq) returns (BaseResp);
+  rpc blockUserAllToken (IDReq) returns (BaseResp);
   // group: token
   rpc updateToken (TokenInfo) returns (BaseResp);
 }

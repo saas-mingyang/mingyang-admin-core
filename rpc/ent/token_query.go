@@ -11,7 +11,6 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	uuid "github.com/gofrs/uuid/v5"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/predicate"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/token"
 )
@@ -84,8 +83,8 @@ func (_q *TokenQuery) FirstX(ctx context.Context) *Token {
 
 // FirstID returns the first Token ID from the query.
 // Returns a *NotFoundError when no Token ID was found.
-func (_q *TokenQuery) FirstID(ctx context.Context) (id uuid.UUID, err error) {
-	var ids []uuid.UUID
+func (_q *TokenQuery) FirstID(ctx context.Context) (id uint64, err error) {
+	var ids []uint64
 	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
@@ -97,7 +96,7 @@ func (_q *TokenQuery) FirstID(ctx context.Context) (id uuid.UUID, err error) {
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (_q *TokenQuery) FirstIDX(ctx context.Context) uuid.UUID {
+func (_q *TokenQuery) FirstIDX(ctx context.Context) uint64 {
 	id, err := _q.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
@@ -135,8 +134,8 @@ func (_q *TokenQuery) OnlyX(ctx context.Context) *Token {
 // OnlyID is like Only, but returns the only Token ID in the query.
 // Returns a *NotSingularError when more than one Token ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (_q *TokenQuery) OnlyID(ctx context.Context) (id uuid.UUID, err error) {
-	var ids []uuid.UUID
+func (_q *TokenQuery) OnlyID(ctx context.Context) (id uint64, err error) {
+	var ids []uint64
 	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
@@ -152,7 +151,7 @@ func (_q *TokenQuery) OnlyID(ctx context.Context) (id uuid.UUID, err error) {
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (_q *TokenQuery) OnlyIDX(ctx context.Context) uuid.UUID {
+func (_q *TokenQuery) OnlyIDX(ctx context.Context) uint64 {
 	id, err := _q.OnlyID(ctx)
 	if err != nil {
 		panic(err)
@@ -180,7 +179,7 @@ func (_q *TokenQuery) AllX(ctx context.Context) []*Token {
 }
 
 // IDs executes the query and returns a list of Token IDs.
-func (_q *TokenQuery) IDs(ctx context.Context) (ids []uuid.UUID, err error) {
+func (_q *TokenQuery) IDs(ctx context.Context) (ids []uint64, err error) {
 	if _q.ctx.Unique == nil && _q.path != nil {
 		_q.Unique(true)
 	}
@@ -192,7 +191,7 @@ func (_q *TokenQuery) IDs(ctx context.Context) (ids []uuid.UUID, err error) {
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (_q *TokenQuery) IDsX(ctx context.Context) []uuid.UUID {
+func (_q *TokenQuery) IDsX(ctx context.Context) []uint64 {
 	ids, err := _q.IDs(ctx)
 	if err != nil {
 		panic(err)
@@ -374,7 +373,7 @@ func (_q *TokenQuery) sqlCount(ctx context.Context) (int, error) {
 }
 
 func (_q *TokenQuery) querySpec() *sqlgraph.QuerySpec {
-	_spec := sqlgraph.NewQuerySpec(token.Table, token.Columns, sqlgraph.NewFieldSpec(token.FieldID, field.TypeUUID))
+	_spec := sqlgraph.NewQuerySpec(token.Table, token.Columns, sqlgraph.NewFieldSpec(token.FieldID, field.TypeUint64))
 	_spec.From = _q.sql
 	if unique := _q.ctx.Unique; unique != nil {
 		_spec.Unique = *unique

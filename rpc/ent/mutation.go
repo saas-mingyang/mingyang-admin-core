@@ -11,7 +11,6 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	uuid "github.com/gofrs/uuid/v5"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/api"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/configuration"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/department"
@@ -1617,7 +1616,8 @@ type DepartmentMutation struct {
 	addsort         *int32
 	name            *string
 	ancestors       *string
-	leader          *string
+	leader          *uint64
+	addleader       *int64
 	phone           *string
 	email           *string
 	remark          *string
@@ -1627,8 +1627,8 @@ type DepartmentMutation struct {
 	children        map[uint64]struct{}
 	removedchildren map[uint64]struct{}
 	clearedchildren bool
-	users           map[uuid.UUID]struct{}
-	removedusers    map[uuid.UUID]struct{}
+	users           map[uint64]struct{}
+	removedusers    map[uint64]struct{}
 	clearedusers    bool
 	done            bool
 	oldValue        func(context.Context) (*Department, error)
@@ -2079,12 +2079,13 @@ func (m *DepartmentMutation) ResetAncestors() {
 }
 
 // SetLeader sets the "leader" field.
-func (m *DepartmentMutation) SetLeader(s string) {
-	m.leader = &s
+func (m *DepartmentMutation) SetLeader(u uint64) {
+	m.leader = &u
+	m.addleader = nil
 }
 
 // Leader returns the value of the "leader" field in the mutation.
-func (m *DepartmentMutation) Leader() (r string, exists bool) {
+func (m *DepartmentMutation) Leader() (r uint64, exists bool) {
 	v := m.leader
 	if v == nil {
 		return
@@ -2095,7 +2096,7 @@ func (m *DepartmentMutation) Leader() (r string, exists bool) {
 // OldLeader returns the old "leader" field's value of the Department entity.
 // If the Department object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *DepartmentMutation) OldLeader(ctx context.Context) (v string, err error) {
+func (m *DepartmentMutation) OldLeader(ctx context.Context) (v uint64, err error) {
 	if !m.op.Is(OpUpdateOne) {
 		return v, errors.New("OldLeader is only allowed on UpdateOne operations")
 	}
@@ -2109,9 +2110,28 @@ func (m *DepartmentMutation) OldLeader(ctx context.Context) (v string, err error
 	return oldValue.Leader, nil
 }
 
+// AddLeader adds u to the "leader" field.
+func (m *DepartmentMutation) AddLeader(u int64) {
+	if m.addleader != nil {
+		*m.addleader += u
+	} else {
+		m.addleader = &u
+	}
+}
+
+// AddedLeader returns the value that was added to the "leader" field in this mutation.
+func (m *DepartmentMutation) AddedLeader() (r int64, exists bool) {
+	v := m.addleader
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
 // ClearLeader clears the value of the "leader" field.
 func (m *DepartmentMutation) ClearLeader() {
 	m.leader = nil
+	m.addleader = nil
 	m.clearedFields[department.FieldLeader] = struct{}{}
 }
 
@@ -2124,6 +2144,7 @@ func (m *DepartmentMutation) LeaderCleared() bool {
 // ResetLeader resets all changes to the "leader" field.
 func (m *DepartmentMutation) ResetLeader() {
 	m.leader = nil
+	m.addleader = nil
 	delete(m.clearedFields, department.FieldLeader)
 }
 
@@ -2405,9 +2426,9 @@ func (m *DepartmentMutation) ResetChildren() {
 }
 
 // AddUserIDs adds the "users" edge to the User entity by ids.
-func (m *DepartmentMutation) AddUserIDs(ids ...uuid.UUID) {
+func (m *DepartmentMutation) AddUserIDs(ids ...uint64) {
 	if m.users == nil {
-		m.users = make(map[uuid.UUID]struct{})
+		m.users = make(map[uint64]struct{})
 	}
 	for i := range ids {
 		m.users[ids[i]] = struct{}{}
@@ -2425,9 +2446,9 @@ func (m *DepartmentMutation) UsersCleared() bool {
 }
 
 // RemoveUserIDs removes the "users" edge to the User entity by IDs.
-func (m *DepartmentMutation) RemoveUserIDs(ids ...uuid.UUID) {
+func (m *DepartmentMutation) RemoveUserIDs(ids ...uint64) {
 	if m.removedusers == nil {
-		m.removedusers = make(map[uuid.UUID]struct{})
+		m.removedusers = make(map[uint64]struct{})
 	}
 	for i := range ids {
 		delete(m.users, ids[i])
@@ -2436,7 +2457,7 @@ func (m *DepartmentMutation) RemoveUserIDs(ids ...uuid.UUID) {
 }
 
 // RemovedUsers returns the removed IDs of the "users" edge to the User entity.
-func (m *DepartmentMutation) RemovedUsersIDs() (ids []uuid.UUID) {
+func (m *DepartmentMutation) RemovedUsersIDs() (ids []uint64) {
 	for id := range m.removedusers {
 		ids = append(ids, id)
 	}
@@ -2444,7 +2465,7 @@ func (m *DepartmentMutation) RemovedUsersIDs() (ids []uuid.UUID) {
 }
 
 // UsersIDs returns the "users" edge IDs in the mutation.
-func (m *DepartmentMutation) UsersIDs() (ids []uuid.UUID) {
+func (m *DepartmentMutation) UsersIDs() (ids []uint64) {
 	for id := range m.users {
 		ids = append(ids, id)
 	}
@@ -2653,7 +2674,7 @@ func (m *DepartmentMutation) SetField(name string, value ent.Value) error {
 		m.SetAncestors(v)
 		return nil
 	case department.FieldLeader:
-		v, ok := value.(string)
+		v, ok := value.(uint64)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
@@ -2704,6 +2725,9 @@ func (m *DepartmentMutation) AddedFields() []string {
 	if m.addsort != nil {
 		fields = append(fields, department.FieldSort)
 	}
+	if m.addleader != nil {
+		fields = append(fields, department.FieldLeader)
+	}
 	return fields
 }
 
@@ -2718,6 +2742,8 @@ func (m *DepartmentMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedStatus()
 	case department.FieldSort:
 		return m.AddedSort()
+	case department.FieldLeader:
+		return m.AddedLeader()
 	}
 	return nil, false
 }
@@ -2747,6 +2773,13 @@ func (m *DepartmentMutation) AddField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddSort(v)
+		return nil
+	case department.FieldLeader:
+		v, ok := value.(int64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddLeader(v)
 		return nil
 	}
 	return fmt.Errorf("unknown Department numeric field %s", name)
@@ -8115,8 +8148,8 @@ type PositionMutation struct {
 	code          *string
 	remark        *string
 	clearedFields map[string]struct{}
-	users         map[uuid.UUID]struct{}
-	removedusers  map[uuid.UUID]struct{}
+	users         map[uint64]struct{}
+	removedusers  map[uint64]struct{}
 	clearedusers  bool
 	done          bool
 	oldValue      func(context.Context) (*Position, error)
@@ -8603,9 +8636,9 @@ func (m *PositionMutation) ResetRemark() {
 }
 
 // AddUserIDs adds the "users" edge to the User entity by ids.
-func (m *PositionMutation) AddUserIDs(ids ...uuid.UUID) {
+func (m *PositionMutation) AddUserIDs(ids ...uint64) {
 	if m.users == nil {
-		m.users = make(map[uuid.UUID]struct{})
+		m.users = make(map[uint64]struct{})
 	}
 	for i := range ids {
 		m.users[ids[i]] = struct{}{}
@@ -8623,9 +8656,9 @@ func (m *PositionMutation) UsersCleared() bool {
 }
 
 // RemoveUserIDs removes the "users" edge to the User entity by IDs.
-func (m *PositionMutation) RemoveUserIDs(ids ...uuid.UUID) {
+func (m *PositionMutation) RemoveUserIDs(ids ...uint64) {
 	if m.removedusers == nil {
-		m.removedusers = make(map[uuid.UUID]struct{})
+		m.removedusers = make(map[uint64]struct{})
 	}
 	for i := range ids {
 		delete(m.users, ids[i])
@@ -8634,7 +8667,7 @@ func (m *PositionMutation) RemoveUserIDs(ids ...uuid.UUID) {
 }
 
 // RemovedUsers returns the removed IDs of the "users" edge to the User entity.
-func (m *PositionMutation) RemovedUsersIDs() (ids []uuid.UUID) {
+func (m *PositionMutation) RemovedUsersIDs() (ids []uint64) {
 	for id := range m.removedusers {
 		ids = append(ids, id)
 	}
@@ -8642,7 +8675,7 @@ func (m *PositionMutation) RemovedUsersIDs() (ids []uuid.UUID) {
 }
 
 // UsersIDs returns the "users" edge IDs in the mutation.
-func (m *PositionMutation) UsersIDs() (ids []uuid.UUID) {
+func (m *PositionMutation) UsersIDs() (ids []uint64) {
 	for id := range m.users {
 		ids = append(ids, id)
 	}
@@ -9063,8 +9096,8 @@ type RoleMutation struct {
 	menus          map[uint64]struct{}
 	removedmenus   map[uint64]struct{}
 	clearedmenus   bool
-	users          map[uuid.UUID]struct{}
-	removedusers   map[uuid.UUID]struct{}
+	users          map[uint64]struct{}
+	removedusers   map[uint64]struct{}
 	clearedusers   bool
 	tenants        map[uint64]struct{}
 	removedtenants map[uint64]struct{}
@@ -9539,9 +9572,9 @@ func (m *RoleMutation) ResetMenus() {
 }
 
 // AddUserIDs adds the "users" edge to the User entity by ids.
-func (m *RoleMutation) AddUserIDs(ids ...uuid.UUID) {
+func (m *RoleMutation) AddUserIDs(ids ...uint64) {
 	if m.users == nil {
-		m.users = make(map[uuid.UUID]struct{})
+		m.users = make(map[uint64]struct{})
 	}
 	for i := range ids {
 		m.users[ids[i]] = struct{}{}
@@ -9559,9 +9592,9 @@ func (m *RoleMutation) UsersCleared() bool {
 }
 
 // RemoveUserIDs removes the "users" edge to the User entity by IDs.
-func (m *RoleMutation) RemoveUserIDs(ids ...uuid.UUID) {
+func (m *RoleMutation) RemoveUserIDs(ids ...uint64) {
 	if m.removedusers == nil {
-		m.removedusers = make(map[uuid.UUID]struct{})
+		m.removedusers = make(map[uint64]struct{})
 	}
 	for i := range ids {
 		delete(m.users, ids[i])
@@ -9570,7 +9603,7 @@ func (m *RoleMutation) RemoveUserIDs(ids ...uuid.UUID) {
 }
 
 // RemovedUsers returns the removed IDs of the "users" edge to the User entity.
-func (m *RoleMutation) RemovedUsersIDs() (ids []uuid.UUID) {
+func (m *RoleMutation) RemovedUsersIDs() (ids []uint64) {
 	for id := range m.removedusers {
 		ids = append(ids, id)
 	}
@@ -9578,7 +9611,7 @@ func (m *RoleMutation) RemovedUsersIDs() (ids []uuid.UUID) {
 }
 
 // UsersIDs returns the "users" edge IDs in the mutation.
-func (m *RoleMutation) UsersIDs() (ids []uuid.UUID) {
+func (m *RoleMutation) UsersIDs() (ids []uint64) {
 	for id := range m.users {
 		ids = append(ids, id)
 	}
@@ -11003,12 +11036,13 @@ type TokenMutation struct {
 	config
 	op            Op
 	typ           string
-	id            *uuid.UUID
+	id            *uint64
 	created_at    *time.Time
 	updated_at    *time.Time
 	status        *uint8
 	addstatus     *int8
-	uuid          *uuid.UUID
+	user_id       *uint64
+	adduser_id    *int64
 	username      *string
 	token         *string
 	source        *string
@@ -11039,7 +11073,7 @@ func newTokenMutation(c config, op Op, opts ...tokenOption) *TokenMutation {
 }
 
 // withTokenID sets the ID field of the mutation.
-func withTokenID(id uuid.UUID) tokenOption {
+func withTokenID(id uint64) tokenOption {
 	return func(m *TokenMutation) {
 		var (
 			err   error
@@ -11091,13 +11125,13 @@ func (m TokenMutation) Tx() (*Tx, error) {
 
 // SetID sets the value of the id field. Note that this
 // operation is only accepted on creation of Token entities.
-func (m *TokenMutation) SetID(id uuid.UUID) {
+func (m *TokenMutation) SetID(id uint64) {
 	m.id = &id
 }
 
 // ID returns the ID value in the mutation. Note that the ID is only available
 // if it was provided to the builder or after it was returned from the database.
-func (m *TokenMutation) ID() (id uuid.UUID, exists bool) {
+func (m *TokenMutation) ID() (id uint64, exists bool) {
 	if m.id == nil {
 		return
 	}
@@ -11108,12 +11142,12 @@ func (m *TokenMutation) ID() (id uuid.UUID, exists bool) {
 // That means, if the mutation is applied within a transaction with an isolation level such
 // as sql.LevelSerializable, the returned ids match the ids of the rows that will be updated
 // or updated by the mutation.
-func (m *TokenMutation) IDs(ctx context.Context) ([]uuid.UUID, error) {
+func (m *TokenMutation) IDs(ctx context.Context) ([]uint64, error) {
 	switch {
 	case m.op.Is(OpUpdateOne | OpDeleteOne):
 		id, exists := m.ID()
 		if exists {
-			return []uuid.UUID{id}, nil
+			return []uint64{id}, nil
 		}
 		fallthrough
 	case m.op.Is(OpUpdate | OpDelete):
@@ -11265,40 +11299,74 @@ func (m *TokenMutation) ResetStatus() {
 	delete(m.clearedFields, token.FieldStatus)
 }
 
-// SetUUID sets the "uuid" field.
-func (m *TokenMutation) SetUUID(u uuid.UUID) {
-	m.uuid = &u
+// SetUserID sets the "user_id" field.
+func (m *TokenMutation) SetUserID(u uint64) {
+	m.user_id = &u
+	m.adduser_id = nil
 }
 
-// UUID returns the value of the "uuid" field in the mutation.
-func (m *TokenMutation) UUID() (r uuid.UUID, exists bool) {
-	v := m.uuid
+// UserID returns the value of the "user_id" field in the mutation.
+func (m *TokenMutation) UserID() (r uint64, exists bool) {
+	v := m.user_id
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldUUID returns the old "uuid" field's value of the Token entity.
+// OldUserID returns the old "user_id" field's value of the Token entity.
 // If the Token object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *TokenMutation) OldUUID(ctx context.Context) (v uuid.UUID, err error) {
+func (m *TokenMutation) OldUserID(ctx context.Context) (v uint64, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldUUID is only allowed on UpdateOne operations")
+		return v, errors.New("OldUserID is only allowed on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldUUID requires an ID field in the mutation")
+		return v, errors.New("OldUserID requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldUUID: %w", err)
+		return v, fmt.Errorf("querying old value for OldUserID: %w", err)
 	}
-	return oldValue.UUID, nil
+	return oldValue.UserID, nil
 }
 
-// ResetUUID resets all changes to the "uuid" field.
-func (m *TokenMutation) ResetUUID() {
-	m.uuid = nil
+// AddUserID adds u to the "user_id" field.
+func (m *TokenMutation) AddUserID(u int64) {
+	if m.adduser_id != nil {
+		*m.adduser_id += u
+	} else {
+		m.adduser_id = &u
+	}
+}
+
+// AddedUserID returns the value that was added to the "user_id" field in this mutation.
+func (m *TokenMutation) AddedUserID() (r int64, exists bool) {
+	v := m.adduser_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearUserID clears the value of the "user_id" field.
+func (m *TokenMutation) ClearUserID() {
+	m.user_id = nil
+	m.adduser_id = nil
+	m.clearedFields[token.FieldUserID] = struct{}{}
+}
+
+// UserIDCleared returns if the "user_id" field was cleared in this mutation.
+func (m *TokenMutation) UserIDCleared() bool {
+	_, ok := m.clearedFields[token.FieldUserID]
+	return ok
+}
+
+// ResetUserID resets all changes to the "user_id" field.
+func (m *TokenMutation) ResetUserID() {
+	m.user_id = nil
+	m.adduser_id = nil
+	delete(m.clearedFields, token.FieldUserID)
 }
 
 // SetUsername sets the "username" field.
@@ -11489,8 +11557,8 @@ func (m *TokenMutation) Fields() []string {
 	if m.status != nil {
 		fields = append(fields, token.FieldStatus)
 	}
-	if m.uuid != nil {
-		fields = append(fields, token.FieldUUID)
+	if m.user_id != nil {
+		fields = append(fields, token.FieldUserID)
 	}
 	if m.username != nil {
 		fields = append(fields, token.FieldUsername)
@@ -11518,8 +11586,8 @@ func (m *TokenMutation) Field(name string) (ent.Value, bool) {
 		return m.UpdatedAt()
 	case token.FieldStatus:
 		return m.Status()
-	case token.FieldUUID:
-		return m.UUID()
+	case token.FieldUserID:
+		return m.UserID()
 	case token.FieldUsername:
 		return m.Username()
 	case token.FieldToken:
@@ -11543,8 +11611,8 @@ func (m *TokenMutation) OldField(ctx context.Context, name string) (ent.Value, e
 		return m.OldUpdatedAt(ctx)
 	case token.FieldStatus:
 		return m.OldStatus(ctx)
-	case token.FieldUUID:
-		return m.OldUUID(ctx)
+	case token.FieldUserID:
+		return m.OldUserID(ctx)
 	case token.FieldUsername:
 		return m.OldUsername(ctx)
 	case token.FieldToken:
@@ -11583,12 +11651,12 @@ func (m *TokenMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetStatus(v)
 		return nil
-	case token.FieldUUID:
-		v, ok := value.(uuid.UUID)
+	case token.FieldUserID:
+		v, ok := value.(uint64)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetUUID(v)
+		m.SetUserID(v)
 		return nil
 	case token.FieldUsername:
 		v, ok := value.(string)
@@ -11629,6 +11697,9 @@ func (m *TokenMutation) AddedFields() []string {
 	if m.addstatus != nil {
 		fields = append(fields, token.FieldStatus)
 	}
+	if m.adduser_id != nil {
+		fields = append(fields, token.FieldUserID)
+	}
 	return fields
 }
 
@@ -11639,6 +11710,8 @@ func (m *TokenMutation) AddedField(name string) (ent.Value, bool) {
 	switch name {
 	case token.FieldStatus:
 		return m.AddedStatus()
+	case token.FieldUserID:
+		return m.AddedUserID()
 	}
 	return nil, false
 }
@@ -11655,6 +11728,13 @@ func (m *TokenMutation) AddField(name string, value ent.Value) error {
 		}
 		m.AddStatus(v)
 		return nil
+	case token.FieldUserID:
+		v, ok := value.(int64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddUserID(v)
+		return nil
 	}
 	return fmt.Errorf("unknown Token numeric field %s", name)
 }
@@ -11665,6 +11745,9 @@ func (m *TokenMutation) ClearedFields() []string {
 	var fields []string
 	if m.FieldCleared(token.FieldStatus) {
 		fields = append(fields, token.FieldStatus)
+	}
+	if m.FieldCleared(token.FieldUserID) {
+		fields = append(fields, token.FieldUserID)
 	}
 	return fields
 }
@@ -11683,6 +11766,9 @@ func (m *TokenMutation) ClearField(name string) error {
 	case token.FieldStatus:
 		m.ClearStatus()
 		return nil
+	case token.FieldUserID:
+		m.ClearUserID()
+		return nil
 	}
 	return fmt.Errorf("unknown Token nullable field %s", name)
 }
@@ -11700,8 +11786,8 @@ func (m *TokenMutation) ResetField(name string) error {
 	case token.FieldStatus:
 		m.ResetStatus()
 		return nil
-	case token.FieldUUID:
-		m.ResetUUID()
+	case token.FieldUserID:
+		m.ResetUserID()
 		return nil
 	case token.FieldUsername:
 		m.ResetUsername()
@@ -11772,9 +11858,11 @@ type UserMutation struct {
 	config
 	op                 Op
 	typ                string
-	id                 *uuid.UUID
+	id                 *uint64
 	created_at         *time.Time
 	updated_at         *time.Time
+	tenant_id          *uint64
+	addtenant_id       *int64
 	status             *uint8
 	addstatus          *int8
 	deleted_at         *time.Time
@@ -11820,7 +11908,7 @@ func newUserMutation(c config, op Op, opts ...userOption) *UserMutation {
 }
 
 // withUserID sets the ID field of the mutation.
-func withUserID(id uuid.UUID) userOption {
+func withUserID(id uint64) userOption {
 	return func(m *UserMutation) {
 		var (
 			err   error
@@ -11872,13 +11960,13 @@ func (m UserMutation) Tx() (*Tx, error) {
 
 // SetID sets the value of the id field. Note that this
 // operation is only accepted on creation of User entities.
-func (m *UserMutation) SetID(id uuid.UUID) {
+func (m *UserMutation) SetID(id uint64) {
 	m.id = &id
 }
 
 // ID returns the ID value in the mutation. Note that the ID is only available
 // if it was provided to the builder or after it was returned from the database.
-func (m *UserMutation) ID() (id uuid.UUID, exists bool) {
+func (m *UserMutation) ID() (id uint64, exists bool) {
 	if m.id == nil {
 		return
 	}
@@ -11889,12 +11977,12 @@ func (m *UserMutation) ID() (id uuid.UUID, exists bool) {
 // That means, if the mutation is applied within a transaction with an isolation level such
 // as sql.LevelSerializable, the returned ids match the ids of the rows that will be updated
 // or updated by the mutation.
-func (m *UserMutation) IDs(ctx context.Context) ([]uuid.UUID, error) {
+func (m *UserMutation) IDs(ctx context.Context) ([]uint64, error) {
 	switch {
 	case m.op.Is(OpUpdateOne | OpDeleteOne):
 		id, exists := m.ID()
 		if exists {
-			return []uuid.UUID{id}, nil
+			return []uint64{id}, nil
 		}
 		fallthrough
 	case m.op.Is(OpUpdate | OpDelete):
@@ -11974,6 +12062,62 @@ func (m *UserMutation) OldUpdatedAt(ctx context.Context) (v time.Time, err error
 // ResetUpdatedAt resets all changes to the "updated_at" field.
 func (m *UserMutation) ResetUpdatedAt() {
 	m.updated_at = nil
+}
+
+// SetTenantID sets the "tenant_id" field.
+func (m *UserMutation) SetTenantID(u uint64) {
+	m.tenant_id = &u
+	m.addtenant_id = nil
+}
+
+// TenantID returns the value of the "tenant_id" field in the mutation.
+func (m *UserMutation) TenantID() (r uint64, exists bool) {
+	v := m.tenant_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldTenantID returns the old "tenant_id" field's value of the User entity.
+// If the User object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *UserMutation) OldTenantID(ctx context.Context) (v uint64, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldTenantID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldTenantID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldTenantID: %w", err)
+	}
+	return oldValue.TenantID, nil
+}
+
+// AddTenantID adds u to the "tenant_id" field.
+func (m *UserMutation) AddTenantID(u int64) {
+	if m.addtenant_id != nil {
+		*m.addtenant_id += u
+	} else {
+		m.addtenant_id = &u
+	}
+}
+
+// AddedTenantID returns the value that was added to the "tenant_id" field in this mutation.
+func (m *UserMutation) AddedTenantID() (r int64, exists bool) {
+	v := m.addtenant_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetTenantID resets all changes to the "tenant_id" field.
+func (m *UserMutation) ResetTenantID() {
+	m.tenant_id = nil
+	m.addtenant_id = nil
 }
 
 // SetStatus sets the "status" field.
@@ -12666,12 +12810,15 @@ func (m *UserMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *UserMutation) Fields() []string {
-	fields := make([]string, 0, 13)
+	fields := make([]string, 0, 14)
 	if m.created_at != nil {
 		fields = append(fields, user.FieldCreatedAt)
 	}
 	if m.updated_at != nil {
 		fields = append(fields, user.FieldUpdatedAt)
+	}
+	if m.tenant_id != nil {
+		fields = append(fields, user.FieldTenantID)
 	}
 	if m.status != nil {
 		fields = append(fields, user.FieldStatus)
@@ -12718,6 +12865,8 @@ func (m *UserMutation) Field(name string) (ent.Value, bool) {
 		return m.CreatedAt()
 	case user.FieldUpdatedAt:
 		return m.UpdatedAt()
+	case user.FieldTenantID:
+		return m.TenantID()
 	case user.FieldStatus:
 		return m.Status()
 	case user.FieldDeletedAt:
@@ -12753,6 +12902,8 @@ func (m *UserMutation) OldField(ctx context.Context, name string) (ent.Value, er
 		return m.OldCreatedAt(ctx)
 	case user.FieldUpdatedAt:
 		return m.OldUpdatedAt(ctx)
+	case user.FieldTenantID:
+		return m.OldTenantID(ctx)
 	case user.FieldStatus:
 		return m.OldStatus(ctx)
 	case user.FieldDeletedAt:
@@ -12797,6 +12948,13 @@ func (m *UserMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetUpdatedAt(v)
+		return nil
+	case user.FieldTenantID:
+		v, ok := value.(uint64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetTenantID(v)
 		return nil
 	case user.FieldStatus:
 		v, ok := value.(uint8)
@@ -12883,6 +13041,9 @@ func (m *UserMutation) SetField(name string, value ent.Value) error {
 // this mutation.
 func (m *UserMutation) AddedFields() []string {
 	var fields []string
+	if m.addtenant_id != nil {
+		fields = append(fields, user.FieldTenantID)
+	}
 	if m.addstatus != nil {
 		fields = append(fields, user.FieldStatus)
 	}
@@ -12894,6 +13055,8 @@ func (m *UserMutation) AddedFields() []string {
 // was not set, or was not defined in the schema.
 func (m *UserMutation) AddedField(name string) (ent.Value, bool) {
 	switch name {
+	case user.FieldTenantID:
+		return m.AddedTenantID()
 	case user.FieldStatus:
 		return m.AddedStatus()
 	}
@@ -12905,6 +13068,13 @@ func (m *UserMutation) AddedField(name string) (ent.Value, bool) {
 // type.
 func (m *UserMutation) AddField(name string, value ent.Value) error {
 	switch name {
+	case user.FieldTenantID:
+		v, ok := value.(int64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddTenantID(v)
+		return nil
 	case user.FieldStatus:
 		v, ok := value.(int8)
 		if !ok {
@@ -12989,6 +13159,9 @@ func (m *UserMutation) ResetField(name string) error {
 		return nil
 	case user.FieldUpdatedAt:
 		m.ResetUpdatedAt()
+		return nil
+	case user.FieldTenantID:
+		m.ResetTenantID()
 		return nil
 	case user.FieldStatus:
 		m.ResetStatus()

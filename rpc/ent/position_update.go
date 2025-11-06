@@ -11,7 +11,6 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	uuid "github.com/gofrs/uuid/v5"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/position"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/predicate"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/user"
@@ -134,14 +133,14 @@ func (_u *PositionUpdate) ClearRemark() *PositionUpdate {
 }
 
 // AddUserIDs adds the "users" edge to the User entity by IDs.
-func (_u *PositionUpdate) AddUserIDs(ids ...uuid.UUID) *PositionUpdate {
+func (_u *PositionUpdate) AddUserIDs(ids ...uint64) *PositionUpdate {
 	_u.mutation.AddUserIDs(ids...)
 	return _u
 }
 
 // AddUsers adds the "users" edges to the User entity.
 func (_u *PositionUpdate) AddUsers(v ...*User) *PositionUpdate {
-	ids := make([]uuid.UUID, len(v))
+	ids := make([]uint64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -160,14 +159,14 @@ func (_u *PositionUpdate) ClearUsers() *PositionUpdate {
 }
 
 // RemoveUserIDs removes the "users" edge to User entities by IDs.
-func (_u *PositionUpdate) RemoveUserIDs(ids ...uuid.UUID) *PositionUpdate {
+func (_u *PositionUpdate) RemoveUserIDs(ids ...uint64) *PositionUpdate {
 	_u.mutation.RemoveUserIDs(ids...)
 	return _u
 }
 
 // RemoveUsers removes "users" edges to User entities.
 func (_u *PositionUpdate) RemoveUsers(v ...*User) *PositionUpdate {
-	ids := make([]uuid.UUID, len(v))
+	ids := make([]uint64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -263,7 +262,7 @@ func (_u *PositionUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 			Columns: position.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
@@ -276,7 +275,7 @@ func (_u *PositionUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 			Columns: position.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {
@@ -292,7 +291,7 @@ func (_u *PositionUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 			Columns: position.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {
@@ -425,14 +424,14 @@ func (_u *PositionUpdateOne) ClearRemark() *PositionUpdateOne {
 }
 
 // AddUserIDs adds the "users" edge to the User entity by IDs.
-func (_u *PositionUpdateOne) AddUserIDs(ids ...uuid.UUID) *PositionUpdateOne {
+func (_u *PositionUpdateOne) AddUserIDs(ids ...uint64) *PositionUpdateOne {
 	_u.mutation.AddUserIDs(ids...)
 	return _u
 }
 
 // AddUsers adds the "users" edges to the User entity.
 func (_u *PositionUpdateOne) AddUsers(v ...*User) *PositionUpdateOne {
-	ids := make([]uuid.UUID, len(v))
+	ids := make([]uint64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -451,14 +450,14 @@ func (_u *PositionUpdateOne) ClearUsers() *PositionUpdateOne {
 }
 
 // RemoveUserIDs removes the "users" edge to User entities by IDs.
-func (_u *PositionUpdateOne) RemoveUserIDs(ids ...uuid.UUID) *PositionUpdateOne {
+func (_u *PositionUpdateOne) RemoveUserIDs(ids ...uint64) *PositionUpdateOne {
 	_u.mutation.RemoveUserIDs(ids...)
 	return _u
 }
 
 // RemoveUsers removes "users" edges to User entities.
 func (_u *PositionUpdateOne) RemoveUsers(v ...*User) *PositionUpdateOne {
-	ids := make([]uuid.UUID, len(v))
+	ids := make([]uint64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -584,7 +583,7 @@ func (_u *PositionUpdateOne) sqlSave(ctx context.Context) (_node *Position, err 
 			Columns: position.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
@@ -597,7 +596,7 @@ func (_u *PositionUpdateOne) sqlSave(ctx context.Context) (_node *Position, err 
 			Columns: position.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {
@@ -613,7 +612,7 @@ func (_u *PositionUpdateOne) sqlSave(ctx context.Context) (_node *Position, err 
 			Columns: position.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {

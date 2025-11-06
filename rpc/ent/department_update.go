@@ -11,7 +11,6 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	uuid "github.com/gofrs/uuid/v5"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/department"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/predicate"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/user"
@@ -120,16 +119,23 @@ func (_u *DepartmentUpdate) ClearAncestors() *DepartmentUpdate {
 }
 
 // SetLeader sets the "leader" field.
-func (_u *DepartmentUpdate) SetLeader(v string) *DepartmentUpdate {
+func (_u *DepartmentUpdate) SetLeader(v uint64) *DepartmentUpdate {
+	_u.mutation.ResetLeader()
 	_u.mutation.SetLeader(v)
 	return _u
 }
 
 // SetNillableLeader sets the "leader" field if the given value is not nil.
-func (_u *DepartmentUpdate) SetNillableLeader(v *string) *DepartmentUpdate {
+func (_u *DepartmentUpdate) SetNillableLeader(v *uint64) *DepartmentUpdate {
 	if v != nil {
 		_u.SetLeader(*v)
 	}
+	return _u
+}
+
+// AddLeader adds value to the "leader" field.
+func (_u *DepartmentUpdate) AddLeader(v int64) *DepartmentUpdate {
+	_u.mutation.AddLeader(v)
 	return _u
 }
 
@@ -240,14 +246,14 @@ func (_u *DepartmentUpdate) AddChildren(v ...*Department) *DepartmentUpdate {
 }
 
 // AddUserIDs adds the "users" edge to the User entity by IDs.
-func (_u *DepartmentUpdate) AddUserIDs(ids ...uuid.UUID) *DepartmentUpdate {
+func (_u *DepartmentUpdate) AddUserIDs(ids ...uint64) *DepartmentUpdate {
 	_u.mutation.AddUserIDs(ids...)
 	return _u
 }
 
 // AddUsers adds the "users" edges to the User entity.
 func (_u *DepartmentUpdate) AddUsers(v ...*User) *DepartmentUpdate {
-	ids := make([]uuid.UUID, len(v))
+	ids := make([]uint64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -293,14 +299,14 @@ func (_u *DepartmentUpdate) ClearUsers() *DepartmentUpdate {
 }
 
 // RemoveUserIDs removes the "users" edge to User entities by IDs.
-func (_u *DepartmentUpdate) RemoveUserIDs(ids ...uuid.UUID) *DepartmentUpdate {
+func (_u *DepartmentUpdate) RemoveUserIDs(ids ...uint64) *DepartmentUpdate {
 	_u.mutation.RemoveUserIDs(ids...)
 	return _u
 }
 
 // RemoveUsers removes "users" edges to User entities.
 func (_u *DepartmentUpdate) RemoveUsers(v ...*User) *DepartmentUpdate {
-	ids := make([]uuid.UUID, len(v))
+	ids := make([]uint64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -386,10 +392,13 @@ func (_u *DepartmentUpdate) sqlSave(ctx context.Context) (_node int, err error) 
 		_spec.ClearField(department.FieldAncestors, field.TypeString)
 	}
 	if value, ok := _u.mutation.Leader(); ok {
-		_spec.SetField(department.FieldLeader, field.TypeString, value)
+		_spec.SetField(department.FieldLeader, field.TypeUint64, value)
+	}
+	if value, ok := _u.mutation.AddedLeader(); ok {
+		_spec.AddField(department.FieldLeader, field.TypeUint64, value)
 	}
 	if _u.mutation.LeaderCleared() {
-		_spec.ClearField(department.FieldLeader, field.TypeString)
+		_spec.ClearField(department.FieldLeader, field.TypeUint64)
 	}
 	if value, ok := _u.mutation.Phone(); ok {
 		_spec.SetField(department.FieldPhone, field.TypeString, value)
@@ -491,7 +500,7 @@ func (_u *DepartmentUpdate) sqlSave(ctx context.Context) (_node int, err error) 
 			Columns: []string{department.UsersColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
@@ -504,7 +513,7 @@ func (_u *DepartmentUpdate) sqlSave(ctx context.Context) (_node int, err error) 
 			Columns: []string{department.UsersColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {
@@ -520,7 +529,7 @@ func (_u *DepartmentUpdate) sqlSave(ctx context.Context) (_node int, err error) 
 			Columns: []string{department.UsersColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {
@@ -639,16 +648,23 @@ func (_u *DepartmentUpdateOne) ClearAncestors() *DepartmentUpdateOne {
 }
 
 // SetLeader sets the "leader" field.
-func (_u *DepartmentUpdateOne) SetLeader(v string) *DepartmentUpdateOne {
+func (_u *DepartmentUpdateOne) SetLeader(v uint64) *DepartmentUpdateOne {
+	_u.mutation.ResetLeader()
 	_u.mutation.SetLeader(v)
 	return _u
 }
 
 // SetNillableLeader sets the "leader" field if the given value is not nil.
-func (_u *DepartmentUpdateOne) SetNillableLeader(v *string) *DepartmentUpdateOne {
+func (_u *DepartmentUpdateOne) SetNillableLeader(v *uint64) *DepartmentUpdateOne {
 	if v != nil {
 		_u.SetLeader(*v)
 	}
+	return _u
+}
+
+// AddLeader adds value to the "leader" field.
+func (_u *DepartmentUpdateOne) AddLeader(v int64) *DepartmentUpdateOne {
+	_u.mutation.AddLeader(v)
 	return _u
 }
 
@@ -759,14 +775,14 @@ func (_u *DepartmentUpdateOne) AddChildren(v ...*Department) *DepartmentUpdateOn
 }
 
 // AddUserIDs adds the "users" edge to the User entity by IDs.
-func (_u *DepartmentUpdateOne) AddUserIDs(ids ...uuid.UUID) *DepartmentUpdateOne {
+func (_u *DepartmentUpdateOne) AddUserIDs(ids ...uint64) *DepartmentUpdateOne {
 	_u.mutation.AddUserIDs(ids...)
 	return _u
 }
 
 // AddUsers adds the "users" edges to the User entity.
 func (_u *DepartmentUpdateOne) AddUsers(v ...*User) *DepartmentUpdateOne {
-	ids := make([]uuid.UUID, len(v))
+	ids := make([]uint64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -812,14 +828,14 @@ func (_u *DepartmentUpdateOne) ClearUsers() *DepartmentUpdateOne {
 }
 
 // RemoveUserIDs removes the "users" edge to User entities by IDs.
-func (_u *DepartmentUpdateOne) RemoveUserIDs(ids ...uuid.UUID) *DepartmentUpdateOne {
+func (_u *DepartmentUpdateOne) RemoveUserIDs(ids ...uint64) *DepartmentUpdateOne {
 	_u.mutation.RemoveUserIDs(ids...)
 	return _u
 }
 
 // RemoveUsers removes "users" edges to User entities.
 func (_u *DepartmentUpdateOne) RemoveUsers(v ...*User) *DepartmentUpdateOne {
-	ids := make([]uuid.UUID, len(v))
+	ids := make([]uint64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -935,10 +951,13 @@ func (_u *DepartmentUpdateOne) sqlSave(ctx context.Context) (_node *Department, 
 		_spec.ClearField(department.FieldAncestors, field.TypeString)
 	}
 	if value, ok := _u.mutation.Leader(); ok {
-		_spec.SetField(department.FieldLeader, field.TypeString, value)
+		_spec.SetField(department.FieldLeader, field.TypeUint64, value)
+	}
+	if value, ok := _u.mutation.AddedLeader(); ok {
+		_spec.AddField(department.FieldLeader, field.TypeUint64, value)
 	}
 	if _u.mutation.LeaderCleared() {
-		_spec.ClearField(department.FieldLeader, field.TypeString)
+		_spec.ClearField(department.FieldLeader, field.TypeUint64)
 	}
 	if value, ok := _u.mutation.Phone(); ok {
 		_spec.SetField(department.FieldPhone, field.TypeString, value)
@@ -1040,7 +1059,7 @@ func (_u *DepartmentUpdateOne) sqlSave(ctx context.Context) (_node *Department, 
 			Columns: []string{department.UsersColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
@@ -1053,7 +1072,7 @@ func (_u *DepartmentUpdateOne) sqlSave(ctx context.Context) (_node *Department, 
 			Columns: []string{department.UsersColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {
@@ -1069,7 +1088,7 @@ func (_u *DepartmentUpdateOne) sqlSave(ctx context.Context) (_node *Department, 
 			Columns: []string{department.UsersColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {

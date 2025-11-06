@@ -12,7 +12,6 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	uuid "github.com/gofrs/uuid/v5"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/menu"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/predicate"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/role"
@@ -561,7 +560,7 @@ func (_q *RoleQuery) loadMenus(ctx context.Context, query *MenuQuery, nodes []*R
 func (_q *RoleQuery) loadUsers(ctx context.Context, query *UserQuery, nodes []*Role, init func(*Role), assign func(*Role, *User)) error {
 	edgeIDs := make([]driver.Value, len(nodes))
 	byID := make(map[uint64]*Role)
-	nids := make(map[uuid.UUID]map[*Role]struct{})
+	nids := make(map[uint64]map[*Role]struct{})
 	for i, node := range nodes {
 		edgeIDs[i] = node.ID
 		byID[node.ID] = node
@@ -594,7 +593,7 @@ func (_q *RoleQuery) loadUsers(ctx context.Context, query *UserQuery, nodes []*R
 			}
 			spec.Assign = func(columns []string, values []any) error {
 				outValue := uint64(values[0].(*sql.NullInt64).Int64)
-				inValue := *values[1].(*uuid.UUID)
+				inValue := uint64(values[1].(*sql.NullInt64).Int64)
 				if nids[inValue] == nil {
 					nids[inValue] = map[*Role]struct{}{byID[outValue]: {}}
 					return assign(columns[1:], values[1:])

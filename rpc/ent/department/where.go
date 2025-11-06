@@ -91,7 +91,7 @@ func Ancestors(v string) predicate.Department {
 }
 
 // Leader applies equality check predicate on the "leader" field. It's identical to LeaderEQ.
-func Leader(v string) predicate.Department {
+func Leader(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldEQ(FieldLeader, v))
 }
 
@@ -466,58 +466,43 @@ func AncestorsContainsFold(v string) predicate.Department {
 }
 
 // LeaderEQ applies the EQ predicate on the "leader" field.
-func LeaderEQ(v string) predicate.Department {
+func LeaderEQ(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldEQ(FieldLeader, v))
 }
 
 // LeaderNEQ applies the NEQ predicate on the "leader" field.
-func LeaderNEQ(v string) predicate.Department {
+func LeaderNEQ(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldNEQ(FieldLeader, v))
 }
 
 // LeaderIn applies the In predicate on the "leader" field.
-func LeaderIn(vs ...string) predicate.Department {
+func LeaderIn(vs ...uint64) predicate.Department {
 	return predicate.Department(sql.FieldIn(FieldLeader, vs...))
 }
 
 // LeaderNotIn applies the NotIn predicate on the "leader" field.
-func LeaderNotIn(vs ...string) predicate.Department {
+func LeaderNotIn(vs ...uint64) predicate.Department {
 	return predicate.Department(sql.FieldNotIn(FieldLeader, vs...))
 }
 
 // LeaderGT applies the GT predicate on the "leader" field.
-func LeaderGT(v string) predicate.Department {
+func LeaderGT(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldGT(FieldLeader, v))
 }
 
 // LeaderGTE applies the GTE predicate on the "leader" field.
-func LeaderGTE(v string) predicate.Department {
+func LeaderGTE(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldGTE(FieldLeader, v))
 }
 
 // LeaderLT applies the LT predicate on the "leader" field.
-func LeaderLT(v string) predicate.Department {
+func LeaderLT(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldLT(FieldLeader, v))
 }
 
 // LeaderLTE applies the LTE predicate on the "leader" field.
-func LeaderLTE(v string) predicate.Department {
+func LeaderLTE(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldLTE(FieldLeader, v))
-}
-
-// LeaderContains applies the Contains predicate on the "leader" field.
-func LeaderContains(v string) predicate.Department {
-	return predicate.Department(sql.FieldContains(FieldLeader, v))
-}
-
-// LeaderHasPrefix applies the HasPrefix predicate on the "leader" field.
-func LeaderHasPrefix(v string) predicate.Department {
-	return predicate.Department(sql.FieldHasPrefix(FieldLeader, v))
-}
-
-// LeaderHasSuffix applies the HasSuffix predicate on the "leader" field.
-func LeaderHasSuffix(v string) predicate.Department {
-	return predicate.Department(sql.FieldHasSuffix(FieldLeader, v))
 }
 
 // LeaderIsNil applies the IsNil predicate on the "leader" field.
@@ -528,16 +513,6 @@ func LeaderIsNil() predicate.Department {
 // LeaderNotNil applies the NotNil predicate on the "leader" field.
 func LeaderNotNil() predicate.Department {
 	return predicate.Department(sql.FieldNotNull(FieldLeader))
-}
-
-// LeaderEqualFold applies the EqualFold predicate on the "leader" field.
-func LeaderEqualFold(v string) predicate.Department {
-	return predicate.Department(sql.FieldEqualFold(FieldLeader, v))
-}
-
-// LeaderContainsFold applies the ContainsFold predicate on the "leader" field.
-func LeaderContainsFold(v string) predicate.Department {
-	return predicate.Department(sql.FieldContainsFold(FieldLeader, v))
 }
 
 // PhoneEQ applies the EQ predicate on the "phone" field.

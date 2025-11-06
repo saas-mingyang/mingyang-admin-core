@@ -10,7 +10,6 @@ import (
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	uuid "github.com/gofrs/uuid/v5"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/token"
 )
 
@@ -63,9 +62,17 @@ func (_c *TokenCreate) SetNillableStatus(v *uint8) *TokenCreate {
 	return _c
 }
 
-// SetUUID sets the "uuid" field.
-func (_c *TokenCreate) SetUUID(v uuid.UUID) *TokenCreate {
-	_c.mutation.SetUUID(v)
+// SetUserID sets the "user_id" field.
+func (_c *TokenCreate) SetUserID(v uint64) *TokenCreate {
+	_c.mutation.SetUserID(v)
+	return _c
+}
+
+// SetNillableUserID sets the "user_id" field if the given value is not nil.
+func (_c *TokenCreate) SetNillableUserID(v *uint64) *TokenCreate {
+	if v != nil {
+		_c.SetUserID(*v)
+	}
 	return _c
 }
 
@@ -102,16 +109,8 @@ func (_c *TokenCreate) SetExpiredAt(v time.Time) *TokenCreate {
 }
 
 // SetID sets the "id" field.
-func (_c *TokenCreate) SetID(v uuid.UUID) *TokenCreate {
+func (_c *TokenCreate) SetID(v uint64) *TokenCreate {
 	_c.mutation.SetID(v)
-	return _c
-}
-
-// SetNillableID sets the "id" field if the given value is not nil.
-func (_c *TokenCreate) SetNillableID(v *uuid.UUID) *TokenCreate {
-	if v != nil {
-		_c.SetID(*v)
-	}
 	return _c
 }
 
@@ -162,13 +161,13 @@ func (_c *TokenCreate) defaults() {
 		v := token.DefaultStatus
 		_c.mutation.SetStatus(v)
 	}
+	if _, ok := _c.mutation.UserID(); !ok {
+		v := token.DefaultUserID
+		_c.mutation.SetUserID(v)
+	}
 	if _, ok := _c.mutation.Username(); !ok {
 		v := token.DefaultUsername
 		_c.mutation.SetUsername(v)
-	}
-	if _, ok := _c.mutation.ID(); !ok {
-		v := token.DefaultID()
-		_c.mutation.SetID(v)
 	}
 }
 
@@ -179,9 +178,6 @@ func (_c *TokenCreate) check() error {
 	}
 	if _, ok := _c.mutation.UpdatedAt(); !ok {
 		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "Token.updated_at"`)}
-	}
-	if _, ok := _c.mutation.UUID(); !ok {
-		return &ValidationError{Name: "uuid", err: errors.New(`ent: missing required field "Token.uuid"`)}
 	}
 	if _, ok := _c.mutation.Username(); !ok {
 		return &ValidationError{Name: "username", err: errors.New(`ent: missing required field "Token.username"`)}
@@ -209,12 +205,9 @@ func (_c *TokenCreate) sqlSave(ctx context.Context) (*Token, error) {
 		}
 		return nil, err
 	}
-	if _spec.ID.Value != nil {
-		if id, ok := _spec.ID.Value.(*uuid.UUID); ok {
-			_node.ID = *id
-		} else if err := _node.ID.Scan(_spec.ID.Value); err != nil {
-			return nil, err
-		}
+	if _spec.ID.Value != _node.ID {
+		id := _spec.ID.Value.(int64)
+		_node.ID = uint64(id)
 	}
 	_c.mutation.id = &_node.ID
 	_c.mutation.done = true
@@ -224,11 +217,11 @@ func (_c *TokenCreate) sqlSave(ctx context.Context) (*Token, error) {
 func (_c *TokenCreate) createSpec() (*Token, *sqlgraph.CreateSpec) {
 	var (
 		_node = &Token{config: _c.config}
-		_spec = sqlgraph.NewCreateSpec(token.Table, sqlgraph.NewFieldSpec(token.FieldID, field.TypeUUID))
+		_spec = sqlgraph.NewCreateSpec(token.Table, sqlgraph.NewFieldSpec(token.FieldID, field.TypeUint64))
 	)
 	if id, ok := _c.mutation.ID(); ok {
 		_node.ID = id
-		_spec.ID.Value = &id
+		_spec.ID.Value = id
 	}
 	if value, ok := _c.mutation.CreatedAt(); ok {
 		_spec.SetField(token.FieldCreatedAt, field.TypeTime, value)
@@ -242,9 +235,9 @@ func (_c *TokenCreate) createSpec() (*Token, *sqlgraph.CreateSpec) {
 		_spec.SetField(token.FieldStatus, field.TypeUint8, value)
 		_node.Status = value
 	}
-	if value, ok := _c.mutation.UUID(); ok {
-		_spec.SetField(token.FieldUUID, field.TypeUUID, value)
-		_node.UUID = value
+	if value, ok := _c.mutation.UserID(); ok {
+		_spec.SetField(token.FieldUserID, field.TypeUint64, value)
+		_node.UserID = value
 	}
 	if value, ok := _c.mutation.Username(); ok {
 		_spec.SetField(token.FieldUsername, field.TypeString, value)
@@ -310,6 +303,10 @@ func (_c *TokenCreateBulk) Save(ctx context.Context) ([]*Token, error) {
 					return nil, err
 				}
 				mutation.id = &nodes[i].ID
+				if specs[i].ID.Value != nil && nodes[i].ID == 0 {
+					id := specs[i].ID.Value.(int64)
+					nodes[i].ID = uint64(id)
+				}
 				mutation.done = true
 				return nodes[i], nil
 			})

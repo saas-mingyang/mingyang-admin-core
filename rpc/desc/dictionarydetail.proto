@@ -6,12 +6,20 @@ message DictionaryDetailInfo {
   optional uint64 id = 1;
   optional int64 created_at = 2;
   optional int64 updated_at = 3;
+  // Status 1: normal 2: ban | 状态 1 正常 2 禁用
   optional uint32 status = 4;
-  optional string title = 5;
-  optional string key = 6;
-  optional string value = 7;
-  optional uint64 dictionary_id = 8;
-  optional uint32 sort = 9;
+  // Sort Number | 排序编号
+  optional uint32 sort = 5;
+  // The title shown in the ui | 展示名称 （建议配合i18n）
+  optional string title = 6;
+  // key | 键
+  optional string key = 7;
+  // value | 值
+  optional string value = 8;
+  // Dictionary ID | 字典ID
+  optional uint64 dictionary_id = 9;
+
+  uint64 tenant_id = 10;
 }
 
 message DictionaryDetailListResp {
@@ -24,6 +32,7 @@ message DictionaryDetailListReq {
   uint64 page_size = 2;
   optional uint64 dictionary_id = 3;
   optional string key = 4;
+  uint64 tenant_id = 5;
 }
 
 

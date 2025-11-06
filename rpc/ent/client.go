@@ -9,7 +9,6 @@ import (
 	"log"
 	"reflect"
 
-	uuid "github.com/gofrs/uuid/v5"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/migrate"
 
 	"entgo.io/ent"
@@ -1899,7 +1898,7 @@ func (c *TokenClient) UpdateOne(_m *Token) *TokenUpdateOne {
 }
 
 // UpdateOneID returns an update builder for the given id.
-func (c *TokenClient) UpdateOneID(id uuid.UUID) *TokenUpdateOne {
+func (c *TokenClient) UpdateOneID(id uint64) *TokenUpdateOne {
 	mutation := newTokenMutation(c.config, OpUpdateOne, withTokenID(id))
 	return &TokenUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
@@ -1916,7 +1915,7 @@ func (c *TokenClient) DeleteOne(_m *Token) *TokenDeleteOne {
 }
 
 // DeleteOneID returns a builder for deleting the given entity by its id.
-func (c *TokenClient) DeleteOneID(id uuid.UUID) *TokenDeleteOne {
+func (c *TokenClient) DeleteOneID(id uint64) *TokenDeleteOne {
 	builder := c.Delete().Where(token.ID(id))
 	builder.mutation.id = &id
 	builder.mutation.op = OpDeleteOne
@@ -1933,12 +1932,12 @@ func (c *TokenClient) Query() *TokenQuery {
 }
 
 // Get returns a Token entity by its id.
-func (c *TokenClient) Get(ctx context.Context, id uuid.UUID) (*Token, error) {
+func (c *TokenClient) Get(ctx context.Context, id uint64) (*Token, error) {
 	return c.Query().Where(token.ID(id)).Only(ctx)
 }
 
 // GetX is like Get, but panics if an error occurs.
-func (c *TokenClient) GetX(ctx context.Context, id uuid.UUID) *Token {
+func (c *TokenClient) GetX(ctx context.Context, id uint64) *Token {
 	obj, err := c.Get(ctx, id)
 	if err != nil {
 		panic(err)
@@ -2032,7 +2031,7 @@ func (c *UserClient) UpdateOne(_m *User) *UserUpdateOne {
 }
 
 // UpdateOneID returns an update builder for the given id.
-func (c *UserClient) UpdateOneID(id uuid.UUID) *UserUpdateOne {
+func (c *UserClient) UpdateOneID(id uint64) *UserUpdateOne {
 	mutation := newUserMutation(c.config, OpUpdateOne, withUserID(id))
 	return &UserUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
@@ -2049,7 +2048,7 @@ func (c *UserClient) DeleteOne(_m *User) *UserDeleteOne {
 }
 
 // DeleteOneID returns a builder for deleting the given entity by its id.
-func (c *UserClient) DeleteOneID(id uuid.UUID) *UserDeleteOne {
+func (c *UserClient) DeleteOneID(id uint64) *UserDeleteOne {
 	builder := c.Delete().Where(user.ID(id))
 	builder.mutation.id = &id
 	builder.mutation.op = OpDeleteOne
@@ -2066,12 +2065,12 @@ func (c *UserClient) Query() *UserQuery {
 }
 
 // Get returns a User entity by its id.
-func (c *UserClient) Get(ctx context.Context, id uuid.UUID) (*User, error) {
+func (c *UserClient) Get(ctx context.Context, id uint64) (*User, error) {
 	return c.Query().Where(user.ID(id)).Only(ctx)
 }
 
 // GetX is like Get, but panics if an error occurs.
-func (c *UserClient) GetX(ctx context.Context, id uuid.UUID) *User {
+func (c *UserClient) GetX(ctx context.Context, id uint64) *User {
 	obj, err := c.Get(ctx, id)
 	if err != nil {
 		panic(err)

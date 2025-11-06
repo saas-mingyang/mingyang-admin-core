@@ -10,7 +10,6 @@ import (
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	uuid "github.com/gofrs/uuid/v5"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/department"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/user"
 )
@@ -113,13 +112,13 @@ func (_c *DepartmentCreate) SetNillableAncestors(v *string) *DepartmentCreate {
 }
 
 // SetLeader sets the "leader" field.
-func (_c *DepartmentCreate) SetLeader(v string) *DepartmentCreate {
+func (_c *DepartmentCreate) SetLeader(v uint64) *DepartmentCreate {
 	_c.mutation.SetLeader(v)
 	return _c
 }
 
 // SetNillableLeader sets the "leader" field if the given value is not nil.
-func (_c *DepartmentCreate) SetNillableLeader(v *string) *DepartmentCreate {
+func (_c *DepartmentCreate) SetNillableLeader(v *uint64) *DepartmentCreate {
 	if v != nil {
 		_c.SetLeader(*v)
 	}
@@ -209,14 +208,14 @@ func (_c *DepartmentCreate) AddChildren(v ...*Department) *DepartmentCreate {
 }
 
 // AddUserIDs adds the "users" edge to the User entity by IDs.
-func (_c *DepartmentCreate) AddUserIDs(ids ...uuid.UUID) *DepartmentCreate {
+func (_c *DepartmentCreate) AddUserIDs(ids ...uint64) *DepartmentCreate {
 	_c.mutation.AddUserIDs(ids...)
 	return _c
 }
 
 // AddUsers adds the "users" edges to the User entity.
 func (_c *DepartmentCreate) AddUsers(v ...*User) *DepartmentCreate {
-	ids := make([]uuid.UUID, len(v))
+	ids := make([]uint64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -277,6 +276,10 @@ func (_c *DepartmentCreate) defaults() {
 	if _, ok := _c.mutation.Sort(); !ok {
 		v := department.DefaultSort
 		_c.mutation.SetSort(v)
+	}
+	if _, ok := _c.mutation.Leader(); !ok {
+		v := department.DefaultLeader
+		_c.mutation.SetLeader(v)
 	}
 	if _, ok := _c.mutation.ParentID(); !ok {
 		v := department.DefaultParentID
@@ -362,7 +365,7 @@ func (_c *DepartmentCreate) createSpec() (*Department, *sqlgraph.CreateSpec) {
 		_node.Ancestors = value
 	}
 	if value, ok := _c.mutation.Leader(); ok {
-		_spec.SetField(department.FieldLeader, field.TypeString, value)
+		_spec.SetField(department.FieldLeader, field.TypeUint64, value)
 		_node.Leader = value
 	}
 	if value, ok := _c.mutation.Phone(); ok {
@@ -418,7 +421,7 @@ func (_c *DepartmentCreate) createSpec() (*Department, *sqlgraph.CreateSpec) {
 			Columns: []string{department.UsersColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {

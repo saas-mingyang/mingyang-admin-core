@@ -32,7 +32,7 @@ type Department struct {
 	// Parents' IDs | 父级列表
 	Ancestors string `json:"ancestors,omitempty"`
 	// Department leader | 部门负责人
-	Leader string `json:"leader,omitempty"`
+	Leader uint64 `json:"leader,omitempty"`
 	// Leader's phone number | 负责人电话
 	Phone string `json:"phone,omitempty"`
 	// Leader's email | 部门负责人电子邮箱
@@ -94,9 +94,9 @@ func (*Department) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case department.FieldID, department.FieldTenantID, department.FieldStatus, department.FieldSort, department.FieldParentID:
+		case department.FieldID, department.FieldTenantID, department.FieldStatus, department.FieldSort, department.FieldLeader, department.FieldParentID:
 			values[i] = new(sql.NullInt64)
-		case department.FieldName, department.FieldAncestors, department.FieldLeader, department.FieldPhone, department.FieldEmail, department.FieldRemark:
+		case department.FieldName, department.FieldAncestors, department.FieldPhone, department.FieldEmail, department.FieldRemark:
 			values[i] = new(sql.NullString)
 		case department.FieldCreatedAt, department.FieldUpdatedAt:
 			values[i] = new(sql.NullTime)
@@ -164,10 +164,10 @@ func (_m *Department) assignValues(columns []string, values []any) error {
 				_m.Ancestors = value.String
 			}
 		case department.FieldLeader:
-			if value, ok := values[i].(*sql.NullString); !ok {
+			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field leader", values[i])
 			} else if value.Valid {
-				_m.Leader = value.String
+				_m.Leader = uint64(value.Int64)
 			}
 		case department.FieldPhone:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -266,7 +266,7 @@ func (_m *Department) String() string {
 	builder.WriteString(_m.Ancestors)
 	builder.WriteString(", ")
 	builder.WriteString("leader=")
-	builder.WriteString(_m.Leader)
+	builder.WriteString(fmt.Sprintf("%v", _m.Leader))
 	builder.WriteString(", ")
 	builder.WriteString("phone=")
 	builder.WriteString(_m.Phone)

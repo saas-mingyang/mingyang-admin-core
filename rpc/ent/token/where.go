@@ -6,52 +6,51 @@ import (
 	"time"
 
 	"entgo.io/ent/dialect/sql"
-	uuid "github.com/gofrs/uuid/v5"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/predicate"
 )
 
 // ID filters vertices based on their ID field.
-func ID(id uuid.UUID) predicate.Token {
+func ID(id uint64) predicate.Token {
 	return predicate.Token(sql.FieldEQ(FieldID, id))
 }
 
 // IDEQ applies the EQ predicate on the ID field.
-func IDEQ(id uuid.UUID) predicate.Token {
+func IDEQ(id uint64) predicate.Token {
 	return predicate.Token(sql.FieldEQ(FieldID, id))
 }
 
 // IDNEQ applies the NEQ predicate on the ID field.
-func IDNEQ(id uuid.UUID) predicate.Token {
+func IDNEQ(id uint64) predicate.Token {
 	return predicate.Token(sql.FieldNEQ(FieldID, id))
 }
 
 // IDIn applies the In predicate on the ID field.
-func IDIn(ids ...uuid.UUID) predicate.Token {
+func IDIn(ids ...uint64) predicate.Token {
 	return predicate.Token(sql.FieldIn(FieldID, ids...))
 }
 
 // IDNotIn applies the NotIn predicate on the ID field.
-func IDNotIn(ids ...uuid.UUID) predicate.Token {
+func IDNotIn(ids ...uint64) predicate.Token {
 	return predicate.Token(sql.FieldNotIn(FieldID, ids...))
 }
 
 // IDGT applies the GT predicate on the ID field.
-func IDGT(id uuid.UUID) predicate.Token {
+func IDGT(id uint64) predicate.Token {
 	return predicate.Token(sql.FieldGT(FieldID, id))
 }
 
 // IDGTE applies the GTE predicate on the ID field.
-func IDGTE(id uuid.UUID) predicate.Token {
+func IDGTE(id uint64) predicate.Token {
 	return predicate.Token(sql.FieldGTE(FieldID, id))
 }
 
 // IDLT applies the LT predicate on the ID field.
-func IDLT(id uuid.UUID) predicate.Token {
+func IDLT(id uint64) predicate.Token {
 	return predicate.Token(sql.FieldLT(FieldID, id))
 }
 
 // IDLTE applies the LTE predicate on the ID field.
-func IDLTE(id uuid.UUID) predicate.Token {
+func IDLTE(id uint64) predicate.Token {
 	return predicate.Token(sql.FieldLTE(FieldID, id))
 }
 
@@ -70,9 +69,9 @@ func Status(v uint8) predicate.Token {
 	return predicate.Token(sql.FieldEQ(FieldStatus, v))
 }
 
-// UUID applies equality check predicate on the "uuid" field. It's identical to UUIDEQ.
-func UUID(v uuid.UUID) predicate.Token {
-	return predicate.Token(sql.FieldEQ(FieldUUID, v))
+// UserID applies equality check predicate on the "user_id" field. It's identical to UserIDEQ.
+func UserID(v uint64) predicate.Token {
+	return predicate.Token(sql.FieldEQ(FieldUserID, v))
 }
 
 // Username applies equality check predicate on the "username" field. It's identical to UsernameEQ.
@@ -225,44 +224,54 @@ func StatusNotNil() predicate.Token {
 	return predicate.Token(sql.FieldNotNull(FieldStatus))
 }
 
-// UUIDEQ applies the EQ predicate on the "uuid" field.
-func UUIDEQ(v uuid.UUID) predicate.Token {
-	return predicate.Token(sql.FieldEQ(FieldUUID, v))
+// UserIDEQ applies the EQ predicate on the "user_id" field.
+func UserIDEQ(v uint64) predicate.Token {
+	return predicate.Token(sql.FieldEQ(FieldUserID, v))
 }
 
-// UUIDNEQ applies the NEQ predicate on the "uuid" field.
-func UUIDNEQ(v uuid.UUID) predicate.Token {
-	return predicate.Token(sql.FieldNEQ(FieldUUID, v))
+// UserIDNEQ applies the NEQ predicate on the "user_id" field.
+func UserIDNEQ(v uint64) predicate.Token {
+	return predicate.Token(sql.FieldNEQ(FieldUserID, v))
 }
 
-// UUIDIn applies the In predicate on the "uuid" field.
-func UUIDIn(vs ...uuid.UUID) predicate.Token {
-	return predicate.Token(sql.FieldIn(FieldUUID, vs...))
+// UserIDIn applies the In predicate on the "user_id" field.
+func UserIDIn(vs ...uint64) predicate.Token {
+	return predicate.Token(sql.FieldIn(FieldUserID, vs...))
 }
 
-// UUIDNotIn applies the NotIn predicate on the "uuid" field.
-func UUIDNotIn(vs ...uuid.UUID) predicate.Token {
-	return predicate.Token(sql.FieldNotIn(FieldUUID, vs...))
+// UserIDNotIn applies the NotIn predicate on the "user_id" field.
+func UserIDNotIn(vs ...uint64) predicate.Token {
+	return predicate.Token(sql.FieldNotIn(FieldUserID, vs...))
 }
 
-// UUIDGT applies the GT predicate on the "uuid" field.
-func UUIDGT(v uuid.UUID) predicate.Token {
-	return predicate.Token(sql.FieldGT(FieldUUID, v))
+// UserIDGT applies the GT predicate on the "user_id" field.
+func UserIDGT(v uint64) predicate.Token {
+	return predicate.Token(sql.FieldGT(FieldUserID, v))
 }
 
-// UUIDGTE applies the GTE predicate on the "uuid" field.
-func UUIDGTE(v uuid.UUID) predicate.Token {
-	return predicate.Token(sql.FieldGTE(FieldUUID, v))
+// UserIDGTE applies the GTE predicate on the "user_id" field.
+func UserIDGTE(v uint64) predicate.Token {
+	return predicate.Token(sql.FieldGTE(FieldUserID, v))
 }
 
-// UUIDLT applies the LT predicate on the "uuid" field.
-func UUIDLT(v uuid.UUID) predicate.Token {
-	return predicate.Token(sql.FieldLT(FieldUUID, v))
+// UserIDLT applies the LT predicate on the "user_id" field.
+func UserIDLT(v uint64) predicate.Token {
+	return predicate.Token(sql.FieldLT(FieldUserID, v))
 }
 
-// UUIDLTE applies the LTE predicate on the "uuid" field.
-func UUIDLTE(v uuid.UUID) predicate.Token {
-	return predicate.Token(sql.FieldLTE(FieldUUID, v))
+// UserIDLTE applies the LTE predicate on the "user_id" field.
+func UserIDLTE(v uint64) predicate.Token {
+	return predicate.Token(sql.FieldLTE(FieldUserID, v))
+}
+
+// UserIDIsNil applies the IsNil predicate on the "user_id" field.
+func UserIDIsNil() predicate.Token {
+	return predicate.Token(sql.FieldIsNull(FieldUserID))
+}
+
+// UserIDNotNil applies the NotNil predicate on the "user_id" field.
+func UserIDNotNil() predicate.Token {
+	return predicate.Token(sql.FieldNotNull(FieldUserID))
 }
 
 // UsernameEQ applies the EQ predicate on the "username" field.

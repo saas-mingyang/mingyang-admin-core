@@ -2,11 +2,7 @@
 
 package ent
 
-import (
-	"time"
-
-	uuid "github.com/gofrs/uuid/v5"
-)
+import "time"
 
 // set field if value's pointer is not nil.
 func (_m *APIUpdate) SetNotNilUpdatedAt(value *time.Time) *APIUpdate {
@@ -489,7 +485,7 @@ func (_m *DepartmentCreate) SetNotNilAncestors(value *string) *DepartmentCreate 
 }
 
 // set field if value's pointer is not nil.
-func (_m *DepartmentUpdate) SetNotNilLeader(value *string) *DepartmentUpdate {
+func (_m *DepartmentUpdate) SetNotNilLeader(value *uint64) *DepartmentUpdate {
 	if value != nil {
 		return _m.SetLeader(*value)
 	}
@@ -497,7 +493,7 @@ func (_m *DepartmentUpdate) SetNotNilLeader(value *string) *DepartmentUpdate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *DepartmentUpdateOne) SetNotNilLeader(value *string) *DepartmentUpdateOne {
+func (_m *DepartmentUpdateOne) SetNotNilLeader(value *uint64) *DepartmentUpdateOne {
 	if value != nil {
 		return _m.SetLeader(*value)
 	}
@@ -505,7 +501,7 @@ func (_m *DepartmentUpdateOne) SetNotNilLeader(value *string) *DepartmentUpdateO
 }
 
 // set field if value's pointer is not nil.
-func (_m *DepartmentCreate) SetNotNilLeader(value *string) *DepartmentCreate {
+func (_m *DepartmentCreate) SetNotNilLeader(value *uint64) *DepartmentCreate {
 	if value != nil {
 		return _m.SetLeader(*value)
 	}
@@ -2241,25 +2237,25 @@ func (_m *TokenCreate) SetNotNilStatus(value *uint8) *TokenCreate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *TokenUpdate) SetNotNilUUID(value *uuid.UUID) *TokenUpdate {
+func (_m *TokenUpdate) SetNotNilUserID(value *uint64) *TokenUpdate {
 	if value != nil {
-		return _m.SetUUID(*value)
+		return _m.SetUserID(*value)
 	}
 	return _m
 }
 
 // set field if value's pointer is not nil.
-func (_m *TokenUpdateOne) SetNotNilUUID(value *uuid.UUID) *TokenUpdateOne {
+func (_m *TokenUpdateOne) SetNotNilUserID(value *uint64) *TokenUpdateOne {
 	if value != nil {
-		return _m.SetUUID(*value)
+		return _m.SetUserID(*value)
 	}
 	return _m
 }
 
 // set field if value's pointer is not nil.
-func (_m *TokenCreate) SetNotNilUUID(value *uuid.UUID) *TokenCreate {
+func (_m *TokenCreate) SetNotNilUserID(value *uint64) *TokenCreate {
 	if value != nil {
-		return _m.SetUUID(*value)
+		return _m.SetUserID(*value)
 	}
 	return _m
 }

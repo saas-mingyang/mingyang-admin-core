@@ -31,7 +31,7 @@ func (Token) Fields() []ent.Field {
 
 func (Token) Mixin() []ent.Mixin {
 	return []ent.Mixin{
-		mixins.UUIDMixin{},
+		mixins.IDMixin{},
 		mixins.StatusMixin{},
 	}
 }

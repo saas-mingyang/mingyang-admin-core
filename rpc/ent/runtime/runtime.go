@@ -5,7 +5,6 @@ package runtime
 import (
 	"time"
 
-	uuid "github.com/gofrs/uuid/v5"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/api"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/configuration"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/department"
@@ -112,6 +111,10 @@ func init() {
 	departmentDescSort := departmentMixinFields3[0].Descriptor()
 	// department.DefaultSort holds the default value on creation for the sort field.
 	department.DefaultSort = departmentDescSort.Default.(uint32)
+	// departmentDescLeader is the schema descriptor for leader field.
+	departmentDescLeader := departmentFields[2].Descriptor()
+	// department.DefaultLeader holds the default value on creation for the leader field.
+	department.DefaultLeader = departmentDescLeader.Default.(uint64)
 	// departmentDescParentID is the schema descriptor for parent_id field.
 	departmentDescParentID := departmentFields[6].Descriptor()
 	// department.DefaultParentID holds the default value on creation for the parent_id field.
@@ -434,23 +437,25 @@ func init() {
 	tokenDescStatus := tokenMixinFields1[0].Descriptor()
 	// token.DefaultStatus holds the default value on creation for the status field.
 	token.DefaultStatus = tokenDescStatus.Default.(uint8)
+	// tokenDescUserID is the schema descriptor for user_id field.
+	tokenDescUserID := tokenFields[0].Descriptor()
+	// token.DefaultUserID holds the default value on creation for the user_id field.
+	token.DefaultUserID = tokenDescUserID.Default.(uint64)
 	// tokenDescUsername is the schema descriptor for username field.
 	tokenDescUsername := tokenFields[1].Descriptor()
 	// token.DefaultUsername holds the default value on creation for the username field.
 	token.DefaultUsername = tokenDescUsername.Default.(string)
-	// tokenDescID is the schema descriptor for id field.
-	tokenDescID := tokenMixinFields0[0].Descriptor()
-	// token.DefaultID holds the default value on creation for the id field.
-	token.DefaultID = tokenDescID.Default.(func() uuid.UUID)
 	userMixin := schema.User{}.Mixin()
-	userMixinHooks2 := userMixin[2].Hooks()
-	user.Hooks[0] = userMixinHooks2[0]
-	userMixinInters2 := userMixin[2].Interceptors()
-	user.Interceptors[0] = userMixinInters2[0]
+	userMixinHooks3 := userMixin[3].Hooks()
+	user.Hooks[0] = userMixinHooks3[0]
+	userMixinInters3 := userMixin[3].Interceptors()
+	user.Interceptors[0] = userMixinInters3[0]
 	userMixinFields0 := userMixin[0].Fields()
 	_ = userMixinFields0
 	userMixinFields1 := userMixin[1].Fields()
 	_ = userMixinFields1
+	userMixinFields2 := userMixin[2].Fields()
+	_ = userMixinFields2
 	userFields := schema.User{}.Fields()
 	_ = userFields
 	// userDescCreatedAt is the schema descriptor for created_at field.
@@ -463,8 +468,12 @@ func init() {
 	user.DefaultUpdatedAt = userDescUpdatedAt.Default.(func() time.Time)
 	// user.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
 	user.UpdateDefaultUpdatedAt = userDescUpdatedAt.UpdateDefault.(func() time.Time)
+	// userDescTenantID is the schema descriptor for tenant_id field.
+	userDescTenantID := userMixinFields1[0].Descriptor()
+	// user.DefaultTenantID holds the default value on creation for the tenant_id field.
+	user.DefaultTenantID = userDescTenantID.Default.(uint64)
 	// userDescStatus is the schema descriptor for status field.
-	userDescStatus := userMixinFields1[0].Descriptor()
+	userDescStatus := userMixinFields2[0].Descriptor()
 	// user.DefaultStatus holds the default value on creation for the status field.
 	user.DefaultStatus = userDescStatus.Default.(uint8)
 	// userDescHomePath is the schema descriptor for home_path field.
@@ -475,10 +484,6 @@ func init() {
 	userDescDepartmentID := userFields[8].Descriptor()
 	// user.DefaultDepartmentID holds the default value on creation for the department_id field.
 	user.DefaultDepartmentID = userDescDepartmentID.Default.(uint64)
-	// userDescID is the schema descriptor for id field.
-	userDescID := userMixinFields0[0].Descriptor()
-	// user.DefaultID holds the default value on creation for the id field.
-	user.DefaultID = userDescID.Default.(func() uuid.UUID)
 }
 
 const (

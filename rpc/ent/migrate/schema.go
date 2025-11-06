@@ -72,7 +72,7 @@ var (
 		{Name: "sort", Type: field.TypeUint32, Comment: "Sort Number | 排序编号", Default: 1},
 		{Name: "name", Type: field.TypeString, Comment: "Department name | 部门名称"},
 		{Name: "ancestors", Type: field.TypeString, Nullable: true, Comment: "Parents' IDs | 父级列表"},
-		{Name: "leader", Type: field.TypeString, Nullable: true, Comment: "Department leader | 部门负责人"},
+		{Name: "leader", Type: field.TypeUint64, Nullable: true, Comment: "Department leader | 部门负责人", Default: 1},
 		{Name: "phone", Type: field.TypeString, Nullable: true, Comment: "Leader's phone number | 负责人电话"},
 		{Name: "email", Type: field.TypeString, Nullable: true, Comment: "Leader's email | 部门负责人电子邮箱"},
 		{Name: "remark", Type: field.TypeString, Nullable: true, Comment: "Remark | 备注"},
@@ -302,11 +302,11 @@ var (
 	}
 	// SysTokensColumns holds the columns for the "sys_tokens" table.
 	SysTokensColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUUID, Comment: "UUID"},
+		{Name: "id", Type: field.TypeUint64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
-		{Name: "uuid", Type: field.TypeUUID, Comment: " User's UUID | 用户的UUID"},
+		{Name: "user_id", Type: field.TypeUint64, Nullable: true, Comment: " User's ID | 用户的ID", Default: 1},
 		{Name: "username", Type: field.TypeString, Comment: "Username | 用户名", Default: "unknown"},
 		{Name: "token", Type: field.TypeString, Comment: "Token string | Token 字符串"},
 		{Name: "source", Type: field.TypeString, Comment: "Log in source such as GitHub | Token 来源 （本地为core, 第三方如github等）"},
@@ -320,7 +320,7 @@ var (
 		PrimaryKey: []*schema.Column{SysTokensColumns[0]},
 		Indexes: []*schema.Index{
 			{
-				Name:    "token_uuid",
+				Name:    "token_user_id",
 				Unique:  false,
 				Columns: []*schema.Column{SysTokensColumns[4]},
 			},
@@ -333,9 +333,10 @@ var (
 	}
 	// SysUsersColumns holds the columns for the "sys_users" table.
 	SysUsersColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUUID, Comment: "UUID"},
+		{Name: "id", Type: field.TypeUint64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
+		{Name: "tenant_id", Type: field.TypeUint64, Comment: "Tenant ID | 租户 ID", Default: 1},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
 		{Name: "deleted_at", Type: field.TypeTime, Nullable: true, Comment: "Delete Time | 删除日期"},
 		{Name: "username", Type: field.TypeString, Unique: true, Comment: "User's login name | 登录名"},
@@ -357,7 +358,7 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "sys_users_sys_departments_departments",
-				Columns:    []*schema.Column{SysUsersColumns[13]},
+				Columns:    []*schema.Column{SysUsersColumns[14]},
 				RefColumns: []*schema.Column{SysDepartmentsColumns[0]},
 				OnDelete:   schema.SetNull,
 			},
@@ -366,7 +367,7 @@ var (
 			{
 				Name:    "user_username_email",
 				Unique:  true,
-				Columns: []*schema.Column{SysUsersColumns[5], SysUsersColumns[11]},
+				Columns: []*schema.Column{SysUsersColumns[6], SysUsersColumns[12]},
 			},
 		},
 	}
@@ -422,7 +423,7 @@ var (
 	}
 	// UserPositionsColumns holds the columns for the "user_positions" table.
 	UserPositionsColumns = []*schema.Column{
-		{Name: "user_id", Type: field.TypeUUID},
+		{Name: "user_id", Type: field.TypeUint64},
 		{Name: "position_id", Type: field.TypeUint64},
 	}
 	// UserPositionsTable holds the schema information for the "user_positions" table.
@@ -447,7 +448,7 @@ var (
 	}
 	// UserRolesColumns holds the columns for the "user_roles" table.
 	UserRolesColumns = []*schema.Column{
-		{Name: "user_id", Type: field.TypeUUID},
+		{Name: "user_id", Type: field.TypeUint64},
 		{Name: "role_id", Type: field.TypeUint64},
 	}
 	// UserRolesTable holds the schema information for the "user_roles" table.
