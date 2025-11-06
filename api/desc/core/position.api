@@ -22,6 +22,9 @@ type (
 
         // Remark | 备注
         Remark *string `json:"remark,optional" validate:"omitempty,max=200"`
+
+        // Tenant ID | 租户ID
+        TenantId *uint64 `json:"tenantId,optional"`
     }
 
     // The response data of position list | 职位列表数据
@@ -52,6 +55,9 @@ type (
 
         // Remark | 备注
         Remark *string `json:"remark,optional" validate:"omitempty,max=200"`
+
+        // Tenant ID | 租户ID
+        TenantId *uint64 `json:"tenantId,optional"`
     }
 
     // Position information response | 职位信息返回体

@@ -48,7 +48,7 @@ func (l *OauthCallbackLogic) OauthCallback() (resp *types.CallbackResp, err erro
 	// add token into database
 	expiredAt := time.Now().Add(time.Second * time.Duration(l.svcCtx.Config.Auth.AccessExpire)).UnixMilli()
 	_, err = l.svcCtx.CoreRpc.CreateToken(l.ctx, &core.TokenInfo{
-		Uuid:      result.Id,
+		UserId:    result.Id,
 		Token:     pointy.GetPointer(token),
 		Source:    pointy.GetPointer(strings.Split(l.r.FormValue("state"), "-")[1]),
 		Status:    pointy.GetPointer(uint32(1)),

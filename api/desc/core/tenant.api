@@ -1,0 +1,89 @@
+import "../base.api"
+
+type (
+    // The response data of tenant information | 部门信息
+    TenantInfo {
+        BaseIDInfo
+
+        // Status | 状态
+        Status *uint32 `json:"status,optional" validate:"omitempty,lt=20"`
+
+        // Name | 部门名称
+        Name *string `json:"name,optional" validate:"omitempty,min=1,max=50"`
+
+        // Leader | 部门负责人
+        AdminId *uint64 `json:"adminId,optional"`
+
+        // Phone | 电话号码
+        Code *string `json:"code,optional" validate:"omitempty,max=128"`
+
+        // ParentId | 父级 ID
+        ParentId *uint64 `json:"parentId,optional"`
+    }
+
+    // The response data of tenant list | 部门列表数据
+    TenantListResp {
+        BaseDataInfo
+
+        // Tenant list data | 部门列表数据
+        Data TenantListInfo `json:"data"`
+    }
+
+    // Tenant list data | 部门列表数据
+    TenantListInfo {
+        BaseListInfo
+
+        // The API list data | 部门列表数据
+        Data  []TenantInfo  `json:"data"`
+    }
+
+    // Get tenant list request params | 部门列表请求参数
+    TenantListReq {
+        PageInfo
+
+        // Name | 部门名称
+        Name *string `json:"name,optional" validate:"omitempty,max=50"`
+
+        // Leader | 部门负责人
+        AdminId *uint64 `json:"adminId,optional" validate:"omitempty,max=20"`
+
+        // Status | 状态
+        Status *uint32 `json:"status,optional" validate:"omitempty,lt=20"`
+    }
+
+    // Tenant information response | 部门信息返回体
+    TenantInfoResp {
+        BaseDataInfo
+
+        // Tenant information | 部门数据
+        Data TenantInfo `json:"data"`
+    }
+)
+
+@server(
+    jwt: Auth
+    group: tenant
+    middleware: Authority
+)
+
+service Core {
+    // Create tenant information | 创建部门
+    @handler createTenant
+    post /tenant/create (TenantInfo) returns (BaseMsgResp)
+
+    // Update tenant information | 更新部门
+    @handler updateTenant
+    post /tenant/update (TenantInfo) returns (BaseMsgResp)
+
+    // Delete tenant information | 删除部门信息
+    @handler deleteTenant
+    post /tenant/delete (IDsReq) returns (BaseMsgResp)
+
+    // Get tenant list | 获取部门列表
+    @handler getTenantList
+    post /tenant/list (TenantListReq) returns (TenantListResp)
+
+    // Get Tenant by ID | 通过ID获取部门
+    @handler getTenantById
+    post /tenant (IDReq) returns (TenantInfoResp)
+}

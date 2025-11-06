@@ -74,7 +74,7 @@ func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err erro
 		// add token into database
 		expiredAt := time.Now().Add(time.Second * time.Duration(l.svcCtx.Config.Auth.AccessExpire)).UnixMilli()
 		_, err = l.svcCtx.CoreRpc.CreateToken(l.ctx, &core.TokenInfo{
-			Uuid:      user.Id,
+			UserId:    user.Id,
 			Token:     pointy.GetPointer(token),
 			Source:    pointy.GetPointer("core_user"),
 			Status:    pointy.GetPointer(uint32(common.StatusNormal)),

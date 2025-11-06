@@ -164,7 +164,7 @@ type RoleInfoResp struct {
 // The response data of user information | 用户信息
 // swagger:model UserInfo
 type UserInfo struct {
-	BaseUUIDInfo
+	BaseIDInfo
 	// Status | 状态
 	// max : 20
 	Status *uint32 `json:"status,optional" validate:"omitempty,lt=20"`
@@ -198,6 +198,8 @@ type UserInfo struct {
 	DepartmentId *uint64 `json:"departmentId,optional,omitempty"`
 	// Position ID | 职位ID
 	PositionIds []uint64 `json:"positionId,optional,omitempty"`
+	// Tenant ID | 租户ID
+	TenantId *uint64 `json:"tenantId,optional"`
 }
 
 // The response data of user list | 用户列表数据
@@ -241,6 +243,8 @@ type UserListReq struct {
 	// Description | 描述
 	// max length : 100
 	Description *string `json:"description,optional" validate:"omitempty,max=100"`
+	// Tenant ID | 租户ID
+	TenantId *uint64 `json:"tenantId,optional"`
 }
 
 // User information response | 用户信息返回体
@@ -277,6 +281,8 @@ type RegisterReq struct {
 	// required : true
 	// max length : 100
 	Email string `json:"email" validate:"required,email,max=100"`
+	// Tenant ID | 租户ID
+	TenantId uint64 `json:"tenantId,optional"`
 }
 
 // Register by email request | 邮箱注册参数
@@ -300,6 +306,8 @@ type RegisterByEmailReq struct {
 	// required : true
 	// max length : 100
 	Email string `json:"email" validate:"required,email,max=100"`
+	// Tenant ID | 租户ID
+	TenantId uint64 `json:"tenantId,optional"`
 }
 
 // Register by SMS request | 短信注册参数
@@ -323,6 +331,8 @@ type RegisterBySmsReq struct {
 	// required : true
 	// max length : 20
 	PhoneNumber string `json:"phoneNumber"  validate:"required,numeric,max=20"`
+	// Tenant ID | 租户ID
+	TenantId uint64 `json:"tenantId,optional"`
 }
 
 // change user's password request | 修改密码请求参数
@@ -342,11 +352,13 @@ type ChangePasswordReq struct {
 // swagger:model LoginInfo
 type LoginInfo struct {
 	// User's UUID | 用户的UUID
-	UserId string `json:"userId"`
+	UserId uint64 `json:"userId"`
 	// Token for authorization | 验证身份的token
 	Token string `json:"token"`
 	// Expire timestamp | 过期时间戳
 	Expire uint64 `json:"expire"`
+	// Tenant ID | 租户ID
+	TenantId uint64 `json:"tenantId,optional"`
 }
 
 // The simple role data | 简单的角色数据
@@ -370,7 +382,7 @@ type UserBaseIDInfoResp struct {
 // swagger:model UserBaseIDInfo
 type UserBaseIDInfo struct {
 	// User's UUID | 用户的UUID
-	UUID *string `json:"userId"`
+	UserId *uint64 `json:"userId"`
 	// User's name | 用户名
 	Username *string `json:"username"`
 	// User's nickname | 用户的昵称
@@ -385,6 +397,8 @@ type UserBaseIDInfo struct {
 	RoleName []string `json:"roleName"`
 	// Department Name | 部门名称
 	DepartmentName string `json:"departmentName,optional"`
+	// Tenant ID | 租户ID
+	TenantId *uint64 `json:"tenantId,optional"`
 }
 
 // The permission code for front end permission control | 权限码： 用于前端权限控制
@@ -417,6 +431,8 @@ type LoginReq struct {
 	// max length : 5
 	// min length : 5
 	Captcha string `json:"captcha" validate:"required,len=5"`
+	// Tenant ID | 租户ID
+	TenantId uint64 `json:"tenantId,optional"`
 }
 
 // Log in by email request | 邮箱登录参数
@@ -430,6 +446,8 @@ type LoginByEmailReq struct {
 	// max length : 5
 	// min length : 5
 	Captcha string `json:"captcha,optional" validate:"omitempty,len=5"`
+	// Tenant ID | 租户ID
+	TenantId uint64 `json:"tenantId,optional"`
 }
 
 // Log in by SMS request | 短信登录参数
@@ -443,6 +461,8 @@ type LoginBySmsReq struct {
 	// max length : 5
 	// min length : 5
 	Captcha string `json:"captcha,optional" validate:"omitempty,len=5"`
+	// Tenant ID | 租户ID
+	TenantId uint64 `json:"tenantId,optional"`
 }
 
 // The log in response data | 登录返回数据
@@ -866,6 +886,8 @@ type DictionaryInfo struct {
 	Desc *string `json:"desc,optional" validate:"omitempty,max=200"`
 	// Whether to be public for everyone | 是否公开词典，无需登录即可访问
 	IsPublic *bool `json:"isPublic,optional"`
+	// Tenant ID | 租户ID
+	TenantId *uint64 `json:"tenantId,optional"`
 }
 
 // The response data of dictionary list | 字典列表数据
@@ -874,6 +896,8 @@ type DictionaryListResp struct {
 	BaseDataInfo
 	// Dictionary list data | 字典列表数据
 	Data DictionaryListInfo `json:"data"`
+	// Tenant ID | 租户ID
+	TenantId *uint64 `json:"tenantId,optional"`
 }
 
 // Dictionary list data | 字典列表数据
@@ -891,6 +915,8 @@ type DictionaryListReq struct {
 	// Name | 字典名称
 	// max length : 50
 	Name *string `json:"name,optional" validate:"omitempty,max=50"`
+	// Tenant ID | 租户ID
+	TenantId *uint64 `json:"tenantId,optional"`
 }
 
 // Dictionary information response | 字典信息返回体
@@ -1000,7 +1026,7 @@ type RedirectInfo struct {
 // swagger:model CallbackResp
 type CallbackResp struct {
 	// User's UUID | 用户的UUID
-	UserId string `json:"userId"`
+	UserId uint64 `json:"userId"`
 	// User's role information| 用户的角色信息
 	// in: body
 	Role RoleInfoSimple `json:"role"`
@@ -1013,11 +1039,11 @@ type CallbackResp struct {
 // The response data of token information | 令牌信息
 // swagger:model TokenInfo
 type TokenInfo struct {
-	BaseUUIDInfo
+	BaseIDInfo
 	// Status | 状态
 	Status *uint32 `json:"status,optional"`
 	// User's UUID | 用户的UUID
-	Uuid *string `json:"uuid,optional"`
+	UserId *uint64 `json:"userId,optional"`
 	// Token | 用户的Token
 	Token *string `json:"token,optional"`
 	// Source | Token 来源
@@ -1054,8 +1080,8 @@ type TokenListReq struct {
 	Nickname *string `json:"nickname,optional"`
 	// Email | 邮箱
 	Email *string `json:"email,optional"`
-	// UUID
-	Uuid *string `json:"uuid,optional"`
+	// User's UUID | 用户的UUID
+	UserId *uint64 `json:"userId,optional"`
 }
 
 // Token information response | Token信息返回体
@@ -1087,7 +1113,7 @@ type DepartmentInfo struct {
 	Ancestors *string `json:"ancestors,optional" validate:"omitempty,max=200"`
 	// Leader | 部门负责人
 	// max length : 20
-	Leader *string `json:"leader,optional" validate:"omitempty,max=20"`
+	Leader *uint64 `json:"leader,optional" validate:"omitempty,max=20"`
 	// Phone | 电话号码
 	// max length : 18
 	Phone *string `json:"phone,optional" validate:"omitempty,max=18"`
@@ -1099,6 +1125,8 @@ type DepartmentInfo struct {
 	Remark *string `json:"remark,optional" validate:"omitempty,max=200"`
 	// ParentId | 父级 ID
 	ParentId *uint64 `json:"parentId,optional"`
+	// Tenant ID | 租户ID
+	TenantId *uint64 `json:"tenantId,optional"`
 }
 
 // The response data of department list | 部门列表数据
@@ -1126,10 +1154,12 @@ type DepartmentListReq struct {
 	Name *string `json:"name,optional" validate:"omitempty,max=50"`
 	// Leader | 部门负责人
 	// max length : 20
-	Leader *string `json:"leader,optional" validate:"omitempty,max=20"`
+	Leader *uint64 `json:"leader,optional" validate:"omitempty,max=20"`
 	// Status | 状态
 	// max : 20
 	Status *uint32 `json:"status,optional" validate:"omitempty,lt=20"`
+	// Tenant ID | 租户ID
+	TenantId *uint64 `json:"tenantId,optional"`
 }
 
 // Department information response | 部门信息返回体
@@ -1161,6 +1191,8 @@ type PositionInfo struct {
 	// Remark | 备注
 	// max length : 200
 	Remark *string `json:"remark,optional" validate:"omitempty,max=200"`
+	// Tenant ID | 租户ID
+	TenantId *uint64 `json:"tenantId,optional"`
 }
 
 // The response data of position list | 职位列表数据
@@ -1192,6 +1224,8 @@ type PositionListReq struct {
 	// Remark | 备注
 	// max length : 200
 	Remark *string `json:"remark,optional" validate:"omitempty,max=200"`
+	// Tenant ID | 租户ID
+	TenantId *uint64 `json:"tenantId,optional"`
 }
 
 // Position information response | 职位信息返回体
@@ -1225,6 +1259,8 @@ type DictionaryDetailInfo struct {
 	Sort *uint32 `json:"sort,optional" validate:"omitempty,lt=10000"`
 	// Title I18n Trans | 标题国际化后
 	Trans string `json:"trans,optional"`
+	// Tenant ID | 租户ID
+	TenantId *uint64 `json:"tenantId,optional"`
 }
 
 // The response data of dictionary detail list | 字典键值列表数据
@@ -1252,6 +1288,8 @@ type DictionaryDetailListReq struct {
 	Key *string `json:"key,optional" validate:"omitempty,max=80"`
 	// Dictionary ID | 所属字典ID
 	DictionaryId *uint64 `json:"dictionaryId,optional"`
+	// Tenant ID | 租户ID
+	TenantId *uint64 `json:"tenantId,optional"`
 }
 
 // DictionaryDetail information response | 字典键值信息返回体
@@ -1267,6 +1305,8 @@ type DictionaryDetailInfoResp struct {
 type DictionaryNameReq struct {
 	// in:path
 	Name *string `json:"name,optional" path:"name"`
+	// Tenant ID | 租户ID
+	TenantId *uint64 `json:"tenantId,optional"`
 }
 
 // The response data of task information | 定时任务信息

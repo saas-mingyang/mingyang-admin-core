@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+	"strconv"
 	"strings"
 	"time"
 
@@ -35,7 +36,9 @@ func NewAccessTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Acces
 }
 
 func (l *AccessTokenLogic) AccessToken() (resp *types.RefreshTokenResp, err error) {
-	userId, err := userctx.GetUserIDFromCtx(l.ctx)
+	u, err := userctx.GetUserIDFromCtx(l.ctx)
+	userId, _ := strconv.ParseUint(u, 10, 64)
+
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +47,7 @@ func (l *AccessTokenLogic) AccessToken() (resp *types.RefreshTokenResp, err erro
 		return nil, err
 	}
 
-	userData, err := l.svcCtx.CoreRpc.GetUserById(l.ctx, &core.UUIDReq{
+	userData, err := l.svcCtx.CoreRpc.GetUserById(l.ctx, &core.IDReq{
 		Id: userId,
 	})
 	if err != nil {
@@ -65,7 +68,7 @@ func (l *AccessTokenLogic) AccessToken() (resp *types.RefreshTokenResp, err erro
 	// add token into database
 	expiredAt := time.Now().Add(time.Hour * time.Duration(l.svcCtx.Config.ProjectConf.AccessTokenPeriod)).UnixMilli()
 	_, err = l.svcCtx.CoreRpc.CreateToken(l.ctx, &core.TokenInfo{
-		Uuid:      &userId,
+		UserId:    &userId,
 		Token:     pointy.GetPointer(token),
 		Source:    pointy.GetPointer("core_user_access_token"),
 		Status:    pointy.GetPointer(uint32(common.StatusNormal)),

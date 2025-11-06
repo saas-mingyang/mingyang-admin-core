@@ -28,7 +28,7 @@ func (l *CreateTokenLogic) CreateToken(req *types.TokenInfo) (resp *types.BaseMs
 	data, err := l.svcCtx.CoreRpc.CreateToken(l.ctx,
 		&core.TokenInfo{
 			Status:    req.Status,
-			Uuid:      req.Uuid,
+			UserId:    req.UserId,
 			Token:     req.Token,
 			Source:    req.Source,
 			Username:  req.Username,

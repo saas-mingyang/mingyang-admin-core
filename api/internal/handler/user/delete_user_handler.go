@@ -27,7 +27,7 @@ import (
 
 func DeleteUserHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.UUIDsReq
+		var req types.IDsReq
 		if err := httpx.Parse(r, &req, true); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return

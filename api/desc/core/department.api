@@ -21,7 +21,7 @@ type (
         Ancestors *string `json:"ancestors,optional" validate:"omitempty,max=200"`
 
         // Leader | 部门负责人
-        Leader *string `json:"leader,optional" validate:"omitempty,max=20"`
+        Leader *uint64 `json:"leader,optional" validate:"omitempty,max=20"`
 
         // Phone | 电话号码
         Phone *string `json:"phone,optional" validate:"omitempty,max=18"`
@@ -34,6 +34,9 @@ type (
 
         // ParentId | 父级 ID
         ParentId *uint64 `json:"parentId,optional"`
+
+        // Tenant ID | 租户ID
+        TenantId *uint64 `json:"tenantId,optional"`
     }
 
     // The response data of department list | 部门列表数据
@@ -60,10 +63,13 @@ type (
         Name *string `json:"name,optional" validate:"omitempty,max=50"`
 
         // Leader | 部门负责人
-        Leader *string `json:"leader,optional" validate:"omitempty,max=20"`
+        Leader *uint64 `json:"leader,optional" validate:"omitempty,max=20"`
 
         // Status | 状态
         Status *uint32 `json:"status,optional" validate:"omitempty,lt=20"`
+
+        // Tenant ID | 租户ID
+        TenantId *uint64 `json:"tenantId,optional"`
     }
 
     // Department information response | 部门信息返回体

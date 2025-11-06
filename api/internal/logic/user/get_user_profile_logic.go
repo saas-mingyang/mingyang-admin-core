@@ -27,7 +27,7 @@ func NewGetUserProfileLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ge
 }
 
 func (l *GetUserProfileLogic) GetUserProfile() (resp *types.ProfileResp, err error) {
-	data, err := l.svcCtx.CoreRpc.GetUserById(l.ctx, &core.UUIDReq{Id: l.ctx.Value("userId").(string)})
+	data, err := l.svcCtx.CoreRpc.GetUserById(l.ctx, &core.IDReq{Id: l.ctx.Value("userId").(uint64)})
 	if err != nil {
 		return nil, err
 	}

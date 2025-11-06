@@ -74,7 +74,7 @@ func (l *LoginBySmsLogic) LoginBySms(req *types.LoginBySmsReq) (resp *types.Logi
 		// add token into database
 		expiredAt := time.Now().Add(time.Second * time.Duration(l.svcCtx.Config.Auth.AccessExpire)).UnixMilli()
 		_, err = l.svcCtx.CoreRpc.CreateToken(l.ctx, &core.TokenInfo{
-			Uuid:      userData.Data[0].Id,
+			UserId:    userData.Data[0].Id,
 			Token:     pointy.GetPointer(token),
 			Source:    pointy.GetPointer("core_user"),
 			Status:    pointy.GetPointer(uint32(common.StatusNormal)),

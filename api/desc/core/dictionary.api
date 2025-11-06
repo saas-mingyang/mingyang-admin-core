@@ -22,6 +22,9 @@ type (
 
         // Whether to be public for everyone | 是否公开词典，无需登录即可访问
         IsPublic *bool `json:"isPublic,optional"`
+
+        // Tenant ID | 租户ID
+        TenantId *uint64 `json:"tenantId,optional"`
     }
 
     // The response data of dictionary list | 字典列表数据
@@ -30,6 +33,9 @@ type (
 
         // Dictionary list data | 字典列表数据
         Data DictionaryListInfo `json:"data"`
+
+        // Tenant ID | 租户ID
+        TenantId *uint64 `json:"tenantId,optional"`
     }
 
     // Dictionary list data | 字典列表数据
@@ -46,6 +52,9 @@ type (
 
         // Name | 字典名称
         Name *string `json:"name,optional" validate:"omitempty,max=50"`
+
+        // Tenant ID | 租户ID
+        TenantId *uint64 `json:"tenantId,optional"`
     }
 
     // Dictionary information response | 字典信息返回体

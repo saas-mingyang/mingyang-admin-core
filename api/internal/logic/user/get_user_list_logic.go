@@ -44,7 +44,7 @@ func (l *GetUserListLogic) GetUserList(req *types.UserListReq) (resp *types.User
 	resp = &types.UserListResp{}
 	for _, v := range data.Data {
 		resp.Data.Data = append(resp.Data.Data, types.UserInfo{
-			BaseUUIDInfo: types.BaseUUIDInfo{
+			BaseIDInfo: types.BaseIDInfo{
 				Id:        v.Id,
 				CreatedAt: v.CreatedAt,
 				UpdatedAt: v.UpdatedAt,

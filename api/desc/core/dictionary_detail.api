@@ -25,6 +25,9 @@ type (
 
         // Title I18n Trans | 标题国际化后
         Trans string `json:"trans,optional"`
+
+        // Tenant ID | 租户ID
+        TenantId *uint64 `json:"tenantId,optional"`
     }
 
     // The response data of dictionary detail list | 字典键值列表数据
@@ -52,6 +55,9 @@ type (
 
         // Dictionary ID | 所属字典ID
         DictionaryId *uint64 `json:"dictionaryId,optional"`
+
+        // Tenant ID | 租户ID
+        TenantId *uint64 `json:"tenantId,optional"`
     }
 
         // DictionaryDetail information response | 字典键值信息返回体
@@ -67,6 +73,9 @@ type (
     DictionaryNameReq {
         // in:path
         Name *string `json:"name,optional" path:"name"`
+
+        // Tenant ID | 租户ID
+        TenantId *uint64 `json:"tenantId,optional"`
     }
 )
 

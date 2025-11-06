@@ -714,6 +714,14 @@
             "name": "name",
             "in": "path",
             "required": true
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "TenantId",
+            "description": "Tenant ID | 租户ID",
+            "name": "tenantId",
+            "in": "query"
           }
         ],
         "responses": {
@@ -741,6 +749,14 @@
             "name": "name",
             "in": "path",
             "required": true
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "TenantId",
+            "description": "Tenant ID | 租户ID",
+            "name": "tenantId",
+            "in": "query"
           }
         ],
         "responses": {
@@ -3604,7 +3620,8 @@
         },
         "userId": {
           "description": "User's UUID | 用户的UUID",
-          "type": "string",
+          "type": "integer",
+          "format": "uint64",
           "x-go-name": "UserId"
         }
       },
@@ -3898,7 +3915,8 @@
         },
         "leader": {
           "description": "Leader | 部门负责人",
-          "type": "string",
+          "type": "integer",
+          "format": "uint64",
           "maxLength": 20,
           "x-go-name": "Leader"
         },
@@ -3940,6 +3958,12 @@
           "format": "uint32",
           "maximum": 20,
           "x-go-name": "Status"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         },
         "trans": {
           "description": "Translated Name | 展示名称",
@@ -4010,7 +4034,8 @@
       "properties": {
         "leader": {
           "description": "Leader | 部门负责人",
-          "type": "string",
+          "type": "integer",
+          "format": "uint64",
           "maxLength": 20,
           "x-go-name": "Leader"
         },
@@ -4040,6 +4065,12 @@
           "format": "uint32",
           "maximum": 20,
           "x-go-name": "Status"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         }
       },
       "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
@@ -4109,6 +4140,12 @@
           "format": "uint32",
           "maximum": 20,
           "x-go-name": "Status"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         },
         "title": {
           "description": "Title | 显示名称",
@@ -4214,6 +4251,12 @@
           "format": "uint64",
           "maximum": 100000,
           "x-go-name": "PageSize"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         }
       },
       "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
@@ -4282,6 +4325,12 @@
           "format": "uint32",
           "maximum": 20,
           "x-go-name": "Status"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         },
         "title": {
           "description": "Title | 字典多语言名称",
@@ -4376,6 +4425,12 @@
           "format": "uint64",
           "maximum": 100000,
           "x-go-name": "PageSize"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         }
       },
       "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
@@ -4400,6 +4455,12 @@
           "description": "Message | 提示信息",
           "type": "string",
           "x-go-name": "Msg"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         }
       },
       "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
@@ -4831,6 +4892,12 @@
           "type": "string",
           "maxLength": 100,
           "x-go-name": "Email"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         }
       },
       "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
@@ -4854,6 +4921,12 @@
           "type": "string",
           "maxLength": 20,
           "x-go-name": "PhoneNumber"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         }
       },
       "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
@@ -4868,6 +4941,12 @@
           "format": "uint64",
           "x-go-name": "Expire"
         },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
+        },
         "token": {
           "description": "Token for authorization | 验证身份的token",
           "type": "string",
@@ -4875,7 +4954,8 @@
         },
         "userId": {
           "description": "User's UUID | 用户的UUID",
-          "type": "string",
+          "type": "integer",
+          "format": "uint64",
           "x-go-name": "UserId"
         }
       },
@@ -4911,6 +4991,12 @@
           "maxLength": 30,
           "minLength": 6,
           "x-go-name": "Password"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         },
         "username": {
           "description": "User Name | 用户名",
@@ -5734,6 +5820,12 @@
           "maximum": 20,
           "x-go-name": "Status"
         },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
+        },
         "trans": {
           "description": "Translated Name | 展示名称",
           "type": "string",
@@ -5832,6 +5924,12 @@
           "type": "string",
           "maxLength": 200,
           "x-go-name": "Remark"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         }
       },
       "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
@@ -6020,6 +6118,12 @@
           "minLength": 6,
           "x-go-name": "Password"
         },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
+        },
         "username": {
           "description": "User Name | 用户名",
           "type": "string",
@@ -6058,6 +6162,12 @@
           "type": "string",
           "maxLength": 20,
           "x-go-name": "PhoneNumber"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         },
         "username": {
           "description": "User Name | 用户名",
@@ -6105,6 +6215,12 @@
           "maxLength": 30,
           "minLength": 6,
           "x-go-name": "Password"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         },
         "username": {
           "description": "User Name | 用户名",
@@ -7034,7 +7150,8 @@
         },
         "id": {
           "description": "ID",
-          "type": "string",
+          "type": "integer",
+          "format": "uint64",
           "x-go-name": "Id"
         },
         "source": {
@@ -7059,15 +7176,16 @@
           "format": "int64",
           "x-go-name": "UpdatedAt"
         },
+        "userId": {
+          "description": "User's UUID | 用户的UUID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "UserId"
+        },
         "username": {
           "description": "Username | 用户名",
           "type": "string",
           "x-go-name": "Username"
-        },
-        "uuid": {
-          "description": "User's UUID | 用户的UUID",
-          "type": "string",
-          "x-go-name": "Uuid"
         }
       },
       "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
@@ -7149,15 +7267,16 @@
           "maximum": 100000,
           "x-go-name": "PageSize"
         },
+        "userId": {
+          "description": "User's UUID | 用户的UUID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "UserId"
+        },
         "username": {
           "description": "Username | 用户名",
           "type": "string",
           "x-go-name": "Username"
-        },
-        "uuid": {
-          "description": "UUID",
-          "type": "string",
-          "x-go-name": "Uuid"
         }
       },
       "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
@@ -7257,10 +7376,17 @@
           },
           "x-go-name": "RoleName"
         },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
+        },
         "userId": {
           "description": "User's UUID | 用户的UUID",
-          "type": "string",
-          "x-go-name": "UUID"
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "UserId"
         },
         "username": {
           "description": "User's name | 用户名",
@@ -7336,7 +7462,8 @@
         },
         "id": {
           "description": "ID",
-          "type": "string",
+          "type": "integer",
+          "format": "uint64",
           "x-go-name": "Id"
         },
         "mobile": {
@@ -7381,6 +7508,12 @@
           "format": "uint32",
           "maximum": 20,
           "x-go-name": "Status"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         },
         "updatedAt": {
           "description": "Update date | 更新日期",
@@ -7508,6 +7641,12 @@
             "format": "uint64"
           },
           "x-go-name": "RoleIds"
+        },
+        "tenantId": {
+          "description": "Tenant ID | 租户ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TenantId"
         },
         "username": {
           "description": "User Name | 用户名",

@@ -26,8 +26,8 @@ func NewGetUserByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUs
 	}
 }
 
-func (l *GetUserByIdLogic) GetUserById(req *types.UUIDReq) (resp *types.UserInfoResp, err error) {
-	data, err := l.svcCtx.CoreRpc.GetUserById(l.ctx, &core.UUIDReq{Id: req.Id})
+func (l *GetUserByIdLogic) GetUserById(req *types.IDReq) (resp *types.UserInfoResp, err error) {
+	data, err := l.svcCtx.CoreRpc.GetUserById(l.ctx, &core.IDReq{Id: req.Id})
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ func (l *GetUserByIdLogic) GetUserById(req *types.UUIDReq) (resp *types.UserInfo
 			Msg:  l.svcCtx.Trans.Trans(l.ctx, i18n.Success),
 		},
 		Data: types.UserInfo{
-			BaseUUIDInfo: types.BaseUUIDInfo{
+			BaseIDInfo: types.BaseIDInfo{
 				Id:        data.Id,
 				CreatedAt: data.CreatedAt,
 				UpdatedAt: data.UpdatedAt,

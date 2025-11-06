@@ -34,7 +34,7 @@ func (l *GetTokenListLogic) GetTokenList(req *types.TokenListReq) (resp *types.T
 			Username: req.Username,
 			Nickname: req.Nickname,
 			Email:    req.Email,
-			Uuid:     req.Uuid,
+			UserId:   req.UserId,
 		})
 	if err != nil {
 		return nil, err
@@ -46,13 +46,13 @@ func (l *GetTokenListLogic) GetTokenList(req *types.TokenListReq) (resp *types.T
 	for _, v := range data.Data {
 		resp.Data.Data = append(resp.Data.Data,
 			types.TokenInfo{
-				BaseUUIDInfo: types.BaseUUIDInfo{
+				BaseIDInfo: types.BaseIDInfo{
 					Id:        v.Id,
 					CreatedAt: v.CreatedAt,
 					UpdatedAt: v.UpdatedAt,
 				},
 				Status:    v.Status,
-				Uuid:      v.Uuid,
+				UserId:    v.UserId,
 				Token:     v.Token,
 				Source:    v.Source,
 				Username:  v.Username,

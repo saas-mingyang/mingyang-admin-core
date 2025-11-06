@@ -3,13 +3,13 @@ import "../base.api"
 type (
     // The response data of token information | 令牌信息
     TokenInfo {
-        BaseUUIDInfo
+        BaseIDInfo
 
         // Status | 状态
         Status *uint32 `json:"status,optional"`
 
         // User's UUID | 用户的UUID
-        Uuid *string `json:"uuid,optional"`
+        UserId *uint64 `json:"userId,optional"`
 
         // Token | 用户的Token
         Token *string `json:"token,optional"`
@@ -53,8 +53,8 @@ type (
         // Email | 邮箱
         Email *string `json:"email,optional"`
 
-        // UUID
-        Uuid *string `json:"uuid,optional"`
+        // User's UUID | 用户的UUID
+        UserId *uint64 `json:"userId,optional"`
     }
 
     // Token information response | Token信息返回体
@@ -83,7 +83,7 @@ service Core {
 
     // Delete token information | 删除令牌信息
     @handler deleteToken
-    post /token/delete (UUIDsReq) returns (BaseMsgResp)
+    post /token/delete (IDsReq) returns (BaseMsgResp)
 
     // Get token list | 获取令牌列表
     @handler getTokenList
@@ -91,9 +91,9 @@ service Core {
 
     // Get Token by ID | 通过ID获取令牌
     @handler getTokenById
-    post /token (UUIDReq) returns (TokenInfoResp)
+    post /token (IDReq) returns (TokenInfoResp)
 
     // Force logging out by user UUID | 根据UUID强制用户退出
     @handler logout
-    post /token/logout (UUIDReq) returns (BaseMsgResp)
+    post /token/logout (IDReq) returns (BaseMsgResp)
 }

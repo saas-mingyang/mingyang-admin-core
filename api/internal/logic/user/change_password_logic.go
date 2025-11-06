@@ -29,14 +29,14 @@ func NewChangePasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ch
 }
 
 func (l *ChangePasswordLogic) ChangePassword(req *types.ChangePasswordReq) (resp *types.BaseMsgResp, err error) {
-	userData, err := l.svcCtx.CoreRpc.GetUserById(l.ctx, &core.UUIDReq{Id: l.ctx.Value("userId").(string)})
+	userData, err := l.svcCtx.CoreRpc.GetUserById(l.ctx, &core.IDReq{Id: l.ctx.Value("userId").(uint64)})
 	if err != nil {
 		return nil, err
 	}
 
 	if encrypt.BcryptCheck(req.OldPassword, *userData.Password) {
 		result, err := l.svcCtx.CoreRpc.UpdateUser(l.ctx, &core.UserInfo{
-			Id:       pointy.GetPointer(l.ctx.Value("userId").(string)),
+			Id:       pointy.GetPointer(l.ctx.Value("userId").(uint64)),
 			Password: pointy.GetPointer(req.NewPassword),
 		})
 		if err != nil {

@@ -28,7 +28,7 @@ func NewUpdateUserProfileLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 func (l *UpdateUserProfileLogic) UpdateUserProfile(req *types.ProfileInfo) (resp *types.BaseMsgResp, err error) {
 	result, err := l.svcCtx.CoreRpc.UpdateUser(l.ctx, &core.UserInfo{
-		Id:       pointy.GetPointer(l.ctx.Value("userId").(string)),
+		Id:       pointy.GetPointer(l.ctx.Value("userId").(uint64)),
 		Nickname: req.Nickname,
 		Email:    req.Email,
 		Mobile:   req.Mobile,

@@ -24,8 +24,8 @@ func NewDeleteTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delet
 	}
 }
 
-func (l *DeleteTokenLogic) DeleteToken(req *types.UUIDsReq) (resp *types.BaseMsgResp, err error) {
-	result, err := l.svcCtx.CoreRpc.DeleteToken(l.ctx, &core.UUIDsReq{
+func (l *DeleteTokenLogic) DeleteToken(req *types.IDsReq) (resp *types.BaseMsgResp, err error) {
+	result, err := l.svcCtx.CoreRpc.DeleteToken(l.ctx, &core.IDsReq{
 		Ids: req.Ids,
 	})
 	if err != nil {

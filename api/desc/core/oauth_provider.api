@@ -94,7 +94,7 @@ type (
     // The oauth callback response data | Oauth回调数据
     CallbackResp {
         // User's UUID | 用户的UUID
-        UserId       string          `json:"userId"`
+        UserId       uint64          `json:"userId"`
 
         // User's role information| 用户的角色信息
         // in: body
