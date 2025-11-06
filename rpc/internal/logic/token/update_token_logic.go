@@ -10,7 +10,6 @@ import (
 	"github.com/saas-mingyang/mingyang-admin-common/i18n"
 	"github.com/saas-mingyang/mingyang-admin-common/msg/logmsg"
 	"github.com/saas-mingyang/mingyang-admin-common/utils/pointy"
-	"github.com/saas-mingyang/mingyang-admin-common/utils/uuidx"
 	"github.com/zeromicro/go-zero/core/errorx"
 
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/svc"
@@ -35,7 +34,7 @@ func NewUpdateTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Updat
 }
 
 func (l *UpdateTokenLogic) UpdateToken(in *core.TokenInfo) (*core.BaseResp, error) {
-	token, err := l.svcCtx.DB.Token.UpdateOneID(uuidx.ParseUUIDString(*in.Id)).
+	token, err := l.svcCtx.DB.Token.UpdateOneID(*in.Id).
 		SetNotNilStatus(pointy.GetStatusPointer(in.Status)).
 		SetNotNilSource(in.Source).
 		Save(l.ctx)

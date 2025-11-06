@@ -4,8 +4,6 @@ import (
 	"context"
 
 	"github.com/saas-mingyang/mingyang-admin-common/utils/pointy"
-	"github.com/saas-mingyang/mingyang-admin-common/utils/uuidx"
-
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/svc"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/utils/dberrorhandler"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/types/core"
@@ -29,10 +27,10 @@ func NewCreateTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Creat
 	}
 }
 
-func (l *CreateTokenLogic) CreateToken(in *core.TokenInfo) (*core.BaseUUIDResp, error) {
+func (l *CreateTokenLogic) CreateToken(in *core.TokenInfo) (*core.BaseIDResp, error) {
 	result, err := l.svcCtx.DB.Token.Create().
 		SetNotNilStatus(pointy.GetStatusPointer(in.Status)).
-		SetNotNilUUID(uuidx.ParseUUIDStringToPointer(in.Uuid)).
+		SetNotNilUserID(in.UserId).
 		SetNotNilToken(in.Token).
 		SetNotNilSource(in.Source).
 		SetNotNilUsername(in.Username).
@@ -42,5 +40,5 @@ func (l *CreateTokenLogic) CreateToken(in *core.TokenInfo) (*core.BaseUUIDResp, 
 		return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
 	}
 
-	return &core.BaseUUIDResp{Id: result.ID.String(), Msg: i18n.CreateSuccess}, nil
+	return &core.BaseIDResp{Id: result.ID, Msg: i18n.CreateSuccess}, nil
 }

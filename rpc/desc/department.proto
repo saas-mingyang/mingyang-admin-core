@@ -37,7 +37,7 @@ message DepartmentListReq {
   uint64 page = 1;
   uint64 page_size = 2;
   optional string name = 3;
-  optional string leader = 4;
+  optional uint64 leader = 4;
   optional uint32 status = 5;
   uint64 tenant_id = 6;
 }

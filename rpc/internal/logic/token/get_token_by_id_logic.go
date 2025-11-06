@@ -4,8 +4,6 @@ import (
 	"context"
 
 	"github.com/saas-mingyang/mingyang-admin-common/utils/pointy"
-	"github.com/saas-mingyang/mingyang-admin-common/utils/uuidx"
-
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/svc"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/utils/dberrorhandler"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/types/core"
@@ -27,18 +25,18 @@ func NewGetTokenByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetT
 	}
 }
 
-func (l *GetTokenByIdLogic) GetTokenById(in *core.UUIDReq) (*core.TokenInfo, error) {
-	result, err := l.svcCtx.DB.Token.Get(l.ctx, uuidx.ParseUUIDString(in.Id))
+func (l *GetTokenByIdLogic) GetTokenById(in *core.IDReq) (*core.TokenInfo, error) {
+	result, err := l.svcCtx.DB.Token.Get(l.ctx, in.Id)
 	if err != nil {
 		return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
 	}
 
 	return &core.TokenInfo{
-		Id:        pointy.GetPointer(result.ID.String()),
+		Id:        pointy.GetPointer(uint64(result.ID)),
 		CreatedAt: pointy.GetPointer(result.CreatedAt.UnixMilli()),
 		UpdatedAt: pointy.GetPointer(result.UpdatedAt.UnixMilli()),
 		Status:    pointy.GetPointer(uint32(result.Status)),
-		Uuid:      pointy.GetPointer(result.UUID.String()),
+		UserId:    pointy.GetPointer(uint64(result.UserID)),
 		Token:     &result.Token,
 		Source:    &result.Source,
 		Username:  &result.Username,

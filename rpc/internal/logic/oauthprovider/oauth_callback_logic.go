@@ -124,7 +124,7 @@ func (l *OauthCallbackLogic) OauthCallback(in *core.CallbackReq) (*core.UserInfo
 			Mobile:       &result.Mobile,
 			Email:        &result.Email,
 			Status:       pointy.GetPointer(uint32(result.Status)),
-			Id:           pointy.GetPointer(result.ID.String()),
+			Id:           pointy.GetPointer(uint64(result.ID)),
 			Username:     &result.Username,
 			HomePath:     &result.HomePath,
 			Description:  &result.Description,

@@ -31,7 +31,7 @@ func NewCreateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 	}
 }
 
-func (l *CreateUserLogic) CreateUser(in *core.UserInfo) (*core.BaseUUIDResp, error) {
+func (l *CreateUserLogic) CreateUser(in *core.UserInfo) (*core.BaseIDResp, error) {
 	if in.Mobile != nil {
 		checkMobile, err := l.svcCtx.DB.User.Query().Where(user.MobileEQ(*in.Mobile)).Exist(l.ctx)
 		if err != nil {
@@ -71,5 +71,5 @@ func (l *CreateUserLogic) CreateUser(in *core.UserInfo) (*core.BaseUUIDResp, err
 		return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
 	}
 
-	return &core.BaseUUIDResp{Id: result.ID.String(), Msg: i18n.CreateSuccess}, nil
+	return &core.BaseIDResp{Id: result.ID, Msg: i18n.CreateSuccess}, nil
 }

@@ -319,7 +319,7 @@ func (l *InitDatabaseLogic) insertDepartmentData() error {
 	departments = append(departments, l.svcCtx.DB.Department.Create().
 		SetName("department.managementDepartment").
 		SetAncestors("").
-		SetLeader("admin").
+		SetLeader(0).
 		SetEmail("simpleadmin@gmail.com").
 		SetPhone("18888888888").
 		SetRemark("Super Administrator").

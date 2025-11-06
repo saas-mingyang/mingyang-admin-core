@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/saas-mingyang/mingyang-admin-common/utils/pointy"
-	"github.com/saas-mingyang/mingyang-admin-common/utils/uuidx"
 
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/user"
@@ -30,8 +29,8 @@ func NewGetUserByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUs
 	}
 }
 
-func (l *GetUserByIdLogic) GetUserById(in *core.UUIDReq) (*core.UserInfo, error) {
-	result, err := l.svcCtx.DB.User.Query().Where(user.IDEQ(uuidx.ParseUUIDString(in.Id))).WithRoles().WithDepartments().First(l.ctx)
+func (l *GetUserByIdLogic) GetUserById(in *core.IDReq) (*core.UserInfo, error) {
+	result, err := l.svcCtx.DB.User.Query().Where(user.IDEQ(in.Id)).WithRoles().WithDepartments().First(l.ctx)
 	if err != nil {
 		return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
 	}
@@ -44,7 +43,7 @@ func (l *GetUserByIdLogic) GetUserById(in *core.UUIDReq) (*core.UserInfo, error)
 		Mobile:         &result.Mobile,
 		Email:          &result.Email,
 		Status:         pointy.GetPointer(uint32(result.Status)),
-		Id:             pointy.GetPointer(result.ID.String()),
+		Id:             pointy.GetPointer(uint64(result.ID)),
 		Username:       &result.Username,
 		HomePath:       &result.HomePath,
 		Password:       &result.Password,

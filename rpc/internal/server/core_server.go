@@ -17,6 +17,7 @@ import (
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/logic/oauthprovider"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/logic/position"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/logic/role"
+	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/logic/tenant"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/logic/token"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/logic/user"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/svc"
@@ -297,13 +298,39 @@ func (s *CoreServer) DeleteRole(ctx context.Context, in *core.IDsReq) (*core.Bas
 	return l.DeleteRole(in)
 }
 
+// Tenant management
+func (s *CoreServer) CreateTenant(ctx context.Context, in *core.TenantInfo) (*core.BaseIDResp, error) {
+	l := tenant.NewCreateTenantLogic(ctx, s.svcCtx)
+	return l.CreateTenant(in)
+}
+
+func (s *CoreServer) UpdateTenant(ctx context.Context, in *core.TenantInfo) (*core.BaseResp, error) {
+	l := tenant.NewUpdateTenantLogic(ctx, s.svcCtx)
+	return l.UpdateTenant(in)
+}
+
+func (s *CoreServer) GetTenantList(ctx context.Context, in *core.TenantListReq) (*core.TenantListResp, error) {
+	l := tenant.NewGetTenantListLogic(ctx, s.svcCtx)
+	return l.GetTenantList(in)
+}
+
+func (s *CoreServer) GetTenantById(ctx context.Context, in *core.IDReq) (*core.TenantInfo, error) {
+	l := tenant.NewGetTenantByIdLogic(ctx, s.svcCtx)
+	return l.GetTenantById(in)
+}
+
+func (s *CoreServer) DeleteTenant(ctx context.Context, in *core.IDsReq) (*core.BaseResp, error) {
+	l := tenant.NewDeleteTenantLogic(ctx, s.svcCtx)
+	return l.DeleteTenant(in)
+}
+
 // Token management
-func (s *CoreServer) CreateToken(ctx context.Context, in *core.TokenInfo) (*core.BaseUUIDResp, error) {
+func (s *CoreServer) CreateToken(ctx context.Context, in *core.TokenInfo) (*core.BaseIDResp, error) {
 	l := token.NewCreateTokenLogic(ctx, s.svcCtx)
 	return l.CreateToken(in)
 }
 
-func (s *CoreServer) DeleteToken(ctx context.Context, in *core.UUIDsReq) (*core.BaseResp, error) {
+func (s *CoreServer) DeleteToken(ctx context.Context, in *core.IDsReq) (*core.BaseResp, error) {
 	l := token.NewDeleteTokenLogic(ctx, s.svcCtx)
 	return l.DeleteToken(in)
 }
@@ -313,12 +340,12 @@ func (s *CoreServer) GetTokenList(ctx context.Context, in *core.TokenListReq) (*
 	return l.GetTokenList(in)
 }
 
-func (s *CoreServer) GetTokenById(ctx context.Context, in *core.UUIDReq) (*core.TokenInfo, error) {
+func (s *CoreServer) GetTokenById(ctx context.Context, in *core.IDReq) (*core.TokenInfo, error) {
 	l := token.NewGetTokenByIdLogic(ctx, s.svcCtx)
 	return l.GetTokenById(in)
 }
 
-func (s *CoreServer) BlockUserAllToken(ctx context.Context, in *core.UUIDReq) (*core.BaseResp, error) {
+func (s *CoreServer) BlockUserAllToken(ctx context.Context, in *core.IDReq) (*core.BaseResp, error) {
 	l := token.NewBlockUserAllTokenLogic(ctx, s.svcCtx)
 	return l.BlockUserAllToken(in)
 }
@@ -329,7 +356,7 @@ func (s *CoreServer) UpdateToken(ctx context.Context, in *core.TokenInfo) (*core
 }
 
 // User management
-func (s *CoreServer) CreateUser(ctx context.Context, in *core.UserInfo) (*core.BaseUUIDResp, error) {
+func (s *CoreServer) CreateUser(ctx context.Context, in *core.UserInfo) (*core.BaseIDResp, error) {
 	l := user.NewCreateUserLogic(ctx, s.svcCtx)
 	return l.CreateUser(in)
 }
@@ -344,7 +371,7 @@ func (s *CoreServer) GetUserList(ctx context.Context, in *core.UserListReq) (*co
 	return l.GetUserList(in)
 }
 
-func (s *CoreServer) GetUserById(ctx context.Context, in *core.UUIDReq) (*core.UserInfo, error) {
+func (s *CoreServer) GetUserById(ctx context.Context, in *core.IDReq) (*core.UserInfo, error) {
 	l := user.NewGetUserByIdLogic(ctx, s.svcCtx)
 	return l.GetUserById(in)
 }
@@ -354,7 +381,7 @@ func (s *CoreServer) GetUserByUsername(ctx context.Context, in *core.UsernameReq
 	return l.GetUserByUsername(in)
 }
 
-func (s *CoreServer) DeleteUser(ctx context.Context, in *core.UUIDsReq) (*core.BaseResp, error) {
+func (s *CoreServer) DeleteUser(ctx context.Context, in *core.IDsReq) (*core.BaseResp, error) {
 	l := user.NewDeleteUserLogic(ctx, s.svcCtx)
 	return l.DeleteUser(in)
 }

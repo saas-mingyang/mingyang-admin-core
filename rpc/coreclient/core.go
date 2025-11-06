@@ -55,6 +55,9 @@ type (
 	RoleListResp             = core.RoleListResp
 	RoleMenuAuthorityReq     = core.RoleMenuAuthorityReq
 	RoleMenuAuthorityResp    = core.RoleMenuAuthorityResp
+	TenantInfo               = core.TenantInfo
+	TenantListReq            = core.TenantListReq
+	TenantListResp           = core.TenantListResp
 	TokenInfo                = core.TokenInfo
 	TokenListReq             = core.TokenListReq
 	TokenListResp            = core.TokenListResp
@@ -125,20 +128,26 @@ type (
 		GetRoleList(ctx context.Context, in *RoleListReq, opts ...grpc.CallOption) (*RoleListResp, error)
 		GetRoleById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*RoleInfo, error)
 		DeleteRole(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error)
+		// Tenant management
+		CreateTenant(ctx context.Context, in *TenantInfo, opts ...grpc.CallOption) (*BaseIDResp, error)
+		UpdateTenant(ctx context.Context, in *TenantInfo, opts ...grpc.CallOption) (*BaseResp, error)
+		GetTenantList(ctx context.Context, in *TenantListReq, opts ...grpc.CallOption) (*TenantListResp, error)
+		GetTenantById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*TenantInfo, error)
+		DeleteTenant(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error)
 		// Token management
-		CreateToken(ctx context.Context, in *TokenInfo, opts ...grpc.CallOption) (*BaseUUIDResp, error)
-		DeleteToken(ctx context.Context, in *UUIDsReq, opts ...grpc.CallOption) (*BaseResp, error)
+		CreateToken(ctx context.Context, in *TokenInfo, opts ...grpc.CallOption) (*BaseIDResp, error)
+		DeleteToken(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error)
 		GetTokenList(ctx context.Context, in *TokenListReq, opts ...grpc.CallOption) (*TokenListResp, error)
-		GetTokenById(ctx context.Context, in *UUIDReq, opts ...grpc.CallOption) (*TokenInfo, error)
-		BlockUserAllToken(ctx context.Context, in *UUIDReq, opts ...grpc.CallOption) (*BaseResp, error)
+		GetTokenById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*TokenInfo, error)
+		BlockUserAllToken(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
 		UpdateToken(ctx context.Context, in *TokenInfo, opts ...grpc.CallOption) (*BaseResp, error)
 		// User management
-		CreateUser(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*BaseUUIDResp, error)
+		CreateUser(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*BaseIDResp, error)
 		UpdateUser(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*BaseResp, error)
 		GetUserList(ctx context.Context, in *UserListReq, opts ...grpc.CallOption) (*UserListResp, error)
-		GetUserById(ctx context.Context, in *UUIDReq, opts ...grpc.CallOption) (*UserInfo, error)
+		GetUserById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UserInfo, error)
 		GetUserByUsername(ctx context.Context, in *UsernameReq, opts ...grpc.CallOption) (*UserInfo, error)
-		DeleteUser(ctx context.Context, in *UUIDsReq, opts ...grpc.CallOption) (*BaseResp, error)
+		DeleteUser(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error)
 	}
 
 	defaultCore struct {
@@ -415,13 +424,39 @@ func (m *defaultCore) DeleteRole(ctx context.Context, in *IDsReq, opts ...grpc.C
 	return client.DeleteRole(ctx, in, opts...)
 }
 
+// Tenant management
+func (m *defaultCore) CreateTenant(ctx context.Context, in *TenantInfo, opts ...grpc.CallOption) (*BaseIDResp, error) {
+	client := core.NewCoreClient(m.cli.Conn())
+	return client.CreateTenant(ctx, in, opts...)
+}
+
+func (m *defaultCore) UpdateTenant(ctx context.Context, in *TenantInfo, opts ...grpc.CallOption) (*BaseResp, error) {
+	client := core.NewCoreClient(m.cli.Conn())
+	return client.UpdateTenant(ctx, in, opts...)
+}
+
+func (m *defaultCore) GetTenantList(ctx context.Context, in *TenantListReq, opts ...grpc.CallOption) (*TenantListResp, error) {
+	client := core.NewCoreClient(m.cli.Conn())
+	return client.GetTenantList(ctx, in, opts...)
+}
+
+func (m *defaultCore) GetTenantById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*TenantInfo, error) {
+	client := core.NewCoreClient(m.cli.Conn())
+	return client.GetTenantById(ctx, in, opts...)
+}
+
+func (m *defaultCore) DeleteTenant(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error) {
+	client := core.NewCoreClient(m.cli.Conn())
+	return client.DeleteTenant(ctx, in, opts...)
+}
+
 // Token management
-func (m *defaultCore) CreateToken(ctx context.Context, in *TokenInfo, opts ...grpc.CallOption) (*BaseUUIDResp, error) {
+func (m *defaultCore) CreateToken(ctx context.Context, in *TokenInfo, opts ...grpc.CallOption) (*BaseIDResp, error) {
 	client := core.NewCoreClient(m.cli.Conn())
 	return client.CreateToken(ctx, in, opts...)
 }
 
-func (m *defaultCore) DeleteToken(ctx context.Context, in *UUIDsReq, opts ...grpc.CallOption) (*BaseResp, error) {
+func (m *defaultCore) DeleteToken(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	client := core.NewCoreClient(m.cli.Conn())
 	return client.DeleteToken(ctx, in, opts...)
 }
@@ -431,12 +466,12 @@ func (m *defaultCore) GetTokenList(ctx context.Context, in *TokenListReq, opts .
 	return client.GetTokenList(ctx, in, opts...)
 }
 
-func (m *defaultCore) GetTokenById(ctx context.Context, in *UUIDReq, opts ...grpc.CallOption) (*TokenInfo, error) {
+func (m *defaultCore) GetTokenById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*TokenInfo, error) {
 	client := core.NewCoreClient(m.cli.Conn())
 	return client.GetTokenById(ctx, in, opts...)
 }
 
-func (m *defaultCore) BlockUserAllToken(ctx context.Context, in *UUIDReq, opts ...grpc.CallOption) (*BaseResp, error) {
+func (m *defaultCore) BlockUserAllToken(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	client := core.NewCoreClient(m.cli.Conn())
 	return client.BlockUserAllToken(ctx, in, opts...)
 }
@@ -447,7 +482,7 @@ func (m *defaultCore) UpdateToken(ctx context.Context, in *TokenInfo, opts ...gr
 }
 
 // User management
-func (m *defaultCore) CreateUser(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*BaseUUIDResp, error) {
+func (m *defaultCore) CreateUser(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*BaseIDResp, error) {
 	client := core.NewCoreClient(m.cli.Conn())
 	return client.CreateUser(ctx, in, opts...)
 }
@@ -462,7 +497,7 @@ func (m *defaultCore) GetUserList(ctx context.Context, in *UserListReq, opts ...
 	return client.GetUserList(ctx, in, opts...)
 }
 
-func (m *defaultCore) GetUserById(ctx context.Context, in *UUIDReq, opts ...grpc.CallOption) (*UserInfo, error) {
+func (m *defaultCore) GetUserById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UserInfo, error) {
 	client := core.NewCoreClient(m.cli.Conn())
 	return client.GetUserById(ctx, in, opts...)
 }
@@ -472,7 +507,7 @@ func (m *defaultCore) GetUserByUsername(ctx context.Context, in *UsernameReq, op
 	return client.GetUserByUsername(ctx, in, opts...)
 }
 
-func (m *defaultCore) DeleteUser(ctx context.Context, in *UUIDsReq, opts ...grpc.CallOption) (*BaseResp, error) {
+func (m *defaultCore) DeleteUser(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	client := core.NewCoreClient(m.cli.Conn())
 	return client.DeleteUser(ctx, in, opts...)
 }

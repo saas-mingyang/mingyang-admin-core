@@ -3,8 +3,6 @@ package user
 import (
 	"context"
 
-	"github.com/saas-mingyang/mingyang-admin-common/utils/uuidx"
-
 	"github.com/saas-mingyang/mingyang-admin-common/i18n"
 
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/user"
@@ -30,8 +28,8 @@ func NewDeleteUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delete
 	}
 }
 
-func (l *DeleteUserLogic) DeleteUser(in *core.UUIDsReq) (*core.BaseResp, error) {
-	_, err := l.svcCtx.DB.User.Delete().Where(user.IDIn(uuidx.ParseUUIDSlice(in.Ids)...)).Exec(l.ctx)
+func (l *DeleteUserLogic) DeleteUser(in *core.IDsReq) (*core.BaseResp, error) {
+	_, err := l.svcCtx.DB.User.Delete().Where(user.IDIn(in.Ids...)).Exec(l.ctx)
 	if err != nil {
 		return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
 	}

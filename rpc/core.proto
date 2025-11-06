@@ -92,23 +92,34 @@ message DepartmentInfo {
   optional uint64 id = 1;
   optional int64 created_at = 2;
   optional int64 updated_at = 3;
+  //  Status 1: normal 2: ban | 状态 1 正常 2 禁用
   optional uint32 status = 4;
+  //  Sort Number | 排序编号
   optional uint32 sort = 5;
+  //  Department name | 部门名称
   optional string name = 6;
+  //  Parents' IDs | 父级列表
   optional string ancestors = 7;
-  optional string leader = 8;
+  //  Department leader | 部门负责人
+  optional uint64 leader = 8;
+  //  Leader's phone number | 负责人电话
   optional string phone = 9;
+  //  Leader's email | 部门负责人电子邮箱
   optional string email = 10;
+  //  Remark | 备注
   optional string remark = 11;
+  //  Parent department ID | 父级部门ID
   optional uint64 parent_id = 12;
+  uint64 tenant_id = 13;
 }
 
 message DepartmentListReq {
   uint64 page = 1;
   uint64 page_size = 2;
   optional string name = 3;
-  optional string leader = 4;
+  optional uint64 leader = 4;
   optional uint32 status = 5;
+  uint64 tenant_id = 6;
 }
 
 message DepartmentListResp {
@@ -120,12 +131,19 @@ message DictionaryDetailInfo {
   optional uint64 id = 1;
   optional int64 created_at = 2;
   optional int64 updated_at = 3;
+  //  Status 1: normal 2: ban | 状态 1 正常 2 禁用
   optional uint32 status = 4;
-  optional string title = 5;
-  optional string key = 6;
-  optional string value = 7;
-  optional uint64 dictionary_id = 8;
-  optional uint32 sort = 9;
+  //  Sort Number | 排序编号
+  optional uint32 sort = 5;
+  //  The title shown in the ui | 展示名称 （建议配合i18n）
+  optional string title = 6;
+  //  key | 键
+  optional string key = 7;
+  //  value | 值
+  optional string value = 8;
+  //  Dictionary ID | 字典ID
+  optional uint64 dictionary_id = 9;
+  uint64 tenant_id = 10;
 }
 
 message DictionaryDetailListReq {
@@ -133,6 +151,7 @@ message DictionaryDetailListReq {
   uint64 page_size = 2;
   optional uint64 dictionary_id = 3;
   optional string key = 4;
+  uint64 tenant_id = 5;
 }
 
 message DictionaryDetailListResp {
@@ -144,11 +163,17 @@ message DictionaryInfo {
   optional uint64 id = 1;
   optional int64 created_at = 2;
   optional int64 updated_at = 3;
+  //  Status 1: normal 2: ban | 状态 1 正常 2 禁用
   optional uint32 status = 4;
+  //  The title shown in the ui | 展示名称 （建议配合i18n）
   optional string title = 5;
+  //  The name of dictionary for search | 字典搜索名称
   optional string name = 6;
+  //  The description of dictionary | 字典的描述
   optional string desc = 7;
+  //  Whether to be public for everyone | 是否公开词典，无需登录即可访问
   optional bool is_public = 8;
+  uint64 tenant_id = 9;
 }
 
 message DictionaryListReq {
@@ -156,6 +181,7 @@ message DictionaryListReq {
   uint64 page_size = 2;
   optional string name = 3;
   optional bool is_public = 4;
+  uint64 tenant_id = 5;
 }
 
 message DictionaryListResp {
@@ -267,11 +293,17 @@ message PositionInfo {
   optional uint64 id = 1;
   optional int64 created_at = 2;
   optional int64 updated_at = 3;
+  //  Status 1: normal 2: ban | 状态 1 正常 2 禁用
   optional uint32 status = 4;
+  //  Sort Number | 排序编号
   optional uint32 sort = 5;
+  //  Position Name | 职位名称
   optional string name = 6;
+  //  The code of position | 职位编码
   optional string code = 7;
+  //  Remark | 备注
   optional string remark = 8;
+  uint64 tenant_id = 9;
 }
 
 message PositionListReq {
@@ -280,6 +312,7 @@ message PositionListReq {
   optional string name = 3;
   optional string code = 4;
   optional string remark = 5;
+  uint64 tenant_id = 6;
 }
 
 message PositionListResp {
@@ -321,16 +354,56 @@ message RoleMenuAuthorityResp {
   repeated uint64 menu_ids = 1;
 }
 
-message TokenInfo {
-  optional string id = 1;
+message TenantInfo {
+  optional uint64 id = 1;
   optional int64 created_at = 2;
   optional int64 updated_at = 3;
+  //  Status 1: normal 2: ban | 状态 1 正常 2 禁用
   optional uint32 status = 4;
-  optional string uuid = 5;
-  optional string token = 6;
-  optional string source = 7;
-  optional int64 expired_at = 8;
-  optional string username = 9;
+  //  名称，不能为空
+  optional string name = 5;
+  //  编码，不能为空
+  optional string code = 6;
+  //  管理员id，不能为空，创建租户的时候顺便创建用户
+  optional int64 admin_id = 7;
+  //  父级id，不能为空,0为第一级
+  optional int64 parent_id = 8;
+}
+
+message TenantListReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional int64 created_at = 3;
+  optional int64 updated_at = 4;
+  optional uint32 status = 5;
+  optional int64 deleted_at = 6;
+  optional string name = 7;
+  optional string code = 8;
+  optional int64 admin_id = 9;
+  optional int64 parent_id = 10;
+}
+
+message TenantListResp {
+  uint64 total = 1;
+  repeated TenantInfo data = 2;
+}
+
+message TokenInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  //  Status 1: normal 2: ban | 状态 1 正常 2 禁用
+  optional uint32 status = 4;
+  //   User's ID | 用户的ID
+  optional uint64 user_id = 5;
+  //  Username | 用户名
+  optional string username = 6;
+  //  Token string | Token 字符串
+  optional string token = 7;
+  //  Log in source such as GitHub | Token 来源 （本地为core, 第三方如github等）
+  optional string source = 8;
+  //   Expire time | 过期时间
+  optional int64 expired_at = 9;
 }
 
 message TokenListReq {
@@ -339,7 +412,7 @@ message TokenListReq {
   optional string username = 3;
   optional string nickname = 4;
   optional string email = 5;
-  optional string uuid = 6;
+  optional uint64 user_id = 6;
 }
 
 message TokenListResp {
@@ -356,24 +429,30 @@ message UUIDsReq {
 }
 
 message UserInfo {
-  optional string id = 1;
+  optional uint64 id = 1;
   optional int64 created_at = 2;
   optional int64 updated_at = 3;
+  //  Status 1: normal 2: ban | 状态 1 正常 2 禁用
   optional uint32 status = 4;
+  //  User's login name | 登录名
   optional string username = 5;
+  //  Password | 密码
   optional string password = 6;
+  //  Nickname | 昵称
   optional string nickname = 7;
+  //  The description of user | 用户的描述信息
   optional string description = 8;
+  //  The home page that the user enters after logging in | 用户登陆后进入的首页
   optional string home_path = 9;
-  repeated uint64 role_ids = 10;
-  optional string mobile = 11;
-  optional string email = 12;
-  optional string avatar = 13;
-  optional uint64 department_id = 14;
-  repeated uint64 position_ids = 15;
-  repeated string role_codes = 16;
-  repeated string role_name = 17;
-  optional string department_name = 18;
+  //  Mobile number | 手机号
+  optional string mobile = 10;
+  //  Email | 邮箱号
+  optional string email = 11;
+  //  Avatar | 头像路径
+  optional string avatar = 12;
+  //  Department ID | 部门ID
+  optional uint64 department_id = 13;
+  uint64 tenant_id = 14;
 }
 
 message UserListReq {
@@ -387,6 +466,7 @@ message UserListReq {
   optional uint64 department_id = 8;
   repeated uint64 position_ids = 9;
   optional string description = 10;
+  uint64 tenant_id = 11;
 }
 
 message UserListResp {
@@ -509,31 +589,42 @@ service Core {
   rpc getRoleById(IDReq) returns (RoleInfo);
   //  group: role
   rpc deleteRole(IDsReq) returns (BaseResp);
+  //  Tenant management
+  //  group: tenant
+  rpc createTenant(TenantInfo) returns (BaseIDResp);
+  //  group: tenant
+  rpc updateTenant(TenantInfo) returns (BaseResp);
+  //  group: tenant
+  rpc getTenantList(TenantListReq) returns (TenantListResp);
+  //  group: tenant
+  rpc getTenantById(IDReq) returns (TenantInfo);
+  //  group: tenant
+  rpc deleteTenant(IDsReq) returns (BaseResp);
   //  Token management
   //  group: token
-  rpc createToken(TokenInfo) returns (BaseUUIDResp);
+  rpc createToken(TokenInfo) returns (BaseIDResp);
   //  group: token
-  rpc deleteToken(UUIDsReq) returns (BaseResp);
+  rpc deleteToken(IDsReq) returns (BaseResp);
   //  group: token
   rpc getTokenList(TokenListReq) returns (TokenListResp);
   //  group: token
-  rpc getTokenById(UUIDReq) returns (TokenInfo);
+  rpc getTokenById(IDReq) returns (TokenInfo);
   //  group: token
-  rpc blockUserAllToken(UUIDReq) returns (BaseResp);
+  rpc blockUserAllToken(IDReq) returns (BaseResp);
   //  group: token
   rpc updateToken(TokenInfo) returns (BaseResp);
   //  User management
   //  group: user
-  rpc createUser(UserInfo) returns (BaseUUIDResp);
+  rpc createUser(UserInfo) returns (BaseIDResp);
   //  group: user
   rpc updateUser(UserInfo) returns (BaseResp);
   //  group: user
   rpc getUserList(UserListReq) returns (UserListResp);
   //  group: user
-  rpc getUserById(UUIDReq) returns (UserInfo);
+  rpc getUserById(IDReq) returns (UserInfo);
   //  group: user
   rpc getUserByUsername(UsernameReq) returns (UserInfo);
   //  group: user
-  rpc deleteUser(UUIDsReq) returns (BaseResp);
+  rpc deleteUser(IDsReq) returns (BaseResp);
 }
 

@@ -7,8 +7,6 @@ import (
 
 	"github.com/saas-mingyang/mingyang-admin-common/utils/encrypt"
 	"github.com/saas-mingyang/mingyang-admin-common/utils/pointy"
-	"github.com/saas-mingyang/mingyang-admin-common/utils/uuidx"
-
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/logic/token"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/utils/entx"
 
@@ -39,7 +37,7 @@ func NewUpdateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Update
 
 func (l *UpdateUserLogic) UpdateUser(in *core.UserInfo) (*core.BaseResp, error) {
 	err := entx.WithTx(l.ctx, l.svcCtx.DB, func(tx *ent.Tx) error {
-		updateQuery := tx.User.UpdateOneID(uuidx.ParseUUIDString(*in.Id)).
+		updateQuery := tx.User.UpdateOneID(*in.Id).
 			SetNotNilUsername(in.Username).
 			SetNotNilNickname(in.Nickname).
 			SetNotNilEmail(in.Email).
@@ -55,7 +53,7 @@ func (l *UpdateUserLogic) UpdateUser(in *core.UserInfo) (*core.BaseResp, error) 
 		}
 
 		if in.RoleIds != nil {
-			err := tx.User.UpdateOneID(uuidx.ParseUUIDString(*in.Id)).ClearRoles().Exec(l.ctx)
+			err := tx.User.UpdateOneID(*in.Id).ClearRoles().Exec(l.ctx)
 			if err != nil {
 				return err
 			}
@@ -64,7 +62,7 @@ func (l *UpdateUserLogic) UpdateUser(in *core.UserInfo) (*core.BaseResp, error) 
 		}
 
 		if in.PositionIds != nil {
-			err := tx.User.UpdateOneID(uuidx.ParseUUIDString(*in.Id)).ClearPositions().Exec(l.ctx)
+			err := tx.User.UpdateOneID(*in.Id).ClearPositions().Exec(l.ctx)
 			if err != nil {
 				return err
 			}
@@ -73,7 +71,7 @@ func (l *UpdateUserLogic) UpdateUser(in *core.UserInfo) (*core.BaseResp, error) 
 		}
 
 		if in.Password != nil || in.RoleIds != nil || in.PositionIds != nil || (in.Status != nil && uint8(*in.Status) != common.StatusNormal) {
-			_, err := token.NewBlockUserAllTokenLogic(l.ctx, l.svcCtx).BlockUserAllToken(&core.UUIDReq{Id: *in.Id})
+			_, err := token.NewBlockUserAllTokenLogic(l.ctx, l.svcCtx).BlockUserAllToken(&core.IDReq{Id: *in.Id})
 			if err != nil {
 				return err
 			}

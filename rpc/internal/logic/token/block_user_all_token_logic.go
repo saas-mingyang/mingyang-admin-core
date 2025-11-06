@@ -8,7 +8,6 @@ import (
 	"github.com/saas-mingyang/mingyang-admin-common/enum/common"
 
 	"github.com/saas-mingyang/mingyang-admin-common/msg/logmsg"
-	"github.com/saas-mingyang/mingyang-admin-common/utils/uuidx"
 	"github.com/zeromicro/go-zero/core/errorx"
 
 	"github.com/saas-mingyang/mingyang-admin-common/i18n"
@@ -36,14 +35,14 @@ func NewBlockUserAllTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-func (l *BlockUserAllTokenLogic) BlockUserAllToken(in *core.UUIDReq) (*core.BaseResp, error) {
-	err := l.svcCtx.DB.Token.Update().Where(token.UUIDEQ(uuidx.ParseUUIDString(in.Id))).SetStatus(common.StatusBanned).Exec(l.ctx)
+func (l *BlockUserAllTokenLogic) BlockUserAllToken(in *core.IDReq) (*core.BaseResp, error) {
+	err := l.svcCtx.DB.Token.Update().Where(token.UserIDEQ(in.Id)).SetStatus(common.StatusBanned).Exec(l.ctx)
 	if err != nil {
 		return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
 	}
 
 	tokenData, err := l.svcCtx.DB.Token.Query().
-		Where(token.UUIDEQ(uuidx.ParseUUIDString(in.Id))).
+		Where(token.UserIDEQ(in.Id)).
 		Where(token.StatusEQ(common.StatusBanned)).
 		Where(token.ExpiredAtGT(time.Now())).
 		All(l.ctx)

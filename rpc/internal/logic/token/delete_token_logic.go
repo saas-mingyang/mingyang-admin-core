@@ -3,7 +3,6 @@ package token
 import (
 	"context"
 
-	"github.com/saas-mingyang/mingyang-admin-common/utils/uuidx"
 	"github.com/zeromicro/go-zero/core/logx"
 
 	"github.com/saas-mingyang/mingyang-admin-common/i18n"
@@ -29,8 +28,8 @@ func NewDeleteTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delet
 	}
 }
 
-func (l *DeleteTokenLogic) DeleteToken(in *core.UUIDsReq) (*core.BaseResp, error) {
-	_, err := l.svcCtx.DB.Token.Delete().Where(token.IDIn(uuidx.ParseUUIDSlice(in.Ids)...)).Exec(l.ctx)
+func (l *DeleteTokenLogic) DeleteToken(in *core.IDsReq) (*core.BaseResp, error) {
+	_, err := l.svcCtx.DB.Token.Delete().Where(token.IDIn(in.Ids...)).Exec(l.ctx)
 	if err != nil {
 		return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
 	}

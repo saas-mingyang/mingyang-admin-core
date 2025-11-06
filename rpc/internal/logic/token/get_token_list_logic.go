@@ -4,8 +4,6 @@ import (
 	"context"
 
 	"github.com/saas-mingyang/mingyang-admin-common/utils/pointy"
-	"github.com/saas-mingyang/mingyang-admin-common/utils/uuidx"
-
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/predicate"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/token"
@@ -35,7 +33,7 @@ func NewGetTokenListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetT
 func (l *GetTokenListLogic) GetTokenList(in *core.TokenListReq) (*core.TokenListResp, error) {
 	var tokens *ent.TokenPageList
 	var err error
-	if in.Username == nil && in.Uuid == nil && in.Nickname == nil && in.Email == nil {
+	if in.Username == nil && in.UserId == nil && in.Nickname == nil && in.Email == nil {
 		tokens, err = l.svcCtx.DB.Token.Query().Page(l.ctx, in.Page, in.PageSize)
 
 		if err != nil {
@@ -44,8 +42,8 @@ func (l *GetTokenListLogic) GetTokenList(in *core.TokenListReq) (*core.TokenList
 	} else {
 		var predicates []predicate.User
 
-		if in.Uuid != nil {
-			predicates = append(predicates, user.IDEQ(uuidx.ParseUUIDString(*in.Uuid)))
+		if in.UserId != nil {
+			predicates = append(predicates, user.IDEQ(*in.UserId))
 		}
 
 		if in.Username != nil {
@@ -65,7 +63,7 @@ func (l *GetTokenListLogic) GetTokenList(in *core.TokenListReq) (*core.TokenList
 			return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
 		}
 
-		tokens, err = l.svcCtx.DB.Token.Query().Where(token.UUIDEQ(u.ID)).Page(l.ctx, in.Page, in.PageSize)
+		tokens, err = l.svcCtx.DB.Token.Query().Where(token.UserIDEQ(u.ID)).Page(l.ctx, in.Page, in.PageSize)
 
 		if err != nil {
 			return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
@@ -77,8 +75,8 @@ func (l *GetTokenListLogic) GetTokenList(in *core.TokenListReq) (*core.TokenList
 
 	for _, v := range tokens.List {
 		resp.Data = append(resp.Data, &core.TokenInfo{
-			Id:        pointy.GetPointer(v.ID.String()),
-			Uuid:      pointy.GetPointer(v.UUID.String()),
+			Id:        pointy.GetPointer(uint64(v.ID)),
+			UserId:    pointy.GetPointer(uint64(v.UserID)),
 			Token:     &v.Token,
 			Status:    pointy.GetPointer(uint32(v.Status)),
 			Source:    &v.Source,

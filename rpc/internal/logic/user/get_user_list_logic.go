@@ -76,7 +76,7 @@ func (l *GetUserListLogic) GetUserList(in *core.UserListReq) (*core.UserListResp
 
 	for _, v := range users.List {
 		resp.Data = append(resp.Data, &core.UserInfo{
-			Id:           pointy.GetPointer(v.ID.String()),
+			Id:           pointy.GetPointer(uint64(v.ID)),
 			Avatar:       &v.Avatar,
 			RoleIds:      GetRoleIds(v.Edges.Roles),
 			RoleCodes:    GetRoleCodes(v.Edges.Roles),

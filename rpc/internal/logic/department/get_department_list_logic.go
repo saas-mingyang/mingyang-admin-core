@@ -34,7 +34,7 @@ func (l *GetDepartmentListLogic) GetDepartmentList(in *core.DepartmentListReq) (
 		predicates = append(predicates, department.NameContains(*in.Name))
 	}
 	if in.Leader != nil {
-		predicates = append(predicates, department.LeaderContains(*in.Leader))
+		predicates = append(predicates, department.LeaderEQ(*in.Leader))
 	}
 	if in.Status != nil {
 		predicates = append(predicates, department.StatusEQ(uint8(*in.Status)))
