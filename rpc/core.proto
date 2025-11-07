@@ -432,27 +432,22 @@ message UserInfo {
   optional uint64 id = 1;
   optional int64 created_at = 2;
   optional int64 updated_at = 3;
-  //  Status 1: normal 2: ban | 状态 1 正常 2 禁用
   optional uint32 status = 4;
-  //  User's login name | 登录名
   optional string username = 5;
-  //  Password | 密码
   optional string password = 6;
-  //  Nickname | 昵称
   optional string nickname = 7;
-  //  The description of user | 用户的描述信息
   optional string description = 8;
-  //  The home page that the user enters after logging in | 用户登陆后进入的首页
   optional string home_path = 9;
-  //  Mobile number | 手机号
-  optional string mobile = 10;
-  //  Email | 邮箱号
-  optional string email = 11;
-  //  Avatar | 头像路径
-  optional string avatar = 12;
-  //  Department ID | 部门ID
-  optional uint64 department_id = 13;
-  uint64 tenant_id = 14;
+  repeated uint64 role_ids = 10;
+  optional string mobile = 11;
+  optional string email = 12;
+  optional string avatar = 13;
+  optional uint64 department_id = 14;
+  repeated uint64 position_ids = 15;
+  repeated string role_codes = 16;
+  repeated string role_name = 17;
+  optional string department_name = 18;
+  uint64 tenant_id = 19;
 }
 
 message UserListReq {

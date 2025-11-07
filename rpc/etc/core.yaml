@@ -5,7 +5,7 @@ DatabaseConf:
   Type: postgres
   Host: 192.168.201.188
   Port: 5432
-  DBName: zero_demo
+  DBName: mingyang_admin
   Username: postgres
   Password: AM38xymTdFree4Fh
   MaxOpenConn: 100
@@ -14,7 +14,7 @@ DatabaseConf:
 
 Log:
   ServiceName: coreRpcLogger
-  Mode: file
+  Mode: console
   Path: /home/data/logs/core/rpc
   Encoding: json
   Level: info

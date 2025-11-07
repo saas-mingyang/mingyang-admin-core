@@ -27,10 +27,11 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	}
 
 	db := ent.NewClient(entOpts...)
+	dbClient := db.Debug()
 
 	return &ServiceContext{
 		Config: c,
-		DB:     db,
+		DB:     dbClient,
 		Redis:  c.RedisConf.MustNewUniversalRedis(),
 	}
 }

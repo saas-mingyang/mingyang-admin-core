@@ -3708,39 +3708,28 @@ func (x *UUIDsReq) GetIds() []string {
 }
 
 type UserInfo struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	Id        *uint64                `protobuf:"varint,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	CreatedAt *int64                 `protobuf:"varint,2,opt,name=created_at,json=createdAt,proto3,oneof" json:"created_at,omitempty"`
-	UpdatedAt *int64                 `protobuf:"varint,3,opt,name=updated_at,json=updatedAt,proto3,oneof" json:"updated_at,omitempty"`
-	// Status 1: normal 2: ban | 状态 1 正常 2 禁用
-	Status *uint32 `protobuf:"varint,4,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	// User's login name | 登录名
-	Username *string `protobuf:"bytes,5,opt,name=username,proto3,oneof" json:"username,omitempty"`
-	// Password | 密码
-	Password *string `protobuf:"bytes,6,opt,name=password,proto3,oneof" json:"password,omitempty"`
-	// Nickname | 昵称
-	Nickname *string `protobuf:"bytes,7,opt,name=nickname,proto3,oneof" json:"nickname,omitempty"`
-	// The description of user | 用户的描述信息
-	Description *string `protobuf:"bytes,8,opt,name=description,proto3,oneof" json:"description,omitempty"`
-	// The home page that the user enters after logging in | 用户登陆后进入的首页
-	HomePath *string `protobuf:"bytes,9,opt,name=home_path,json=homePath,proto3,oneof" json:"home_path,omitempty"`
-	// Mobile number | 手机号
-	Mobile *string `protobuf:"bytes,10,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
-	// Email | 邮箱号
-	Email *string `protobuf:"bytes,11,opt,name=email,proto3,oneof" json:"email,omitempty"`
-	// Avatar | 头像路径
-	Avatar *string `protobuf:"bytes,12,opt,name=avatar,proto3,oneof" json:"avatar,omitempty"`
-	// Department ID | 部门ID
-	DepartmentId  *uint64 `protobuf:"varint,13,opt,name=department_id,json=departmentId,proto3,oneof" json:"department_id,omitempty"`
-	TenantId      uint64  `protobuf:"varint,14,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-
-	RoleIds        []uint64 `protobuf:"varint,10,rep,packed,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
-	PositionIds    []uint64 `protobuf:"varint,15,rep,packed,name=position_ids,json=positionIds,proto3" json:"position_ids,omitempty"`
-	RoleCodes      []string `protobuf:"bytes,16,rep,name=role_codes,json=roleCodes,proto3" json:"role_codes,omitempty"`
-	RoleName       []string `protobuf:"bytes,17,rep,name=role_name,json=roleName,proto3" json:"role_name,omitempty"`
-	DepartmentName *string  `protobuf:"bytes,18,opt,name=department_name,json=departmentName,proto3,oneof" json:"department_name,omitempty"`
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Id             *uint64                `protobuf:"varint,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	CreatedAt      *int64                 `protobuf:"varint,2,opt,name=created_at,json=createdAt,proto3,oneof" json:"created_at,omitempty"`
+	UpdatedAt      *int64                 `protobuf:"varint,3,opt,name=updated_at,json=updatedAt,proto3,oneof" json:"updated_at,omitempty"`
+	Status         *uint32                `protobuf:"varint,4,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Username       *string                `protobuf:"bytes,5,opt,name=username,proto3,oneof" json:"username,omitempty"`
+	Password       *string                `protobuf:"bytes,6,opt,name=password,proto3,oneof" json:"password,omitempty"`
+	Nickname       *string                `protobuf:"bytes,7,opt,name=nickname,proto3,oneof" json:"nickname,omitempty"`
+	Description    *string                `protobuf:"bytes,8,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	HomePath       *string                `protobuf:"bytes,9,opt,name=home_path,json=homePath,proto3,oneof" json:"home_path,omitempty"`
+	RoleIds        []uint64               `protobuf:"varint,10,rep,packed,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
+	Mobile         *string                `protobuf:"bytes,11,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
+	Email          *string                `protobuf:"bytes,12,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	Avatar         *string                `protobuf:"bytes,13,opt,name=avatar,proto3,oneof" json:"avatar,omitempty"`
+	DepartmentId   *uint64                `protobuf:"varint,14,opt,name=department_id,json=departmentId,proto3,oneof" json:"department_id,omitempty"`
+	PositionIds    []uint64               `protobuf:"varint,15,rep,packed,name=position_ids,json=positionIds,proto3" json:"position_ids,omitempty"`
+	RoleCodes      []string               `protobuf:"bytes,16,rep,name=role_codes,json=roleCodes,proto3" json:"role_codes,omitempty"`
+	RoleName       []string               `protobuf:"bytes,17,rep,name=role_name,json=roleName,proto3" json:"role_name,omitempty"`
+	DepartmentName *string                `protobuf:"bytes,18,opt,name=department_name,json=departmentName,proto3,oneof" json:"department_name,omitempty"`
+	TenantId       uint64                 `protobuf:"varint,19,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *UserInfo) Reset() {
@@ -3836,6 +3825,13 @@ func (x *UserInfo) GetHomePath() string {
 	return ""
 }
 
+func (x *UserInfo) GetRoleIds() []uint64 {
+	if x != nil {
+		return x.RoleIds
+	}
+	return nil
+}
+
 func (x *UserInfo) GetMobile() string {
 	if x != nil && x.Mobile != nil {
 		return *x.Mobile
@@ -3862,6 +3858,34 @@ func (x *UserInfo) GetDepartmentId() uint64 {
 		return *x.DepartmentId
 	}
 	return 0
+}
+
+func (x *UserInfo) GetPositionIds() []uint64 {
+	if x != nil {
+		return x.PositionIds
+	}
+	return nil
+}
+
+func (x *UserInfo) GetRoleCodes() []string {
+	if x != nil {
+		return x.RoleCodes
+	}
+	return nil
+}
+
+func (x *UserInfo) GetRoleName() []string {
+	if x != nil {
+		return x.RoleName
+	}
+	return nil
+}
+
+func (x *UserInfo) GetDepartmentName() string {
+	if x != nil && x.DepartmentName != nil {
+		return *x.DepartmentName
+	}
+	return ""
 }
 
 func (x *UserInfo) GetTenantId() uint64 {
@@ -4595,7 +4619,7 @@ const file_rpc_core_proto_rawDesc = "" +
 	"\aUUIDReq\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"\x1c\n" +
 	"\bUUIDsReq\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\tR\x03ids\"\xf3\x04\n" +
+	"\x03ids\x18\x01 \x03(\tR\x03ids\"\xaf\x06\n" +
 	"\bUserInfo\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\x04H\x00R\x02id\x88\x01\x01\x12\"\n" +
 	"\n" +
@@ -4607,14 +4631,20 @@ const file_rpc_core_proto_rawDesc = "" +
 	"\bpassword\x18\x06 \x01(\tH\x05R\bpassword\x88\x01\x01\x12\x1f\n" +
 	"\bnickname\x18\a \x01(\tH\x06R\bnickname\x88\x01\x01\x12%\n" +
 	"\vdescription\x18\b \x01(\tH\aR\vdescription\x88\x01\x01\x12 \n" +
-	"\thome_path\x18\t \x01(\tH\bR\bhomePath\x88\x01\x01\x12\x1b\n" +
-	"\x06mobile\x18\n" +
-	" \x01(\tH\tR\x06mobile\x88\x01\x01\x12\x19\n" +
-	"\x05email\x18\v \x01(\tH\n" +
+	"\thome_path\x18\t \x01(\tH\bR\bhomePath\x88\x01\x01\x12\x19\n" +
+	"\brole_ids\x18\n" +
+	" \x03(\x04R\aroleIds\x12\x1b\n" +
+	"\x06mobile\x18\v \x01(\tH\tR\x06mobile\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\f \x01(\tH\n" +
 	"R\x05email\x88\x01\x01\x12\x1b\n" +
-	"\x06avatar\x18\f \x01(\tH\vR\x06avatar\x88\x01\x01\x12(\n" +
-	"\rdepartment_id\x18\r \x01(\x04H\fR\fdepartmentId\x88\x01\x01\x12\x1b\n" +
-	"\ttenant_id\x18\x0e \x01(\x04R\btenantIdB\x05\n" +
+	"\x06avatar\x18\r \x01(\tH\vR\x06avatar\x88\x01\x01\x12(\n" +
+	"\rdepartment_id\x18\x0e \x01(\x04H\fR\fdepartmentId\x88\x01\x01\x12!\n" +
+	"\fposition_ids\x18\x0f \x03(\x04R\vpositionIds\x12\x1d\n" +
+	"\n" +
+	"role_codes\x18\x10 \x03(\tR\troleCodes\x12\x1b\n" +
+	"\trole_name\x18\x11 \x03(\tR\broleName\x12,\n" +
+	"\x0fdepartment_name\x18\x12 \x01(\tH\rR\x0edepartmentName\x88\x01\x01\x12\x1b\n" +
+	"\ttenant_id\x18\x13 \x01(\x04R\btenantIdB\x05\n" +
 	"\x03_idB\r\n" +
 	"\v_created_atB\r\n" +
 	"\v_updated_atB\t\n" +
@@ -4628,7 +4658,8 @@ const file_rpc_core_proto_rawDesc = "" +
 	"\a_mobileB\b\n" +
 	"\x06_emailB\t\n" +
 	"\a_avatarB\x10\n" +
-	"\x0e_department_id\"\xb5\x03\n" +
+	"\x0e_department_idB\x12\n" +
+	"\x10_department_name\"\xb5\x03\n" +
 	"\vUserListReq\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x04R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x04R\bpageSize\x12\x1f\n" +
