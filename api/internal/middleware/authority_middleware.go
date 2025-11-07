@@ -2,8 +2,11 @@ package middleware
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/casbin/casbin/v2"
 	"github.com/redis/go-redis/v9"
@@ -34,11 +37,33 @@ func (m *AuthorityMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		obj := r.URL.Path
 		// get the method
 		act := r.Method
-		// get the role id
-		roleIds, err := rolectx.GetRoleIDFromCtx(r.Context())
-		if err != nil {
-			httpx.Error(w, err)
-			return
+
+		// get the role id with enhanced type handling
+		var roleIds []string
+		var err error
+
+		if roleIdVal := r.Context().Value("roleId"); roleIdVal != nil {
+			switch v := roleIdVal.(type) {
+			case string:
+				roleIds = strings.Split(v, ",")
+			case json.Number:
+				roleIds = []string{v.String()}
+			case int64:
+				roleIds = []string{fmt.Sprintf("%d", v)}
+			case uint64:
+				roleIds = []string{fmt.Sprintf("%d", v)}
+			case int:
+				roleIds = []string{fmt.Sprintf("%d", v)}
+			default:
+				roleIds = []string{fmt.Sprintf("%v", v)}
+			}
+		} else {
+			// Fallback to original function
+			roleIds, err = rolectx.GetRoleIDFromCtx(r.Context())
+			if err != nil {
+				httpx.Error(w, err)
+				return
+			}
 		}
 
 		// check jwt blacklist
@@ -57,7 +82,26 @@ func (m *AuthorityMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		result := batchCheck(m.Cbn, roleIds, act, obj)
 
 		if result {
-			logx.Infow("HTTP/HTTPS Request", logx.Field("UUID", r.Context().Value("userId").(string)),
+			// Handle different types for userId (string, json.Number, int64, uint64)
+			var userIdStr string
+			if userIdVal := r.Context().Value("userId"); userIdVal != nil {
+				switch v := userIdVal.(type) {
+				case string:
+					userIdStr = v
+				case json.Number:
+					userIdStr = v.String()
+				case int64:
+					userIdStr = fmt.Sprintf("%d", v)
+				case uint64:
+					userIdStr = fmt.Sprintf("%d", v)
+				case int:
+					userIdStr = fmt.Sprintf("%d", v)
+				default:
+					userIdStr = fmt.Sprintf("%v", v)
+				}
+			}
+
+			logx.Infow("HTTP/HTTPS Request", logx.Field("UUID", userIdStr),
 				logx.Field("path", obj), logx.Field("method", act))
 			next(w, r)
 			return

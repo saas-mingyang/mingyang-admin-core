@@ -4,9 +4,11 @@ import (
 	"context"
 
 	"github.com/saas-mingyang/mingyang-admin-common/i18n"
+	"github.com/zeromicro/go-zero/core/errorx"
 
 	"github.com/saas-mingyang/mingyang-admin-core/api/internal/svc"
 	"github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
+	"github.com/saas-mingyang/mingyang-admin-core/api/internal/utils"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/types/core"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -27,7 +29,12 @@ func NewGetUserProfileLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ge
 }
 
 func (l *GetUserProfileLogic) GetUserProfile() (resp *types.ProfileResp, err error) {
-	data, err := l.svcCtx.CoreRpc.GetUserById(l.ctx, &core.IDReq{Id: l.ctx.Value("userId").(uint64)})
+	userId := utils.GetUserIdFromCtx(l.ctx)
+	if userId == 0 {
+		return nil, errorx.NewCodeInvalidArgumentError("invalid user id")
+	}
+
+	data, err := l.svcCtx.CoreRpc.GetUserById(l.ctx, &core.IDReq{Id: userId})
 	if err != nil {
 		return nil, err
 	}
