@@ -7,7 +7,6 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"entgo.io/ent/dialect/sql/sqlgraph"
 )
 
 const (
@@ -27,19 +26,30 @@ const (
 	FieldName = "name"
 	// FieldCode holds the string denoting the code field in the database.
 	FieldCode = "code"
+	// FieldContactPhone holds the string denoting the contact_phone field in the database.
+	FieldContactPhone = "contact_phone"
+	// FieldContactEmail holds the string denoting the contact_email field in the database.
+	FieldContactEmail = "contact_email"
+	// FieldCompanyName holds the string denoting the company_name field in the database.
+	FieldCompanyName = "company_name"
+	// FieldLicenseNumber holds the string denoting the license_number field in the database.
+	FieldLicenseNumber = "license_number"
+	// FieldAddress holds the string denoting the address field in the database.
+	FieldAddress = "address"
+	// FieldIntro holds the string denoting the intro field in the database.
+	FieldIntro = "intro"
+	// FieldDomain holds the string denoting the domain field in the database.
+	FieldDomain = "domain"
+	// FieldLevel holds the string denoting the level field in the database.
+	FieldLevel = "level"
+	// FieldPlanID holds the string denoting the plan_id field in the database.
+	FieldPlanID = "plan_id"
 	// FieldAdminID holds the string denoting the admin_id field in the database.
 	FieldAdminID = "admin_id"
 	// FieldParentID holds the string denoting the parent_id field in the database.
 	FieldParentID = "parent_id"
-	// EdgeRoles holds the string denoting the roles edge name in mutations.
-	EdgeRoles = "roles"
 	// Table holds the table name of the tenant in the database.
 	Table = "sys_tenants"
-	// RolesTable is the table that holds the roles relation/edge. The primary key declared below.
-	RolesTable = "tenant_roles"
-	// RolesInverseTable is the table name for the Role entity.
-	// It exists in this package in order to avoid circular dependency with the "role" package.
-	RolesInverseTable = "sys_roles"
 )
 
 // Columns holds all SQL columns for tenant fields.
@@ -51,15 +61,18 @@ var Columns = []string{
 	FieldDeletedAt,
 	FieldName,
 	FieldCode,
+	FieldContactPhone,
+	FieldContactEmail,
+	FieldCompanyName,
+	FieldLicenseNumber,
+	FieldAddress,
+	FieldIntro,
+	FieldDomain,
+	FieldLevel,
+	FieldPlanID,
 	FieldAdminID,
 	FieldParentID,
 }
-
-var (
-	// RolesPrimaryKey and RolesColumn2 are the table columns denoting the
-	// primary key for the roles relation (M2M).
-	RolesPrimaryKey = []string{"tenant_id", "role_id"}
-)
 
 // ValidColumn reports if the column name is valid (part of the table columns).
 func ValidColumn(column string) bool {
@@ -137,6 +150,51 @@ func ByCode(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldCode, opts...).ToFunc()
 }
 
+// ByContactPhone orders the results by the contact_phone field.
+func ByContactPhone(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldContactPhone, opts...).ToFunc()
+}
+
+// ByContactEmail orders the results by the contact_email field.
+func ByContactEmail(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldContactEmail, opts...).ToFunc()
+}
+
+// ByCompanyName orders the results by the company_name field.
+func ByCompanyName(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldCompanyName, opts...).ToFunc()
+}
+
+// ByLicenseNumber orders the results by the license_number field.
+func ByLicenseNumber(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldLicenseNumber, opts...).ToFunc()
+}
+
+// ByAddress orders the results by the address field.
+func ByAddress(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldAddress, opts...).ToFunc()
+}
+
+// ByIntro orders the results by the intro field.
+func ByIntro(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldIntro, opts...).ToFunc()
+}
+
+// ByDomain orders the results by the domain field.
+func ByDomain(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldDomain, opts...).ToFunc()
+}
+
+// ByLevel orders the results by the level field.
+func ByLevel(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldLevel, opts...).ToFunc()
+}
+
+// ByPlanID orders the results by the plan_id field.
+func ByPlanID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldPlanID, opts...).ToFunc()
+}
+
 // ByAdminID orders the results by the admin_id field.
 func ByAdminID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldAdminID, opts...).ToFunc()
@@ -145,25 +203,4 @@ func ByAdminID(opts ...sql.OrderTermOption) OrderOption {
 // ByParentID orders the results by the parent_id field.
 func ByParentID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldParentID, opts...).ToFunc()
-}
-
-// ByRolesCount orders the results by roles count.
-func ByRolesCount(opts ...sql.OrderTermOption) OrderOption {
-	return func(s *sql.Selector) {
-		sqlgraph.OrderByNeighborsCount(s, newRolesStep(), opts...)
-	}
-}
-
-// ByRoles orders the results by roles terms.
-func ByRoles(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
-	return func(s *sql.Selector) {
-		sqlgraph.OrderByNeighborTerms(s, newRolesStep(), append([]sql.OrderTerm{term}, terms...)...)
-	}
-}
-func newRolesStep() *sqlgraph.Step {
-	return sqlgraph.NewStep(
-		sqlgraph.From(Table, FieldID),
-		sqlgraph.To(RolesInverseTable, FieldID),
-		sqlgraph.Edge(sqlgraph.M2M, false, RolesTable, RolesPrimaryKey...),
-	)
 }

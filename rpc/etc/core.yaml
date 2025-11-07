@@ -5,12 +5,15 @@ DatabaseConf:
   Type: postgres
   Host: 192.168.201.188
   Port: 5432
-  DBName: mingyang_admin
+  DBName: mingyang_admin_test
   Username: postgres
   Password: AM38xymTdFree4Fh
   MaxOpenConn: 100
   SSLMode: disable
   CacheTime: 5
+  # 添加以下配置启用 SQL 日志
+  Debug: true
+  LogSlowThreshold: 600ms
 
 Log:
   ServiceName: coreRpcLogger

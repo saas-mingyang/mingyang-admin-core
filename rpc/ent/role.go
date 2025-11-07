@@ -43,11 +43,9 @@ type RoleEdges struct {
 	Menus []*Menu `json:"menus,omitempty"`
 	// Users holds the value of the users edge.
 	Users []*User `json:"users,omitempty"`
-	// Tenants holds the value of the tenants edge.
-	Tenants []*Tenant `json:"tenants,omitempty"`
 	// loadedTypes holds the information for reporting if a
 	// type was loaded (or requested) in eager-loading or not.
-	loadedTypes [3]bool
+	loadedTypes [2]bool
 }
 
 // MenusOrErr returns the Menus value or an error if the edge
@@ -66,15 +64,6 @@ func (e RoleEdges) UsersOrErr() ([]*User, error) {
 		return e.Users, nil
 	}
 	return nil, &NotLoadedError{edge: "users"}
-}
-
-// TenantsOrErr returns the Tenants value or an error if the edge
-// was not loaded in eager-loading.
-func (e RoleEdges) TenantsOrErr() ([]*Tenant, error) {
-	if e.loadedTypes[2] {
-		return e.Tenants, nil
-	}
-	return nil, &NotLoadedError{edge: "tenants"}
 }
 
 // scanValues returns the types for scanning values from sql.Rows.
@@ -172,11 +161,6 @@ func (_m *Role) QueryMenus() *MenuQuery {
 // QueryUsers queries the "users" edge of the Role entity.
 func (_m *Role) QueryUsers() *UserQuery {
 	return NewRoleClient(_m.config).QueryUsers(_m)
-}
-
-// QueryTenants queries the "tenants" edge of the Role entity.
-func (_m *Role) QueryTenants() *TenantQuery {
-	return NewRoleClient(_m.config).QueryTenants(_m)
 }
 
 // Update returns a builder for updating this Role.

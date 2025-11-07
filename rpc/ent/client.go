@@ -25,6 +25,7 @@ import (
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/position"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/role"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenant"
+	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenantplan"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/token"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/user"
 
@@ -56,6 +57,8 @@ type Client struct {
 	Role *RoleClient
 	// Tenant is the client for interacting with the Tenant builders.
 	Tenant *TenantClient
+	// TenantPlan is the client for interacting with the TenantPlan builders.
+	TenantPlan *TenantPlanClient
 	// Token is the client for interacting with the Token builders.
 	Token *TokenClient
 	// User is the client for interacting with the User builders.
@@ -81,6 +84,7 @@ func (c *Client) init() {
 	c.Position = NewPositionClient(c.config)
 	c.Role = NewRoleClient(c.config)
 	c.Tenant = NewTenantClient(c.config)
+	c.TenantPlan = NewTenantPlanClient(c.config)
 	c.Token = NewTokenClient(c.config)
 	c.User = NewUserClient(c.config)
 }
@@ -185,6 +189,7 @@ func (c *Client) Tx(ctx context.Context) (*Tx, error) {
 		Position:         NewPositionClient(cfg),
 		Role:             NewRoleClient(cfg),
 		Tenant:           NewTenantClient(cfg),
+		TenantPlan:       NewTenantPlanClient(cfg),
 		Token:            NewTokenClient(cfg),
 		User:             NewUserClient(cfg),
 	}, nil
@@ -216,6 +221,7 @@ func (c *Client) BeginTx(ctx context.Context, opts *sql.TxOptions) (*Tx, error) 
 		Position:         NewPositionClient(cfg),
 		Role:             NewRoleClient(cfg),
 		Tenant:           NewTenantClient(cfg),
+		TenantPlan:       NewTenantPlanClient(cfg),
 		Token:            NewTokenClient(cfg),
 		User:             NewUserClient(cfg),
 	}, nil
@@ -248,7 +254,7 @@ func (c *Client) Close() error {
 func (c *Client) Use(hooks ...Hook) {
 	for _, n := range []interface{ Use(...Hook) }{
 		c.API, c.Configuration, c.Department, c.Dictionary, c.DictionaryDetail, c.Menu,
-		c.OauthProvider, c.Position, c.Role, c.Tenant, c.Token, c.User,
+		c.OauthProvider, c.Position, c.Role, c.Tenant, c.TenantPlan, c.Token, c.User,
 	} {
 		n.Use(hooks...)
 	}
@@ -259,7 +265,7 @@ func (c *Client) Use(hooks ...Hook) {
 func (c *Client) Intercept(interceptors ...Interceptor) {
 	for _, n := range []interface{ Intercept(...Interceptor) }{
 		c.API, c.Configuration, c.Department, c.Dictionary, c.DictionaryDetail, c.Menu,
-		c.OauthProvider, c.Position, c.Role, c.Tenant, c.Token, c.User,
+		c.OauthProvider, c.Position, c.Role, c.Tenant, c.TenantPlan, c.Token, c.User,
 	} {
 		n.Intercept(interceptors...)
 	}
@@ -288,6 +294,8 @@ func (c *Client) Mutate(ctx context.Context, m Mutation) (Value, error) {
 		return c.Role.mutate(ctx, m)
 	case *TenantMutation:
 		return c.Tenant.mutate(ctx, m)
+	case *TenantPlanMutation:
+		return c.TenantPlan.mutate(ctx, m)
 	case *TokenMutation:
 		return c.Token.mutate(ctx, m)
 	case *UserMutation:
@@ -1645,22 +1653,6 @@ func (c *RoleClient) QueryUsers(_m *Role) *UserQuery {
 	return query
 }
 
-// QueryTenants queries the tenants edge of a Role.
-func (c *RoleClient) QueryTenants(_m *Role) *TenantQuery {
-	query := (&TenantClient{config: c.config}).Query()
-	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
-		id := _m.ID
-		step := sqlgraph.NewStep(
-			sqlgraph.From(role.Table, role.FieldID, id),
-			sqlgraph.To(tenant.Table, tenant.FieldID),
-			sqlgraph.Edge(sqlgraph.M2M, true, role.TenantsTable, role.TenantsPrimaryKey...),
-		)
-		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
-		return fromV, nil
-	}
-	return query
-}
-
 // Hooks returns the client hooks.
 func (c *RoleClient) Hooks() []Hook {
 	return c.hooks.Role
@@ -1794,22 +1786,6 @@ func (c *TenantClient) GetX(ctx context.Context, id uint64) *Tenant {
 	return obj
 }
 
-// QueryRoles queries the roles edge of a Tenant.
-func (c *TenantClient) QueryRoles(_m *Tenant) *RoleQuery {
-	query := (&RoleClient{config: c.config}).Query()
-	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
-		id := _m.ID
-		step := sqlgraph.NewStep(
-			sqlgraph.From(tenant.Table, tenant.FieldID, id),
-			sqlgraph.To(role.Table, role.FieldID),
-			sqlgraph.Edge(sqlgraph.M2M, false, tenant.RolesTable, tenant.RolesPrimaryKey...),
-		)
-		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
-		return fromV, nil
-	}
-	return query
-}
-
 // Hooks returns the client hooks.
 func (c *TenantClient) Hooks() []Hook {
 	hooks := c.hooks.Tenant
@@ -1834,6 +1810,141 @@ func (c *TenantClient) mutate(ctx context.Context, m *TenantMutation) (Value, er
 		return (&TenantDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
 	default:
 		return nil, fmt.Errorf("ent: unknown Tenant mutation op: %q", m.Op())
+	}
+}
+
+// TenantPlanClient is a client for the TenantPlan schema.
+type TenantPlanClient struct {
+	config
+}
+
+// NewTenantPlanClient returns a client for the TenantPlan from the given config.
+func NewTenantPlanClient(c config) *TenantPlanClient {
+	return &TenantPlanClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `tenantplan.Hooks(f(g(h())))`.
+func (c *TenantPlanClient) Use(hooks ...Hook) {
+	c.hooks.TenantPlan = append(c.hooks.TenantPlan, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `tenantplan.Intercept(f(g(h())))`.
+func (c *TenantPlanClient) Intercept(interceptors ...Interceptor) {
+	c.inters.TenantPlan = append(c.inters.TenantPlan, interceptors...)
+}
+
+// Create returns a builder for creating a TenantPlan entity.
+func (c *TenantPlanClient) Create() *TenantPlanCreate {
+	mutation := newTenantPlanMutation(c.config, OpCreate)
+	return &TenantPlanCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of TenantPlan entities.
+func (c *TenantPlanClient) CreateBulk(builders ...*TenantPlanCreate) *TenantPlanCreateBulk {
+	return &TenantPlanCreateBulk{config: c.config, builders: builders}
+}
+
+// MapCreateBulk creates a bulk creation builder from the given slice. For each item in the slice, the function creates
+// a builder and applies setFunc on it.
+func (c *TenantPlanClient) MapCreateBulk(slice any, setFunc func(*TenantPlanCreate, int)) *TenantPlanCreateBulk {
+	rv := reflect.ValueOf(slice)
+	if rv.Kind() != reflect.Slice {
+		return &TenantPlanCreateBulk{err: fmt.Errorf("calling to TenantPlanClient.MapCreateBulk with wrong type %T, need slice", slice)}
+	}
+	builders := make([]*TenantPlanCreate, rv.Len())
+	for i := 0; i < rv.Len(); i++ {
+		builders[i] = c.Create()
+		setFunc(builders[i], i)
+	}
+	return &TenantPlanCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for TenantPlan.
+func (c *TenantPlanClient) Update() *TenantPlanUpdate {
+	mutation := newTenantPlanMutation(c.config, OpUpdate)
+	return &TenantPlanUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *TenantPlanClient) UpdateOne(_m *TenantPlan) *TenantPlanUpdateOne {
+	mutation := newTenantPlanMutation(c.config, OpUpdateOne, withTenantPlan(_m))
+	return &TenantPlanUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *TenantPlanClient) UpdateOneID(id uint64) *TenantPlanUpdateOne {
+	mutation := newTenantPlanMutation(c.config, OpUpdateOne, withTenantPlanID(id))
+	return &TenantPlanUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for TenantPlan.
+func (c *TenantPlanClient) Delete() *TenantPlanDelete {
+	mutation := newTenantPlanMutation(c.config, OpDelete)
+	return &TenantPlanDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *TenantPlanClient) DeleteOne(_m *TenantPlan) *TenantPlanDeleteOne {
+	return c.DeleteOneID(_m.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *TenantPlanClient) DeleteOneID(id uint64) *TenantPlanDeleteOne {
+	builder := c.Delete().Where(tenantplan.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &TenantPlanDeleteOne{builder}
+}
+
+// Query returns a query builder for TenantPlan.
+func (c *TenantPlanClient) Query() *TenantPlanQuery {
+	return &TenantPlanQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeTenantPlan},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a TenantPlan entity by its id.
+func (c *TenantPlanClient) Get(ctx context.Context, id uint64) (*TenantPlan, error) {
+	return c.Query().Where(tenantplan.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *TenantPlanClient) GetX(ctx context.Context, id uint64) *TenantPlan {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// Hooks returns the client hooks.
+func (c *TenantPlanClient) Hooks() []Hook {
+	hooks := c.hooks.TenantPlan
+	return append(hooks[:len(hooks):len(hooks)], tenantplan.Hooks[:]...)
+}
+
+// Interceptors returns the client interceptors.
+func (c *TenantPlanClient) Interceptors() []Interceptor {
+	inters := c.inters.TenantPlan
+	return append(inters[:len(inters):len(inters)], tenantplan.Interceptors[:]...)
+}
+
+func (c *TenantPlanClient) mutate(ctx context.Context, m *TenantPlanMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&TenantPlanCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&TenantPlanUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&TenantPlanUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&TenantPlanDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown TenantPlan mutation op: %q", m.Op())
 	}
 }
 
@@ -2157,11 +2268,12 @@ func (c *UserClient) mutate(ctx context.Context, m *UserMutation) (Value, error)
 type (
 	hooks struct {
 		API, Configuration, Department, Dictionary, DictionaryDetail, Menu,
-		OauthProvider, Position, Role, Tenant, Token, User []ent.Hook
+		OauthProvider, Position, Role, Tenant, TenantPlan, Token, User []ent.Hook
 	}
 	inters struct {
 		API, Configuration, Department, Dictionary, DictionaryDetail, Menu,
-		OauthProvider, Position, Role, Tenant, Token, User []ent.Interceptor
+		OauthProvider, Position, Role, Tenant, TenantPlan, Token,
+		User []ent.Interceptor
 	}
 )
 
