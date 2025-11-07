@@ -11,6 +11,9 @@ DatabaseConf:
   MaxOpenConn: 100
   SSLMode: disable
   CacheTime: 5
+  # 添加以下配置启用 SQL 日志
+  Debug: true
+  LogSlowThreshold: 600ms
 
 Log:
   ServiceName: coreRpcLogger
