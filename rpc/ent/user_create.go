@@ -65,6 +65,20 @@ func (_c *UserCreate) SetNillableTenantID(v *uint64) *UserCreate {
 	return _c
 }
 
+// SetDepartmentID sets the "department_id" field.
+func (_c *UserCreate) SetDepartmentID(v uint64) *UserCreate {
+	_c.mutation.SetDepartmentID(v)
+	return _c
+}
+
+// SetNillableDepartmentID sets the "department_id" field if the given value is not nil.
+func (_c *UserCreate) SetNillableDepartmentID(v *uint64) *UserCreate {
+	if v != nil {
+		_c.SetDepartmentID(*v)
+	}
+	return _c
+}
+
 // SetStatus sets the "status" field.
 func (_c *UserCreate) SetStatus(v uint8) *UserCreate {
 	_c.mutation.SetStatus(v)
@@ -177,20 +191,6 @@ func (_c *UserCreate) SetAvatar(v string) *UserCreate {
 func (_c *UserCreate) SetNillableAvatar(v *string) *UserCreate {
 	if v != nil {
 		_c.SetAvatar(*v)
-	}
-	return _c
-}
-
-// SetDepartmentID sets the "department_id" field.
-func (_c *UserCreate) SetDepartmentID(v uint64) *UserCreate {
-	_c.mutation.SetDepartmentID(v)
-	return _c
-}
-
-// SetNillableDepartmentID sets the "department_id" field if the given value is not nil.
-func (_c *UserCreate) SetNillableDepartmentID(v *uint64) *UserCreate {
-	if v != nil {
-		_c.SetDepartmentID(*v)
 	}
 	return _c
 }
@@ -312,10 +312,6 @@ func (_c *UserCreate) defaults() error {
 	if _, ok := _c.mutation.HomePath(); !ok {
 		v := user.DefaultHomePath
 		_c.mutation.SetHomePath(v)
-	}
-	if _, ok := _c.mutation.DepartmentID(); !ok {
-		v := user.DefaultDepartmentID
-		_c.mutation.SetDepartmentID(v)
 	}
 	return nil
 }

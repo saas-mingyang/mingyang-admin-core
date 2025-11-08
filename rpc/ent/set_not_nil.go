@@ -2381,6 +2381,30 @@ func (_m *UserCreate) SetNotNilUpdatedAt(value *time.Time) *UserCreate {
 }
 
 // set field if value's pointer is not nil.
+func (_m *UserUpdate) SetNotNilDepartmentID(value *uint64) *UserUpdate {
+	if value != nil {
+		return _m.SetDepartmentID(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *UserUpdateOne) SetNotNilDepartmentID(value *uint64) *UserUpdateOne {
+	if value != nil {
+		return _m.SetDepartmentID(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *UserCreate) SetNotNilDepartmentID(value *uint64) *UserCreate {
+	if value != nil {
+		return _m.SetDepartmentID(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
 func (_m *UserUpdate) SetNotNilStatus(value *uint8) *UserUpdate {
 	if value != nil {
 		return _m.SetStatus(*value)
@@ -2616,30 +2640,6 @@ func (_m *UserUpdateOne) SetNotNilAvatar(value *string) *UserUpdateOne {
 func (_m *UserCreate) SetNotNilAvatar(value *string) *UserCreate {
 	if value != nil {
 		return _m.SetAvatar(*value)
-	}
-	return _m
-}
-
-// set field if value's pointer is not nil.
-func (_m *UserUpdate) SetNotNilDepartmentID(value *uint64) *UserUpdate {
-	if value != nil {
-		return _m.SetDepartmentID(*value)
-	}
-	return _m
-}
-
-// set field if value's pointer is not nil.
-func (_m *UserUpdateOne) SetNotNilDepartmentID(value *uint64) *UserUpdateOne {
-	if value != nil {
-		return _m.SetDepartmentID(*value)
-	}
-	return _m
-}
-
-// set field if value's pointer is not nil.
-func (_m *UserCreate) SetNotNilDepartmentID(value *uint64) *UserCreate {
-	if value != nil {
-		return _m.SetDepartmentID(*value)
 	}
 	return _m
 }

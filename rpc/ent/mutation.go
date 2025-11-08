@@ -12120,6 +12120,55 @@ func (m *UserMutation) ResetTenantID() {
 	m.addtenant_id = nil
 }
 
+// SetDepartmentID sets the "department_id" field.
+func (m *UserMutation) SetDepartmentID(u uint64) {
+	m.departments = &u
+}
+
+// DepartmentID returns the value of the "department_id" field in the mutation.
+func (m *UserMutation) DepartmentID() (r uint64, exists bool) {
+	v := m.departments
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldDepartmentID returns the old "department_id" field's value of the User entity.
+// If the User object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *UserMutation) OldDepartmentID(ctx context.Context) (v uint64, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldDepartmentID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldDepartmentID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldDepartmentID: %w", err)
+	}
+	return oldValue.DepartmentID, nil
+}
+
+// ClearDepartmentID clears the value of the "department_id" field.
+func (m *UserMutation) ClearDepartmentID() {
+	m.departments = nil
+	m.clearedFields[user.FieldDepartmentID] = struct{}{}
+}
+
+// DepartmentIDCleared returns if the "department_id" field was cleared in this mutation.
+func (m *UserMutation) DepartmentIDCleared() bool {
+	_, ok := m.clearedFields[user.FieldDepartmentID]
+	return ok
+}
+
+// ResetDepartmentID resets all changes to the "department_id" field.
+func (m *UserMutation) ResetDepartmentID() {
+	m.departments = nil
+	delete(m.clearedFields, user.FieldDepartmentID)
+}
+
 // SetStatus sets the "status" field.
 func (m *UserMutation) SetStatus(u uint8) {
 	m.status = &u
@@ -12579,55 +12628,6 @@ func (m *UserMutation) ResetAvatar() {
 	delete(m.clearedFields, user.FieldAvatar)
 }
 
-// SetDepartmentID sets the "department_id" field.
-func (m *UserMutation) SetDepartmentID(u uint64) {
-	m.departments = &u
-}
-
-// DepartmentID returns the value of the "department_id" field in the mutation.
-func (m *UserMutation) DepartmentID() (r uint64, exists bool) {
-	v := m.departments
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldDepartmentID returns the old "department_id" field's value of the User entity.
-// If the User object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *UserMutation) OldDepartmentID(ctx context.Context) (v uint64, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldDepartmentID is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldDepartmentID requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldDepartmentID: %w", err)
-	}
-	return oldValue.DepartmentID, nil
-}
-
-// ClearDepartmentID clears the value of the "department_id" field.
-func (m *UserMutation) ClearDepartmentID() {
-	m.departments = nil
-	m.clearedFields[user.FieldDepartmentID] = struct{}{}
-}
-
-// DepartmentIDCleared returns if the "department_id" field was cleared in this mutation.
-func (m *UserMutation) DepartmentIDCleared() bool {
-	_, ok := m.clearedFields[user.FieldDepartmentID]
-	return ok
-}
-
-// ResetDepartmentID resets all changes to the "department_id" field.
-func (m *UserMutation) ResetDepartmentID() {
-	m.departments = nil
-	delete(m.clearedFields, user.FieldDepartmentID)
-}
-
 // SetDepartmentsID sets the "departments" edge to the Department entity by id.
 func (m *UserMutation) SetDepartmentsID(id uint64) {
 	m.departments = &id
@@ -12820,6 +12820,9 @@ func (m *UserMutation) Fields() []string {
 	if m.tenant_id != nil {
 		fields = append(fields, user.FieldTenantID)
 	}
+	if m.departments != nil {
+		fields = append(fields, user.FieldDepartmentID)
+	}
 	if m.status != nil {
 		fields = append(fields, user.FieldStatus)
 	}
@@ -12850,9 +12853,6 @@ func (m *UserMutation) Fields() []string {
 	if m.avatar != nil {
 		fields = append(fields, user.FieldAvatar)
 	}
-	if m.departments != nil {
-		fields = append(fields, user.FieldDepartmentID)
-	}
 	return fields
 }
 
@@ -12867,6 +12867,8 @@ func (m *UserMutation) Field(name string) (ent.Value, bool) {
 		return m.UpdatedAt()
 	case user.FieldTenantID:
 		return m.TenantID()
+	case user.FieldDepartmentID:
+		return m.DepartmentID()
 	case user.FieldStatus:
 		return m.Status()
 	case user.FieldDeletedAt:
@@ -12887,8 +12889,6 @@ func (m *UserMutation) Field(name string) (ent.Value, bool) {
 		return m.Email()
 	case user.FieldAvatar:
 		return m.Avatar()
-	case user.FieldDepartmentID:
-		return m.DepartmentID()
 	}
 	return nil, false
 }
@@ -12904,6 +12904,8 @@ func (m *UserMutation) OldField(ctx context.Context, name string) (ent.Value, er
 		return m.OldUpdatedAt(ctx)
 	case user.FieldTenantID:
 		return m.OldTenantID(ctx)
+	case user.FieldDepartmentID:
+		return m.OldDepartmentID(ctx)
 	case user.FieldStatus:
 		return m.OldStatus(ctx)
 	case user.FieldDeletedAt:
@@ -12924,8 +12926,6 @@ func (m *UserMutation) OldField(ctx context.Context, name string) (ent.Value, er
 		return m.OldEmail(ctx)
 	case user.FieldAvatar:
 		return m.OldAvatar(ctx)
-	case user.FieldDepartmentID:
-		return m.OldDepartmentID(ctx)
 	}
 	return nil, fmt.Errorf("unknown User field %s", name)
 }
@@ -12955,6 +12955,13 @@ func (m *UserMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetTenantID(v)
+		return nil
+	case user.FieldDepartmentID:
+		v, ok := value.(uint64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetDepartmentID(v)
 		return nil
 	case user.FieldStatus:
 		v, ok := value.(uint8)
@@ -13026,13 +13033,6 @@ func (m *UserMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetAvatar(v)
 		return nil
-	case user.FieldDepartmentID:
-		v, ok := value.(uint64)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetDepartmentID(v)
-		return nil
 	}
 	return fmt.Errorf("unknown User field %s", name)
 }
@@ -13090,6 +13090,9 @@ func (m *UserMutation) AddField(name string, value ent.Value) error {
 // mutation.
 func (m *UserMutation) ClearedFields() []string {
 	var fields []string
+	if m.FieldCleared(user.FieldDepartmentID) {
+		fields = append(fields, user.FieldDepartmentID)
+	}
 	if m.FieldCleared(user.FieldStatus) {
 		fields = append(fields, user.FieldStatus)
 	}
@@ -13108,9 +13111,6 @@ func (m *UserMutation) ClearedFields() []string {
 	if m.FieldCleared(user.FieldAvatar) {
 		fields = append(fields, user.FieldAvatar)
 	}
-	if m.FieldCleared(user.FieldDepartmentID) {
-		fields = append(fields, user.FieldDepartmentID)
-	}
 	return fields
 }
 
@@ -13125,6 +13125,9 @@ func (m *UserMutation) FieldCleared(name string) bool {
 // error if the field is not defined in the schema.
 func (m *UserMutation) ClearField(name string) error {
 	switch name {
+	case user.FieldDepartmentID:
+		m.ClearDepartmentID()
+		return nil
 	case user.FieldStatus:
 		m.ClearStatus()
 		return nil
@@ -13143,9 +13146,6 @@ func (m *UserMutation) ClearField(name string) error {
 	case user.FieldAvatar:
 		m.ClearAvatar()
 		return nil
-	case user.FieldDepartmentID:
-		m.ClearDepartmentID()
-		return nil
 	}
 	return fmt.Errorf("unknown User nullable field %s", name)
 }
@@ -13162,6 +13162,9 @@ func (m *UserMutation) ResetField(name string) error {
 		return nil
 	case user.FieldTenantID:
 		m.ResetTenantID()
+		return nil
+	case user.FieldDepartmentID:
+		m.ResetDepartmentID()
 		return nil
 	case user.FieldStatus:
 		m.ResetStatus()
@@ -13192,9 +13195,6 @@ func (m *UserMutation) ResetField(name string) error {
 		return nil
 	case user.FieldAvatar:
 		m.ResetAvatar()
-		return nil
-	case user.FieldDepartmentID:
-		m.ResetDepartmentID()
 		return nil
 	}
 	return fmt.Errorf("unknown User field %s", name)

@@ -70,6 +70,11 @@ func TenantID(v uint64) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldTenantID, v))
 }
 
+// DepartmentID applies equality check predicate on the "department_id" field. It's identical to DepartmentIDEQ.
+func DepartmentID(v uint64) predicate.User {
+	return predicate.User(sql.FieldEQ(FieldDepartmentID, v))
+}
+
 // Status applies equality check predicate on the "status" field. It's identical to StatusEQ.
 func Status(v uint8) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldStatus, v))
@@ -118,11 +123,6 @@ func Email(v string) predicate.User {
 // Avatar applies equality check predicate on the "avatar" field. It's identical to AvatarEQ.
 func Avatar(v string) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldAvatar, v))
-}
-
-// DepartmentID applies equality check predicate on the "department_id" field. It's identical to DepartmentIDEQ.
-func DepartmentID(v uint64) predicate.User {
-	return predicate.User(sql.FieldEQ(FieldDepartmentID, v))
 }
 
 // CreatedAtEQ applies the EQ predicate on the "created_at" field.
@@ -243,6 +243,36 @@ func TenantIDLT(v uint64) predicate.User {
 // TenantIDLTE applies the LTE predicate on the "tenant_id" field.
 func TenantIDLTE(v uint64) predicate.User {
 	return predicate.User(sql.FieldLTE(FieldTenantID, v))
+}
+
+// DepartmentIDEQ applies the EQ predicate on the "department_id" field.
+func DepartmentIDEQ(v uint64) predicate.User {
+	return predicate.User(sql.FieldEQ(FieldDepartmentID, v))
+}
+
+// DepartmentIDNEQ applies the NEQ predicate on the "department_id" field.
+func DepartmentIDNEQ(v uint64) predicate.User {
+	return predicate.User(sql.FieldNEQ(FieldDepartmentID, v))
+}
+
+// DepartmentIDIn applies the In predicate on the "department_id" field.
+func DepartmentIDIn(vs ...uint64) predicate.User {
+	return predicate.User(sql.FieldIn(FieldDepartmentID, vs...))
+}
+
+// DepartmentIDNotIn applies the NotIn predicate on the "department_id" field.
+func DepartmentIDNotIn(vs ...uint64) predicate.User {
+	return predicate.User(sql.FieldNotIn(FieldDepartmentID, vs...))
+}
+
+// DepartmentIDIsNil applies the IsNil predicate on the "department_id" field.
+func DepartmentIDIsNil() predicate.User {
+	return predicate.User(sql.FieldIsNull(FieldDepartmentID))
+}
+
+// DepartmentIDNotNil applies the NotNil predicate on the "department_id" field.
+func DepartmentIDNotNil() predicate.User {
+	return predicate.User(sql.FieldNotNull(FieldDepartmentID))
 }
 
 // StatusEQ applies the EQ predicate on the "status" field.
@@ -903,36 +933,6 @@ func AvatarEqualFold(v string) predicate.User {
 // AvatarContainsFold applies the ContainsFold predicate on the "avatar" field.
 func AvatarContainsFold(v string) predicate.User {
 	return predicate.User(sql.FieldContainsFold(FieldAvatar, v))
-}
-
-// DepartmentIDEQ applies the EQ predicate on the "department_id" field.
-func DepartmentIDEQ(v uint64) predicate.User {
-	return predicate.User(sql.FieldEQ(FieldDepartmentID, v))
-}
-
-// DepartmentIDNEQ applies the NEQ predicate on the "department_id" field.
-func DepartmentIDNEQ(v uint64) predicate.User {
-	return predicate.User(sql.FieldNEQ(FieldDepartmentID, v))
-}
-
-// DepartmentIDIn applies the In predicate on the "department_id" field.
-func DepartmentIDIn(vs ...uint64) predicate.User {
-	return predicate.User(sql.FieldIn(FieldDepartmentID, vs...))
-}
-
-// DepartmentIDNotIn applies the NotIn predicate on the "department_id" field.
-func DepartmentIDNotIn(vs ...uint64) predicate.User {
-	return predicate.User(sql.FieldNotIn(FieldDepartmentID, vs...))
-}
-
-// DepartmentIDIsNil applies the IsNil predicate on the "department_id" field.
-func DepartmentIDIsNil() predicate.User {
-	return predicate.User(sql.FieldIsNull(FieldDepartmentID))
-}
-
-// DepartmentIDNotNil applies the NotNil predicate on the "department_id" field.
-func DepartmentIDNotNil() predicate.User {
-	return predicate.User(sql.FieldNotNull(FieldDepartmentID))
 }
 
 // HasDepartments applies the HasEdge predicate on the "departments" edge.

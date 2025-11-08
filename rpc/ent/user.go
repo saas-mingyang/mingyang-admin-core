@@ -24,6 +24,8 @@ type User struct {
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
 	// Tenant ID | 租户 ID
 	TenantID uint64 `json:"tenant_id,omitempty"`
+	// Department ID | 部门 ID
+	DepartmentID uint64 `json:"department_id,omitempty"`
 	// Status 1: normal 2: ban | 状态 1 正常 2 禁用
 	Status uint8 `json:"status,omitempty"`
 	// Delete Time | 删除日期
@@ -44,8 +46,6 @@ type User struct {
 	Email string `json:"email,omitempty"`
 	// Avatar | 头像路径
 	Avatar string `json:"avatar,omitempty"`
-	// Department ID | 部门ID
-	DepartmentID uint64 `json:"department_id,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the UserQuery when eager-loading is set.
 	Edges        UserEdges `json:"edges"`
@@ -99,7 +99,7 @@ func (*User) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case user.FieldID, user.FieldTenantID, user.FieldStatus, user.FieldDepartmentID:
+		case user.FieldID, user.FieldTenantID, user.FieldDepartmentID, user.FieldStatus:
 			values[i] = new(sql.NullInt64)
 		case user.FieldUsername, user.FieldPassword, user.FieldNickname, user.FieldDescription, user.FieldHomePath, user.FieldMobile, user.FieldEmail, user.FieldAvatar:
 			values[i] = new(sql.NullString)
@@ -143,6 +143,12 @@ func (_m *User) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field tenant_id", values[i])
 			} else if value.Valid {
 				_m.TenantID = uint64(value.Int64)
+			}
+		case user.FieldDepartmentID:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field department_id", values[i])
+			} else if value.Valid {
+				_m.DepartmentID = uint64(value.Int64)
 			}
 		case user.FieldStatus:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -204,12 +210,6 @@ func (_m *User) assignValues(columns []string, values []any) error {
 			} else if value.Valid {
 				_m.Avatar = value.String
 			}
-		case user.FieldDepartmentID:
-			if value, ok := values[i].(*sql.NullInt64); !ok {
-				return fmt.Errorf("unexpected type %T for field department_id", values[i])
-			} else if value.Valid {
-				_m.DepartmentID = uint64(value.Int64)
-			}
 		default:
 			_m.selectValues.Set(columns[i], values[i])
 		}
@@ -270,6 +270,9 @@ func (_m *User) String() string {
 	builder.WriteString("tenant_id=")
 	builder.WriteString(fmt.Sprintf("%v", _m.TenantID))
 	builder.WriteString(", ")
+	builder.WriteString("department_id=")
+	builder.WriteString(fmt.Sprintf("%v", _m.DepartmentID))
+	builder.WriteString(", ")
 	builder.WriteString("status=")
 	builder.WriteString(fmt.Sprintf("%v", _m.Status))
 	builder.WriteString(", ")
@@ -299,9 +302,6 @@ func (_m *User) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("avatar=")
 	builder.WriteString(_m.Avatar)
-	builder.WriteString(", ")
-	builder.WriteString("department_id=")
-	builder.WriteString(fmt.Sprintf("%v", _m.DepartmentID))
 	builder.WriteByte(')')
 	return builder.String()
 }

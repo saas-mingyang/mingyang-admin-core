@@ -38,6 +38,26 @@ func (_u *UserUpdate) SetUpdatedAt(v time.Time) *UserUpdate {
 	return _u
 }
 
+// SetDepartmentID sets the "department_id" field.
+func (_u *UserUpdate) SetDepartmentID(v uint64) *UserUpdate {
+	_u.mutation.SetDepartmentID(v)
+	return _u
+}
+
+// SetNillableDepartmentID sets the "department_id" field if the given value is not nil.
+func (_u *UserUpdate) SetNillableDepartmentID(v *uint64) *UserUpdate {
+	if v != nil {
+		_u.SetDepartmentID(*v)
+	}
+	return _u
+}
+
+// ClearDepartmentID clears the value of the "department_id" field.
+func (_u *UserUpdate) ClearDepartmentID() *UserUpdate {
+	_u.mutation.ClearDepartmentID()
+	return _u
+}
+
 // SetStatus sets the "status" field.
 func (_u *UserUpdate) SetStatus(v uint8) *UserUpdate {
 	_u.mutation.ResetStatus()
@@ -218,26 +238,6 @@ func (_u *UserUpdate) SetNillableAvatar(v *string) *UserUpdate {
 // ClearAvatar clears the value of the "avatar" field.
 func (_u *UserUpdate) ClearAvatar() *UserUpdate {
 	_u.mutation.ClearAvatar()
-	return _u
-}
-
-// SetDepartmentID sets the "department_id" field.
-func (_u *UserUpdate) SetDepartmentID(v uint64) *UserUpdate {
-	_u.mutation.SetDepartmentID(v)
-	return _u
-}
-
-// SetNillableDepartmentID sets the "department_id" field if the given value is not nil.
-func (_u *UserUpdate) SetNillableDepartmentID(v *uint64) *UserUpdate {
-	if v != nil {
-		_u.SetDepartmentID(*v)
-	}
-	return _u
-}
-
-// ClearDepartmentID clears the value of the "department_id" field.
-func (_u *UserUpdate) ClearDepartmentID() *UserUpdate {
-	_u.mutation.ClearDepartmentID()
 	return _u
 }
 
@@ -601,6 +601,26 @@ func (_u *UserUpdateOne) SetUpdatedAt(v time.Time) *UserUpdateOne {
 	return _u
 }
 
+// SetDepartmentID sets the "department_id" field.
+func (_u *UserUpdateOne) SetDepartmentID(v uint64) *UserUpdateOne {
+	_u.mutation.SetDepartmentID(v)
+	return _u
+}
+
+// SetNillableDepartmentID sets the "department_id" field if the given value is not nil.
+func (_u *UserUpdateOne) SetNillableDepartmentID(v *uint64) *UserUpdateOne {
+	if v != nil {
+		_u.SetDepartmentID(*v)
+	}
+	return _u
+}
+
+// ClearDepartmentID clears the value of the "department_id" field.
+func (_u *UserUpdateOne) ClearDepartmentID() *UserUpdateOne {
+	_u.mutation.ClearDepartmentID()
+	return _u
+}
+
 // SetStatus sets the "status" field.
 func (_u *UserUpdateOne) SetStatus(v uint8) *UserUpdateOne {
 	_u.mutation.ResetStatus()
@@ -781,26 +801,6 @@ func (_u *UserUpdateOne) SetNillableAvatar(v *string) *UserUpdateOne {
 // ClearAvatar clears the value of the "avatar" field.
 func (_u *UserUpdateOne) ClearAvatar() *UserUpdateOne {
 	_u.mutation.ClearAvatar()
-	return _u
-}
-
-// SetDepartmentID sets the "department_id" field.
-func (_u *UserUpdateOne) SetDepartmentID(v uint64) *UserUpdateOne {
-	_u.mutation.SetDepartmentID(v)
-	return _u
-}
-
-// SetNillableDepartmentID sets the "department_id" field if the given value is not nil.
-func (_u *UserUpdateOne) SetNillableDepartmentID(v *uint64) *UserUpdateOne {
-	if v != nil {
-		_u.SetDepartmentID(*v)
-	}
-	return _u
-}
-
-// ClearDepartmentID clears the value of the "department_id" field.
-func (_u *UserUpdateOne) ClearDepartmentID() *UserUpdateOne {
-	_u.mutation.ClearDepartmentID()
 	return _u
 }
 

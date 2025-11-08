@@ -446,16 +446,18 @@ func init() {
 	// token.DefaultUsername holds the default value on creation for the username field.
 	token.DefaultUsername = tokenDescUsername.Default.(string)
 	userMixin := schema.User{}.Mixin()
-	userMixinHooks3 := userMixin[3].Hooks()
-	user.Hooks[0] = userMixinHooks3[0]
-	userMixinInters3 := userMixin[3].Interceptors()
-	user.Interceptors[0] = userMixinInters3[0]
+	userMixinHooks4 := userMixin[4].Hooks()
+	user.Hooks[0] = userMixinHooks4[0]
+	userMixinInters2 := userMixin[2].Interceptors()
+	userMixinInters4 := userMixin[4].Interceptors()
+	user.Interceptors[0] = userMixinInters2[0]
+	user.Interceptors[1] = userMixinInters4[0]
 	userMixinFields0 := userMixin[0].Fields()
 	_ = userMixinFields0
 	userMixinFields1 := userMixin[1].Fields()
 	_ = userMixinFields1
-	userMixinFields2 := userMixin[2].Fields()
-	_ = userMixinFields2
+	userMixinFields3 := userMixin[3].Fields()
+	_ = userMixinFields3
 	userFields := schema.User{}.Fields()
 	_ = userFields
 	// userDescCreatedAt is the schema descriptor for created_at field.
@@ -473,17 +475,13 @@ func init() {
 	// user.DefaultTenantID holds the default value on creation for the tenant_id field.
 	user.DefaultTenantID = userDescTenantID.Default.(uint64)
 	// userDescStatus is the schema descriptor for status field.
-	userDescStatus := userMixinFields2[0].Descriptor()
+	userDescStatus := userMixinFields3[0].Descriptor()
 	// user.DefaultStatus holds the default value on creation for the status field.
 	user.DefaultStatus = userDescStatus.Default.(uint8)
 	// userDescHomePath is the schema descriptor for home_path field.
 	userDescHomePath := userFields[4].Descriptor()
 	// user.DefaultHomePath holds the default value on creation for the home_path field.
 	user.DefaultHomePath = userDescHomePath.Default.(string)
-	// userDescDepartmentID is the schema descriptor for department_id field.
-	userDescDepartmentID := userFields[8].Descriptor()
-	// user.DefaultDepartmentID holds the default value on creation for the department_id field.
-	user.DefaultDepartmentID = userDescDepartmentID.Default.(uint64)
 }
 
 const (

@@ -21,6 +21,8 @@ const (
 	FieldUpdatedAt = "updated_at"
 	// FieldTenantID holds the string denoting the tenant_id field in the database.
 	FieldTenantID = "tenant_id"
+	// FieldDepartmentID holds the string denoting the department_id field in the database.
+	FieldDepartmentID = "department_id"
 	// FieldStatus holds the string denoting the status field in the database.
 	FieldStatus = "status"
 	// FieldDeletedAt holds the string denoting the deleted_at field in the database.
@@ -41,8 +43,6 @@ const (
 	FieldEmail = "email"
 	// FieldAvatar holds the string denoting the avatar field in the database.
 	FieldAvatar = "avatar"
-	// FieldDepartmentID holds the string denoting the department_id field in the database.
-	FieldDepartmentID = "department_id"
 	// EdgeDepartments holds the string denoting the departments edge name in mutations.
 	EdgeDepartments = "departments"
 	// EdgePositions holds the string denoting the positions edge name in mutations.
@@ -76,6 +76,7 @@ var Columns = []string{
 	FieldCreatedAt,
 	FieldUpdatedAt,
 	FieldTenantID,
+	FieldDepartmentID,
 	FieldStatus,
 	FieldDeletedAt,
 	FieldUsername,
@@ -86,7 +87,6 @@ var Columns = []string{
 	FieldMobile,
 	FieldEmail,
 	FieldAvatar,
-	FieldDepartmentID,
 }
 
 var (
@@ -115,7 +115,7 @@ func ValidColumn(column string) bool {
 //	import _ "github.com/saas-mingyang/mingyang-admin-core/rpc/ent/runtime"
 var (
 	Hooks        [1]ent.Hook
-	Interceptors [1]ent.Interceptor
+	Interceptors [2]ent.Interceptor
 	// DefaultCreatedAt holds the default value on creation for the "created_at" field.
 	DefaultCreatedAt func() time.Time
 	// DefaultUpdatedAt holds the default value on creation for the "updated_at" field.
@@ -128,8 +128,6 @@ var (
 	DefaultStatus uint8
 	// DefaultHomePath holds the default value on creation for the "home_path" field.
 	DefaultHomePath string
-	// DefaultDepartmentID holds the default value on creation for the "department_id" field.
-	DefaultDepartmentID uint64
 )
 
 // OrderOption defines the ordering options for the User queries.
@@ -153,6 +151,11 @@ func ByUpdatedAt(opts ...sql.OrderTermOption) OrderOption {
 // ByTenantID orders the results by the tenant_id field.
 func ByTenantID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldTenantID, opts...).ToFunc()
+}
+
+// ByDepartmentID orders the results by the department_id field.
+func ByDepartmentID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldDepartmentID, opts...).ToFunc()
 }
 
 // ByStatus orders the results by the status field.
@@ -203,11 +206,6 @@ func ByEmail(opts ...sql.OrderTermOption) OrderOption {
 // ByAvatar orders the results by the avatar field.
 func ByAvatar(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldAvatar, opts...).ToFunc()
-}
-
-// ByDepartmentID orders the results by the department_id field.
-func ByDepartmentID(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldDepartmentID, opts...).ToFunc()
 }
 
 // ByDepartmentsField orders the results by departments field.
