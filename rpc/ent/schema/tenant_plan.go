@@ -8,7 +8,6 @@ import (
 	"entgo.io/ent/schema/index"
 
 	"github.com/saas-mingyang/mingyang-admin-common/orm/ent/mixins"
-	mixins2 "github.com/saas-mingyang/mingyang-admin-core/rpc/ent/schema/mixins"
 )
 
 type TenantPlan struct {
@@ -28,7 +27,6 @@ func (TenantPlan) Mixin() []ent.Mixin {
 	return []ent.Mixin{
 		mixins.IDMixin{},
 		mixins.StatusMixin{},
-		mixins2.SoftDeleteMixin{},
 	}
 }
 

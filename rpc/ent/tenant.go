@@ -23,8 +23,6 @@ type Tenant struct {
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
 	// Status 1: normal 2: ban | 状态 1 正常 2 禁用
 	Status uint8 `json:"status,omitempty"`
-	// Delete Time | 删除日期
-	DeletedAt time.Time `json:"deleted_at,omitempty"`
 	// 名称，不能为空
 	Name string `json:"name,omitempty"`
 	// 编码，不能为空
@@ -63,7 +61,7 @@ func (*Tenant) scanValues(columns []string) ([]any, error) {
 			values[i] = new(sql.NullInt64)
 		case tenant.FieldName, tenant.FieldCode, tenant.FieldContactPhone, tenant.FieldContactEmail, tenant.FieldCompanyName, tenant.FieldLicenseNumber, tenant.FieldAddress, tenant.FieldIntro, tenant.FieldDomain:
 			values[i] = new(sql.NullString)
-		case tenant.FieldCreatedAt, tenant.FieldUpdatedAt, tenant.FieldDeletedAt:
+		case tenant.FieldCreatedAt, tenant.FieldUpdatedAt:
 			values[i] = new(sql.NullTime)
 		default:
 			values[i] = new(sql.UnknownType)
@@ -103,12 +101,6 @@ func (_m *Tenant) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field status", values[i])
 			} else if value.Valid {
 				_m.Status = uint8(value.Int64)
-			}
-		case tenant.FieldDeletedAt:
-			if value, ok := values[i].(*sql.NullTime); !ok {
-				return fmt.Errorf("unexpected type %T for field deleted_at", values[i])
-			} else if value.Valid {
-				_m.DeletedAt = value.Time
 			}
 		case tenant.FieldName:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -232,9 +224,6 @@ func (_m *Tenant) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("status=")
 	builder.WriteString(fmt.Sprintf("%v", _m.Status))
-	builder.WriteString(", ")
-	builder.WriteString("deleted_at=")
-	builder.WriteString(_m.DeletedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("name=")
 	builder.WriteString(_m.Name)

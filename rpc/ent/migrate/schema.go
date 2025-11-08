@@ -275,7 +275,6 @@ var (
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
-		{Name: "deleted_at", Type: field.TypeTime, Nullable: true, Comment: "Delete Time | 删除日期"},
 		{Name: "name", Type: field.TypeString, Unique: true, Size: 128, Comment: "名称，不能为空"},
 		{Name: "code", Type: field.TypeString, Unique: true, Size: 128, Comment: "编码，不能为空"},
 		{Name: "contact_phone", Type: field.TypeString, Comment: "联系方式"},
@@ -305,7 +304,7 @@ var (
 			{
 				Name:    "tenant_parent_id_status",
 				Unique:  false,
-				Columns: []*schema.Column{SysTenantsColumns[17], SysTenantsColumns[3]},
+				Columns: []*schema.Column{SysTenantsColumns[16], SysTenantsColumns[3]},
 			},
 		},
 	}
@@ -315,7 +314,6 @@ var (
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
-		{Name: "deleted_at", Type: field.TypeTime, Nullable: true, Comment: "Delete Time | 删除日期"},
 		{Name: "package_name", Type: field.TypeString, Unique: true, Comment: "套餐名称"},
 		{Name: "menu_ids", Type: field.TypeJSON, Comment: "菜单ID"},
 		{Name: "remark", Type: field.TypeJSON, Comment: "备注"},
