@@ -2141,6 +2141,222 @@ func (_m *TenantCreate) SetNotNilCode(value *string) *TenantCreate {
 }
 
 // set field if value's pointer is not nil.
+func (_m *TenantUpdate) SetNotNilContactPhone(value *string) *TenantUpdate {
+	if value != nil {
+		return _m.SetContactPhone(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdateOne) SetNotNilContactPhone(value *string) *TenantUpdateOne {
+	if value != nil {
+		return _m.SetContactPhone(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantCreate) SetNotNilContactPhone(value *string) *TenantCreate {
+	if value != nil {
+		return _m.SetContactPhone(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdate) SetNotNilContactEmail(value *string) *TenantUpdate {
+	if value != nil {
+		return _m.SetContactEmail(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdateOne) SetNotNilContactEmail(value *string) *TenantUpdateOne {
+	if value != nil {
+		return _m.SetContactEmail(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantCreate) SetNotNilContactEmail(value *string) *TenantCreate {
+	if value != nil {
+		return _m.SetContactEmail(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdate) SetNotNilCompanyName(value *string) *TenantUpdate {
+	if value != nil {
+		return _m.SetCompanyName(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdateOne) SetNotNilCompanyName(value *string) *TenantUpdateOne {
+	if value != nil {
+		return _m.SetCompanyName(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantCreate) SetNotNilCompanyName(value *string) *TenantCreate {
+	if value != nil {
+		return _m.SetCompanyName(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdate) SetNotNilLicenseNumber(value *string) *TenantUpdate {
+	if value != nil {
+		return _m.SetLicenseNumber(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdateOne) SetNotNilLicenseNumber(value *string) *TenantUpdateOne {
+	if value != nil {
+		return _m.SetLicenseNumber(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantCreate) SetNotNilLicenseNumber(value *string) *TenantCreate {
+	if value != nil {
+		return _m.SetLicenseNumber(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdate) SetNotNilAddress(value *string) *TenantUpdate {
+	if value != nil {
+		return _m.SetAddress(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdateOne) SetNotNilAddress(value *string) *TenantUpdateOne {
+	if value != nil {
+		return _m.SetAddress(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantCreate) SetNotNilAddress(value *string) *TenantCreate {
+	if value != nil {
+		return _m.SetAddress(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdate) SetNotNilIntro(value *string) *TenantUpdate {
+	if value != nil {
+		return _m.SetIntro(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdateOne) SetNotNilIntro(value *string) *TenantUpdateOne {
+	if value != nil {
+		return _m.SetIntro(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantCreate) SetNotNilIntro(value *string) *TenantCreate {
+	if value != nil {
+		return _m.SetIntro(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdate) SetNotNilDomain(value *string) *TenantUpdate {
+	if value != nil {
+		return _m.SetDomain(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdateOne) SetNotNilDomain(value *string) *TenantUpdateOne {
+	if value != nil {
+		return _m.SetDomain(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantCreate) SetNotNilDomain(value *string) *TenantCreate {
+	if value != nil {
+		return _m.SetDomain(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdate) SetNotNilLevel(value *int) *TenantUpdate {
+	if value != nil {
+		return _m.SetLevel(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdateOne) SetNotNilLevel(value *int) *TenantUpdateOne {
+	if value != nil {
+		return _m.SetLevel(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantCreate) SetNotNilLevel(value *int) *TenantCreate {
+	if value != nil {
+		return _m.SetLevel(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdate) SetNotNilPlanID(value *uint64) *TenantUpdate {
+	if value != nil {
+		return _m.SetPlanID(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantUpdateOne) SetNotNilPlanID(value *uint64) *TenantUpdateOne {
+	if value != nil {
+		return _m.SetPlanID(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantCreate) SetNotNilPlanID(value *uint64) *TenantCreate {
+	if value != nil {
+		return _m.SetPlanID(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
 func (_m *TenantUpdate) SetNotNilAdminID(value *int64) *TenantUpdate {
 	if value != nil {
 		return _m.SetAdminID(*value)
@@ -2184,6 +2400,174 @@ func (_m *TenantUpdateOne) SetNotNilParentID(value *int64) *TenantUpdateOne {
 func (_m *TenantCreate) SetNotNilParentID(value *int64) *TenantCreate {
 	if value != nil {
 		return _m.SetParentID(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdate) SetNotNilUpdatedAt(value *time.Time) *TenantPlanUpdate {
+	if value != nil {
+		return _m.SetUpdatedAt(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdateOne) SetNotNilUpdatedAt(value *time.Time) *TenantPlanUpdateOne {
+	if value != nil {
+		return _m.SetUpdatedAt(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanCreate) SetNotNilUpdatedAt(value *time.Time) *TenantPlanCreate {
+	if value != nil {
+		return _m.SetUpdatedAt(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdate) SetNotNilStatus(value *uint8) *TenantPlanUpdate {
+	if value != nil {
+		return _m.SetStatus(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdateOne) SetNotNilStatus(value *uint8) *TenantPlanUpdateOne {
+	if value != nil {
+		return _m.SetStatus(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanCreate) SetNotNilStatus(value *uint8) *TenantPlanCreate {
+	if value != nil {
+		return _m.SetStatus(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdate) SetNotNilDeletedAt(value *time.Time) *TenantPlanUpdate {
+	if value != nil {
+		return _m.SetDeletedAt(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdateOne) SetNotNilDeletedAt(value *time.Time) *TenantPlanUpdateOne {
+	if value != nil {
+		return _m.SetDeletedAt(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanCreate) SetNotNilDeletedAt(value *time.Time) *TenantPlanCreate {
+	if value != nil {
+		return _m.SetDeletedAt(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdate) SetNotNilPackageName(value *string) *TenantPlanUpdate {
+	if value != nil {
+		return _m.SetPackageName(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdateOne) SetNotNilPackageName(value *string) *TenantPlanUpdateOne {
+	if value != nil {
+		return _m.SetPackageName(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanCreate) SetNotNilPackageName(value *string) *TenantPlanCreate {
+	if value != nil {
+		return _m.SetPackageName(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdate) SetNotNilMenuIds(value []string) *TenantPlanUpdate {
+	if value != nil {
+		return _m.SetMenuIds(value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdateOne) SetNotNilMenuIds(value []string) *TenantPlanUpdateOne {
+	if value != nil {
+		return _m.SetMenuIds(value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanCreate) SetNotNilMenuIds(value []string) *TenantPlanCreate {
+	if value != nil {
+		return _m.SetMenuIds(value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdate) SetNotNilRemark(value []string) *TenantPlanUpdate {
+	if value != nil {
+		return _m.SetRemark(value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdateOne) SetNotNilRemark(value []string) *TenantPlanUpdateOne {
+	if value != nil {
+		return _m.SetRemark(value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanCreate) SetNotNilRemark(value []string) *TenantPlanCreate {
+	if value != nil {
+		return _m.SetRemark(value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdate) SetNotNilMenuCheckStrictly(value *int) *TenantPlanUpdate {
+	if value != nil {
+		return _m.SetMenuCheckStrictly(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdateOne) SetNotNilMenuCheckStrictly(value *int) *TenantPlanUpdateOne {
+	if value != nil {
+		return _m.SetMenuCheckStrictly(*value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanCreate) SetNotNilMenuCheckStrictly(value *int) *TenantPlanCreate {
+	if value != nil {
+		return _m.SetMenuCheckStrictly(*value)
 	}
 	return _m
 }

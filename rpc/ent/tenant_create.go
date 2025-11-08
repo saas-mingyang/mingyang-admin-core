@@ -10,7 +10,6 @@ import (
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/role"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenant"
 )
 
@@ -89,6 +88,68 @@ func (_c *TenantCreate) SetCode(v string) *TenantCreate {
 	return _c
 }
 
+// SetContactPhone sets the "contact_phone" field.
+func (_c *TenantCreate) SetContactPhone(v string) *TenantCreate {
+	_c.mutation.SetContactPhone(v)
+	return _c
+}
+
+// SetContactEmail sets the "contact_email" field.
+func (_c *TenantCreate) SetContactEmail(v string) *TenantCreate {
+	_c.mutation.SetContactEmail(v)
+	return _c
+}
+
+// SetCompanyName sets the "company_name" field.
+func (_c *TenantCreate) SetCompanyName(v string) *TenantCreate {
+	_c.mutation.SetCompanyName(v)
+	return _c
+}
+
+// SetLicenseNumber sets the "license_number" field.
+func (_c *TenantCreate) SetLicenseNumber(v string) *TenantCreate {
+	_c.mutation.SetLicenseNumber(v)
+	return _c
+}
+
+// SetAddress sets the "address" field.
+func (_c *TenantCreate) SetAddress(v string) *TenantCreate {
+	_c.mutation.SetAddress(v)
+	return _c
+}
+
+// SetIntro sets the "intro" field.
+func (_c *TenantCreate) SetIntro(v string) *TenantCreate {
+	_c.mutation.SetIntro(v)
+	return _c
+}
+
+// SetDomain sets the "domain" field.
+func (_c *TenantCreate) SetDomain(v string) *TenantCreate {
+	_c.mutation.SetDomain(v)
+	return _c
+}
+
+// SetLevel sets the "level" field.
+func (_c *TenantCreate) SetLevel(v int) *TenantCreate {
+	_c.mutation.SetLevel(v)
+	return _c
+}
+
+// SetPlanID sets the "plan_id" field.
+func (_c *TenantCreate) SetPlanID(v uint64) *TenantCreate {
+	_c.mutation.SetPlanID(v)
+	return _c
+}
+
+// SetNillablePlanID sets the "plan_id" field if the given value is not nil.
+func (_c *TenantCreate) SetNillablePlanID(v *uint64) *TenantCreate {
+	if v != nil {
+		_c.SetPlanID(*v)
+	}
+	return _c
+}
+
 // SetAdminID sets the "admin_id" field.
 func (_c *TenantCreate) SetAdminID(v int64) *TenantCreate {
 	_c.mutation.SetAdminID(v)
@@ -113,21 +174,6 @@ func (_c *TenantCreate) SetNillableParentID(v *int64) *TenantCreate {
 func (_c *TenantCreate) SetID(v uint64) *TenantCreate {
 	_c.mutation.SetID(v)
 	return _c
-}
-
-// AddRoleIDs adds the "roles" edge to the Role entity by IDs.
-func (_c *TenantCreate) AddRoleIDs(ids ...uint64) *TenantCreate {
-	_c.mutation.AddRoleIDs(ids...)
-	return _c
-}
-
-// AddRoles adds the "roles" edges to the Role entity.
-func (_c *TenantCreate) AddRoles(v ...*Role) *TenantCreate {
-	ids := make([]uint64, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
-	}
-	return _c.AddRoleIDs(ids...)
 }
 
 // Mutation returns the TenantMutation object of the builder.
@@ -216,6 +262,30 @@ func (_c *TenantCreate) check() error {
 			return &ValidationError{Name: "code", err: fmt.Errorf(`ent: validator failed for field "Tenant.code": %w`, err)}
 		}
 	}
+	if _, ok := _c.mutation.ContactPhone(); !ok {
+		return &ValidationError{Name: "contact_phone", err: errors.New(`ent: missing required field "Tenant.contact_phone"`)}
+	}
+	if _, ok := _c.mutation.ContactEmail(); !ok {
+		return &ValidationError{Name: "contact_email", err: errors.New(`ent: missing required field "Tenant.contact_email"`)}
+	}
+	if _, ok := _c.mutation.CompanyName(); !ok {
+		return &ValidationError{Name: "company_name", err: errors.New(`ent: missing required field "Tenant.company_name"`)}
+	}
+	if _, ok := _c.mutation.LicenseNumber(); !ok {
+		return &ValidationError{Name: "license_number", err: errors.New(`ent: missing required field "Tenant.license_number"`)}
+	}
+	if _, ok := _c.mutation.Address(); !ok {
+		return &ValidationError{Name: "address", err: errors.New(`ent: missing required field "Tenant.address"`)}
+	}
+	if _, ok := _c.mutation.Intro(); !ok {
+		return &ValidationError{Name: "intro", err: errors.New(`ent: missing required field "Tenant.intro"`)}
+	}
+	if _, ok := _c.mutation.Domain(); !ok {
+		return &ValidationError{Name: "domain", err: errors.New(`ent: missing required field "Tenant.domain"`)}
+	}
+	if _, ok := _c.mutation.Level(); !ok {
+		return &ValidationError{Name: "level", err: errors.New(`ent: missing required field "Tenant.level"`)}
+	}
 	if _, ok := _c.mutation.AdminID(); !ok {
 		return &ValidationError{Name: "admin_id", err: errors.New(`ent: missing required field "Tenant.admin_id"`)}
 	}
@@ -288,6 +358,42 @@ func (_c *TenantCreate) createSpec() (*Tenant, *sqlgraph.CreateSpec) {
 		_spec.SetField(tenant.FieldCode, field.TypeString, value)
 		_node.Code = value
 	}
+	if value, ok := _c.mutation.ContactPhone(); ok {
+		_spec.SetField(tenant.FieldContactPhone, field.TypeString, value)
+		_node.ContactPhone = value
+	}
+	if value, ok := _c.mutation.ContactEmail(); ok {
+		_spec.SetField(tenant.FieldContactEmail, field.TypeString, value)
+		_node.ContactEmail = value
+	}
+	if value, ok := _c.mutation.CompanyName(); ok {
+		_spec.SetField(tenant.FieldCompanyName, field.TypeString, value)
+		_node.CompanyName = value
+	}
+	if value, ok := _c.mutation.LicenseNumber(); ok {
+		_spec.SetField(tenant.FieldLicenseNumber, field.TypeString, value)
+		_node.LicenseNumber = value
+	}
+	if value, ok := _c.mutation.Address(); ok {
+		_spec.SetField(tenant.FieldAddress, field.TypeString, value)
+		_node.Address = value
+	}
+	if value, ok := _c.mutation.Intro(); ok {
+		_spec.SetField(tenant.FieldIntro, field.TypeString, value)
+		_node.Intro = value
+	}
+	if value, ok := _c.mutation.Domain(); ok {
+		_spec.SetField(tenant.FieldDomain, field.TypeString, value)
+		_node.Domain = value
+	}
+	if value, ok := _c.mutation.Level(); ok {
+		_spec.SetField(tenant.FieldLevel, field.TypeInt, value)
+		_node.Level = value
+	}
+	if value, ok := _c.mutation.PlanID(); ok {
+		_spec.SetField(tenant.FieldPlanID, field.TypeUint64, value)
+		_node.PlanID = value
+	}
 	if value, ok := _c.mutation.AdminID(); ok {
 		_spec.SetField(tenant.FieldAdminID, field.TypeInt64, value)
 		_node.AdminID = value
@@ -295,22 +401,6 @@ func (_c *TenantCreate) createSpec() (*Tenant, *sqlgraph.CreateSpec) {
 	if value, ok := _c.mutation.ParentID(); ok {
 		_spec.SetField(tenant.FieldParentID, field.TypeInt64, value)
 		_node.ParentID = value
-	}
-	if nodes := _c.mutation.RolesIDs(); len(nodes) > 0 {
-		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2M,
-			Inverse: false,
-			Table:   tenant.RolesTable,
-			Columns: tenant.RolesPrimaryKey,
-			Bidi:    false,
-			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(role.FieldID, field.TypeUint64),
-			},
-		}
-		for _, k := range nodes {
-			edge.Target.Nodes = append(edge.Target.Nodes, k)
-		}
-		_spec.Edges = append(_spec.Edges, edge)
 	}
 	return _node, _spec
 }

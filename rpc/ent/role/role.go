@@ -32,8 +32,6 @@ const (
 	EdgeMenus = "menus"
 	// EdgeUsers holds the string denoting the users edge name in mutations.
 	EdgeUsers = "users"
-	// EdgeTenants holds the string denoting the tenants edge name in mutations.
-	EdgeTenants = "tenants"
 	// Table holds the table name of the role in the database.
 	Table = "sys_roles"
 	// MenusTable is the table that holds the menus relation/edge. The primary key declared below.
@@ -46,11 +44,6 @@ const (
 	// UsersInverseTable is the table name for the User entity.
 	// It exists in this package in order to avoid circular dependency with the "user" package.
 	UsersInverseTable = "sys_users"
-	// TenantsTable is the table that holds the tenants relation/edge. The primary key declared below.
-	TenantsTable = "tenant_roles"
-	// TenantsInverseTable is the table name for the Tenant entity.
-	// It exists in this package in order to avoid circular dependency with the "tenant" package.
-	TenantsInverseTable = "sys_tenants"
 )
 
 // Columns holds all SQL columns for role fields.
@@ -72,9 +65,6 @@ var (
 	// UsersPrimaryKey and UsersColumn2 are the table columns denoting the
 	// primary key for the users relation (M2M).
 	UsersPrimaryKey = []string{"user_id", "role_id"}
-	// TenantsPrimaryKey and TenantsColumn2 are the table columns denoting the
-	// primary key for the tenants relation (M2M).
-	TenantsPrimaryKey = []string{"tenant_id", "role_id"}
 )
 
 // ValidColumn reports if the column name is valid (part of the table columns).
@@ -172,20 +162,6 @@ func ByUsers(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
 		sqlgraph.OrderByNeighborTerms(s, newUsersStep(), append([]sql.OrderTerm{term}, terms...)...)
 	}
 }
-
-// ByTenantsCount orders the results by tenants count.
-func ByTenantsCount(opts ...sql.OrderTermOption) OrderOption {
-	return func(s *sql.Selector) {
-		sqlgraph.OrderByNeighborsCount(s, newTenantsStep(), opts...)
-	}
-}
-
-// ByTenants orders the results by tenants terms.
-func ByTenants(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
-	return func(s *sql.Selector) {
-		sqlgraph.OrderByNeighborTerms(s, newTenantsStep(), append([]sql.OrderTerm{term}, terms...)...)
-	}
-}
 func newMenusStep() *sqlgraph.Step {
 	return sqlgraph.NewStep(
 		sqlgraph.From(Table, FieldID),
@@ -198,12 +174,5 @@ func newUsersStep() *sqlgraph.Step {
 		sqlgraph.From(Table, FieldID),
 		sqlgraph.To(UsersInverseTable, FieldID),
 		sqlgraph.Edge(sqlgraph.M2M, true, UsersTable, UsersPrimaryKey...),
-	)
-}
-func newTenantsStep() *sqlgraph.Step {
-	return sqlgraph.NewStep(
-		sqlgraph.From(Table, FieldID),
-		sqlgraph.To(TenantsInverseTable, FieldID),
-		sqlgraph.Edge(sqlgraph.M2M, true, TenantsTable, TenantsPrimaryKey...),
 	)
 }

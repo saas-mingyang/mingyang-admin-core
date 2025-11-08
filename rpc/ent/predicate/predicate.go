@@ -36,6 +36,9 @@ type Role func(*sql.Selector)
 // Tenant is the predicate function for tenant builders.
 type Tenant func(*sql.Selector)
 
+// TenantPlan is the predicate function for tenantplan builders.
+type TenantPlan func(*sql.Selector)
+
 // Token is the predicate function for token builders.
 type Token func(*sql.Selector)
 

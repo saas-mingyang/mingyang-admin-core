@@ -16,6 +16,7 @@ import (
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/position"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/role"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenant"
+	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenantplan"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/token"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/user"
 )
@@ -864,6 +865,87 @@ func (_m *TenantQuery) Page(
 		_m = _m.Order(pager.Order)
 	} else {
 		_m = _m.Order(DefaultTenantOrder)
+	}
+
+	_m = _m.Offset(int((pageNum - 1) * pageSize)).Limit(int(pageSize))
+	list, err := _m.All(ctx)
+	if err != nil {
+		return nil, err
+	}
+	ret.List = list
+
+	return ret, nil
+}
+
+type TenantPlanPager struct {
+	Order  tenantplan.OrderOption
+	Filter func(*TenantPlanQuery) (*TenantPlanQuery, error)
+}
+
+// TenantPlanPaginateOption enables pagination customization.
+type TenantPlanPaginateOption func(*TenantPlanPager)
+
+// DefaultTenantPlanOrder is the default ordering of TenantPlan.
+var DefaultTenantPlanOrder = Desc(tenantplan.FieldID)
+
+func newTenantPlanPager(opts []TenantPlanPaginateOption) (*TenantPlanPager, error) {
+	pager := &TenantPlanPager{}
+	for _, opt := range opts {
+		opt(pager)
+	}
+	if pager.Order == nil {
+		pager.Order = DefaultTenantPlanOrder
+	}
+	return pager, nil
+}
+
+func (p *TenantPlanPager) ApplyFilter(query *TenantPlanQuery) (*TenantPlanQuery, error) {
+	if p.Filter != nil {
+		return p.Filter(query)
+	}
+	return query, nil
+}
+
+// TenantPlanPageList is TenantPlan PageList result.
+type TenantPlanPageList struct {
+	List        []*TenantPlan `json:"list"`
+	PageDetails *PageDetails  `json:"pageDetails"`
+}
+
+func (_m *TenantPlanQuery) Page(
+	ctx context.Context, pageNum uint64, pageSize uint64, opts ...TenantPlanPaginateOption,
+) (*TenantPlanPageList, error) {
+
+	pager, err := newTenantPlanPager(opts)
+	if err != nil {
+		return nil, err
+	}
+
+	if _m, err = pager.ApplyFilter(_m); err != nil {
+		return nil, err
+	}
+
+	ret := &TenantPlanPageList{}
+
+	ret.PageDetails = &PageDetails{
+		Page: pageNum,
+		Size: pageSize,
+	}
+
+	query := _m.Clone()
+	query.ctx.Fields = nil
+	count, err := query.Count(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	ret.PageDetails.Total = uint64(count)
+
+	if pager.Order != nil {
+		_m = _m.Order(pager.Order)
+	} else {
+		_m = _m.Order(DefaultTenantPlanOrder)
 	}
 
 	_m = _m.Offset(int((pageNum - 1) * pageSize)).Limit(int(pageSize))

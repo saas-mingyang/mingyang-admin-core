@@ -278,8 +278,17 @@ var (
 		{Name: "deleted_at", Type: field.TypeTime, Nullable: true, Comment: "Delete Time | 删除日期"},
 		{Name: "name", Type: field.TypeString, Unique: true, Size: 128, Comment: "名称，不能为空"},
 		{Name: "code", Type: field.TypeString, Unique: true, Size: 128, Comment: "编码，不能为空"},
-		{Name: "admin_id", Type: field.TypeInt64, Comment: "管理员id，不能为空，创建租户的时候顺便创建用户"},
-		{Name: "parent_id", Type: field.TypeInt64, Comment: "父级id，不能为空,0为第一级", Default: 0},
+		{Name: "contact_phone", Type: field.TypeString, Comment: "联系方式"},
+		{Name: "contact_email", Type: field.TypeString, Comment: "联系邮箱"},
+		{Name: "company_name", Type: field.TypeString, Comment: "企业名称"},
+		{Name: "license_number", Type: field.TypeString, Comment: "统一社会信用代码"},
+		{Name: "address", Type: field.TypeString, Comment: "地址"},
+		{Name: "intro", Type: field.TypeString, Comment: "企业简介"},
+		{Name: "domain", Type: field.TypeString, Comment: "域名"},
+		{Name: "level", Type: field.TypeInt, Comment: "租户级别"},
+		{Name: "plan_id", Type: field.TypeUint64, Nullable: true, Comment: "套餐计划Id，外键关联 tenant_plan.id"},
+		{Name: "admin_id", Type: field.TypeInt64, Comment: "管理员id"},
+		{Name: "parent_id", Type: field.TypeInt64, Comment: "父级id,0为第一级", Default: 0},
 	}
 	// SysTenantsTable holds the schema information for the "sys_tenants" table.
 	SysTenantsTable = &schema.Table{
@@ -296,7 +305,33 @@ var (
 			{
 				Name:    "tenant_parent_id_status",
 				Unique:  false,
-				Columns: []*schema.Column{SysTenantsColumns[8], SysTenantsColumns[3]},
+				Columns: []*schema.Column{SysTenantsColumns[17], SysTenantsColumns[3]},
+			},
+		},
+	}
+	// SyTenantPlansColumns holds the columns for the "sy_tenant_plans" table.
+	SyTenantPlansColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
+		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
+		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
+		{Name: "deleted_at", Type: field.TypeTime, Nullable: true, Comment: "Delete Time | 删除日期"},
+		{Name: "package_name", Type: field.TypeString, Unique: true, Comment: "套餐名称"},
+		{Name: "menu_ids", Type: field.TypeJSON, Comment: "菜单ID"},
+		{Name: "remark", Type: field.TypeJSON, Comment: "备注"},
+		{Name: "menu_check_strictly", Type: field.TypeInt, Comment: "菜单树选择项是否关联显示"},
+	}
+	// SyTenantPlansTable holds the schema information for the "sy_tenant_plans" table.
+	SyTenantPlansTable = &schema.Table{
+		Name:       "sy_tenant_plans",
+		Comment:    "tenant Table | 租户套餐计划表",
+		Columns:    SyTenantPlansColumns,
+		PrimaryKey: []*schema.Column{SyTenantPlansColumns[0]},
+		Indexes: []*schema.Index{
+			{
+				Name:    "tenantplan_id_status",
+				Unique:  false,
+				Columns: []*schema.Column{SyTenantPlansColumns[0], SyTenantPlansColumns[3]},
 			},
 		},
 	}
@@ -396,31 +431,6 @@ var (
 			},
 		},
 	}
-	// TenantRolesColumns holds the columns for the "tenant_roles" table.
-	TenantRolesColumns = []*schema.Column{
-		{Name: "tenant_id", Type: field.TypeUint64},
-		{Name: "role_id", Type: field.TypeUint64},
-	}
-	// TenantRolesTable holds the schema information for the "tenant_roles" table.
-	TenantRolesTable = &schema.Table{
-		Name:       "tenant_roles",
-		Columns:    TenantRolesColumns,
-		PrimaryKey: []*schema.Column{TenantRolesColumns[0], TenantRolesColumns[1]},
-		ForeignKeys: []*schema.ForeignKey{
-			{
-				Symbol:     "tenant_roles_tenant_id",
-				Columns:    []*schema.Column{TenantRolesColumns[0]},
-				RefColumns: []*schema.Column{SysTenantsColumns[0]},
-				OnDelete:   schema.Cascade,
-			},
-			{
-				Symbol:     "tenant_roles_role_id",
-				Columns:    []*schema.Column{TenantRolesColumns[1]},
-				RefColumns: []*schema.Column{SysRolesColumns[0]},
-				OnDelete:   schema.Cascade,
-			},
-		},
-	}
 	// UserPositionsColumns holds the columns for the "user_positions" table.
 	UserPositionsColumns = []*schema.Column{
 		{Name: "user_id", Type: field.TypeUint64},
@@ -483,10 +493,10 @@ var (
 		SysPositionsTable,
 		SysRolesTable,
 		SysTenantsTable,
+		SyTenantPlansTable,
 		SysTokensTable,
 		SysUsersTable,
 		RoleMenusTable,
-		TenantRolesTable,
 		UserPositionsTable,
 		UserRolesTable,
 	}
@@ -526,6 +536,9 @@ func init() {
 	SysTenantsTable.Annotation = &entsql.Annotation{
 		Table: "sys_tenants",
 	}
+	SyTenantPlansTable.Annotation = &entsql.Annotation{
+		Table: "sy_tenant_plans",
+	}
 	SysTokensTable.Annotation = &entsql.Annotation{
 		Table: "sys_tokens",
 	}
@@ -535,8 +548,6 @@ func init() {
 	}
 	RoleMenusTable.ForeignKeys[0].RefTable = SysRolesTable
 	RoleMenusTable.ForeignKeys[1].RefTable = SysMenusTable
-	TenantRolesTable.ForeignKeys[0].RefTable = SysTenantsTable
-	TenantRolesTable.ForeignKeys[1].RefTable = SysRolesTable
 	UserPositionsTable.ForeignKeys[0].RefTable = SysUsersTable
 	UserPositionsTable.ForeignKeys[1].RefTable = SysPositionsTable
 	UserRolesTable.ForeignKeys[0].RefTable = SysUsersTable

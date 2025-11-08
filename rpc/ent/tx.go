@@ -34,6 +34,8 @@ type Tx struct {
 	Role *RoleClient
 	// Tenant is the client for interacting with the Tenant builders.
 	Tenant *TenantClient
+	// TenantPlan is the client for interacting with the TenantPlan builders.
+	TenantPlan *TenantPlanClient
 	// Token is the client for interacting with the Token builders.
 	Token *TokenClient
 	// User is the client for interacting with the User builders.
@@ -179,6 +181,7 @@ func (tx *Tx) init() {
 	tx.Position = NewPositionClient(tx.config)
 	tx.Role = NewRoleClient(tx.config)
 	tx.Tenant = NewTenantClient(tx.config)
+	tx.TenantPlan = NewTenantPlanClient(tx.config)
 	tx.Token = NewTokenClient(tx.config)
 	tx.User = NewUserClient(tx.config)
 }

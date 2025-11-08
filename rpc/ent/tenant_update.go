@@ -12,7 +12,6 @@ import (
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/predicate"
-	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/role"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenant"
 )
 
@@ -111,6 +110,152 @@ func (_u *TenantUpdate) SetNillableCode(v *string) *TenantUpdate {
 	return _u
 }
 
+// SetContactPhone sets the "contact_phone" field.
+func (_u *TenantUpdate) SetContactPhone(v string) *TenantUpdate {
+	_u.mutation.SetContactPhone(v)
+	return _u
+}
+
+// SetNillableContactPhone sets the "contact_phone" field if the given value is not nil.
+func (_u *TenantUpdate) SetNillableContactPhone(v *string) *TenantUpdate {
+	if v != nil {
+		_u.SetContactPhone(*v)
+	}
+	return _u
+}
+
+// SetContactEmail sets the "contact_email" field.
+func (_u *TenantUpdate) SetContactEmail(v string) *TenantUpdate {
+	_u.mutation.SetContactEmail(v)
+	return _u
+}
+
+// SetNillableContactEmail sets the "contact_email" field if the given value is not nil.
+func (_u *TenantUpdate) SetNillableContactEmail(v *string) *TenantUpdate {
+	if v != nil {
+		_u.SetContactEmail(*v)
+	}
+	return _u
+}
+
+// SetCompanyName sets the "company_name" field.
+func (_u *TenantUpdate) SetCompanyName(v string) *TenantUpdate {
+	_u.mutation.SetCompanyName(v)
+	return _u
+}
+
+// SetNillableCompanyName sets the "company_name" field if the given value is not nil.
+func (_u *TenantUpdate) SetNillableCompanyName(v *string) *TenantUpdate {
+	if v != nil {
+		_u.SetCompanyName(*v)
+	}
+	return _u
+}
+
+// SetLicenseNumber sets the "license_number" field.
+func (_u *TenantUpdate) SetLicenseNumber(v string) *TenantUpdate {
+	_u.mutation.SetLicenseNumber(v)
+	return _u
+}
+
+// SetNillableLicenseNumber sets the "license_number" field if the given value is not nil.
+func (_u *TenantUpdate) SetNillableLicenseNumber(v *string) *TenantUpdate {
+	if v != nil {
+		_u.SetLicenseNumber(*v)
+	}
+	return _u
+}
+
+// SetAddress sets the "address" field.
+func (_u *TenantUpdate) SetAddress(v string) *TenantUpdate {
+	_u.mutation.SetAddress(v)
+	return _u
+}
+
+// SetNillableAddress sets the "address" field if the given value is not nil.
+func (_u *TenantUpdate) SetNillableAddress(v *string) *TenantUpdate {
+	if v != nil {
+		_u.SetAddress(*v)
+	}
+	return _u
+}
+
+// SetIntro sets the "intro" field.
+func (_u *TenantUpdate) SetIntro(v string) *TenantUpdate {
+	_u.mutation.SetIntro(v)
+	return _u
+}
+
+// SetNillableIntro sets the "intro" field if the given value is not nil.
+func (_u *TenantUpdate) SetNillableIntro(v *string) *TenantUpdate {
+	if v != nil {
+		_u.SetIntro(*v)
+	}
+	return _u
+}
+
+// SetDomain sets the "domain" field.
+func (_u *TenantUpdate) SetDomain(v string) *TenantUpdate {
+	_u.mutation.SetDomain(v)
+	return _u
+}
+
+// SetNillableDomain sets the "domain" field if the given value is not nil.
+func (_u *TenantUpdate) SetNillableDomain(v *string) *TenantUpdate {
+	if v != nil {
+		_u.SetDomain(*v)
+	}
+	return _u
+}
+
+// SetLevel sets the "level" field.
+func (_u *TenantUpdate) SetLevel(v int) *TenantUpdate {
+	_u.mutation.ResetLevel()
+	_u.mutation.SetLevel(v)
+	return _u
+}
+
+// SetNillableLevel sets the "level" field if the given value is not nil.
+func (_u *TenantUpdate) SetNillableLevel(v *int) *TenantUpdate {
+	if v != nil {
+		_u.SetLevel(*v)
+	}
+	return _u
+}
+
+// AddLevel adds value to the "level" field.
+func (_u *TenantUpdate) AddLevel(v int) *TenantUpdate {
+	_u.mutation.AddLevel(v)
+	return _u
+}
+
+// SetPlanID sets the "plan_id" field.
+func (_u *TenantUpdate) SetPlanID(v uint64) *TenantUpdate {
+	_u.mutation.ResetPlanID()
+	_u.mutation.SetPlanID(v)
+	return _u
+}
+
+// SetNillablePlanID sets the "plan_id" field if the given value is not nil.
+func (_u *TenantUpdate) SetNillablePlanID(v *uint64) *TenantUpdate {
+	if v != nil {
+		_u.SetPlanID(*v)
+	}
+	return _u
+}
+
+// AddPlanID adds value to the "plan_id" field.
+func (_u *TenantUpdate) AddPlanID(v int64) *TenantUpdate {
+	_u.mutation.AddPlanID(v)
+	return _u
+}
+
+// ClearPlanID clears the value of the "plan_id" field.
+func (_u *TenantUpdate) ClearPlanID() *TenantUpdate {
+	_u.mutation.ClearPlanID()
+	return _u
+}
+
 // SetAdminID sets the "admin_id" field.
 func (_u *TenantUpdate) SetAdminID(v int64) *TenantUpdate {
 	_u.mutation.ResetAdminID()
@@ -153,45 +298,9 @@ func (_u *TenantUpdate) AddParentID(v int64) *TenantUpdate {
 	return _u
 }
 
-// AddRoleIDs adds the "roles" edge to the Role entity by IDs.
-func (_u *TenantUpdate) AddRoleIDs(ids ...uint64) *TenantUpdate {
-	_u.mutation.AddRoleIDs(ids...)
-	return _u
-}
-
-// AddRoles adds the "roles" edges to the Role entity.
-func (_u *TenantUpdate) AddRoles(v ...*Role) *TenantUpdate {
-	ids := make([]uint64, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
-	}
-	return _u.AddRoleIDs(ids...)
-}
-
 // Mutation returns the TenantMutation object of the builder.
 func (_u *TenantUpdate) Mutation() *TenantMutation {
 	return _u.mutation
-}
-
-// ClearRoles clears all "roles" edges to the Role entity.
-func (_u *TenantUpdate) ClearRoles() *TenantUpdate {
-	_u.mutation.ClearRoles()
-	return _u
-}
-
-// RemoveRoleIDs removes the "roles" edge to Role entities by IDs.
-func (_u *TenantUpdate) RemoveRoleIDs(ids ...uint64) *TenantUpdate {
-	_u.mutation.RemoveRoleIDs(ids...)
-	return _u
-}
-
-// RemoveRoles removes "roles" edges to Role entities.
-func (_u *TenantUpdate) RemoveRoles(v ...*Role) *TenantUpdate {
-	ids := make([]uint64, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
-	}
-	return _u.RemoveRoleIDs(ids...)
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
@@ -303,6 +412,42 @@ func (_u *TenantUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 	if value, ok := _u.mutation.Code(); ok {
 		_spec.SetField(tenant.FieldCode, field.TypeString, value)
 	}
+	if value, ok := _u.mutation.ContactPhone(); ok {
+		_spec.SetField(tenant.FieldContactPhone, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.ContactEmail(); ok {
+		_spec.SetField(tenant.FieldContactEmail, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.CompanyName(); ok {
+		_spec.SetField(tenant.FieldCompanyName, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.LicenseNumber(); ok {
+		_spec.SetField(tenant.FieldLicenseNumber, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.Address(); ok {
+		_spec.SetField(tenant.FieldAddress, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.Intro(); ok {
+		_spec.SetField(tenant.FieldIntro, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.Domain(); ok {
+		_spec.SetField(tenant.FieldDomain, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.Level(); ok {
+		_spec.SetField(tenant.FieldLevel, field.TypeInt, value)
+	}
+	if value, ok := _u.mutation.AddedLevel(); ok {
+		_spec.AddField(tenant.FieldLevel, field.TypeInt, value)
+	}
+	if value, ok := _u.mutation.PlanID(); ok {
+		_spec.SetField(tenant.FieldPlanID, field.TypeUint64, value)
+	}
+	if value, ok := _u.mutation.AddedPlanID(); ok {
+		_spec.AddField(tenant.FieldPlanID, field.TypeUint64, value)
+	}
+	if _u.mutation.PlanIDCleared() {
+		_spec.ClearField(tenant.FieldPlanID, field.TypeUint64)
+	}
 	if value, ok := _u.mutation.AdminID(); ok {
 		_spec.SetField(tenant.FieldAdminID, field.TypeInt64, value)
 	}
@@ -314,51 +459,6 @@ func (_u *TenantUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 	}
 	if value, ok := _u.mutation.AddedParentID(); ok {
 		_spec.AddField(tenant.FieldParentID, field.TypeInt64, value)
-	}
-	if _u.mutation.RolesCleared() {
-		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2M,
-			Inverse: false,
-			Table:   tenant.RolesTable,
-			Columns: tenant.RolesPrimaryKey,
-			Bidi:    false,
-			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(role.FieldID, field.TypeUint64),
-			},
-		}
-		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
-	}
-	if nodes := _u.mutation.RemovedRolesIDs(); len(nodes) > 0 && !_u.mutation.RolesCleared() {
-		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2M,
-			Inverse: false,
-			Table:   tenant.RolesTable,
-			Columns: tenant.RolesPrimaryKey,
-			Bidi:    false,
-			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(role.FieldID, field.TypeUint64),
-			},
-		}
-		for _, k := range nodes {
-			edge.Target.Nodes = append(edge.Target.Nodes, k)
-		}
-		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
-	}
-	if nodes := _u.mutation.RolesIDs(); len(nodes) > 0 {
-		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2M,
-			Inverse: false,
-			Table:   tenant.RolesTable,
-			Columns: tenant.RolesPrimaryKey,
-			Bidi:    false,
-			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(role.FieldID, field.TypeUint64),
-			},
-		}
-		for _, k := range nodes {
-			edge.Target.Nodes = append(edge.Target.Nodes, k)
-		}
-		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
 	_spec.AddModifiers(_u.modifiers...)
 	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
@@ -463,6 +563,152 @@ func (_u *TenantUpdateOne) SetNillableCode(v *string) *TenantUpdateOne {
 	return _u
 }
 
+// SetContactPhone sets the "contact_phone" field.
+func (_u *TenantUpdateOne) SetContactPhone(v string) *TenantUpdateOne {
+	_u.mutation.SetContactPhone(v)
+	return _u
+}
+
+// SetNillableContactPhone sets the "contact_phone" field if the given value is not nil.
+func (_u *TenantUpdateOne) SetNillableContactPhone(v *string) *TenantUpdateOne {
+	if v != nil {
+		_u.SetContactPhone(*v)
+	}
+	return _u
+}
+
+// SetContactEmail sets the "contact_email" field.
+func (_u *TenantUpdateOne) SetContactEmail(v string) *TenantUpdateOne {
+	_u.mutation.SetContactEmail(v)
+	return _u
+}
+
+// SetNillableContactEmail sets the "contact_email" field if the given value is not nil.
+func (_u *TenantUpdateOne) SetNillableContactEmail(v *string) *TenantUpdateOne {
+	if v != nil {
+		_u.SetContactEmail(*v)
+	}
+	return _u
+}
+
+// SetCompanyName sets the "company_name" field.
+func (_u *TenantUpdateOne) SetCompanyName(v string) *TenantUpdateOne {
+	_u.mutation.SetCompanyName(v)
+	return _u
+}
+
+// SetNillableCompanyName sets the "company_name" field if the given value is not nil.
+func (_u *TenantUpdateOne) SetNillableCompanyName(v *string) *TenantUpdateOne {
+	if v != nil {
+		_u.SetCompanyName(*v)
+	}
+	return _u
+}
+
+// SetLicenseNumber sets the "license_number" field.
+func (_u *TenantUpdateOne) SetLicenseNumber(v string) *TenantUpdateOne {
+	_u.mutation.SetLicenseNumber(v)
+	return _u
+}
+
+// SetNillableLicenseNumber sets the "license_number" field if the given value is not nil.
+func (_u *TenantUpdateOne) SetNillableLicenseNumber(v *string) *TenantUpdateOne {
+	if v != nil {
+		_u.SetLicenseNumber(*v)
+	}
+	return _u
+}
+
+// SetAddress sets the "address" field.
+func (_u *TenantUpdateOne) SetAddress(v string) *TenantUpdateOne {
+	_u.mutation.SetAddress(v)
+	return _u
+}
+
+// SetNillableAddress sets the "address" field if the given value is not nil.
+func (_u *TenantUpdateOne) SetNillableAddress(v *string) *TenantUpdateOne {
+	if v != nil {
+		_u.SetAddress(*v)
+	}
+	return _u
+}
+
+// SetIntro sets the "intro" field.
+func (_u *TenantUpdateOne) SetIntro(v string) *TenantUpdateOne {
+	_u.mutation.SetIntro(v)
+	return _u
+}
+
+// SetNillableIntro sets the "intro" field if the given value is not nil.
+func (_u *TenantUpdateOne) SetNillableIntro(v *string) *TenantUpdateOne {
+	if v != nil {
+		_u.SetIntro(*v)
+	}
+	return _u
+}
+
+// SetDomain sets the "domain" field.
+func (_u *TenantUpdateOne) SetDomain(v string) *TenantUpdateOne {
+	_u.mutation.SetDomain(v)
+	return _u
+}
+
+// SetNillableDomain sets the "domain" field if the given value is not nil.
+func (_u *TenantUpdateOne) SetNillableDomain(v *string) *TenantUpdateOne {
+	if v != nil {
+		_u.SetDomain(*v)
+	}
+	return _u
+}
+
+// SetLevel sets the "level" field.
+func (_u *TenantUpdateOne) SetLevel(v int) *TenantUpdateOne {
+	_u.mutation.ResetLevel()
+	_u.mutation.SetLevel(v)
+	return _u
+}
+
+// SetNillableLevel sets the "level" field if the given value is not nil.
+func (_u *TenantUpdateOne) SetNillableLevel(v *int) *TenantUpdateOne {
+	if v != nil {
+		_u.SetLevel(*v)
+	}
+	return _u
+}
+
+// AddLevel adds value to the "level" field.
+func (_u *TenantUpdateOne) AddLevel(v int) *TenantUpdateOne {
+	_u.mutation.AddLevel(v)
+	return _u
+}
+
+// SetPlanID sets the "plan_id" field.
+func (_u *TenantUpdateOne) SetPlanID(v uint64) *TenantUpdateOne {
+	_u.mutation.ResetPlanID()
+	_u.mutation.SetPlanID(v)
+	return _u
+}
+
+// SetNillablePlanID sets the "plan_id" field if the given value is not nil.
+func (_u *TenantUpdateOne) SetNillablePlanID(v *uint64) *TenantUpdateOne {
+	if v != nil {
+		_u.SetPlanID(*v)
+	}
+	return _u
+}
+
+// AddPlanID adds value to the "plan_id" field.
+func (_u *TenantUpdateOne) AddPlanID(v int64) *TenantUpdateOne {
+	_u.mutation.AddPlanID(v)
+	return _u
+}
+
+// ClearPlanID clears the value of the "plan_id" field.
+func (_u *TenantUpdateOne) ClearPlanID() *TenantUpdateOne {
+	_u.mutation.ClearPlanID()
+	return _u
+}
+
 // SetAdminID sets the "admin_id" field.
 func (_u *TenantUpdateOne) SetAdminID(v int64) *TenantUpdateOne {
 	_u.mutation.ResetAdminID()
@@ -505,45 +751,9 @@ func (_u *TenantUpdateOne) AddParentID(v int64) *TenantUpdateOne {
 	return _u
 }
 
-// AddRoleIDs adds the "roles" edge to the Role entity by IDs.
-func (_u *TenantUpdateOne) AddRoleIDs(ids ...uint64) *TenantUpdateOne {
-	_u.mutation.AddRoleIDs(ids...)
-	return _u
-}
-
-// AddRoles adds the "roles" edges to the Role entity.
-func (_u *TenantUpdateOne) AddRoles(v ...*Role) *TenantUpdateOne {
-	ids := make([]uint64, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
-	}
-	return _u.AddRoleIDs(ids...)
-}
-
 // Mutation returns the TenantMutation object of the builder.
 func (_u *TenantUpdateOne) Mutation() *TenantMutation {
 	return _u.mutation
-}
-
-// ClearRoles clears all "roles" edges to the Role entity.
-func (_u *TenantUpdateOne) ClearRoles() *TenantUpdateOne {
-	_u.mutation.ClearRoles()
-	return _u
-}
-
-// RemoveRoleIDs removes the "roles" edge to Role entities by IDs.
-func (_u *TenantUpdateOne) RemoveRoleIDs(ids ...uint64) *TenantUpdateOne {
-	_u.mutation.RemoveRoleIDs(ids...)
-	return _u
-}
-
-// RemoveRoles removes "roles" edges to Role entities.
-func (_u *TenantUpdateOne) RemoveRoles(v ...*Role) *TenantUpdateOne {
-	ids := make([]uint64, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
-	}
-	return _u.RemoveRoleIDs(ids...)
 }
 
 // Where appends a list predicates to the TenantUpdate builder.
@@ -685,6 +895,42 @@ func (_u *TenantUpdateOne) sqlSave(ctx context.Context) (_node *Tenant, err erro
 	if value, ok := _u.mutation.Code(); ok {
 		_spec.SetField(tenant.FieldCode, field.TypeString, value)
 	}
+	if value, ok := _u.mutation.ContactPhone(); ok {
+		_spec.SetField(tenant.FieldContactPhone, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.ContactEmail(); ok {
+		_spec.SetField(tenant.FieldContactEmail, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.CompanyName(); ok {
+		_spec.SetField(tenant.FieldCompanyName, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.LicenseNumber(); ok {
+		_spec.SetField(tenant.FieldLicenseNumber, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.Address(); ok {
+		_spec.SetField(tenant.FieldAddress, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.Intro(); ok {
+		_spec.SetField(tenant.FieldIntro, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.Domain(); ok {
+		_spec.SetField(tenant.FieldDomain, field.TypeString, value)
+	}
+	if value, ok := _u.mutation.Level(); ok {
+		_spec.SetField(tenant.FieldLevel, field.TypeInt, value)
+	}
+	if value, ok := _u.mutation.AddedLevel(); ok {
+		_spec.AddField(tenant.FieldLevel, field.TypeInt, value)
+	}
+	if value, ok := _u.mutation.PlanID(); ok {
+		_spec.SetField(tenant.FieldPlanID, field.TypeUint64, value)
+	}
+	if value, ok := _u.mutation.AddedPlanID(); ok {
+		_spec.AddField(tenant.FieldPlanID, field.TypeUint64, value)
+	}
+	if _u.mutation.PlanIDCleared() {
+		_spec.ClearField(tenant.FieldPlanID, field.TypeUint64)
+	}
 	if value, ok := _u.mutation.AdminID(); ok {
 		_spec.SetField(tenant.FieldAdminID, field.TypeInt64, value)
 	}
@@ -696,51 +942,6 @@ func (_u *TenantUpdateOne) sqlSave(ctx context.Context) (_node *Tenant, err erro
 	}
 	if value, ok := _u.mutation.AddedParentID(); ok {
 		_spec.AddField(tenant.FieldParentID, field.TypeInt64, value)
-	}
-	if _u.mutation.RolesCleared() {
-		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2M,
-			Inverse: false,
-			Table:   tenant.RolesTable,
-			Columns: tenant.RolesPrimaryKey,
-			Bidi:    false,
-			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(role.FieldID, field.TypeUint64),
-			},
-		}
-		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
-	}
-	if nodes := _u.mutation.RemovedRolesIDs(); len(nodes) > 0 && !_u.mutation.RolesCleared() {
-		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2M,
-			Inverse: false,
-			Table:   tenant.RolesTable,
-			Columns: tenant.RolesPrimaryKey,
-			Bidi:    false,
-			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(role.FieldID, field.TypeUint64),
-			},
-		}
-		for _, k := range nodes {
-			edge.Target.Nodes = append(edge.Target.Nodes, k)
-		}
-		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
-	}
-	if nodes := _u.mutation.RolesIDs(); len(nodes) > 0 {
-		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2M,
-			Inverse: false,
-			Table:   tenant.RolesTable,
-			Columns: tenant.RolesPrimaryKey,
-			Bidi:    false,
-			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(role.FieldID, field.TypeUint64),
-			},
-		}
-		for _, k := range nodes {
-			edge.Target.Nodes = append(edge.Target.Nodes, k)
-		}
-		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
 	_spec.AddModifiers(_u.modifiers...)
 	_node = &Tenant{config: _u.config}

@@ -29,32 +29,29 @@ type Tenant struct {
 	Name string `json:"name,omitempty"`
 	// 编码，不能为空
 	Code string `json:"code,omitempty"`
-	// 管理员id，不能为空，创建租户的时候顺便创建用户
+	// 联系方式
+	ContactPhone string `json:"contact_phone,omitempty"`
+	// 联系邮箱
+	ContactEmail string `json:"contact_email,omitempty"`
+	// 企业名称
+	CompanyName string `json:"company_name,omitempty"`
+	// 统一社会信用代码
+	LicenseNumber string `json:"license_number,omitempty"`
+	// 地址
+	Address string `json:"address,omitempty"`
+	// 企业简介
+	Intro string `json:"intro,omitempty"`
+	// 域名
+	Domain string `json:"domain,omitempty"`
+	// 租户级别
+	Level int `json:"level,omitempty"`
+	// 套餐计划Id，外键关联 tenant_plan.id
+	PlanID uint64 `json:"plan_id,omitempty"`
+	// 管理员id
 	AdminID int64 `json:"admin_id,omitempty"`
-	// 父级id，不能为空,0为第一级
-	ParentID int64 `json:"parent_id,omitempty"`
-	// Edges holds the relations/edges for other nodes in the graph.
-	// The values are being populated by the TenantQuery when eager-loading is set.
-	Edges        TenantEdges `json:"edges"`
+	// 父级id,0为第一级
+	ParentID     int64 `json:"parent_id,omitempty"`
 	selectValues sql.SelectValues
-}
-
-// TenantEdges holds the relations/edges for other nodes in the graph.
-type TenantEdges struct {
-	// Roles holds the value of the roles edge.
-	Roles []*Role `json:"roles,omitempty"`
-	// loadedTypes holds the information for reporting if a
-	// type was loaded (or requested) in eager-loading or not.
-	loadedTypes [1]bool
-}
-
-// RolesOrErr returns the Roles value or an error if the edge
-// was not loaded in eager-loading.
-func (e TenantEdges) RolesOrErr() ([]*Role, error) {
-	if e.loadedTypes[0] {
-		return e.Roles, nil
-	}
-	return nil, &NotLoadedError{edge: "roles"}
 }
 
 // scanValues returns the types for scanning values from sql.Rows.
@@ -62,9 +59,9 @@ func (*Tenant) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case tenant.FieldID, tenant.FieldStatus, tenant.FieldAdminID, tenant.FieldParentID:
+		case tenant.FieldID, tenant.FieldStatus, tenant.FieldLevel, tenant.FieldPlanID, tenant.FieldAdminID, tenant.FieldParentID:
 			values[i] = new(sql.NullInt64)
-		case tenant.FieldName, tenant.FieldCode:
+		case tenant.FieldName, tenant.FieldCode, tenant.FieldContactPhone, tenant.FieldContactEmail, tenant.FieldCompanyName, tenant.FieldLicenseNumber, tenant.FieldAddress, tenant.FieldIntro, tenant.FieldDomain:
 			values[i] = new(sql.NullString)
 		case tenant.FieldCreatedAt, tenant.FieldUpdatedAt, tenant.FieldDeletedAt:
 			values[i] = new(sql.NullTime)
@@ -125,6 +122,60 @@ func (_m *Tenant) assignValues(columns []string, values []any) error {
 			} else if value.Valid {
 				_m.Code = value.String
 			}
+		case tenant.FieldContactPhone:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field contact_phone", values[i])
+			} else if value.Valid {
+				_m.ContactPhone = value.String
+			}
+		case tenant.FieldContactEmail:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field contact_email", values[i])
+			} else if value.Valid {
+				_m.ContactEmail = value.String
+			}
+		case tenant.FieldCompanyName:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field company_name", values[i])
+			} else if value.Valid {
+				_m.CompanyName = value.String
+			}
+		case tenant.FieldLicenseNumber:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field license_number", values[i])
+			} else if value.Valid {
+				_m.LicenseNumber = value.String
+			}
+		case tenant.FieldAddress:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field address", values[i])
+			} else if value.Valid {
+				_m.Address = value.String
+			}
+		case tenant.FieldIntro:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field intro", values[i])
+			} else if value.Valid {
+				_m.Intro = value.String
+			}
+		case tenant.FieldDomain:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field domain", values[i])
+			} else if value.Valid {
+				_m.Domain = value.String
+			}
+		case tenant.FieldLevel:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field level", values[i])
+			} else if value.Valid {
+				_m.Level = int(value.Int64)
+			}
+		case tenant.FieldPlanID:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field plan_id", values[i])
+			} else if value.Valid {
+				_m.PlanID = uint64(value.Int64)
+			}
 		case tenant.FieldAdminID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field admin_id", values[i])
@@ -148,11 +199,6 @@ func (_m *Tenant) assignValues(columns []string, values []any) error {
 // This includes values selected through modifiers, order, etc.
 func (_m *Tenant) Value(name string) (ent.Value, error) {
 	return _m.selectValues.Get(name)
-}
-
-// QueryRoles queries the "roles" edge of the Tenant entity.
-func (_m *Tenant) QueryRoles() *RoleQuery {
-	return NewTenantClient(_m.config).QueryRoles(_m)
 }
 
 // Update returns a builder for updating this Tenant.
@@ -195,6 +241,33 @@ func (_m *Tenant) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("code=")
 	builder.WriteString(_m.Code)
+	builder.WriteString(", ")
+	builder.WriteString("contact_phone=")
+	builder.WriteString(_m.ContactPhone)
+	builder.WriteString(", ")
+	builder.WriteString("contact_email=")
+	builder.WriteString(_m.ContactEmail)
+	builder.WriteString(", ")
+	builder.WriteString("company_name=")
+	builder.WriteString(_m.CompanyName)
+	builder.WriteString(", ")
+	builder.WriteString("license_number=")
+	builder.WriteString(_m.LicenseNumber)
+	builder.WriteString(", ")
+	builder.WriteString("address=")
+	builder.WriteString(_m.Address)
+	builder.WriteString(", ")
+	builder.WriteString("intro=")
+	builder.WriteString(_m.Intro)
+	builder.WriteString(", ")
+	builder.WriteString("domain=")
+	builder.WriteString(_m.Domain)
+	builder.WriteString(", ")
+	builder.WriteString("level=")
+	builder.WriteString(fmt.Sprintf("%v", _m.Level))
+	builder.WriteString(", ")
+	builder.WriteString("plan_id=")
+	builder.WriteString(fmt.Sprintf("%v", _m.PlanID))
 	builder.WriteString(", ")
 	builder.WriteString("admin_id=")
 	builder.WriteString(fmt.Sprintf("%v", _m.AdminID))

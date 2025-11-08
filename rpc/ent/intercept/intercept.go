@@ -19,6 +19,7 @@ import (
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/predicate"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/role"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenant"
+	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenantplan"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/token"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/user"
 )
@@ -349,6 +350,33 @@ func (f TraverseTenant) Traverse(ctx context.Context, q ent.Query) error {
 	return fmt.Errorf("unexpected query type %T. expect *ent.TenantQuery", q)
 }
 
+// The TenantPlanFunc type is an adapter to allow the use of ordinary function as a Querier.
+type TenantPlanFunc func(context.Context, *ent.TenantPlanQuery) (ent.Value, error)
+
+// Query calls f(ctx, q).
+func (f TenantPlanFunc) Query(ctx context.Context, q ent.Query) (ent.Value, error) {
+	if q, ok := q.(*ent.TenantPlanQuery); ok {
+		return f(ctx, q)
+	}
+	return nil, fmt.Errorf("unexpected query type %T. expect *ent.TenantPlanQuery", q)
+}
+
+// The TraverseTenantPlan type is an adapter to allow the use of ordinary function as Traverser.
+type TraverseTenantPlan func(context.Context, *ent.TenantPlanQuery) error
+
+// Intercept is a dummy implementation of Intercept that returns the next Querier in the pipeline.
+func (f TraverseTenantPlan) Intercept(next ent.Querier) ent.Querier {
+	return next
+}
+
+// Traverse calls f(ctx, q).
+func (f TraverseTenantPlan) Traverse(ctx context.Context, q ent.Query) error {
+	if q, ok := q.(*ent.TenantPlanQuery); ok {
+		return f(ctx, q)
+	}
+	return fmt.Errorf("unexpected query type %T. expect *ent.TenantPlanQuery", q)
+}
+
 // The TokenFunc type is an adapter to allow the use of ordinary function as a Querier.
 type TokenFunc func(context.Context, *ent.TokenQuery) (ent.Value, error)
 
@@ -426,6 +454,8 @@ func NewQuery(q ent.Query) (Query, error) {
 		return &query[*ent.RoleQuery, predicate.Role, role.OrderOption]{typ: ent.TypeRole, tq: q}, nil
 	case *ent.TenantQuery:
 		return &query[*ent.TenantQuery, predicate.Tenant, tenant.OrderOption]{typ: ent.TypeTenant, tq: q}, nil
+	case *ent.TenantPlanQuery:
+		return &query[*ent.TenantPlanQuery, predicate.TenantPlan, tenantplan.OrderOption]{typ: ent.TypeTenantPlan, tq: q}, nil
 	case *ent.TokenQuery:
 		return &query[*ent.TokenQuery, predicate.Token, token.OrderOption]{typ: ent.TypeToken, tq: q}, nil
 	case *ent.UserQuery:

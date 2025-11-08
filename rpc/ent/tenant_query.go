@@ -4,7 +4,6 @@ package ent
 
 import (
 	"context"
-	"database/sql/driver"
 	"fmt"
 	"math"
 
@@ -13,7 +12,6 @@ import (
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/predicate"
-	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/role"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenant"
 )
 
@@ -24,7 +22,6 @@ type TenantQuery struct {
 	order      []tenant.OrderOption
 	inters     []Interceptor
 	predicates []predicate.Tenant
-	withRoles  *RoleQuery
 	modifiers  []func(*sql.Selector)
 	// intermediate query (i.e. traversal path).
 	sql  *sql.Selector
@@ -60,28 +57,6 @@ func (_q *TenantQuery) Unique(unique bool) *TenantQuery {
 func (_q *TenantQuery) Order(o ...tenant.OrderOption) *TenantQuery {
 	_q.order = append(_q.order, o...)
 	return _q
-}
-
-// QueryRoles chains the current query on the "roles" edge.
-func (_q *TenantQuery) QueryRoles() *RoleQuery {
-	query := (&RoleClient{config: _q.config}).Query()
-	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
-			return nil, err
-		}
-		selector := _q.sqlQuery(ctx)
-		if err := selector.Err(); err != nil {
-			return nil, err
-		}
-		step := sqlgraph.NewStep(
-			sqlgraph.From(tenant.Table, tenant.FieldID, selector),
-			sqlgraph.To(role.Table, role.FieldID),
-			sqlgraph.Edge(sqlgraph.M2M, false, tenant.RolesTable, tenant.RolesPrimaryKey...),
-		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
-		return fromU, nil
-	}
-	return query
 }
 
 // First returns the first Tenant entity from the query.
@@ -276,23 +251,11 @@ func (_q *TenantQuery) Clone() *TenantQuery {
 		order:      append([]tenant.OrderOption{}, _q.order...),
 		inters:     append([]Interceptor{}, _q.inters...),
 		predicates: append([]predicate.Tenant{}, _q.predicates...),
-		withRoles:  _q.withRoles.Clone(),
 		// clone intermediate query.
 		sql:       _q.sql.Clone(),
 		path:      _q.path,
 		modifiers: append([]func(*sql.Selector){}, _q.modifiers...),
 	}
-}
-
-// WithRoles tells the query-builder to eager-load the nodes that are connected to
-// the "roles" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *TenantQuery) WithRoles(opts ...func(*RoleQuery)) *TenantQuery {
-	query := (&RoleClient{config: _q.config}).Query()
-	for _, opt := range opts {
-		opt(query)
-	}
-	_q.withRoles = query
-	return _q
 }
 
 // GroupBy is used to group vertices by one or more fields/columns.
@@ -371,11 +334,8 @@ func (_q *TenantQuery) prepareQuery(ctx context.Context) error {
 
 func (_q *TenantQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Tenant, error) {
 	var (
-		nodes       = []*Tenant{}
-		_spec       = _q.querySpec()
-		loadedTypes = [1]bool{
-			_q.withRoles != nil,
-		}
+		nodes = []*Tenant{}
+		_spec = _q.querySpec()
 	)
 	_spec.ScanValues = func(columns []string) ([]any, error) {
 		return (*Tenant).scanValues(nil, columns)
@@ -383,7 +343,6 @@ func (_q *TenantQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Tenan
 	_spec.Assign = func(columns []string, values []any) error {
 		node := &Tenant{config: _q.config}
 		nodes = append(nodes, node)
-		node.Edges.loadedTypes = loadedTypes
 		return node.assignValues(columns, values)
 	}
 	if len(_q.modifiers) > 0 {
@@ -398,76 +357,7 @@ func (_q *TenantQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Tenan
 	if len(nodes) == 0 {
 		return nodes, nil
 	}
-	if query := _q.withRoles; query != nil {
-		if err := _q.loadRoles(ctx, query, nodes,
-			func(n *Tenant) { n.Edges.Roles = []*Role{} },
-			func(n *Tenant, e *Role) { n.Edges.Roles = append(n.Edges.Roles, e) }); err != nil {
-			return nil, err
-		}
-	}
 	return nodes, nil
-}
-
-func (_q *TenantQuery) loadRoles(ctx context.Context, query *RoleQuery, nodes []*Tenant, init func(*Tenant), assign func(*Tenant, *Role)) error {
-	edgeIDs := make([]driver.Value, len(nodes))
-	byID := make(map[uint64]*Tenant)
-	nids := make(map[uint64]map[*Tenant]struct{})
-	for i, node := range nodes {
-		edgeIDs[i] = node.ID
-		byID[node.ID] = node
-		if init != nil {
-			init(node)
-		}
-	}
-	query.Where(func(s *sql.Selector) {
-		joinT := sql.Table(tenant.RolesTable)
-		s.Join(joinT).On(s.C(role.FieldID), joinT.C(tenant.RolesPrimaryKey[1]))
-		s.Where(sql.InValues(joinT.C(tenant.RolesPrimaryKey[0]), edgeIDs...))
-		columns := s.SelectedColumns()
-		s.Select(joinT.C(tenant.RolesPrimaryKey[0]))
-		s.AppendSelect(columns...)
-		s.SetDistinct(false)
-	})
-	if err := query.prepareQuery(ctx); err != nil {
-		return err
-	}
-	qr := QuerierFunc(func(ctx context.Context, q Query) (Value, error) {
-		return query.sqlAll(ctx, func(_ context.Context, spec *sqlgraph.QuerySpec) {
-			assign := spec.Assign
-			values := spec.ScanValues
-			spec.ScanValues = func(columns []string) ([]any, error) {
-				values, err := values(columns[1:])
-				if err != nil {
-					return nil, err
-				}
-				return append([]any{new(sql.NullInt64)}, values...), nil
-			}
-			spec.Assign = func(columns []string, values []any) error {
-				outValue := uint64(values[0].(*sql.NullInt64).Int64)
-				inValue := uint64(values[1].(*sql.NullInt64).Int64)
-				if nids[inValue] == nil {
-					nids[inValue] = map[*Tenant]struct{}{byID[outValue]: {}}
-					return assign(columns[1:], values[1:])
-				}
-				nids[inValue][byID[outValue]] = struct{}{}
-				return nil
-			}
-		})
-	})
-	neighbors, err := withInterceptors[[]*Role](ctx, query, qr, query.inters)
-	if err != nil {
-		return err
-	}
-	for _, n := range neighbors {
-		nodes, ok := nids[n.ID]
-		if !ok {
-			return fmt.Errorf(`unexpected "roles" node returned %v`, n.ID)
-		}
-		for kn := range nodes {
-			assign(kn, n)
-		}
-	}
-	return nil
 }
 
 func (_q *TenantQuery) sqlCount(ctx context.Context) (int, error) {

@@ -16,6 +16,7 @@ import (
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/role"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/schema"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenant"
+	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/tenantplan"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/token"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/user"
 )
@@ -407,15 +408,40 @@ func init() {
 		}
 	}()
 	// tenantDescAdminID is the schema descriptor for admin_id field.
-	tenantDescAdminID := tenantFields[2].Descriptor()
+	tenantDescAdminID := tenantFields[11].Descriptor()
 	// tenant.AdminIDValidator is a validator for the "admin_id" field. It is called by the builders before save.
 	tenant.AdminIDValidator = tenantDescAdminID.Validators[0].(func(int64) error)
 	// tenantDescParentID is the schema descriptor for parent_id field.
-	tenantDescParentID := tenantFields[3].Descriptor()
+	tenantDescParentID := tenantFields[12].Descriptor()
 	// tenant.DefaultParentID holds the default value on creation for the parent_id field.
 	tenant.DefaultParentID = tenantDescParentID.Default.(int64)
 	// tenant.ParentIDValidator is a validator for the "parent_id" field. It is called by the builders before save.
 	tenant.ParentIDValidator = tenantDescParentID.Validators[0].(func(int64) error)
+	tenantplanMixin := schema.TenantPlan{}.Mixin()
+	tenantplanMixinHooks2 := tenantplanMixin[2].Hooks()
+	tenantplan.Hooks[0] = tenantplanMixinHooks2[0]
+	tenantplanMixinInters2 := tenantplanMixin[2].Interceptors()
+	tenantplan.Interceptors[0] = tenantplanMixinInters2[0]
+	tenantplanMixinFields0 := tenantplanMixin[0].Fields()
+	_ = tenantplanMixinFields0
+	tenantplanMixinFields1 := tenantplanMixin[1].Fields()
+	_ = tenantplanMixinFields1
+	tenantplanFields := schema.TenantPlan{}.Fields()
+	_ = tenantplanFields
+	// tenantplanDescCreatedAt is the schema descriptor for created_at field.
+	tenantplanDescCreatedAt := tenantplanMixinFields0[1].Descriptor()
+	// tenantplan.DefaultCreatedAt holds the default value on creation for the created_at field.
+	tenantplan.DefaultCreatedAt = tenantplanDescCreatedAt.Default.(func() time.Time)
+	// tenantplanDescUpdatedAt is the schema descriptor for updated_at field.
+	tenantplanDescUpdatedAt := tenantplanMixinFields0[2].Descriptor()
+	// tenantplan.DefaultUpdatedAt holds the default value on creation for the updated_at field.
+	tenantplan.DefaultUpdatedAt = tenantplanDescUpdatedAt.Default.(func() time.Time)
+	// tenantplan.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
+	tenantplan.UpdateDefaultUpdatedAt = tenantplanDescUpdatedAt.UpdateDefault.(func() time.Time)
+	// tenantplanDescStatus is the schema descriptor for status field.
+	tenantplanDescStatus := tenantplanMixinFields1[0].Descriptor()
+	// tenantplan.DefaultStatus holds the default value on creation for the status field.
+	tenantplan.DefaultStatus = tenantplanDescStatus.Default.(uint8)
 	tokenMixin := schema.Token{}.Mixin()
 	tokenMixinFields0 := tokenMixin[0].Fields()
 	_ = tokenMixinFields0
