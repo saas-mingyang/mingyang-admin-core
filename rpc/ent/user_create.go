@@ -201,6 +201,14 @@ func (_c *UserCreate) SetID(v uint64) *UserCreate {
 	return _c
 }
 
+// SetNillableID sets the "id" field if the given value is not nil.
+func (_c *UserCreate) SetNillableID(v *uint64) *UserCreate {
+	if v != nil {
+		_c.SetID(*v)
+	}
+	return _c
+}
+
 // SetDepartmentsID sets the "departments" edge to the Department entity by ID.
 func (_c *UserCreate) SetDepartmentsID(id uint64) *UserCreate {
 	_c.mutation.SetDepartmentsID(id)
@@ -312,6 +320,10 @@ func (_c *UserCreate) defaults() error {
 	if _, ok := _c.mutation.HomePath(); !ok {
 		v := user.DefaultHomePath
 		_c.mutation.SetHomePath(v)
+	}
+	if _, ok := _c.mutation.ID(); !ok {
+		v := user.DefaultID
+		_c.mutation.SetID(v)
 	}
 	return nil
 }

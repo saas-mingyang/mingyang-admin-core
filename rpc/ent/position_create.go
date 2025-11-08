@@ -123,6 +123,14 @@ func (_c *PositionCreate) SetID(v uint64) *PositionCreate {
 	return _c
 }
 
+// SetNillableID sets the "id" field if the given value is not nil.
+func (_c *PositionCreate) SetNillableID(v *uint64) *PositionCreate {
+	if v != nil {
+		_c.SetID(*v)
+	}
+	return _c
+}
+
 // AddUserIDs adds the "users" edge to the User entity by IDs.
 func (_c *PositionCreate) AddUserIDs(ids ...uint64) *PositionCreate {
 	_c.mutation.AddUserIDs(ids...)
@@ -192,6 +200,10 @@ func (_c *PositionCreate) defaults() {
 	if _, ok := _c.mutation.Sort(); !ok {
 		v := position.DefaultSort
 		_c.mutation.SetSort(v)
+	}
+	if _, ok := _c.mutation.ID(); !ok {
+		v := position.DefaultID
+		_c.mutation.SetID(v)
 	}
 }
 

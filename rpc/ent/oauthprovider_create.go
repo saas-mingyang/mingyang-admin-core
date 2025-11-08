@@ -108,6 +108,14 @@ func (_c *OauthProviderCreate) SetID(v uint64) *OauthProviderCreate {
 	return _c
 }
 
+// SetNillableID sets the "id" field if the given value is not nil.
+func (_c *OauthProviderCreate) SetNillableID(v *uint64) *OauthProviderCreate {
+	if v != nil {
+		_c.SetID(*v)
+	}
+	return _c
+}
+
 // Mutation returns the OauthProviderMutation object of the builder.
 func (_c *OauthProviderCreate) Mutation() *OauthProviderMutation {
 	return _c.mutation
@@ -150,6 +158,10 @@ func (_c *OauthProviderCreate) defaults() {
 	if _, ok := _c.mutation.UpdatedAt(); !ok {
 		v := oauthprovider.DefaultUpdatedAt()
 		_c.mutation.SetUpdatedAt(v)
+	}
+	if _, ok := _c.mutation.ID(); !ok {
+		v := oauthprovider.DefaultID
+		_c.mutation.SetID(v)
 	}
 }
 

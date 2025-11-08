@@ -114,6 +114,14 @@ func (_c *APICreate) SetID(v uint64) *APICreate {
 	return _c
 }
 
+// SetNillableID sets the "id" field if the given value is not nil.
+func (_c *APICreate) SetNillableID(v *uint64) *APICreate {
+	if v != nil {
+		_c.SetID(*v)
+	}
+	return _c
+}
+
 // Mutation returns the APIMutation object of the builder.
 func (_c *APICreate) Mutation() *APIMutation {
 	return _c.mutation
@@ -168,6 +176,10 @@ func (_c *APICreate) defaults() {
 	if _, ok := _c.mutation.IsRequired(); !ok {
 		v := api.DefaultIsRequired
 		_c.mutation.SetIsRequired(v)
+	}
+	if _, ok := _c.mutation.ID(); !ok {
+		v := api.DefaultID
+		_c.mutation.SetID(v)
 	}
 }
 

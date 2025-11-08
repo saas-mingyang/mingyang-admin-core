@@ -187,6 +187,14 @@ func (_c *DepartmentCreate) SetID(v uint64) *DepartmentCreate {
 	return _c
 }
 
+// SetNillableID sets the "id" field if the given value is not nil.
+func (_c *DepartmentCreate) SetNillableID(v *uint64) *DepartmentCreate {
+	if v != nil {
+		_c.SetID(*v)
+	}
+	return _c
+}
+
 // SetParent sets the "parent" edge to the Department entity.
 func (_c *DepartmentCreate) SetParent(v *Department) *DepartmentCreate {
 	return _c.SetParentID(v.ID)
@@ -284,6 +292,10 @@ func (_c *DepartmentCreate) defaults() {
 	if _, ok := _c.mutation.ParentID(); !ok {
 		v := department.DefaultParentID
 		_c.mutation.SetParentID(v)
+	}
+	if _, ok := _c.mutation.ID(); !ok {
+		v := department.DefaultID
+		_c.mutation.SetID(v)
 	}
 }
 

@@ -62,6 +62,8 @@ var (
 	UpdateDefaultUpdatedAt func() time.Time
 	// DefaultStatus holds the default value on creation for the "status" field.
 	DefaultStatus uint8
+	// DefaultID holds the default value on creation for the "id" field.
+	DefaultID uint64
 )
 
 // OrderOption defines the ordering options for the TenantPlan queries.

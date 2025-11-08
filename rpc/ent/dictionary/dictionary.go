@@ -79,6 +79,8 @@ var (
 	DefaultTenantID uint64
 	// DefaultIsPublic holds the default value on creation for the "is_public" field.
 	DefaultIsPublic bool
+	// DefaultID holds the default value on creation for the "id" field.
+	DefaultID uint64
 )
 
 // OrderOption defines the ordering options for the Dictionary queries.

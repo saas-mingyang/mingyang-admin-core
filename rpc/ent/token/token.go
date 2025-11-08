@@ -69,6 +69,8 @@ var (
 	DefaultUserID uint64
 	// DefaultUsername holds the default value on creation for the "username" field.
 	DefaultUsername string
+	// DefaultID holds the default value on creation for the "id" field.
+	DefaultID uint64
 )
 
 // OrderOption defines the ordering options for the Token queries.

@@ -42,6 +42,7 @@ func (l *UpdateUserLogic) UpdateUser(req *types.UserInfo) (resp *types.BaseMsgRe
 			PositionIds:  req.PositionIds,
 		})
 	if err != nil {
+		logx.Errorf("update user error: %v", err)
 		return nil, err
 	}
 	return &types.BaseMsgResp{Msg: l.svcCtx.Trans.Trans(l.ctx, data.Msg)}, nil

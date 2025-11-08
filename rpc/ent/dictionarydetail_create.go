@@ -129,6 +129,14 @@ func (_c *DictionaryDetailCreate) SetID(v uint64) *DictionaryDetailCreate {
 	return _c
 }
 
+// SetNillableID sets the "id" field if the given value is not nil.
+func (_c *DictionaryDetailCreate) SetNillableID(v *uint64) *DictionaryDetailCreate {
+	if v != nil {
+		_c.SetID(*v)
+	}
+	return _c
+}
+
 // SetDictionariesID sets the "dictionaries" edge to the Dictionary entity by ID.
 func (_c *DictionaryDetailCreate) SetDictionariesID(id uint64) *DictionaryDetailCreate {
 	_c.mutation.SetDictionariesID(id)
@@ -202,6 +210,10 @@ func (_c *DictionaryDetailCreate) defaults() {
 	if _, ok := _c.mutation.Sort(); !ok {
 		v := dictionarydetail.DefaultSort
 		_c.mutation.SetSort(v)
+	}
+	if _, ok := _c.mutation.ID(); !ok {
+		v := dictionarydetail.DefaultID
+		_c.mutation.SetID(v)
 	}
 }
 

@@ -174,6 +174,8 @@ var (
 	DefaultDynamicLevel uint32
 	// DefaultRealPath holds the default value on creation for the "real_path" field.
 	DefaultRealPath string
+	// DefaultID holds the default value on creation for the "id" field.
+	DefaultID uint64
 )
 
 // OrderOption defines the ordering options for the Menu queries.

@@ -224,8 +224,8 @@ github.com/redis/go-redis/v9 v9.16.0 h1:OotgqgLSRCmzfqChbQyG1PHC3tLNR89DG4jdOERS
 github.com/redis/go-redis/v9 v9.16.0/go.mod h1:u410H11HMLoB+TP67dz8rL9s6QW2j76l0//kSOd3370=
 github.com/rogpeppe/go-internal v1.14.1 h1:UQB4HGPB6osV0SQTLymcB4TgvyWu6ZyliaW0tI/otEQ=
 github.com/rogpeppe/go-internal v1.14.1/go.mod h1:MaRKkUm5W0goXpeCfT7UZI6fk/L7L7so1lCWt35ZSgc=
-github.com/saas-mingyang/mingyang-admin-common v0.0.5 h1:c8vIE4cwq1yC/urvdO+d1Yi1yIIC++ypE5ThNY6Ykuo=
-github.com/saas-mingyang/mingyang-admin-common v0.0.5/go.mod h1:mAweT+3C08LGdr14AQNz9Sx5COPEpTtL6dr5fQAKqWc=
+github.com/saas-mingyang/mingyang-admin-common v0.0.9 h1:x+8kH+hoH+6899aQoHaoXtPOe5rZCLP8jTP5FNn4SOg=
+github.com/saas-mingyang/mingyang-admin-common v0.0.9/go.mod h1:mAweT+3C08LGdr14AQNz9Sx5COPEpTtL6dr5fQAKqWc=
 github.com/saas-mingyang/mingyang-admin-job v0.0.2 h1:TCQxZGu0kS8iZjNynq9jhDLpWiL332x3cpaiNcr6uBs=
 github.com/saas-mingyang/mingyang-admin-job v0.0.2/go.mod h1:aKPa+uN1zNJjbyOfgDIG8kYynQrYOwiBK/NX7uH6QYs=
 github.com/saas-mingyang/mingyang-admin-message-center v0.0.5 h1:lgkr5GaxoKCB97xnY9cs2FnxOjhpjI9X0y8moJosnYU=

@@ -114,6 +114,14 @@ func (_c *TokenCreate) SetID(v uint64) *TokenCreate {
 	return _c
 }
 
+// SetNillableID sets the "id" field if the given value is not nil.
+func (_c *TokenCreate) SetNillableID(v *uint64) *TokenCreate {
+	if v != nil {
+		_c.SetID(*v)
+	}
+	return _c
+}
+
 // Mutation returns the TokenMutation object of the builder.
 func (_c *TokenCreate) Mutation() *TokenMutation {
 	return _c.mutation
@@ -168,6 +176,10 @@ func (_c *TokenCreate) defaults() {
 	if _, ok := _c.mutation.Username(); !ok {
 		v := token.DefaultUsername
 		_c.mutation.SetUsername(v)
+	}
+	if _, ok := _c.mutation.ID(); !ok {
+		v := token.DefaultID
+		_c.mutation.SetID(v)
 	}
 }
 

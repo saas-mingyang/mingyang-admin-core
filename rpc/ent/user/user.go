@@ -128,6 +128,8 @@ var (
 	DefaultStatus uint8
 	// DefaultHomePath holds the default value on creation for the "home_path" field.
 	DefaultHomePath string
+	// DefaultID holds the default value on creation for the "id" field.
+	DefaultID uint64
 )
 
 // OrderOption defines the ordering options for the User queries.

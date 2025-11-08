@@ -120,6 +120,14 @@ func (_c *ConfigurationCreate) SetID(v uint64) *ConfigurationCreate {
 	return _c
 }
 
+// SetNillableID sets the "id" field if the given value is not nil.
+func (_c *ConfigurationCreate) SetNillableID(v *uint64) *ConfigurationCreate {
+	if v != nil {
+		_c.SetID(*v)
+	}
+	return _c
+}
+
 // Mutation returns the ConfigurationMutation object of the builder.
 func (_c *ConfigurationCreate) Mutation() *ConfigurationMutation {
 	return _c.mutation
@@ -170,6 +178,10 @@ func (_c *ConfigurationCreate) defaults() {
 	if _, ok := _c.mutation.State(); !ok {
 		v := configuration.DefaultState
 		_c.mutation.SetState(v)
+	}
+	if _, ok := _c.mutation.ID(); !ok {
+		v := configuration.DefaultID
+		_c.mutation.SetID(v)
 	}
 }
 

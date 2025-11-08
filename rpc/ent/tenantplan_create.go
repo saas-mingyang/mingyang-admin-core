@@ -92,6 +92,14 @@ func (_c *TenantPlanCreate) SetID(v uint64) *TenantPlanCreate {
 	return _c
 }
 
+// SetNillableID sets the "id" field if the given value is not nil.
+func (_c *TenantPlanCreate) SetNillableID(v *uint64) *TenantPlanCreate {
+	if v != nil {
+		_c.SetID(*v)
+	}
+	return _c
+}
+
 // Mutation returns the TenantPlanMutation object of the builder.
 func (_c *TenantPlanCreate) Mutation() *TenantPlanMutation {
 	return _c.mutation
@@ -138,6 +146,10 @@ func (_c *TenantPlanCreate) defaults() {
 	if _, ok := _c.mutation.Status(); !ok {
 		v := tenantplan.DefaultStatus
 		_c.mutation.SetStatus(v)
+	}
+	if _, ok := _c.mutation.ID(); !ok {
+		v := tenantplan.DefaultID
+		_c.mutation.SetID(v)
 	}
 }
 

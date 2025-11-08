@@ -337,6 +337,14 @@ func (_c *MenuCreate) SetID(v uint64) *MenuCreate {
 	return _c
 }
 
+// SetNillableID sets the "id" field if the given value is not nil.
+func (_c *MenuCreate) SetNillableID(v *uint64) *MenuCreate {
+	if v != nil {
+		_c.SetID(*v)
+	}
+	return _c
+}
+
 // AddRoleIDs adds the "roles" edge to the Role entity by IDs.
 func (_c *MenuCreate) AddRoleIDs(ids ...uint64) *MenuCreate {
 	_c.mutation.AddRoleIDs(ids...)
@@ -482,6 +490,10 @@ func (_c *MenuCreate) defaults() {
 	if _, ok := _c.mutation.RealPath(); !ok {
 		v := menu.DefaultRealPath
 		_c.mutation.SetRealPath(v)
+	}
+	if _, ok := _c.mutation.ID(); !ok {
+		v := menu.DefaultID
+		_c.mutation.SetID(v)
 	}
 }
 
