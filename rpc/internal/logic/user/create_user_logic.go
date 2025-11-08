@@ -35,6 +35,7 @@ func (l *CreateUserLogic) CreateUser(in *core.UserInfo) (*core.BaseIDResp, error
 	if in.Mobile != nil {
 		checkMobile, err := l.svcCtx.DB.User.Query().Where(user.MobileEQ(*in.Mobile)).Exist(l.ctx)
 		if err != nil {
+			logx.WithContext(l.ctx).Errorf("mobile: %s, err: %v", *in.Mobile, err)
 			return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
 		}
 
