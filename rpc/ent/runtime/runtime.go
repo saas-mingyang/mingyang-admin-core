@@ -347,10 +347,6 @@ func init() {
 	// role.DefaultSort holds the default value on creation for the sort field.
 	role.DefaultSort = roleDescSort.Default.(uint32)
 	tenantMixin := schema.Tenant{}.Mixin()
-	tenantMixinHooks2 := tenantMixin[2].Hooks()
-	tenant.Hooks[0] = tenantMixinHooks2[0]
-	tenantMixinInters2 := tenantMixin[2].Interceptors()
-	tenant.Interceptors[0] = tenantMixinInters2[0]
 	tenantMixinFields0 := tenantMixin[0].Fields()
 	_ = tenantMixinFields0
 	tenantMixinFields1 := tenantMixin[1].Fields()
@@ -418,10 +414,6 @@ func init() {
 	// tenant.ParentIDValidator is a validator for the "parent_id" field. It is called by the builders before save.
 	tenant.ParentIDValidator = tenantDescParentID.Validators[0].(func(int64) error)
 	tenantplanMixin := schema.TenantPlan{}.Mixin()
-	tenantplanMixinHooks2 := tenantplanMixin[2].Hooks()
-	tenantplan.Hooks[0] = tenantplanMixinHooks2[0]
-	tenantplanMixinInters2 := tenantplanMixin[2].Interceptors()
-	tenantplan.Interceptors[0] = tenantplanMixinInters2[0]
 	tenantplanMixinFields0 := tenantplanMixin[0].Fields()
 	_ = tenantplanMixinFields0
 	tenantplanMixinFields1 := tenantplanMixin[1].Fields()

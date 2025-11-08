@@ -2069,30 +2069,6 @@ func (_m *TenantCreate) SetNotNilStatus(value *uint8) *TenantCreate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *TenantUpdate) SetNotNilDeletedAt(value *time.Time) *TenantUpdate {
-	if value != nil {
-		return _m.SetDeletedAt(*value)
-	}
-	return _m
-}
-
-// set field if value's pointer is not nil.
-func (_m *TenantUpdateOne) SetNotNilDeletedAt(value *time.Time) *TenantUpdateOne {
-	if value != nil {
-		return _m.SetDeletedAt(*value)
-	}
-	return _m
-}
-
-// set field if value's pointer is not nil.
-func (_m *TenantCreate) SetNotNilDeletedAt(value *time.Time) *TenantCreate {
-	if value != nil {
-		return _m.SetDeletedAt(*value)
-	}
-	return _m
-}
-
-// set field if value's pointer is not nil.
 func (_m *TenantUpdate) SetNotNilName(value *string) *TenantUpdate {
 	if value != nil {
 		return _m.SetName(*value)
@@ -2448,30 +2424,6 @@ func (_m *TenantPlanUpdateOne) SetNotNilStatus(value *uint8) *TenantPlanUpdateOn
 func (_m *TenantPlanCreate) SetNotNilStatus(value *uint8) *TenantPlanCreate {
 	if value != nil {
 		return _m.SetStatus(*value)
-	}
-	return _m
-}
-
-// set field if value's pointer is not nil.
-func (_m *TenantPlanUpdate) SetNotNilDeletedAt(value *time.Time) *TenantPlanUpdate {
-	if value != nil {
-		return _m.SetDeletedAt(*value)
-	}
-	return _m
-}
-
-// set field if value's pointer is not nil.
-func (_m *TenantPlanUpdateOne) SetNotNilDeletedAt(value *time.Time) *TenantPlanUpdateOne {
-	if value != nil {
-		return _m.SetDeletedAt(*value)
-	}
-	return _m
-}
-
-// set field if value's pointer is not nil.
-func (_m *TenantPlanCreate) SetNotNilDeletedAt(value *time.Time) *TenantPlanCreate {
-	if value != nil {
-		return _m.SetDeletedAt(*value)
 	}
 	return _m
 }

@@ -62,20 +62,6 @@ func (_c *TenantCreate) SetNillableStatus(v *uint8) *TenantCreate {
 	return _c
 }
 
-// SetDeletedAt sets the "deleted_at" field.
-func (_c *TenantCreate) SetDeletedAt(v time.Time) *TenantCreate {
-	_c.mutation.SetDeletedAt(v)
-	return _c
-}
-
-// SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_c *TenantCreate) SetNillableDeletedAt(v *time.Time) *TenantCreate {
-	if v != nil {
-		_c.SetDeletedAt(*v)
-	}
-	return _c
-}
-
 // SetName sets the "name" field.
 func (_c *TenantCreate) SetName(v string) *TenantCreate {
 	_c.mutation.SetName(v)
@@ -183,9 +169,7 @@ func (_c *TenantCreate) Mutation() *TenantMutation {
 
 // Save creates the Tenant in the database.
 func (_c *TenantCreate) Save(ctx context.Context) (*Tenant, error) {
-	if err := _c.defaults(); err != nil {
-		return nil, err
-	}
+	_c.defaults()
 	return withHooks(ctx, _c.sqlSave, _c.mutation, _c.hooks)
 }
 
@@ -212,18 +196,12 @@ func (_c *TenantCreate) ExecX(ctx context.Context) {
 }
 
 // defaults sets the default values of the builder before save.
-func (_c *TenantCreate) defaults() error {
+func (_c *TenantCreate) defaults() {
 	if _, ok := _c.mutation.CreatedAt(); !ok {
-		if tenant.DefaultCreatedAt == nil {
-			return fmt.Errorf("ent: uninitialized tenant.DefaultCreatedAt (forgotten import ent/runtime?)")
-		}
 		v := tenant.DefaultCreatedAt()
 		_c.mutation.SetCreatedAt(v)
 	}
 	if _, ok := _c.mutation.UpdatedAt(); !ok {
-		if tenant.DefaultUpdatedAt == nil {
-			return fmt.Errorf("ent: uninitialized tenant.DefaultUpdatedAt (forgotten import ent/runtime?)")
-		}
 		v := tenant.DefaultUpdatedAt()
 		_c.mutation.SetUpdatedAt(v)
 	}
@@ -235,7 +213,6 @@ func (_c *TenantCreate) defaults() error {
 		v := tenant.DefaultParentID
 		_c.mutation.SetParentID(v)
 	}
-	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
@@ -345,10 +322,6 @@ func (_c *TenantCreate) createSpec() (*Tenant, *sqlgraph.CreateSpec) {
 	if value, ok := _c.mutation.Status(); ok {
 		_spec.SetField(tenant.FieldStatus, field.TypeUint8, value)
 		_node.Status = value
-	}
-	if value, ok := _c.mutation.DeletedAt(); ok {
-		_spec.SetField(tenant.FieldDeletedAt, field.TypeTime, value)
-		_node.DeletedAt = value
 	}
 	if value, ok := _c.mutation.Name(); ok {
 		_spec.SetField(tenant.FieldName, field.TypeString, value)

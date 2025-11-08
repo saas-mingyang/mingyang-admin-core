@@ -62,26 +62,6 @@ func (_u *TenantUpdate) ClearStatus() *TenantUpdate {
 	return _u
 }
 
-// SetDeletedAt sets the "deleted_at" field.
-func (_u *TenantUpdate) SetDeletedAt(v time.Time) *TenantUpdate {
-	_u.mutation.SetDeletedAt(v)
-	return _u
-}
-
-// SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *TenantUpdate) SetNillableDeletedAt(v *time.Time) *TenantUpdate {
-	if v != nil {
-		_u.SetDeletedAt(*v)
-	}
-	return _u
-}
-
-// ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *TenantUpdate) ClearDeletedAt() *TenantUpdate {
-	_u.mutation.ClearDeletedAt()
-	return _u
-}
-
 // SetName sets the "name" field.
 func (_u *TenantUpdate) SetName(v string) *TenantUpdate {
 	_u.mutation.SetName(v)
@@ -305,9 +285,7 @@ func (_u *TenantUpdate) Mutation() *TenantMutation {
 
 // Save executes the query and returns the number of nodes affected by the update operation.
 func (_u *TenantUpdate) Save(ctx context.Context) (int, error) {
-	if err := _u.defaults(); err != nil {
-		return 0, err
-	}
+	_u.defaults()
 	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
 }
 
@@ -334,15 +312,11 @@ func (_u *TenantUpdate) ExecX(ctx context.Context) {
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *TenantUpdate) defaults() error {
+func (_u *TenantUpdate) defaults() {
 	if _, ok := _u.mutation.UpdatedAt(); !ok {
-		if tenant.UpdateDefaultUpdatedAt == nil {
-			return fmt.Errorf("ent: uninitialized tenant.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
-		}
 		v := tenant.UpdateDefaultUpdatedAt()
 		_u.mutation.SetUpdatedAt(v)
 	}
-	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
@@ -399,12 +373,6 @@ func (_u *TenantUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 	}
 	if _u.mutation.StatusCleared() {
 		_spec.ClearField(tenant.FieldStatus, field.TypeUint8)
-	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
-		_spec.SetField(tenant.FieldDeletedAt, field.TypeTime, value)
-	}
-	if _u.mutation.DeletedAtCleared() {
-		_spec.ClearField(tenant.FieldDeletedAt, field.TypeTime)
 	}
 	if value, ok := _u.mutation.Name(); ok {
 		_spec.SetField(tenant.FieldName, field.TypeString, value)
@@ -512,26 +480,6 @@ func (_u *TenantUpdateOne) AddStatus(v int8) *TenantUpdateOne {
 // ClearStatus clears the value of the "status" field.
 func (_u *TenantUpdateOne) ClearStatus() *TenantUpdateOne {
 	_u.mutation.ClearStatus()
-	return _u
-}
-
-// SetDeletedAt sets the "deleted_at" field.
-func (_u *TenantUpdateOne) SetDeletedAt(v time.Time) *TenantUpdateOne {
-	_u.mutation.SetDeletedAt(v)
-	return _u
-}
-
-// SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *TenantUpdateOne) SetNillableDeletedAt(v *time.Time) *TenantUpdateOne {
-	if v != nil {
-		_u.SetDeletedAt(*v)
-	}
-	return _u
-}
-
-// ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *TenantUpdateOne) ClearDeletedAt() *TenantUpdateOne {
-	_u.mutation.ClearDeletedAt()
 	return _u
 }
 
@@ -771,9 +719,7 @@ func (_u *TenantUpdateOne) Select(field string, fields ...string) *TenantUpdateO
 
 // Save executes the query and returns the updated Tenant entity.
 func (_u *TenantUpdateOne) Save(ctx context.Context) (*Tenant, error) {
-	if err := _u.defaults(); err != nil {
-		return nil, err
-	}
+	_u.defaults()
 	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
 }
 
@@ -800,15 +746,11 @@ func (_u *TenantUpdateOne) ExecX(ctx context.Context) {
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *TenantUpdateOne) defaults() error {
+func (_u *TenantUpdateOne) defaults() {
 	if _, ok := _u.mutation.UpdatedAt(); !ok {
-		if tenant.UpdateDefaultUpdatedAt == nil {
-			return fmt.Errorf("ent: uninitialized tenant.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
-		}
 		v := tenant.UpdateDefaultUpdatedAt()
 		_u.mutation.SetUpdatedAt(v)
 	}
-	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
@@ -882,12 +824,6 @@ func (_u *TenantUpdateOne) sqlSave(ctx context.Context) (_node *Tenant, err erro
 	}
 	if _u.mutation.StatusCleared() {
 		_spec.ClearField(tenant.FieldStatus, field.TypeUint8)
-	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
-		_spec.SetField(tenant.FieldDeletedAt, field.TypeTime, value)
-	}
-	if _u.mutation.DeletedAtCleared() {
-		_spec.ClearField(tenant.FieldDeletedAt, field.TypeTime)
 	}
 	if value, ok := _u.mutation.Name(); ok {
 		_spec.SetField(tenant.FieldName, field.TypeString, value)

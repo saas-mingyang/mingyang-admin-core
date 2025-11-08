@@ -10013,7 +10013,6 @@ type TenantMutation struct {
 	updated_at     *time.Time
 	status         *uint8
 	addstatus      *int8
-	deleted_at     *time.Time
 	name           *string
 	code           *string
 	contact_phone  *string
@@ -10281,55 +10280,6 @@ func (m *TenantMutation) ResetStatus() {
 	m.status = nil
 	m.addstatus = nil
 	delete(m.clearedFields, tenant.FieldStatus)
-}
-
-// SetDeletedAt sets the "deleted_at" field.
-func (m *TenantMutation) SetDeletedAt(t time.Time) {
-	m.deleted_at = &t
-}
-
-// DeletedAt returns the value of the "deleted_at" field in the mutation.
-func (m *TenantMutation) DeletedAt() (r time.Time, exists bool) {
-	v := m.deleted_at
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldDeletedAt returns the old "deleted_at" field's value of the Tenant entity.
-// If the Tenant object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *TenantMutation) OldDeletedAt(ctx context.Context) (v time.Time, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldDeletedAt is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldDeletedAt requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldDeletedAt: %w", err)
-	}
-	return oldValue.DeletedAt, nil
-}
-
-// ClearDeletedAt clears the value of the "deleted_at" field.
-func (m *TenantMutation) ClearDeletedAt() {
-	m.deleted_at = nil
-	m.clearedFields[tenant.FieldDeletedAt] = struct{}{}
-}
-
-// DeletedAtCleared returns if the "deleted_at" field was cleared in this mutation.
-func (m *TenantMutation) DeletedAtCleared() bool {
-	_, ok := m.clearedFields[tenant.FieldDeletedAt]
-	return ok
-}
-
-// ResetDeletedAt resets all changes to the "deleted_at" field.
-func (m *TenantMutation) ResetDeletedAt() {
-	m.deleted_at = nil
-	delete(m.clearedFields, tenant.FieldDeletedAt)
 }
 
 // SetName sets the "name" field.
@@ -10928,7 +10878,7 @@ func (m *TenantMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *TenantMutation) Fields() []string {
-	fields := make([]string, 0, 17)
+	fields := make([]string, 0, 16)
 	if m.created_at != nil {
 		fields = append(fields, tenant.FieldCreatedAt)
 	}
@@ -10937,9 +10887,6 @@ func (m *TenantMutation) Fields() []string {
 	}
 	if m.status != nil {
 		fields = append(fields, tenant.FieldStatus)
-	}
-	if m.deleted_at != nil {
-		fields = append(fields, tenant.FieldDeletedAt)
 	}
 	if m.name != nil {
 		fields = append(fields, tenant.FieldName)
@@ -10994,8 +10941,6 @@ func (m *TenantMutation) Field(name string) (ent.Value, bool) {
 		return m.UpdatedAt()
 	case tenant.FieldStatus:
 		return m.Status()
-	case tenant.FieldDeletedAt:
-		return m.DeletedAt()
 	case tenant.FieldName:
 		return m.Name()
 	case tenant.FieldCode:
@@ -11037,8 +10982,6 @@ func (m *TenantMutation) OldField(ctx context.Context, name string) (ent.Value, 
 		return m.OldUpdatedAt(ctx)
 	case tenant.FieldStatus:
 		return m.OldStatus(ctx)
-	case tenant.FieldDeletedAt:
-		return m.OldDeletedAt(ctx)
 	case tenant.FieldName:
 		return m.OldName(ctx)
 	case tenant.FieldCode:
@@ -11094,13 +11037,6 @@ func (m *TenantMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetStatus(v)
-		return nil
-	case tenant.FieldDeletedAt:
-		v, ok := value.(time.Time)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetDeletedAt(v)
 		return nil
 	case tenant.FieldName:
 		v, ok := value.(string)
@@ -11289,9 +11225,6 @@ func (m *TenantMutation) ClearedFields() []string {
 	if m.FieldCleared(tenant.FieldStatus) {
 		fields = append(fields, tenant.FieldStatus)
 	}
-	if m.FieldCleared(tenant.FieldDeletedAt) {
-		fields = append(fields, tenant.FieldDeletedAt)
-	}
 	if m.FieldCleared(tenant.FieldPlanID) {
 		fields = append(fields, tenant.FieldPlanID)
 	}
@@ -11312,9 +11245,6 @@ func (m *TenantMutation) ClearField(name string) error {
 	case tenant.FieldStatus:
 		m.ClearStatus()
 		return nil
-	case tenant.FieldDeletedAt:
-		m.ClearDeletedAt()
-		return nil
 	case tenant.FieldPlanID:
 		m.ClearPlanID()
 		return nil
@@ -11334,9 +11264,6 @@ func (m *TenantMutation) ResetField(name string) error {
 		return nil
 	case tenant.FieldStatus:
 		m.ResetStatus()
-		return nil
-	case tenant.FieldDeletedAt:
-		m.ResetDeletedAt()
 		return nil
 	case tenant.FieldName:
 		m.ResetName()
@@ -11439,7 +11366,6 @@ type TenantPlanMutation struct {
 	updated_at             *time.Time
 	status                 *uint8
 	addstatus              *int8
-	deleted_at             *time.Time
 	package_name           *string
 	menu_ids               *[]string
 	appendmenu_ids         []string
@@ -11699,55 +11625,6 @@ func (m *TenantPlanMutation) ResetStatus() {
 	delete(m.clearedFields, tenantplan.FieldStatus)
 }
 
-// SetDeletedAt sets the "deleted_at" field.
-func (m *TenantPlanMutation) SetDeletedAt(t time.Time) {
-	m.deleted_at = &t
-}
-
-// DeletedAt returns the value of the "deleted_at" field in the mutation.
-func (m *TenantPlanMutation) DeletedAt() (r time.Time, exists bool) {
-	v := m.deleted_at
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldDeletedAt returns the old "deleted_at" field's value of the TenantPlan entity.
-// If the TenantPlan object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *TenantPlanMutation) OldDeletedAt(ctx context.Context) (v time.Time, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldDeletedAt is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldDeletedAt requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldDeletedAt: %w", err)
-	}
-	return oldValue.DeletedAt, nil
-}
-
-// ClearDeletedAt clears the value of the "deleted_at" field.
-func (m *TenantPlanMutation) ClearDeletedAt() {
-	m.deleted_at = nil
-	m.clearedFields[tenantplan.FieldDeletedAt] = struct{}{}
-}
-
-// DeletedAtCleared returns if the "deleted_at" field was cleared in this mutation.
-func (m *TenantPlanMutation) DeletedAtCleared() bool {
-	_, ok := m.clearedFields[tenantplan.FieldDeletedAt]
-	return ok
-}
-
-// ResetDeletedAt resets all changes to the "deleted_at" field.
-func (m *TenantPlanMutation) ResetDeletedAt() {
-	m.deleted_at = nil
-	delete(m.clearedFields, tenantplan.FieldDeletedAt)
-}
-
 // SetPackageName sets the "package_name" field.
 func (m *TenantPlanMutation) SetPackageName(s string) {
 	m.package_name = &s
@@ -11976,7 +11853,7 @@ func (m *TenantPlanMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *TenantPlanMutation) Fields() []string {
-	fields := make([]string, 0, 8)
+	fields := make([]string, 0, 7)
 	if m.created_at != nil {
 		fields = append(fields, tenantplan.FieldCreatedAt)
 	}
@@ -11985,9 +11862,6 @@ func (m *TenantPlanMutation) Fields() []string {
 	}
 	if m.status != nil {
 		fields = append(fields, tenantplan.FieldStatus)
-	}
-	if m.deleted_at != nil {
-		fields = append(fields, tenantplan.FieldDeletedAt)
 	}
 	if m.package_name != nil {
 		fields = append(fields, tenantplan.FieldPackageName)
@@ -12015,8 +11889,6 @@ func (m *TenantPlanMutation) Field(name string) (ent.Value, bool) {
 		return m.UpdatedAt()
 	case tenantplan.FieldStatus:
 		return m.Status()
-	case tenantplan.FieldDeletedAt:
-		return m.DeletedAt()
 	case tenantplan.FieldPackageName:
 		return m.PackageName()
 	case tenantplan.FieldMenuIds:
@@ -12040,8 +11912,6 @@ func (m *TenantPlanMutation) OldField(ctx context.Context, name string) (ent.Val
 		return m.OldUpdatedAt(ctx)
 	case tenantplan.FieldStatus:
 		return m.OldStatus(ctx)
-	case tenantplan.FieldDeletedAt:
-		return m.OldDeletedAt(ctx)
 	case tenantplan.FieldPackageName:
 		return m.OldPackageName(ctx)
 	case tenantplan.FieldMenuIds:
@@ -12079,13 +11949,6 @@ func (m *TenantPlanMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetStatus(v)
-		return nil
-	case tenantplan.FieldDeletedAt:
-		v, ok := value.(time.Time)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetDeletedAt(v)
 		return nil
 	case tenantplan.FieldPackageName:
 		v, ok := value.(string)
@@ -12175,9 +12038,6 @@ func (m *TenantPlanMutation) ClearedFields() []string {
 	if m.FieldCleared(tenantplan.FieldStatus) {
 		fields = append(fields, tenantplan.FieldStatus)
 	}
-	if m.FieldCleared(tenantplan.FieldDeletedAt) {
-		fields = append(fields, tenantplan.FieldDeletedAt)
-	}
 	return fields
 }
 
@@ -12195,9 +12055,6 @@ func (m *TenantPlanMutation) ClearField(name string) error {
 	case tenantplan.FieldStatus:
 		m.ClearStatus()
 		return nil
-	case tenantplan.FieldDeletedAt:
-		m.ClearDeletedAt()
-		return nil
 	}
 	return fmt.Errorf("unknown TenantPlan nullable field %s", name)
 }
@@ -12214,9 +12071,6 @@ func (m *TenantPlanMutation) ResetField(name string) error {
 		return nil
 	case tenantplan.FieldStatus:
 		m.ResetStatus()
-		return nil
-	case tenantplan.FieldDeletedAt:
-		m.ResetDeletedAt()
 		return nil
 	case tenantplan.FieldPackageName:
 		m.ResetPackageName()

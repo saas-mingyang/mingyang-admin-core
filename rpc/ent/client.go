@@ -1788,14 +1788,12 @@ func (c *TenantClient) GetX(ctx context.Context, id uint64) *Tenant {
 
 // Hooks returns the client hooks.
 func (c *TenantClient) Hooks() []Hook {
-	hooks := c.hooks.Tenant
-	return append(hooks[:len(hooks):len(hooks)], tenant.Hooks[:]...)
+	return c.hooks.Tenant
 }
 
 // Interceptors returns the client interceptors.
 func (c *TenantClient) Interceptors() []Interceptor {
-	inters := c.inters.Tenant
-	return append(inters[:len(inters):len(inters)], tenant.Interceptors[:]...)
+	return c.inters.Tenant
 }
 
 func (c *TenantClient) mutate(ctx context.Context, m *TenantMutation) (Value, error) {
@@ -1923,14 +1921,12 @@ func (c *TenantPlanClient) GetX(ctx context.Context, id uint64) *TenantPlan {
 
 // Hooks returns the client hooks.
 func (c *TenantPlanClient) Hooks() []Hook {
-	hooks := c.hooks.TenantPlan
-	return append(hooks[:len(hooks):len(hooks)], tenantplan.Hooks[:]...)
+	return c.hooks.TenantPlan
 }
 
 // Interceptors returns the client interceptors.
 func (c *TenantPlanClient) Interceptors() []Interceptor {
-	inters := c.inters.TenantPlan
-	return append(inters[:len(inters):len(inters)], tenantplan.Interceptors[:]...)
+	return c.inters.TenantPlan
 }
 
 func (c *TenantPlanClient) mutate(ctx context.Context, m *TenantPlanMutation) (Value, error) {
