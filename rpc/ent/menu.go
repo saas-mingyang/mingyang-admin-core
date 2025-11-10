@@ -16,7 +16,7 @@ import (
 type Menu struct {
 	config `json:"-"`
 	// ID of the ent.
-	ID int64 `json:"id,omitempty"`
+	ID uint64 `json:"id,omitempty"`
 	// Create Time | 创建日期
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	// Update Time | 修改日期
@@ -24,7 +24,7 @@ type Menu struct {
 	// Sort Number | 排序编号
 	Sort uint32 `json:"sort,omitempty"`
 	// Parent menu ID | 父菜单ID
-	ParentID int64 `json:"parent_id,omitempty"`
+	ParentID uint64 `json:"parent_id,omitempty"`
 	// Menu level | 菜单层级
 	MenuLevel uint32 `json:"menu_level,omitempty"`
 	// Menu type | 菜单类型 （菜单或目录）0 目录 1 菜单
@@ -148,7 +148,7 @@ func (_m *Menu) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = int64(value.Int64)
+			_m.ID = uint64(value.Int64)
 		case menu.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
@@ -171,7 +171,7 @@ func (_m *Menu) assignValues(columns []string, values []any) error {
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field parent_id", values[i])
 			} else if value.Valid {
-				_m.ParentID = value.Int64
+				_m.ParentID = uint64(value.Int64)
 			}
 		case menu.FieldMenuLevel:
 			if value, ok := values[i].(*sql.NullInt64); !ok {

@@ -16,7 +16,7 @@ import (
 type Department struct {
 	config `json:"-"`
 	// ID of the ent.
-	ID int64 `json:"id,omitempty"`
+	ID uint64 `json:"id,omitempty"`
 	// Create Time | 创建日期
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	// Update Time | 修改日期
@@ -32,7 +32,7 @@ type Department struct {
 	// Parents' IDs | 父级列表
 	Ancestors string `json:"ancestors,omitempty"`
 	// Department leader | 部门负责人
-	Leader int64 `json:"leader,omitempty"`
+	Leader uint64 `json:"leader,omitempty"`
 	// Leader's phone number | 负责人电话
 	Phone string `json:"phone,omitempty"`
 	// Leader's email | 部门负责人电子邮箱
@@ -40,7 +40,7 @@ type Department struct {
 	// Remark | 备注
 	Remark string `json:"remark,omitempty"`
 	// Parent department ID | 父级部门ID
-	ParentID int64 `json:"parent_id,omitempty"`
+	ParentID uint64 `json:"parent_id,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the DepartmentQuery when eager-loading is set.
 	Edges        DepartmentEdges `json:"edges"`
@@ -120,7 +120,7 @@ func (_m *Department) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = int64(value.Int64)
+			_m.ID = uint64(value.Int64)
 		case department.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
@@ -167,7 +167,7 @@ func (_m *Department) assignValues(columns []string, values []any) error {
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field leader", values[i])
 			} else if value.Valid {
-				_m.Leader = value.Int64
+				_m.Leader = uint64(value.Int64)
 			}
 		case department.FieldPhone:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -191,7 +191,7 @@ func (_m *Department) assignValues(columns []string, values []any) error {
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field parent_id", values[i])
 			} else if value.Valid {
-				_m.ParentID = value.Int64
+				_m.ParentID = uint64(value.Int64)
 			}
 		default:
 			_m.selectValues.Set(columns[i], values[i])

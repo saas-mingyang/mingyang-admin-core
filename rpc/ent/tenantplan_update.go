@@ -170,7 +170,7 @@ func (_u *TenantPlanUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *Ten
 }
 
 func (_u *TenantPlanUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	_spec := sqlgraph.NewUpdateSpec(tenantplan.Table, tenantplan.Columns, sqlgraph.NewFieldSpec(tenantplan.FieldID, field.TypeInt64))
+	_spec := sqlgraph.NewUpdateSpec(tenantplan.Table, tenantplan.Columns, sqlgraph.NewFieldSpec(tenantplan.FieldID, field.TypeUint64))
 	if ps := _u.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
@@ -390,7 +390,7 @@ func (_u *TenantPlanUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *
 }
 
 func (_u *TenantPlanUpdateOne) sqlSave(ctx context.Context) (_node *TenantPlan, err error) {
-	_spec := sqlgraph.NewUpdateSpec(tenantplan.Table, tenantplan.Columns, sqlgraph.NewFieldSpec(tenantplan.FieldID, field.TypeInt64))
+	_spec := sqlgraph.NewUpdateSpec(tenantplan.Table, tenantplan.Columns, sqlgraph.NewFieldSpec(tenantplan.FieldID, field.TypeUint64))
 	id, ok := _u.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "TenantPlan.id" for update`)}

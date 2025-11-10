@@ -11,47 +11,47 @@ import (
 )
 
 // ID filters vertices based on their ID field.
-func ID(id int64) predicate.DictionaryDetail {
+func ID(id uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldEQ(FieldID, id))
 }
 
 // IDEQ applies the EQ predicate on the ID field.
-func IDEQ(id int64) predicate.DictionaryDetail {
+func IDEQ(id uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldEQ(FieldID, id))
 }
 
 // IDNEQ applies the NEQ predicate on the ID field.
-func IDNEQ(id int64) predicate.DictionaryDetail {
+func IDNEQ(id uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldNEQ(FieldID, id))
 }
 
 // IDIn applies the In predicate on the ID field.
-func IDIn(ids ...int64) predicate.DictionaryDetail {
+func IDIn(ids ...uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldIn(FieldID, ids...))
 }
 
 // IDNotIn applies the NotIn predicate on the ID field.
-func IDNotIn(ids ...int64) predicate.DictionaryDetail {
+func IDNotIn(ids ...uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldNotIn(FieldID, ids...))
 }
 
 // IDGT applies the GT predicate on the ID field.
-func IDGT(id int64) predicate.DictionaryDetail {
+func IDGT(id uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldGT(FieldID, id))
 }
 
 // IDGTE applies the GTE predicate on the ID field.
-func IDGTE(id int64) predicate.DictionaryDetail {
+func IDGTE(id uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldGTE(FieldID, id))
 }
 
 // IDLT applies the LT predicate on the ID field.
-func IDLT(id int64) predicate.DictionaryDetail {
+func IDLT(id uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldLT(FieldID, id))
 }
 
 // IDLTE applies the LTE predicate on the ID field.
-func IDLTE(id int64) predicate.DictionaryDetail {
+func IDLTE(id uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldLTE(FieldID, id))
 }
 
@@ -96,7 +96,7 @@ func Value(v string) predicate.DictionaryDetail {
 }
 
 // DictionaryID applies equality check predicate on the "dictionary_id" field. It's identical to DictionaryIDEQ.
-func DictionaryID(v int64) predicate.DictionaryDetail {
+func DictionaryID(v uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldEQ(FieldDictionaryID, v))
 }
 
@@ -506,22 +506,22 @@ func ValueContainsFold(v string) predicate.DictionaryDetail {
 }
 
 // DictionaryIDEQ applies the EQ predicate on the "dictionary_id" field.
-func DictionaryIDEQ(v int64) predicate.DictionaryDetail {
+func DictionaryIDEQ(v uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldEQ(FieldDictionaryID, v))
 }
 
 // DictionaryIDNEQ applies the NEQ predicate on the "dictionary_id" field.
-func DictionaryIDNEQ(v int64) predicate.DictionaryDetail {
+func DictionaryIDNEQ(v uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldNEQ(FieldDictionaryID, v))
 }
 
 // DictionaryIDIn applies the In predicate on the "dictionary_id" field.
-func DictionaryIDIn(vs ...int64) predicate.DictionaryDetail {
+func DictionaryIDIn(vs ...uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldIn(FieldDictionaryID, vs...))
 }
 
 // DictionaryIDNotIn applies the NotIn predicate on the "dictionary_id" field.
-func DictionaryIDNotIn(vs ...int64) predicate.DictionaryDetail {
+func DictionaryIDNotIn(vs ...uint64) predicate.DictionaryDetail {
 	return predicate.DictionaryDetail(sql.FieldNotIn(FieldDictionaryID, vs...))
 }
 

@@ -17,7 +17,7 @@ type Menu struct {
 
 func (Menu) Fields() []ent.Field {
 	return []ent.Field{
-		field.Int64("parent_id").Default(100000).Optional().
+		field.Uint64("parent_id").Default(100000).Optional().
 			Comment("Parent menu ID | 父菜单ID"),
 		field.Uint32("menu_level").
 			Comment("Menu level | 菜单层级"),

@@ -15,7 +15,7 @@ type Token struct {
 
 func (Token) Fields() []ent.Field {
 	return []ent.Field{
-		field.Int64("user_id").Optional().Default(1).
+		field.Uint64("user_id").Optional().Default(1).
 			Comment(" User's ID | 用户的ID"),
 		field.String("username").
 			Comment("Username | 用户名").

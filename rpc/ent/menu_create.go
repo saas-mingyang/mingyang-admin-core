@@ -64,13 +64,13 @@ func (_c *MenuCreate) SetNillableSort(v *uint32) *MenuCreate {
 }
 
 // SetParentID sets the "parent_id" field.
-func (_c *MenuCreate) SetParentID(v int64) *MenuCreate {
+func (_c *MenuCreate) SetParentID(v uint64) *MenuCreate {
 	_c.mutation.SetParentID(v)
 	return _c
 }
 
 // SetNillableParentID sets the "parent_id" field if the given value is not nil.
-func (_c *MenuCreate) SetNillableParentID(v *int64) *MenuCreate {
+func (_c *MenuCreate) SetNillableParentID(v *uint64) *MenuCreate {
 	if v != nil {
 		_c.SetParentID(*v)
 	}
@@ -332,13 +332,13 @@ func (_c *MenuCreate) SetNillableRealPath(v *string) *MenuCreate {
 }
 
 // SetID sets the "id" field.
-func (_c *MenuCreate) SetID(v int64) *MenuCreate {
+func (_c *MenuCreate) SetID(v uint64) *MenuCreate {
 	_c.mutation.SetID(v)
 	return _c
 }
 
 // SetNillableID sets the "id" field if the given value is not nil.
-func (_c *MenuCreate) SetNillableID(v *int64) *MenuCreate {
+func (_c *MenuCreate) SetNillableID(v *uint64) *MenuCreate {
 	if v != nil {
 		_c.SetID(*v)
 	}
@@ -346,14 +346,14 @@ func (_c *MenuCreate) SetNillableID(v *int64) *MenuCreate {
 }
 
 // AddRoleIDs adds the "roles" edge to the Role entity by IDs.
-func (_c *MenuCreate) AddRoleIDs(ids ...int64) *MenuCreate {
+func (_c *MenuCreate) AddRoleIDs(ids ...uint64) *MenuCreate {
 	_c.mutation.AddRoleIDs(ids...)
 	return _c
 }
 
 // AddRoles adds the "roles" edges to the Role entity.
 func (_c *MenuCreate) AddRoles(v ...*Role) *MenuCreate {
-	ids := make([]int64, len(v))
+	ids := make([]uint64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -366,14 +366,14 @@ func (_c *MenuCreate) SetParent(v *Menu) *MenuCreate {
 }
 
 // AddChildIDs adds the "children" edge to the Menu entity by IDs.
-func (_c *MenuCreate) AddChildIDs(ids ...int64) *MenuCreate {
+func (_c *MenuCreate) AddChildIDs(ids ...uint64) *MenuCreate {
 	_c.mutation.AddChildIDs(ids...)
 	return _c
 }
 
 // AddChildren adds the "children" edges to the Menu entity.
 func (_c *MenuCreate) AddChildren(v ...*Menu) *MenuCreate {
-	ids := make([]int64, len(v))
+	ids := make([]uint64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -539,7 +539,7 @@ func (_c *MenuCreate) sqlSave(ctx context.Context) (*Menu, error) {
 	}
 	if _spec.ID.Value != _node.ID {
 		id := _spec.ID.Value.(int64)
-		_node.ID = int64(id)
+		_node.ID = uint64(id)
 	}
 	_c.mutation.id = &_node.ID
 	_c.mutation.done = true
@@ -549,7 +549,7 @@ func (_c *MenuCreate) sqlSave(ctx context.Context) (*Menu, error) {
 func (_c *MenuCreate) createSpec() (*Menu, *sqlgraph.CreateSpec) {
 	var (
 		_node = &Menu{config: _c.config}
-		_spec = sqlgraph.NewCreateSpec(menu.Table, sqlgraph.NewFieldSpec(menu.FieldID, field.TypeInt64))
+		_spec = sqlgraph.NewCreateSpec(menu.Table, sqlgraph.NewFieldSpec(menu.FieldID, field.TypeUint64))
 	)
 	if id, ok := _c.mutation.ID(); ok {
 		_node.ID = id
@@ -659,7 +659,7 @@ func (_c *MenuCreate) createSpec() (*Menu, *sqlgraph.CreateSpec) {
 			Columns: menu.RolesPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(role.FieldID, field.TypeInt64),
+				IDSpec: sqlgraph.NewFieldSpec(role.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {
@@ -675,7 +675,7 @@ func (_c *MenuCreate) createSpec() (*Menu, *sqlgraph.CreateSpec) {
 			Columns: []string{menu.ParentColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeInt64),
+				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {
@@ -692,7 +692,7 @@ func (_c *MenuCreate) createSpec() (*Menu, *sqlgraph.CreateSpec) {
 			Columns: []string{menu.ChildrenColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeInt64),
+				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {
@@ -750,7 +750,7 @@ func (_c *MenuCreateBulk) Save(ctx context.Context) ([]*Menu, error) {
 				mutation.id = &nodes[i].ID
 				if specs[i].ID.Value != nil && nodes[i].ID == 0 {
 					id := specs[i].ID.Value.(int64)
-					nodes[i].ID = int64(id)
+					nodes[i].ID = uint64(id)
 				}
 				mutation.done = true
 				return nodes[i], nil

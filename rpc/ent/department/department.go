@@ -104,11 +104,11 @@ var (
 	// DefaultSort holds the default value on creation for the "sort" field.
 	DefaultSort uint32
 	// DefaultLeader holds the default value on creation for the "leader" field.
-	DefaultLeader int64
+	DefaultLeader uint64
 	// DefaultParentID holds the default value on creation for the "parent_id" field.
-	DefaultParentID int64
+	DefaultParentID uint64
 	// DefaultID holds the default value on creation for the "id" field.
-	DefaultID int64
+	DefaultID uint64
 )
 
 // OrderOption defines the ordering options for the Department queries.

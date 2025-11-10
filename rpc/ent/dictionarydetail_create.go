@@ -110,13 +110,13 @@ func (_c *DictionaryDetailCreate) SetValue(v string) *DictionaryDetailCreate {
 }
 
 // SetDictionaryID sets the "dictionary_id" field.
-func (_c *DictionaryDetailCreate) SetDictionaryID(v int64) *DictionaryDetailCreate {
+func (_c *DictionaryDetailCreate) SetDictionaryID(v uint64) *DictionaryDetailCreate {
 	_c.mutation.SetDictionaryID(v)
 	return _c
 }
 
 // SetNillableDictionaryID sets the "dictionary_id" field if the given value is not nil.
-func (_c *DictionaryDetailCreate) SetNillableDictionaryID(v *int64) *DictionaryDetailCreate {
+func (_c *DictionaryDetailCreate) SetNillableDictionaryID(v *uint64) *DictionaryDetailCreate {
 	if v != nil {
 		_c.SetDictionaryID(*v)
 	}
@@ -124,13 +124,13 @@ func (_c *DictionaryDetailCreate) SetNillableDictionaryID(v *int64) *DictionaryD
 }
 
 // SetID sets the "id" field.
-func (_c *DictionaryDetailCreate) SetID(v int64) *DictionaryDetailCreate {
+func (_c *DictionaryDetailCreate) SetID(v uint64) *DictionaryDetailCreate {
 	_c.mutation.SetID(v)
 	return _c
 }
 
 // SetNillableID sets the "id" field if the given value is not nil.
-func (_c *DictionaryDetailCreate) SetNillableID(v *int64) *DictionaryDetailCreate {
+func (_c *DictionaryDetailCreate) SetNillableID(v *uint64) *DictionaryDetailCreate {
 	if v != nil {
 		_c.SetID(*v)
 	}
@@ -138,13 +138,13 @@ func (_c *DictionaryDetailCreate) SetNillableID(v *int64) *DictionaryDetailCreat
 }
 
 // SetDictionariesID sets the "dictionaries" edge to the Dictionary entity by ID.
-func (_c *DictionaryDetailCreate) SetDictionariesID(id int64) *DictionaryDetailCreate {
+func (_c *DictionaryDetailCreate) SetDictionariesID(id uint64) *DictionaryDetailCreate {
 	_c.mutation.SetDictionariesID(id)
 	return _c
 }
 
 // SetNillableDictionariesID sets the "dictionaries" edge to the Dictionary entity by ID if the given value is not nil.
-func (_c *DictionaryDetailCreate) SetNillableDictionariesID(id *int64) *DictionaryDetailCreate {
+func (_c *DictionaryDetailCreate) SetNillableDictionariesID(id *uint64) *DictionaryDetailCreate {
 	if id != nil {
 		_c = _c.SetDictionariesID(*id)
 	}
@@ -256,7 +256,7 @@ func (_c *DictionaryDetailCreate) sqlSave(ctx context.Context) (*DictionaryDetai
 	}
 	if _spec.ID.Value != _node.ID {
 		id := _spec.ID.Value.(int64)
-		_node.ID = int64(id)
+		_node.ID = uint64(id)
 	}
 	_c.mutation.id = &_node.ID
 	_c.mutation.done = true
@@ -266,7 +266,7 @@ func (_c *DictionaryDetailCreate) sqlSave(ctx context.Context) (*DictionaryDetai
 func (_c *DictionaryDetailCreate) createSpec() (*DictionaryDetail, *sqlgraph.CreateSpec) {
 	var (
 		_node = &DictionaryDetail{config: _c.config}
-		_spec = sqlgraph.NewCreateSpec(dictionarydetail.Table, sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeInt64))
+		_spec = sqlgraph.NewCreateSpec(dictionarydetail.Table, sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeUint64))
 	)
 	if id, ok := _c.mutation.ID(); ok {
 		_node.ID = id
@@ -312,7 +312,7 @@ func (_c *DictionaryDetailCreate) createSpec() (*DictionaryDetail, *sqlgraph.Cre
 			Columns: []string{dictionarydetail.DictionariesColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeInt64),
+				IDSpec: sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {
@@ -371,7 +371,7 @@ func (_c *DictionaryDetailCreateBulk) Save(ctx context.Context) ([]*DictionaryDe
 				mutation.id = &nodes[i].ID
 				if specs[i].ID.Value != nil && nodes[i].ID == 0 {
 					id := specs[i].ID.Value.(int64)
-					nodes[i].ID = int64(id)
+					nodes[i].ID = uint64(id)
 				}
 				mutation.done = true
 				return nodes[i], nil

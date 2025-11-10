@@ -11,47 +11,47 @@ import (
 )
 
 // ID filters vertices based on their ID field.
-func ID(id int64) predicate.Department {
+func ID(id uint64) predicate.Department {
 	return predicate.Department(sql.FieldEQ(FieldID, id))
 }
 
 // IDEQ applies the EQ predicate on the ID field.
-func IDEQ(id int64) predicate.Department {
+func IDEQ(id uint64) predicate.Department {
 	return predicate.Department(sql.FieldEQ(FieldID, id))
 }
 
 // IDNEQ applies the NEQ predicate on the ID field.
-func IDNEQ(id int64) predicate.Department {
+func IDNEQ(id uint64) predicate.Department {
 	return predicate.Department(sql.FieldNEQ(FieldID, id))
 }
 
 // IDIn applies the In predicate on the ID field.
-func IDIn(ids ...int64) predicate.Department {
+func IDIn(ids ...uint64) predicate.Department {
 	return predicate.Department(sql.FieldIn(FieldID, ids...))
 }
 
 // IDNotIn applies the NotIn predicate on the ID field.
-func IDNotIn(ids ...int64) predicate.Department {
+func IDNotIn(ids ...uint64) predicate.Department {
 	return predicate.Department(sql.FieldNotIn(FieldID, ids...))
 }
 
 // IDGT applies the GT predicate on the ID field.
-func IDGT(id int64) predicate.Department {
+func IDGT(id uint64) predicate.Department {
 	return predicate.Department(sql.FieldGT(FieldID, id))
 }
 
 // IDGTE applies the GTE predicate on the ID field.
-func IDGTE(id int64) predicate.Department {
+func IDGTE(id uint64) predicate.Department {
 	return predicate.Department(sql.FieldGTE(FieldID, id))
 }
 
 // IDLT applies the LT predicate on the ID field.
-func IDLT(id int64) predicate.Department {
+func IDLT(id uint64) predicate.Department {
 	return predicate.Department(sql.FieldLT(FieldID, id))
 }
 
 // IDLTE applies the LTE predicate on the ID field.
-func IDLTE(id int64) predicate.Department {
+func IDLTE(id uint64) predicate.Department {
 	return predicate.Department(sql.FieldLTE(FieldID, id))
 }
 
@@ -91,7 +91,7 @@ func Ancestors(v string) predicate.Department {
 }
 
 // Leader applies equality check predicate on the "leader" field. It's identical to LeaderEQ.
-func Leader(v int64) predicate.Department {
+func Leader(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldEQ(FieldLeader, v))
 }
 
@@ -111,7 +111,7 @@ func Remark(v string) predicate.Department {
 }
 
 // ParentID applies equality check predicate on the "parent_id" field. It's identical to ParentIDEQ.
-func ParentID(v int64) predicate.Department {
+func ParentID(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldEQ(FieldParentID, v))
 }
 
@@ -466,42 +466,42 @@ func AncestorsContainsFold(v string) predicate.Department {
 }
 
 // LeaderEQ applies the EQ predicate on the "leader" field.
-func LeaderEQ(v int64) predicate.Department {
+func LeaderEQ(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldEQ(FieldLeader, v))
 }
 
 // LeaderNEQ applies the NEQ predicate on the "leader" field.
-func LeaderNEQ(v int64) predicate.Department {
+func LeaderNEQ(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldNEQ(FieldLeader, v))
 }
 
 // LeaderIn applies the In predicate on the "leader" field.
-func LeaderIn(vs ...int64) predicate.Department {
+func LeaderIn(vs ...uint64) predicate.Department {
 	return predicate.Department(sql.FieldIn(FieldLeader, vs...))
 }
 
 // LeaderNotIn applies the NotIn predicate on the "leader" field.
-func LeaderNotIn(vs ...int64) predicate.Department {
+func LeaderNotIn(vs ...uint64) predicate.Department {
 	return predicate.Department(sql.FieldNotIn(FieldLeader, vs...))
 }
 
 // LeaderGT applies the GT predicate on the "leader" field.
-func LeaderGT(v int64) predicate.Department {
+func LeaderGT(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldGT(FieldLeader, v))
 }
 
 // LeaderGTE applies the GTE predicate on the "leader" field.
-func LeaderGTE(v int64) predicate.Department {
+func LeaderGTE(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldGTE(FieldLeader, v))
 }
 
 // LeaderLT applies the LT predicate on the "leader" field.
-func LeaderLT(v int64) predicate.Department {
+func LeaderLT(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldLT(FieldLeader, v))
 }
 
 // LeaderLTE applies the LTE predicate on the "leader" field.
-func LeaderLTE(v int64) predicate.Department {
+func LeaderLTE(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldLTE(FieldLeader, v))
 }
 
@@ -741,22 +741,22 @@ func RemarkContainsFold(v string) predicate.Department {
 }
 
 // ParentIDEQ applies the EQ predicate on the "parent_id" field.
-func ParentIDEQ(v int64) predicate.Department {
+func ParentIDEQ(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldEQ(FieldParentID, v))
 }
 
 // ParentIDNEQ applies the NEQ predicate on the "parent_id" field.
-func ParentIDNEQ(v int64) predicate.Department {
+func ParentIDNEQ(v uint64) predicate.Department {
 	return predicate.Department(sql.FieldNEQ(FieldParentID, v))
 }
 
 // ParentIDIn applies the In predicate on the "parent_id" field.
-func ParentIDIn(vs ...int64) predicate.Department {
+func ParentIDIn(vs ...uint64) predicate.Department {
 	return predicate.Department(sql.FieldIn(FieldParentID, vs...))
 }
 
 // ParentIDNotIn applies the NotIn predicate on the "parent_id" field.
-func ParentIDNotIn(vs ...int64) predicate.Department {
+func ParentIDNotIn(vs ...uint64) predicate.Department {
 	return predicate.Department(sql.FieldNotIn(FieldParentID, vs...))
 }
 

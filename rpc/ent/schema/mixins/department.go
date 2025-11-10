@@ -33,7 +33,7 @@ type DepartmentMixin struct {
 // Fields for all schemas that embed DepartmentMixin.
 func (DepartmentMixin) Fields() []ent.Field {
 	return []ent.Field{
-		field.Int64("department_id").
+		field.Uint64("department_id").
 			Optional().
 			Comment("Department ID | 部门 ID"),
 	}

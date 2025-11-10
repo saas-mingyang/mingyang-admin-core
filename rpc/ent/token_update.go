@@ -63,14 +63,14 @@ func (_u *TokenUpdate) ClearStatus() *TokenUpdate {
 }
 
 // SetUserID sets the "user_id" field.
-func (_u *TokenUpdate) SetUserID(v int64) *TokenUpdate {
+func (_u *TokenUpdate) SetUserID(v uint64) *TokenUpdate {
 	_u.mutation.ResetUserID()
 	_u.mutation.SetUserID(v)
 	return _u
 }
 
 // SetNillableUserID sets the "user_id" field if the given value is not nil.
-func (_u *TokenUpdate) SetNillableUserID(v *int64) *TokenUpdate {
+func (_u *TokenUpdate) SetNillableUserID(v *uint64) *TokenUpdate {
 	if v != nil {
 		_u.SetUserID(*v)
 	}
@@ -193,7 +193,7 @@ func (_u *TokenUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *TokenUpd
 }
 
 func (_u *TokenUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	_spec := sqlgraph.NewUpdateSpec(token.Table, token.Columns, sqlgraph.NewFieldSpec(token.FieldID, field.TypeInt64))
+	_spec := sqlgraph.NewUpdateSpec(token.Table, token.Columns, sqlgraph.NewFieldSpec(token.FieldID, field.TypeUint64))
 	if ps := _u.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
@@ -214,13 +214,13 @@ func (_u *TokenUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		_spec.ClearField(token.FieldStatus, field.TypeUint8)
 	}
 	if value, ok := _u.mutation.UserID(); ok {
-		_spec.SetField(token.FieldUserID, field.TypeInt64, value)
+		_spec.SetField(token.FieldUserID, field.TypeUint64, value)
 	}
 	if value, ok := _u.mutation.AddedUserID(); ok {
-		_spec.AddField(token.FieldUserID, field.TypeInt64, value)
+		_spec.AddField(token.FieldUserID, field.TypeUint64, value)
 	}
 	if _u.mutation.UserIDCleared() {
-		_spec.ClearField(token.FieldUserID, field.TypeInt64)
+		_spec.ClearField(token.FieldUserID, field.TypeUint64)
 	}
 	if value, ok := _u.mutation.Username(); ok {
 		_spec.SetField(token.FieldUsername, field.TypeString, value)
@@ -290,14 +290,14 @@ func (_u *TokenUpdateOne) ClearStatus() *TokenUpdateOne {
 }
 
 // SetUserID sets the "user_id" field.
-func (_u *TokenUpdateOne) SetUserID(v int64) *TokenUpdateOne {
+func (_u *TokenUpdateOne) SetUserID(v uint64) *TokenUpdateOne {
 	_u.mutation.ResetUserID()
 	_u.mutation.SetUserID(v)
 	return _u
 }
 
 // SetNillableUserID sets the "user_id" field if the given value is not nil.
-func (_u *TokenUpdateOne) SetNillableUserID(v *int64) *TokenUpdateOne {
+func (_u *TokenUpdateOne) SetNillableUserID(v *uint64) *TokenUpdateOne {
 	if v != nil {
 		_u.SetUserID(*v)
 	}
@@ -433,7 +433,7 @@ func (_u *TokenUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *Token
 }
 
 func (_u *TokenUpdateOne) sqlSave(ctx context.Context) (_node *Token, err error) {
-	_spec := sqlgraph.NewUpdateSpec(token.Table, token.Columns, sqlgraph.NewFieldSpec(token.FieldID, field.TypeInt64))
+	_spec := sqlgraph.NewUpdateSpec(token.Table, token.Columns, sqlgraph.NewFieldSpec(token.FieldID, field.TypeUint64))
 	id, ok := _u.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "Token.id" for update`)}
@@ -471,13 +471,13 @@ func (_u *TokenUpdateOne) sqlSave(ctx context.Context) (_node *Token, err error)
 		_spec.ClearField(token.FieldStatus, field.TypeUint8)
 	}
 	if value, ok := _u.mutation.UserID(); ok {
-		_spec.SetField(token.FieldUserID, field.TypeInt64, value)
+		_spec.SetField(token.FieldUserID, field.TypeUint64, value)
 	}
 	if value, ok := _u.mutation.AddedUserID(); ok {
-		_spec.AddField(token.FieldUserID, field.TypeInt64, value)
+		_spec.AddField(token.FieldUserID, field.TypeUint64, value)
 	}
 	if _u.mutation.UserIDCleared() {
-		_spec.ClearField(token.FieldUserID, field.TypeInt64)
+		_spec.ClearField(token.FieldUserID, field.TypeUint64)
 	}
 	if value, ok := _u.mutation.Username(); ok {
 		_spec.SetField(token.FieldUsername, field.TypeString, value)

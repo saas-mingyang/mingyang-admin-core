@@ -16,7 +16,7 @@ import (
 type Token struct {
 	config `json:"-"`
 	// ID of the ent.
-	ID int64 `json:"id,omitempty"`
+	ID uint64 `json:"id,omitempty"`
 	// Create Time | 创建日期
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	// Update Time | 修改日期
@@ -24,7 +24,7 @@ type Token struct {
 	// Status 1: normal 2: ban | 状态 1 正常 2 禁用
 	Status uint8 `json:"status,omitempty"`
 	//  User's ID | 用户的ID
-	UserID int64 `json:"user_id,omitempty"`
+	UserID uint64 `json:"user_id,omitempty"`
 	// Username | 用户名
 	Username string `json:"username,omitempty"`
 	// Token string | Token 字符串
@@ -67,7 +67,7 @@ func (_m *Token) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = int64(value.Int64)
+			_m.ID = uint64(value.Int64)
 		case token.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
@@ -90,7 +90,7 @@ func (_m *Token) assignValues(columns []string, values []any) error {
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field user_id", values[i])
 			} else if value.Valid {
-				_m.UserID = value.Int64
+				_m.UserID = uint64(value.Int64)
 			}
 		case token.FieldUsername:
 			if value, ok := values[i].(*sql.NullString); !ok {

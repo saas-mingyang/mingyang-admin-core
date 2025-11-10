@@ -83,7 +83,7 @@ var (
 	// DefaultSort holds the default value on creation for the "sort" field.
 	DefaultSort uint32
 	// DefaultID holds the default value on creation for the "id" field.
-	DefaultID int64
+	DefaultID uint64
 )
 
 // OrderOption defines the ordering options for the DictionaryDetail queries.

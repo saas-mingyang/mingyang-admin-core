@@ -66,11 +66,11 @@ var (
 	// DefaultStatus holds the default value on creation for the "status" field.
 	DefaultStatus uint8
 	// DefaultUserID holds the default value on creation for the "user_id" field.
-	DefaultUserID int64
+	DefaultUserID uint64
 	// DefaultUsername holds the default value on creation for the "username" field.
 	DefaultUsername string
 	// DefaultID holds the default value on creation for the "id" field.
-	DefaultID int64
+	DefaultID uint64
 )
 
 // OrderOption defines the ordering options for the Token queries.

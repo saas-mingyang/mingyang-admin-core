@@ -143,7 +143,7 @@ var (
 	// DefaultSort holds the default value on creation for the "sort" field.
 	DefaultSort uint32
 	// DefaultParentID holds the default value on creation for the "parent_id" field.
-	DefaultParentID int64
+	DefaultParentID uint64
 	// DefaultPath holds the default value on creation for the "path" field.
 	DefaultPath string
 	// DefaultRedirect holds the default value on creation for the "redirect" field.
@@ -175,7 +175,7 @@ var (
 	// DefaultRealPath holds the default value on creation for the "real_path" field.
 	DefaultRealPath string
 	// DefaultID holds the default value on creation for the "id" field.
-	DefaultID int64
+	DefaultID uint64
 )
 
 // OrderOption defines the ordering options for the Menu queries.

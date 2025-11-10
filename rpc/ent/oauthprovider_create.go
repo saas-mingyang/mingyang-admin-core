@@ -91,7 +91,7 @@ func (_c *OauthProviderCreate) SetTokenURL(v string) *OauthProviderCreate {
 }
 
 // SetAuthStyle sets the "auth_style" field.
-func (_c *OauthProviderCreate) SetAuthStyle(v int64) *OauthProviderCreate {
+func (_c *OauthProviderCreate) SetAuthStyle(v uint64) *OauthProviderCreate {
 	_c.mutation.SetAuthStyle(v)
 	return _c
 }
@@ -103,13 +103,13 @@ func (_c *OauthProviderCreate) SetInfoURL(v string) *OauthProviderCreate {
 }
 
 // SetID sets the "id" field.
-func (_c *OauthProviderCreate) SetID(v int64) *OauthProviderCreate {
+func (_c *OauthProviderCreate) SetID(v uint64) *OauthProviderCreate {
 	_c.mutation.SetID(v)
 	return _c
 }
 
 // SetNillableID sets the "id" field if the given value is not nil.
-func (_c *OauthProviderCreate) SetNillableID(v *int64) *OauthProviderCreate {
+func (_c *OauthProviderCreate) SetNillableID(v *uint64) *OauthProviderCreate {
 	if v != nil {
 		_c.SetID(*v)
 	}
@@ -216,7 +216,7 @@ func (_c *OauthProviderCreate) sqlSave(ctx context.Context) (*OauthProvider, err
 	}
 	if _spec.ID.Value != _node.ID {
 		id := _spec.ID.Value.(int64)
-		_node.ID = int64(id)
+		_node.ID = uint64(id)
 	}
 	_c.mutation.id = &_node.ID
 	_c.mutation.done = true
@@ -226,7 +226,7 @@ func (_c *OauthProviderCreate) sqlSave(ctx context.Context) (*OauthProvider, err
 func (_c *OauthProviderCreate) createSpec() (*OauthProvider, *sqlgraph.CreateSpec) {
 	var (
 		_node = &OauthProvider{config: _c.config}
-		_spec = sqlgraph.NewCreateSpec(oauthprovider.Table, sqlgraph.NewFieldSpec(oauthprovider.FieldID, field.TypeInt64))
+		_spec = sqlgraph.NewCreateSpec(oauthprovider.Table, sqlgraph.NewFieldSpec(oauthprovider.FieldID, field.TypeUint64))
 	)
 	if id, ok := _c.mutation.ID(); ok {
 		_node.ID = id
@@ -269,7 +269,7 @@ func (_c *OauthProviderCreate) createSpec() (*OauthProvider, *sqlgraph.CreateSpe
 		_node.TokenURL = value
 	}
 	if value, ok := _c.mutation.AuthStyle(); ok {
-		_spec.SetField(oauthprovider.FieldAuthStyle, field.TypeInt64, value)
+		_spec.SetField(oauthprovider.FieldAuthStyle, field.TypeUint64, value)
 		_node.AuthStyle = value
 	}
 	if value, ok := _c.mutation.InfoURL(); ok {
@@ -326,7 +326,7 @@ func (_c *OauthProviderCreateBulk) Save(ctx context.Context) ([]*OauthProvider, 
 				mutation.id = &nodes[i].ID
 				if specs[i].ID.Value != nil && nodes[i].ID == 0 {
 					id := specs[i].ID.Value.(int64)
-					nodes[i].ID = int64(id)
+					nodes[i].ID = uint64(id)
 				}
 				mutation.done = true
 				return nodes[i], nil

@@ -29,7 +29,7 @@ func (OauthProvider) Fields() []ent.Field {
 			Comment("The auth url of the provider | 认证地址"),
 		field.String("token_url").
 			Comment("The token url of the provider | 获取 token地址"),
-		field.Int64("auth_style").
+		field.Uint64("auth_style").
 			Comment("The auth style, 0: auto detect 1: third party log in 2: log in with username and password | 鉴权方式" +
 				" 0 自动 1 第三方登录 2 使用用户名密码"),
 		field.String("info_url").

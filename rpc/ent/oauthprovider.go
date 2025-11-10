@@ -16,7 +16,7 @@ import (
 type OauthProvider struct {
 	config `json:"-"`
 	// ID of the ent.
-	ID int64 `json:"id,omitempty"`
+	ID uint64 `json:"id,omitempty"`
 	// Create Time | 创建日期
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	// Update Time | 修改日期
@@ -36,7 +36,7 @@ type OauthProvider struct {
 	// The token url of the provider | 获取 token地址
 	TokenURL string `json:"token_url,omitempty"`
 	// The auth style, 0: auto detect 1: third party log in 2: log in with username and password | 鉴权方式 0 自动 1 第三方登录 2 使用用户名密码
-	AuthStyle int64 `json:"auth_style,omitempty"`
+	AuthStyle uint64 `json:"auth_style,omitempty"`
 	// The URL to request user information by token | 用户信息请求地址
 	InfoURL      string `json:"info_url,omitempty"`
 	selectValues sql.SelectValues
@@ -73,7 +73,7 @@ func (_m *OauthProvider) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = int64(value.Int64)
+			_m.ID = uint64(value.Int64)
 		case oauthprovider.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
@@ -132,7 +132,7 @@ func (_m *OauthProvider) assignValues(columns []string, values []any) error {
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field auth_style", values[i])
 			} else if value.Valid {
-				_m.AuthStyle = value.Int64
+				_m.AuthStyle = uint64(value.Int64)
 			}
 		case oauthprovider.FieldInfoURL:
 			if value, ok := values[i].(*sql.NullString); !ok {

@@ -108,8 +108,8 @@ func (_q *PositionQuery) FirstX(ctx context.Context) *Position {
 
 // FirstID returns the first Position ID from the query.
 // Returns a *NotFoundError when no Position ID was found.
-func (_q *PositionQuery) FirstID(ctx context.Context) (id int64, err error) {
-	var ids []int64
+func (_q *PositionQuery) FirstID(ctx context.Context) (id uint64, err error) {
+	var ids []uint64
 	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
@@ -121,7 +121,7 @@ func (_q *PositionQuery) FirstID(ctx context.Context) (id int64, err error) {
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (_q *PositionQuery) FirstIDX(ctx context.Context) int64 {
+func (_q *PositionQuery) FirstIDX(ctx context.Context) uint64 {
 	id, err := _q.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
@@ -159,8 +159,8 @@ func (_q *PositionQuery) OnlyX(ctx context.Context) *Position {
 // OnlyID is like Only, but returns the only Position ID in the query.
 // Returns a *NotSingularError when more than one Position ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (_q *PositionQuery) OnlyID(ctx context.Context) (id int64, err error) {
-	var ids []int64
+func (_q *PositionQuery) OnlyID(ctx context.Context) (id uint64, err error) {
+	var ids []uint64
 	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
@@ -176,7 +176,7 @@ func (_q *PositionQuery) OnlyID(ctx context.Context) (id int64, err error) {
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (_q *PositionQuery) OnlyIDX(ctx context.Context) int64 {
+func (_q *PositionQuery) OnlyIDX(ctx context.Context) uint64 {
 	id, err := _q.OnlyID(ctx)
 	if err != nil {
 		panic(err)
@@ -204,7 +204,7 @@ func (_q *PositionQuery) AllX(ctx context.Context) []*Position {
 }
 
 // IDs executes the query and returns a list of Position IDs.
-func (_q *PositionQuery) IDs(ctx context.Context) (ids []int64, err error) {
+func (_q *PositionQuery) IDs(ctx context.Context) (ids []uint64, err error) {
 	if _q.ctx.Unique == nil && _q.path != nil {
 		_q.Unique(true)
 	}
@@ -216,7 +216,7 @@ func (_q *PositionQuery) IDs(ctx context.Context) (ids []int64, err error) {
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (_q *PositionQuery) IDsX(ctx context.Context) []int64 {
+func (_q *PositionQuery) IDsX(ctx context.Context) []uint64 {
 	ids, err := _q.IDs(ctx)
 	if err != nil {
 		panic(err)
@@ -410,8 +410,8 @@ func (_q *PositionQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Pos
 
 func (_q *PositionQuery) loadUsers(ctx context.Context, query *UserQuery, nodes []*Position, init func(*Position), assign func(*Position, *User)) error {
 	edgeIDs := make([]driver.Value, len(nodes))
-	byID := make(map[int64]*Position)
-	nids := make(map[int64]map[*Position]struct{})
+	byID := make(map[uint64]*Position)
+	nids := make(map[uint64]map[*Position]struct{})
 	for i, node := range nodes {
 		edgeIDs[i] = node.ID
 		byID[node.ID] = node
@@ -443,8 +443,8 @@ func (_q *PositionQuery) loadUsers(ctx context.Context, query *UserQuery, nodes 
 				return append([]any{new(sql.NullInt64)}, values...), nil
 			}
 			spec.Assign = func(columns []string, values []any) error {
-				outValue := values[0].(*sql.NullInt64).Int64
-				inValue := values[1].(*sql.NullInt64).Int64
+				outValue := uint64(values[0].(*sql.NullInt64).Int64)
+				inValue := uint64(values[1].(*sql.NullInt64).Int64)
 				if nids[inValue] == nil {
 					nids[inValue] = map[*Position]struct{}{byID[outValue]: {}}
 					return assign(columns[1:], values[1:])
@@ -483,7 +483,7 @@ func (_q *PositionQuery) sqlCount(ctx context.Context) (int, error) {
 }
 
 func (_q *PositionQuery) querySpec() *sqlgraph.QuerySpec {
-	_spec := sqlgraph.NewQuerySpec(position.Table, position.Columns, sqlgraph.NewFieldSpec(position.FieldID, field.TypeInt64))
+	_spec := sqlgraph.NewQuerySpec(position.Table, position.Columns, sqlgraph.NewFieldSpec(position.FieldID, field.TypeUint64))
 	_spec.From = _q.sql
 	if unique := _q.ctx.Unique; unique != nil {
 		_spec.Unique = *unique

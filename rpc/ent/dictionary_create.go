@@ -118,13 +118,13 @@ func (_c *DictionaryCreate) SetNillableIsPublic(v *bool) *DictionaryCreate {
 }
 
 // SetID sets the "id" field.
-func (_c *DictionaryCreate) SetID(v int64) *DictionaryCreate {
+func (_c *DictionaryCreate) SetID(v uint64) *DictionaryCreate {
 	_c.mutation.SetID(v)
 	return _c
 }
 
 // SetNillableID sets the "id" field if the given value is not nil.
-func (_c *DictionaryCreate) SetNillableID(v *int64) *DictionaryCreate {
+func (_c *DictionaryCreate) SetNillableID(v *uint64) *DictionaryCreate {
 	if v != nil {
 		_c.SetID(*v)
 	}
@@ -132,14 +132,14 @@ func (_c *DictionaryCreate) SetNillableID(v *int64) *DictionaryCreate {
 }
 
 // AddDictionaryDetailIDs adds the "dictionary_details" edge to the DictionaryDetail entity by IDs.
-func (_c *DictionaryCreate) AddDictionaryDetailIDs(ids ...int64) *DictionaryCreate {
+func (_c *DictionaryCreate) AddDictionaryDetailIDs(ids ...uint64) *DictionaryCreate {
 	_c.mutation.AddDictionaryDetailIDs(ids...)
 	return _c
 }
 
 // AddDictionaryDetails adds the "dictionary_details" edges to the DictionaryDetail entity.
 func (_c *DictionaryCreate) AddDictionaryDetails(v ...*DictionaryDetail) *DictionaryCreate {
-	ids := make([]int64, len(v))
+	ids := make([]uint64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -243,7 +243,7 @@ func (_c *DictionaryCreate) sqlSave(ctx context.Context) (*Dictionary, error) {
 	}
 	if _spec.ID.Value != _node.ID {
 		id := _spec.ID.Value.(int64)
-		_node.ID = int64(id)
+		_node.ID = uint64(id)
 	}
 	_c.mutation.id = &_node.ID
 	_c.mutation.done = true
@@ -253,7 +253,7 @@ func (_c *DictionaryCreate) sqlSave(ctx context.Context) (*Dictionary, error) {
 func (_c *DictionaryCreate) createSpec() (*Dictionary, *sqlgraph.CreateSpec) {
 	var (
 		_node = &Dictionary{config: _c.config}
-		_spec = sqlgraph.NewCreateSpec(dictionary.Table, sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeInt64))
+		_spec = sqlgraph.NewCreateSpec(dictionary.Table, sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeUint64))
 	)
 	if id, ok := _c.mutation.ID(); ok {
 		_node.ID = id
@@ -299,7 +299,7 @@ func (_c *DictionaryCreate) createSpec() (*Dictionary, *sqlgraph.CreateSpec) {
 			Columns: []string{dictionary.DictionaryDetailsColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeInt64),
+				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeUint64),
 			},
 		}
 		for _, k := range nodes {
@@ -357,7 +357,7 @@ func (_c *DictionaryCreateBulk) Save(ctx context.Context) ([]*Dictionary, error)
 				mutation.id = &nodes[i].ID
 				if specs[i].ID.Value != nil && nodes[i].ID == 0 {
 					id := specs[i].ID.Value.(int64)
-					nodes[i].ID = int64(id)
+					nodes[i].ID = uint64(id)
 				}
 				mutation.done = true
 				return nodes[i], nil

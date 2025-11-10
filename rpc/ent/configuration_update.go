@@ -200,7 +200,7 @@ func (_u *ConfigurationUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *
 }
 
 func (_u *ConfigurationUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	_spec := sqlgraph.NewUpdateSpec(configuration.Table, configuration.Columns, sqlgraph.NewFieldSpec(configuration.FieldID, field.TypeInt64))
+	_spec := sqlgraph.NewUpdateSpec(configuration.Table, configuration.Columns, sqlgraph.NewFieldSpec(configuration.FieldID, field.TypeUint64))
 	if ps := _u.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
@@ -447,7 +447,7 @@ func (_u *ConfigurationUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)
 }
 
 func (_u *ConfigurationUpdateOne) sqlSave(ctx context.Context) (_node *Configuration, err error) {
-	_spec := sqlgraph.NewUpdateSpec(configuration.Table, configuration.Columns, sqlgraph.NewFieldSpec(configuration.FieldID, field.TypeInt64))
+	_spec := sqlgraph.NewUpdateSpec(configuration.Table, configuration.Columns, sqlgraph.NewFieldSpec(configuration.FieldID, field.TypeUint64))
 	id, ok := _u.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "Configuration.id" for update`)}
