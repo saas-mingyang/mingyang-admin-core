@@ -2,7 +2,6 @@ package user
 
 import (
 	"context"
-
 	"github.com/saas-mingyang/mingyang-admin-common/utils/pointy"
 
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/user"
@@ -33,7 +32,6 @@ func (l *GetUserByUsernameLogic) GetUserByUsername(in *core.UsernameReq) (*core.
 	if err != nil {
 		return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
 	}
-
 	return &core.UserInfo{
 		Nickname:     &result.Nickname,
 		Avatar:       &result.Avatar,
@@ -43,7 +41,7 @@ func (l *GetUserByUsernameLogic) GetUserByUsername(in *core.UsernameReq) (*core.
 		Mobile:       &result.Mobile,
 		Email:        &result.Email,
 		Status:       pointy.GetPointer(uint32(result.Status)),
-		Id:           pointy.GetPointer(uint64(result.ID)),
+		Id:           pointy.GetPointer(result.ID),
 		Username:     &result.Username,
 		HomePath:     &result.HomePath,
 		Description:  &result.Description,

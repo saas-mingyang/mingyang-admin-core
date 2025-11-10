@@ -3,11 +3,9 @@ package svc
 import (
 	"github.com/redis/go-redis/v9"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent"
-	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/config"
-
-	"github.com/zeromicro/go-zero/core/logx"
-
 	_ "github.com/saas-mingyang/mingyang-admin-core/rpc/ent/runtime"
+	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/config"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type ServiceContext struct {
@@ -18,20 +16,20 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	entOpts := []ent.Option{
-		ent.Log(logx.Info),
 		ent.Driver(c.DatabaseConf.NewNoCacheDriver()),
 	}
-
 	if c.DatabaseConf.Debug {
-		entOpts = append(entOpts, ent.Debug())
+		entOpts = append(entOpts,
+			ent.Debug(),
+			ent.Log(func(a ...interface{}) {
+				logx.Info(a...)
+			}),
+		)
 	}
-
 	db := ent.NewClient(entOpts...)
-	dbClient := db.Debug()
-
 	return &ServiceContext{
 		Config: c,
-		DB:     dbClient,
+		DB:     db,
 		Redis:  c.RedisConf.MustNewUniversalRedis(),
 	}
 }

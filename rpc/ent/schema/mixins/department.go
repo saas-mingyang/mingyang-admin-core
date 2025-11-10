@@ -17,11 +17,8 @@ package mixins
 import (
 	"context"
 	"entgo.io/ent"
-	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/schema/field"
 	"entgo.io/ent/schema/mixin"
-	"fmt"
-	"github.com/saas-mingyang/mingyang-admin-common/orm/ent/entctx/deptctx"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/ent/intercept"
 )
 
@@ -48,15 +45,14 @@ func (d DepartmentMixin) Interceptors() []ent.Interceptor {
 			if skip, _ := ctx.Value(DepartmentKey{}).(bool); skip {
 				return nil
 			}
+			//todo 这里肯定会报错,应该从Context拿不到deptId
 
-			fromCtx, err := deptctx.GetDepartmentIDFromCtx(ctx)
+			/*fromCtx, err := deptctx.GetDepartmentIDFromCtx(ctx)
 			if err != nil {
-				return err
+				return nil
 			}
-
 			fmt.Printf("部门列表 %v\n", fromCtx)
-
-			q.WhereP(sql.FieldIn(d.Fields()[0].Descriptor().Name, fromCtx))
+			q.WhereP(sql.FieldIn(d.Fields()[0].Descriptor().Name, fromCtx))*/
 			return nil
 		}),
 	}
