@@ -294,7 +294,7 @@ func (_c *DepartmentCreate) defaults() {
 		_c.mutation.SetParentID(v)
 	}
 	if _, ok := _c.mutation.ID(); !ok {
-		v := department.DefaultID
+		v := department.DefaultID()
 		_c.mutation.SetID(v)
 	}
 }

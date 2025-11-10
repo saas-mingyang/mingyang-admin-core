@@ -148,7 +148,7 @@ func (_c *TenantPlanCreate) defaults() {
 		_c.mutation.SetStatus(v)
 	}
 	if _, ok := _c.mutation.ID(); !ok {
-		v := tenantplan.DefaultID
+		v := tenantplan.DefaultID()
 		_c.mutation.SetID(v)
 	}
 }

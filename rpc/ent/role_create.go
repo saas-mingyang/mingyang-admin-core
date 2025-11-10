@@ -204,7 +204,7 @@ func (_c *RoleCreate) defaults() {
 		_c.mutation.SetSort(v)
 	}
 	if _, ok := _c.mutation.ID(); !ok {
-		v := role.DefaultID
+		v := role.DefaultID()
 		_c.mutation.SetID(v)
 	}
 }

@@ -3369,6 +3369,430 @@ func (x *TenantListResp) GetData() []*TenantInfo {
 	return nil
 }
 
+type TenantPlanCreateReq struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	PackageName       string                 `protobuf:"bytes,1,opt,name=package_name,json=packageName,proto3" json:"package_name,omitempty"`
+	MenuIds           []string               `protobuf:"bytes,2,rep,name=menu_ids,json=menuIds,proto3" json:"menu_ids,omitempty"`
+	Remark            []string               `protobuf:"bytes,3,rep,name=remark,proto3" json:"remark,omitempty"`
+	MenuCheckStrictly int32                  `protobuf:"varint,4,opt,name=menu_check_strictly,json=menuCheckStrictly,proto3" json:"menu_check_strictly,omitempty"`
+	Status            int32                  `protobuf:"varint,5,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *TenantPlanCreateReq) Reset() {
+	*x = TenantPlanCreateReq{}
+	mi := &file_rpc_core_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TenantPlanCreateReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TenantPlanCreateReq) ProtoMessage() {}
+
+func (x *TenantPlanCreateReq) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_core_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TenantPlanCreateReq.ProtoReflect.Descriptor instead.
+func (*TenantPlanCreateReq) Descriptor() ([]byte, []int) {
+	return file_rpc_core_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *TenantPlanCreateReq) GetPackageName() string {
+	if x != nil {
+		return x.PackageName
+	}
+	return ""
+}
+
+func (x *TenantPlanCreateReq) GetMenuIds() []string {
+	if x != nil {
+		return x.MenuIds
+	}
+	return nil
+}
+
+func (x *TenantPlanCreateReq) GetRemark() []string {
+	if x != nil {
+		return x.Remark
+	}
+	return nil
+}
+
+func (x *TenantPlanCreateReq) GetMenuCheckStrictly() int32 {
+	if x != nil {
+		return x.MenuCheckStrictly
+	}
+	return 0
+}
+
+func (x *TenantPlanCreateReq) GetStatus() int32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+type TenantPlanInfo struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Id                string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	CreatedAt         int64                  `protobuf:"varint,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt         int64                  `protobuf:"varint,3,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Status            int32                  `protobuf:"varint,4,opt,name=status,proto3" json:"status,omitempty"`
+	PackageName       string                 `protobuf:"bytes,5,opt,name=package_name,json=packageName,proto3" json:"package_name,omitempty"`
+	MenuIds           []string               `protobuf:"bytes,6,rep,name=menu_ids,json=menuIds,proto3" json:"menu_ids,omitempty"`
+	Remark            []string               `protobuf:"bytes,7,rep,name=remark,proto3" json:"remark,omitempty"`
+	MenuCheckStrictly int32                  `protobuf:"varint,8,opt,name=menu_check_strictly,json=menuCheckStrictly,proto3" json:"menu_check_strictly,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *TenantPlanInfo) Reset() {
+	*x = TenantPlanInfo{}
+	mi := &file_rpc_core_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TenantPlanInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TenantPlanInfo) ProtoMessage() {}
+
+func (x *TenantPlanInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_core_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TenantPlanInfo.ProtoReflect.Descriptor instead.
+func (*TenantPlanInfo) Descriptor() ([]byte, []int) {
+	return file_rpc_core_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *TenantPlanInfo) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *TenantPlanInfo) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *TenantPlanInfo) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
+func (x *TenantPlanInfo) GetStatus() int32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *TenantPlanInfo) GetPackageName() string {
+	if x != nil {
+		return x.PackageName
+	}
+	return ""
+}
+
+func (x *TenantPlanInfo) GetMenuIds() []string {
+	if x != nil {
+		return x.MenuIds
+	}
+	return nil
+}
+
+func (x *TenantPlanInfo) GetRemark() []string {
+	if x != nil {
+		return x.Remark
+	}
+	return nil
+}
+
+func (x *TenantPlanInfo) GetMenuCheckStrictly() int32 {
+	if x != nil {
+		return x.MenuCheckStrictly
+	}
+	return 0
+}
+
+type TenantPlanInfoReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TenantPlanInfoReq) Reset() {
+	*x = TenantPlanInfoReq{}
+	mi := &file_rpc_core_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TenantPlanInfoReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TenantPlanInfoReq) ProtoMessage() {}
+
+func (x *TenantPlanInfoReq) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_core_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TenantPlanInfoReq.ProtoReflect.Descriptor instead.
+func (*TenantPlanInfoReq) Descriptor() ([]byte, []int) {
+	return file_rpc_core_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *TenantPlanInfoReq) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type TenantPlanListReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int64                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int64                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PackageName   string                 `protobuf:"bytes,3,opt,name=package_name,json=packageName,proto3" json:"package_name,omitempty"`
+	Status        int32                  `protobuf:"varint,4,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TenantPlanListReq) Reset() {
+	*x = TenantPlanListReq{}
+	mi := &file_rpc_core_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TenantPlanListReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TenantPlanListReq) ProtoMessage() {}
+
+func (x *TenantPlanListReq) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_core_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TenantPlanListReq.ProtoReflect.Descriptor instead.
+func (*TenantPlanListReq) Descriptor() ([]byte, []int) {
+	return file_rpc_core_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *TenantPlanListReq) GetPage() int64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *TenantPlanListReq) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *TenantPlanListReq) GetPackageName() string {
+	if x != nil {
+		return x.PackageName
+	}
+	return ""
+}
+
+func (x *TenantPlanListReq) GetStatus() int32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+type TenantPlanListResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Total         int64                  `protobuf:"varint,1,opt,name=total,proto3" json:"total,omitempty"`
+	Data          []*TenantPlanInfo      `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TenantPlanListResp) Reset() {
+	*x = TenantPlanListResp{}
+	mi := &file_rpc_core_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TenantPlanListResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TenantPlanListResp) ProtoMessage() {}
+
+func (x *TenantPlanListResp) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_core_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TenantPlanListResp.ProtoReflect.Descriptor instead.
+func (*TenantPlanListResp) Descriptor() ([]byte, []int) {
+	return file_rpc_core_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *TenantPlanListResp) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *TenantPlanListResp) GetData() []*TenantPlanInfo {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type TenantPlanUpdateReq struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Id                string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	PackageName       string                 `protobuf:"bytes,2,opt,name=package_name,json=packageName,proto3" json:"package_name,omitempty"`
+	MenuIds           []string               `protobuf:"bytes,3,rep,name=menu_ids,json=menuIds,proto3" json:"menu_ids,omitempty"`
+	Remark            []string               `protobuf:"bytes,4,rep,name=remark,proto3" json:"remark,omitempty"`
+	MenuCheckStrictly int32                  `protobuf:"varint,5,opt,name=menu_check_strictly,json=menuCheckStrictly,proto3" json:"menu_check_strictly,omitempty"`
+	Status            int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *TenantPlanUpdateReq) Reset() {
+	*x = TenantPlanUpdateReq{}
+	mi := &file_rpc_core_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TenantPlanUpdateReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TenantPlanUpdateReq) ProtoMessage() {}
+
+func (x *TenantPlanUpdateReq) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_core_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TenantPlanUpdateReq.ProtoReflect.Descriptor instead.
+func (*TenantPlanUpdateReq) Descriptor() ([]byte, []int) {
+	return file_rpc_core_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *TenantPlanUpdateReq) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *TenantPlanUpdateReq) GetPackageName() string {
+	if x != nil {
+		return x.PackageName
+	}
+	return ""
+}
+
+func (x *TenantPlanUpdateReq) GetMenuIds() []string {
+	if x != nil {
+		return x.MenuIds
+	}
+	return nil
+}
+
+func (x *TenantPlanUpdateReq) GetRemark() []string {
+	if x != nil {
+		return x.Remark
+	}
+	return nil
+}
+
+func (x *TenantPlanUpdateReq) GetMenuCheckStrictly() int32 {
+	if x != nil {
+		return x.MenuCheckStrictly
+	}
+	return 0
+}
+
+func (x *TenantPlanUpdateReq) GetStatus() int32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
 type TokenInfo struct {
 	state     protoimpl.MessageState `protogen:"open.v1"`
 	Id        *uint64                `protobuf:"varint,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
@@ -3392,7 +3816,7 @@ type TokenInfo struct {
 
 func (x *TokenInfo) Reset() {
 	*x = TokenInfo{}
-	mi := &file_rpc_core_proto_msgTypes[45]
+	mi := &file_rpc_core_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3404,7 +3828,7 @@ func (x *TokenInfo) String() string {
 func (*TokenInfo) ProtoMessage() {}
 
 func (x *TokenInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_core_proto_msgTypes[45]
+	mi := &file_rpc_core_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3417,7 +3841,7 @@ func (x *TokenInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TokenInfo.ProtoReflect.Descriptor instead.
 func (*TokenInfo) Descriptor() ([]byte, []int) {
-	return file_rpc_core_proto_rawDescGZIP(), []int{45}
+	return file_rpc_core_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *TokenInfo) GetId() uint64 {
@@ -3497,7 +3921,7 @@ type TokenListReq struct {
 
 func (x *TokenListReq) Reset() {
 	*x = TokenListReq{}
-	mi := &file_rpc_core_proto_msgTypes[46]
+	mi := &file_rpc_core_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3509,7 +3933,7 @@ func (x *TokenListReq) String() string {
 func (*TokenListReq) ProtoMessage() {}
 
 func (x *TokenListReq) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_core_proto_msgTypes[46]
+	mi := &file_rpc_core_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3522,7 +3946,7 @@ func (x *TokenListReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TokenListReq.ProtoReflect.Descriptor instead.
 func (*TokenListReq) Descriptor() ([]byte, []int) {
-	return file_rpc_core_proto_rawDescGZIP(), []int{46}
+	return file_rpc_core_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *TokenListReq) GetPage() uint64 {
@@ -3577,7 +4001,7 @@ type TokenListResp struct {
 
 func (x *TokenListResp) Reset() {
 	*x = TokenListResp{}
-	mi := &file_rpc_core_proto_msgTypes[47]
+	mi := &file_rpc_core_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3589,7 +4013,7 @@ func (x *TokenListResp) String() string {
 func (*TokenListResp) ProtoMessage() {}
 
 func (x *TokenListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_core_proto_msgTypes[47]
+	mi := &file_rpc_core_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3602,7 +4026,7 @@ func (x *TokenListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TokenListResp.ProtoReflect.Descriptor instead.
 func (*TokenListResp) Descriptor() ([]byte, []int) {
-	return file_rpc_core_proto_rawDescGZIP(), []int{47}
+	return file_rpc_core_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *TokenListResp) GetTotal() uint64 {
@@ -3628,7 +4052,7 @@ type UUIDReq struct {
 
 func (x *UUIDReq) Reset() {
 	*x = UUIDReq{}
-	mi := &file_rpc_core_proto_msgTypes[48]
+	mi := &file_rpc_core_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3640,7 +4064,7 @@ func (x *UUIDReq) String() string {
 func (*UUIDReq) ProtoMessage() {}
 
 func (x *UUIDReq) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_core_proto_msgTypes[48]
+	mi := &file_rpc_core_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3653,7 +4077,7 @@ func (x *UUIDReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UUIDReq.ProtoReflect.Descriptor instead.
 func (*UUIDReq) Descriptor() ([]byte, []int) {
-	return file_rpc_core_proto_rawDescGZIP(), []int{48}
+	return file_rpc_core_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *UUIDReq) GetId() string {
@@ -3672,7 +4096,7 @@ type UUIDsReq struct {
 
 func (x *UUIDsReq) Reset() {
 	*x = UUIDsReq{}
-	mi := &file_rpc_core_proto_msgTypes[49]
+	mi := &file_rpc_core_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3684,7 +4108,7 @@ func (x *UUIDsReq) String() string {
 func (*UUIDsReq) ProtoMessage() {}
 
 func (x *UUIDsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_core_proto_msgTypes[49]
+	mi := &file_rpc_core_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3697,7 +4121,7 @@ func (x *UUIDsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UUIDsReq.ProtoReflect.Descriptor instead.
 func (*UUIDsReq) Descriptor() ([]byte, []int) {
-	return file_rpc_core_proto_rawDescGZIP(), []int{49}
+	return file_rpc_core_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *UUIDsReq) GetIds() []string {
@@ -3734,7 +4158,7 @@ type UserInfo struct {
 
 func (x *UserInfo) Reset() {
 	*x = UserInfo{}
-	mi := &file_rpc_core_proto_msgTypes[50]
+	mi := &file_rpc_core_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3746,7 +4170,7 @@ func (x *UserInfo) String() string {
 func (*UserInfo) ProtoMessage() {}
 
 func (x *UserInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_core_proto_msgTypes[50]
+	mi := &file_rpc_core_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3759,7 +4183,7 @@ func (x *UserInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserInfo.ProtoReflect.Descriptor instead.
 func (*UserInfo) Descriptor() ([]byte, []int) {
-	return file_rpc_core_proto_rawDescGZIP(), []int{50}
+	return file_rpc_core_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *UserInfo) GetId() uint64 {
@@ -3914,7 +4338,7 @@ type UserListReq struct {
 
 func (x *UserListReq) Reset() {
 	*x = UserListReq{}
-	mi := &file_rpc_core_proto_msgTypes[51]
+	mi := &file_rpc_core_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3926,7 +4350,7 @@ func (x *UserListReq) String() string {
 func (*UserListReq) ProtoMessage() {}
 
 func (x *UserListReq) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_core_proto_msgTypes[51]
+	mi := &file_rpc_core_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3939,7 +4363,7 @@ func (x *UserListReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserListReq.ProtoReflect.Descriptor instead.
 func (*UserListReq) Descriptor() ([]byte, []int) {
-	return file_rpc_core_proto_rawDescGZIP(), []int{51}
+	return file_rpc_core_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *UserListReq) GetPage() uint64 {
@@ -4029,7 +4453,7 @@ type UserListResp struct {
 
 func (x *UserListResp) Reset() {
 	*x = UserListResp{}
-	mi := &file_rpc_core_proto_msgTypes[52]
+	mi := &file_rpc_core_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4041,7 +4465,7 @@ func (x *UserListResp) String() string {
 func (*UserListResp) ProtoMessage() {}
 
 func (x *UserListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_core_proto_msgTypes[52]
+	mi := &file_rpc_core_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4054,7 +4478,7 @@ func (x *UserListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserListResp.ProtoReflect.Descriptor instead.
 func (*UserListResp) Descriptor() ([]byte, []int) {
-	return file_rpc_core_proto_rawDescGZIP(), []int{52}
+	return file_rpc_core_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *UserListResp) GetTotal() uint64 {
@@ -4080,7 +4504,7 @@ type UsernameReq struct {
 
 func (x *UsernameReq) Reset() {
 	*x = UsernameReq{}
-	mi := &file_rpc_core_proto_msgTypes[53]
+	mi := &file_rpc_core_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4092,7 +4516,7 @@ func (x *UsernameReq) String() string {
 func (*UsernameReq) ProtoMessage() {}
 
 func (x *UsernameReq) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_core_proto_msgTypes[53]
+	mi := &file_rpc_core_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4105,7 +4529,7 @@ func (x *UsernameReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsernameReq.ProtoReflect.Descriptor instead.
 func (*UsernameReq) Descriptor() ([]byte, []int) {
-	return file_rpc_core_proto_rawDescGZIP(), []int{53}
+	return file_rpc_core_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *UsernameReq) GetUsername() string {
@@ -4577,7 +5001,41 @@ const file_rpc_core_proto_rawDesc = "" +
 	"_parent_id\"L\n" +
 	"\x0eTenantListResp\x12\x14\n" +
 	"\x05total\x18\x01 \x01(\x04R\x05total\x12$\n" +
-	"\x04data\x18\x02 \x03(\v2\x10.core.TenantInfoR\x04data\"\x8d\x03\n" +
+	"\x04data\x18\x02 \x03(\v2\x10.core.TenantInfoR\x04data\"\xb3\x01\n" +
+	"\x13TenantPlanCreateReq\x12!\n" +
+	"\fpackage_name\x18\x01 \x01(\tR\vpackageName\x12\x19\n" +
+	"\bmenu_ids\x18\x02 \x03(\tR\amenuIds\x12\x16\n" +
+	"\x06remark\x18\x03 \x03(\tR\x06remark\x12.\n" +
+	"\x13menu_check_strictly\x18\x04 \x01(\x05R\x11menuCheckStrictly\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\x05R\x06status\"\xfc\x01\n" +
+	"\x0eTenantPlanInfo\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x02 \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\x03 \x01(\x03R\tupdatedAt\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\x05R\x06status\x12!\n" +
+	"\fpackage_name\x18\x05 \x01(\tR\vpackageName\x12\x19\n" +
+	"\bmenu_ids\x18\x06 \x03(\tR\amenuIds\x12\x16\n" +
+	"\x06remark\x18\a \x03(\tR\x06remark\x12.\n" +
+	"\x13menu_check_strictly\x18\b \x01(\x05R\x11menuCheckStrictly\"#\n" +
+	"\x11TenantPlanInfoReq\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"\x7f\n" +
+	"\x11TenantPlanListReq\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12!\n" +
+	"\fpackage_name\x18\x03 \x01(\tR\vpackageName\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\x05R\x06status\"T\n" +
+	"\x12TenantPlanListResp\x12\x14\n" +
+	"\x05total\x18\x01 \x01(\x03R\x05total\x12(\n" +
+	"\x04data\x18\x02 \x03(\v2\x14.core.TenantPlanInfoR\x04data\"\xc3\x01\n" +
+	"\x13TenantPlanUpdateReq\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
+	"\fpackage_name\x18\x02 \x01(\tR\vpackageName\x12\x19\n" +
+	"\bmenu_ids\x18\x03 \x03(\tR\amenuIds\x12\x16\n" +
+	"\x06remark\x18\x04 \x03(\tR\x06remark\x12.\n" +
+	"\x13menu_check_strictly\x18\x05 \x01(\x05R\x11menuCheckStrictly\x12\x16\n" +
+	"\x06status\x18\x06 \x01(\x05R\x06status\"\x8d\x03\n" +
 	"\tTokenInfo\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\x04H\x00R\x02id\x88\x01\x01\x12\"\n" +
 	"\n" +
@@ -4683,7 +5141,7 @@ const file_rpc_core_proto_rawDesc = "" +
 	"\x05total\x18\x01 \x01(\x04R\x05total\x12\"\n" +
 	"\x04data\x18\x02 \x03(\v2\x0e.core.UserInfoR\x04data\")\n" +
 	"\vUsernameReq\x12\x1a\n" +
-	"\busername\x18\x01 \x01(\tR\busername2\xe7\x1d\n" +
+	"\busername\x18\x01 \x01(\tR\busername2\x99 \n" +
 	"\x04Core\x12,\n" +
 	"\tcreateApi\x12\r.core.ApiInfo\x1a\x10.core.BaseIDResp\x12*\n" +
 	"\tupdateApi\x12\r.core.ApiInfo\x1a\x0e.core.BaseResp\x121\n" +
@@ -4749,7 +5207,12 @@ const file_rpc_core_proto_rawDesc = "" +
 	"\fupdateTenant\x12\x10.core.TenantInfo\x1a\x0e.core.BaseResp\x12:\n" +
 	"\rgetTenantList\x12\x13.core.TenantListReq\x1a\x14.core.TenantListResp\x12.\n" +
 	"\rgetTenantById\x12\v.core.IDReq\x1a\x10.core.TenantInfo\x12,\n" +
-	"\fdeleteTenant\x12\f.core.IDsReq\x1a\x0e.core.BaseResp\x120\n" +
+	"\fdeleteTenant\x12\f.core.IDsReq\x1a\x0e.core.BaseResp\x12?\n" +
+	"\x10createTenantPlan\x12\x19.core.TenantPlanCreateReq\x1a\x10.core.BaseIDResp\x12=\n" +
+	"\x10updateTenantPlan\x12\x19.core.TenantPlanUpdateReq\x1a\x0e.core.BaseResp\x12F\n" +
+	"\x11getTenantPlanById\x12\x17.core.TenantPlanInfoReq\x1a\x18.core.TenantPlanListResp\x126\n" +
+	"\x11getTenantPlanList\x12\v.core.IDReq\x1a\x14.core.TenantPlanInfo\x120\n" +
+	"\x10deleteTenantPlan\x12\f.core.IDsReq\x1a\x0e.core.BaseResp\x120\n" +
 	"\vcreateToken\x12\x0f.core.TokenInfo\x1a\x10.core.BaseIDResp\x12+\n" +
 	"\vdeleteToken\x12\f.core.IDsReq\x1a\x0e.core.BaseResp\x127\n" +
 	"\fgetTokenList\x12\x12.core.TokenListReq\x1a\x13.core.TokenListResp\x12,\n" +
@@ -4778,7 +5241,7 @@ func file_rpc_core_proto_rawDescGZIP() []byte {
 	return file_rpc_core_proto_rawDescData
 }
 
-var file_rpc_core_proto_msgTypes = make([]protoimpl.MessageInfo, 54)
+var file_rpc_core_proto_msgTypes = make([]protoimpl.MessageInfo, 60)
 var file_rpc_core_proto_goTypes = []any{
 	(*ApiInfo)(nil),                  // 0: core.ApiInfo
 	(*ApiListReq)(nil),               // 1: core.ApiListReq
@@ -4825,15 +5288,21 @@ var file_rpc_core_proto_goTypes = []any{
 	(*TenantInfo)(nil),               // 42: core.TenantInfo
 	(*TenantListReq)(nil),            // 43: core.TenantListReq
 	(*TenantListResp)(nil),           // 44: core.TenantListResp
-	(*TokenInfo)(nil),                // 45: core.TokenInfo
-	(*TokenListReq)(nil),             // 46: core.TokenListReq
-	(*TokenListResp)(nil),            // 47: core.TokenListResp
-	(*UUIDReq)(nil),                  // 48: core.UUIDReq
-	(*UUIDsReq)(nil),                 // 49: core.UUIDsReq
-	(*UserInfo)(nil),                 // 50: core.UserInfo
-	(*UserListReq)(nil),              // 51: core.UserListReq
-	(*UserListResp)(nil),             // 52: core.UserListResp
-	(*UsernameReq)(nil),              // 53: core.UsernameReq
+	(*TenantPlanCreateReq)(nil),      // 45: core.TenantPlanCreateReq
+	(*TenantPlanInfo)(nil),           // 46: core.TenantPlanInfo
+	(*TenantPlanInfoReq)(nil),        // 47: core.TenantPlanInfoReq
+	(*TenantPlanListReq)(nil),        // 48: core.TenantPlanListReq
+	(*TenantPlanListResp)(nil),       // 49: core.TenantPlanListResp
+	(*TenantPlanUpdateReq)(nil),      // 50: core.TenantPlanUpdateReq
+	(*TokenInfo)(nil),                // 51: core.TokenInfo
+	(*TokenListReq)(nil),             // 52: core.TokenListReq
+	(*TokenListResp)(nil),            // 53: core.TokenListResp
+	(*UUIDReq)(nil),                  // 54: core.UUIDReq
+	(*UUIDsReq)(nil),                 // 55: core.UUIDsReq
+	(*UserInfo)(nil),                 // 56: core.UserInfo
+	(*UserListReq)(nil),              // 57: core.UserListReq
+	(*UserListResp)(nil),             // 58: core.UserListResp
+	(*UsernameReq)(nil),              // 59: core.UsernameReq
 }
 var file_rpc_core_proto_depIdxs = []int32{
 	0,  // 0: core.ApiListResp.data:type_name -> core.ApiInfo
@@ -4848,149 +5317,160 @@ var file_rpc_core_proto_depIdxs = []int32{
 	34, // 9: core.PositionListResp.data:type_name -> core.PositionInfo
 	37, // 10: core.RoleListResp.data:type_name -> core.RoleInfo
 	42, // 11: core.TenantListResp.data:type_name -> core.TenantInfo
-	45, // 12: core.TokenListResp.data:type_name -> core.TokenInfo
-	50, // 13: core.UserListResp.data:type_name -> core.UserInfo
-	0,  // 14: core.Core.createApi:input_type -> core.ApiInfo
-	0,  // 15: core.Core.updateApi:input_type -> core.ApiInfo
-	1,  // 16: core.Core.getApiList:input_type -> core.ApiListReq
-	21, // 17: core.Core.getApiById:input_type -> core.IDReq
-	22, // 18: core.Core.deleteApi:input_type -> core.IDsReq
-	21, // 19: core.Core.getMenuAuthority:input_type -> core.IDReq
-	40, // 20: core.Core.createOrUpdateMenuAuthority:input_type -> core.RoleMenuAuthorityReq
-	20, // 21: core.Core.initDatabase:input_type -> core.Empty
-	8,  // 22: core.Core.createConfiguration:input_type -> core.ConfigurationInfo
-	8,  // 23: core.Core.updateConfiguration:input_type -> core.ConfigurationInfo
-	9,  // 24: core.Core.getConfigurationList:input_type -> core.ConfigurationListReq
-	21, // 25: core.Core.getConfigurationById:input_type -> core.IDReq
-	22, // 26: core.Core.deleteConfiguration:input_type -> core.IDsReq
-	11, // 27: core.Core.createDepartment:input_type -> core.DepartmentInfo
-	11, // 28: core.Core.updateDepartment:input_type -> core.DepartmentInfo
-	12, // 29: core.Core.getDepartmentList:input_type -> core.DepartmentListReq
-	21, // 30: core.Core.getDepartmentById:input_type -> core.IDReq
-	22, // 31: core.Core.deleteDepartment:input_type -> core.IDsReq
-	17, // 32: core.Core.createDictionary:input_type -> core.DictionaryInfo
-	17, // 33: core.Core.updateDictionary:input_type -> core.DictionaryInfo
-	18, // 34: core.Core.getDictionaryList:input_type -> core.DictionaryListReq
-	21, // 35: core.Core.getDictionaryById:input_type -> core.IDReq
-	22, // 36: core.Core.deleteDictionary:input_type -> core.IDsReq
-	14, // 37: core.Core.createDictionaryDetail:input_type -> core.DictionaryDetailInfo
-	14, // 38: core.Core.updateDictionaryDetail:input_type -> core.DictionaryDetailInfo
-	15, // 39: core.Core.getDictionaryDetailList:input_type -> core.DictionaryDetailListReq
-	21, // 40: core.Core.getDictionaryDetailById:input_type -> core.IDReq
-	22, // 41: core.Core.deleteDictionaryDetail:input_type -> core.IDsReq
-	4,  // 42: core.Core.getDictionaryDetailByDictionaryName:input_type -> core.BaseMsg
-	23, // 43: core.Core.createMenu:input_type -> core.MenuInfo
-	23, // 44: core.Core.updateMenu:input_type -> core.MenuInfo
-	21, // 45: core.Core.deleteMenu:input_type -> core.IDReq
-	4,  // 46: core.Core.getMenuListByRole:input_type -> core.BaseMsg
-	33, // 47: core.Core.getMenuList:input_type -> core.PageInfoReq
-	29, // 48: core.Core.createOauthProvider:input_type -> core.OauthProviderInfo
-	29, // 49: core.Core.updateOauthProvider:input_type -> core.OauthProviderInfo
-	30, // 50: core.Core.getOauthProviderList:input_type -> core.OauthProviderListReq
-	21, // 51: core.Core.getOauthProviderById:input_type -> core.IDReq
-	22, // 52: core.Core.deleteOauthProvider:input_type -> core.IDsReq
-	28, // 53: core.Core.oauthLogin:input_type -> core.OauthLoginReq
-	7,  // 54: core.Core.oauthCallback:input_type -> core.CallbackReq
-	34, // 55: core.Core.createPosition:input_type -> core.PositionInfo
-	34, // 56: core.Core.updatePosition:input_type -> core.PositionInfo
-	35, // 57: core.Core.getPositionList:input_type -> core.PositionListReq
-	21, // 58: core.Core.getPositionById:input_type -> core.IDReq
-	22, // 59: core.Core.deletePosition:input_type -> core.IDsReq
-	37, // 60: core.Core.createRole:input_type -> core.RoleInfo
-	37, // 61: core.Core.updateRole:input_type -> core.RoleInfo
-	38, // 62: core.Core.getRoleList:input_type -> core.RoleListReq
-	21, // 63: core.Core.getRoleById:input_type -> core.IDReq
-	22, // 64: core.Core.deleteRole:input_type -> core.IDsReq
-	42, // 65: core.Core.createTenant:input_type -> core.TenantInfo
-	42, // 66: core.Core.updateTenant:input_type -> core.TenantInfo
-	43, // 67: core.Core.getTenantList:input_type -> core.TenantListReq
-	21, // 68: core.Core.getTenantById:input_type -> core.IDReq
-	22, // 69: core.Core.deleteTenant:input_type -> core.IDsReq
-	45, // 70: core.Core.createToken:input_type -> core.TokenInfo
-	22, // 71: core.Core.deleteToken:input_type -> core.IDsReq
-	46, // 72: core.Core.getTokenList:input_type -> core.TokenListReq
-	21, // 73: core.Core.getTokenById:input_type -> core.IDReq
-	21, // 74: core.Core.blockUserAllToken:input_type -> core.IDReq
-	45, // 75: core.Core.updateToken:input_type -> core.TokenInfo
-	50, // 76: core.Core.createUser:input_type -> core.UserInfo
-	50, // 77: core.Core.updateUser:input_type -> core.UserInfo
-	51, // 78: core.Core.getUserList:input_type -> core.UserListReq
-	21, // 79: core.Core.getUserById:input_type -> core.IDReq
-	53, // 80: core.Core.getUserByUsername:input_type -> core.UsernameReq
-	22, // 81: core.Core.deleteUser:input_type -> core.IDsReq
-	3,  // 82: core.Core.createApi:output_type -> core.BaseIDResp
-	5,  // 83: core.Core.updateApi:output_type -> core.BaseResp
-	2,  // 84: core.Core.getApiList:output_type -> core.ApiListResp
-	0,  // 85: core.Core.getApiById:output_type -> core.ApiInfo
-	5,  // 86: core.Core.deleteApi:output_type -> core.BaseResp
-	41, // 87: core.Core.getMenuAuthority:output_type -> core.RoleMenuAuthorityResp
-	5,  // 88: core.Core.createOrUpdateMenuAuthority:output_type -> core.BaseResp
-	5,  // 89: core.Core.initDatabase:output_type -> core.BaseResp
-	3,  // 90: core.Core.createConfiguration:output_type -> core.BaseIDResp
-	5,  // 91: core.Core.updateConfiguration:output_type -> core.BaseResp
-	10, // 92: core.Core.getConfigurationList:output_type -> core.ConfigurationListResp
-	8,  // 93: core.Core.getConfigurationById:output_type -> core.ConfigurationInfo
-	5,  // 94: core.Core.deleteConfiguration:output_type -> core.BaseResp
-	3,  // 95: core.Core.createDepartment:output_type -> core.BaseIDResp
-	5,  // 96: core.Core.updateDepartment:output_type -> core.BaseResp
-	13, // 97: core.Core.getDepartmentList:output_type -> core.DepartmentListResp
-	11, // 98: core.Core.getDepartmentById:output_type -> core.DepartmentInfo
-	5,  // 99: core.Core.deleteDepartment:output_type -> core.BaseResp
-	3,  // 100: core.Core.createDictionary:output_type -> core.BaseIDResp
-	5,  // 101: core.Core.updateDictionary:output_type -> core.BaseResp
-	19, // 102: core.Core.getDictionaryList:output_type -> core.DictionaryListResp
-	17, // 103: core.Core.getDictionaryById:output_type -> core.DictionaryInfo
-	5,  // 104: core.Core.deleteDictionary:output_type -> core.BaseResp
-	3,  // 105: core.Core.createDictionaryDetail:output_type -> core.BaseIDResp
-	5,  // 106: core.Core.updateDictionaryDetail:output_type -> core.BaseResp
-	16, // 107: core.Core.getDictionaryDetailList:output_type -> core.DictionaryDetailListResp
-	14, // 108: core.Core.getDictionaryDetailById:output_type -> core.DictionaryDetailInfo
-	5,  // 109: core.Core.deleteDictionaryDetail:output_type -> core.BaseResp
-	16, // 110: core.Core.getDictionaryDetailByDictionaryName:output_type -> core.DictionaryDetailListResp
-	3,  // 111: core.Core.createMenu:output_type -> core.BaseIDResp
-	5,  // 112: core.Core.updateMenu:output_type -> core.BaseResp
-	5,  // 113: core.Core.deleteMenu:output_type -> core.BaseResp
-	24, // 114: core.Core.getMenuListByRole:output_type -> core.MenuInfoList
-	24, // 115: core.Core.getMenuList:output_type -> core.MenuInfoList
-	3,  // 116: core.Core.createOauthProvider:output_type -> core.BaseIDResp
-	5,  // 117: core.Core.updateOauthProvider:output_type -> core.BaseResp
-	31, // 118: core.Core.getOauthProviderList:output_type -> core.OauthProviderListResp
-	29, // 119: core.Core.getOauthProviderById:output_type -> core.OauthProviderInfo
-	5,  // 120: core.Core.deleteOauthProvider:output_type -> core.BaseResp
-	32, // 121: core.Core.oauthLogin:output_type -> core.OauthRedirectResp
-	50, // 122: core.Core.oauthCallback:output_type -> core.UserInfo
-	3,  // 123: core.Core.createPosition:output_type -> core.BaseIDResp
-	5,  // 124: core.Core.updatePosition:output_type -> core.BaseResp
-	36, // 125: core.Core.getPositionList:output_type -> core.PositionListResp
-	34, // 126: core.Core.getPositionById:output_type -> core.PositionInfo
-	5,  // 127: core.Core.deletePosition:output_type -> core.BaseResp
-	3,  // 128: core.Core.createRole:output_type -> core.BaseIDResp
-	5,  // 129: core.Core.updateRole:output_type -> core.BaseResp
-	39, // 130: core.Core.getRoleList:output_type -> core.RoleListResp
-	37, // 131: core.Core.getRoleById:output_type -> core.RoleInfo
-	5,  // 132: core.Core.deleteRole:output_type -> core.BaseResp
-	3,  // 133: core.Core.createTenant:output_type -> core.BaseIDResp
-	5,  // 134: core.Core.updateTenant:output_type -> core.BaseResp
-	44, // 135: core.Core.getTenantList:output_type -> core.TenantListResp
-	42, // 136: core.Core.getTenantById:output_type -> core.TenantInfo
-	5,  // 137: core.Core.deleteTenant:output_type -> core.BaseResp
-	3,  // 138: core.Core.createToken:output_type -> core.BaseIDResp
-	5,  // 139: core.Core.deleteToken:output_type -> core.BaseResp
-	47, // 140: core.Core.getTokenList:output_type -> core.TokenListResp
-	45, // 141: core.Core.getTokenById:output_type -> core.TokenInfo
-	5,  // 142: core.Core.blockUserAllToken:output_type -> core.BaseResp
-	5,  // 143: core.Core.updateToken:output_type -> core.BaseResp
-	3,  // 144: core.Core.createUser:output_type -> core.BaseIDResp
-	5,  // 145: core.Core.updateUser:output_type -> core.BaseResp
-	52, // 146: core.Core.getUserList:output_type -> core.UserListResp
-	50, // 147: core.Core.getUserById:output_type -> core.UserInfo
-	50, // 148: core.Core.getUserByUsername:output_type -> core.UserInfo
-	5,  // 149: core.Core.deleteUser:output_type -> core.BaseResp
-	82, // [82:150] is the sub-list for method output_type
-	14, // [14:82] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	46, // 12: core.TenantPlanListResp.data:type_name -> core.TenantPlanInfo
+	51, // 13: core.TokenListResp.data:type_name -> core.TokenInfo
+	56, // 14: core.UserListResp.data:type_name -> core.UserInfo
+	0,  // 15: core.Core.createApi:input_type -> core.ApiInfo
+	0,  // 16: core.Core.updateApi:input_type -> core.ApiInfo
+	1,  // 17: core.Core.getApiList:input_type -> core.ApiListReq
+	21, // 18: core.Core.getApiById:input_type -> core.IDReq
+	22, // 19: core.Core.deleteApi:input_type -> core.IDsReq
+	21, // 20: core.Core.getMenuAuthority:input_type -> core.IDReq
+	40, // 21: core.Core.createOrUpdateMenuAuthority:input_type -> core.RoleMenuAuthorityReq
+	20, // 22: core.Core.initDatabase:input_type -> core.Empty
+	8,  // 23: core.Core.createConfiguration:input_type -> core.ConfigurationInfo
+	8,  // 24: core.Core.updateConfiguration:input_type -> core.ConfigurationInfo
+	9,  // 25: core.Core.getConfigurationList:input_type -> core.ConfigurationListReq
+	21, // 26: core.Core.getConfigurationById:input_type -> core.IDReq
+	22, // 27: core.Core.deleteConfiguration:input_type -> core.IDsReq
+	11, // 28: core.Core.createDepartment:input_type -> core.DepartmentInfo
+	11, // 29: core.Core.updateDepartment:input_type -> core.DepartmentInfo
+	12, // 30: core.Core.getDepartmentList:input_type -> core.DepartmentListReq
+	21, // 31: core.Core.getDepartmentById:input_type -> core.IDReq
+	22, // 32: core.Core.deleteDepartment:input_type -> core.IDsReq
+	17, // 33: core.Core.createDictionary:input_type -> core.DictionaryInfo
+	17, // 34: core.Core.updateDictionary:input_type -> core.DictionaryInfo
+	18, // 35: core.Core.getDictionaryList:input_type -> core.DictionaryListReq
+	21, // 36: core.Core.getDictionaryById:input_type -> core.IDReq
+	22, // 37: core.Core.deleteDictionary:input_type -> core.IDsReq
+	14, // 38: core.Core.createDictionaryDetail:input_type -> core.DictionaryDetailInfo
+	14, // 39: core.Core.updateDictionaryDetail:input_type -> core.DictionaryDetailInfo
+	15, // 40: core.Core.getDictionaryDetailList:input_type -> core.DictionaryDetailListReq
+	21, // 41: core.Core.getDictionaryDetailById:input_type -> core.IDReq
+	22, // 42: core.Core.deleteDictionaryDetail:input_type -> core.IDsReq
+	4,  // 43: core.Core.getDictionaryDetailByDictionaryName:input_type -> core.BaseMsg
+	23, // 44: core.Core.createMenu:input_type -> core.MenuInfo
+	23, // 45: core.Core.updateMenu:input_type -> core.MenuInfo
+	21, // 46: core.Core.deleteMenu:input_type -> core.IDReq
+	4,  // 47: core.Core.getMenuListByRole:input_type -> core.BaseMsg
+	33, // 48: core.Core.getMenuList:input_type -> core.PageInfoReq
+	29, // 49: core.Core.createOauthProvider:input_type -> core.OauthProviderInfo
+	29, // 50: core.Core.updateOauthProvider:input_type -> core.OauthProviderInfo
+	30, // 51: core.Core.getOauthProviderList:input_type -> core.OauthProviderListReq
+	21, // 52: core.Core.getOauthProviderById:input_type -> core.IDReq
+	22, // 53: core.Core.deleteOauthProvider:input_type -> core.IDsReq
+	28, // 54: core.Core.oauthLogin:input_type -> core.OauthLoginReq
+	7,  // 55: core.Core.oauthCallback:input_type -> core.CallbackReq
+	34, // 56: core.Core.createPosition:input_type -> core.PositionInfo
+	34, // 57: core.Core.updatePosition:input_type -> core.PositionInfo
+	35, // 58: core.Core.getPositionList:input_type -> core.PositionListReq
+	21, // 59: core.Core.getPositionById:input_type -> core.IDReq
+	22, // 60: core.Core.deletePosition:input_type -> core.IDsReq
+	37, // 61: core.Core.createRole:input_type -> core.RoleInfo
+	37, // 62: core.Core.updateRole:input_type -> core.RoleInfo
+	38, // 63: core.Core.getRoleList:input_type -> core.RoleListReq
+	21, // 64: core.Core.getRoleById:input_type -> core.IDReq
+	22, // 65: core.Core.deleteRole:input_type -> core.IDsReq
+	42, // 66: core.Core.createTenant:input_type -> core.TenantInfo
+	42, // 67: core.Core.updateTenant:input_type -> core.TenantInfo
+	43, // 68: core.Core.getTenantList:input_type -> core.TenantListReq
+	21, // 69: core.Core.getTenantById:input_type -> core.IDReq
+	22, // 70: core.Core.deleteTenant:input_type -> core.IDsReq
+	45, // 71: core.Core.createTenantPlan:input_type -> core.TenantPlanCreateReq
+	50, // 72: core.Core.updateTenantPlan:input_type -> core.TenantPlanUpdateReq
+	47, // 73: core.Core.getTenantPlanById:input_type -> core.TenantPlanInfoReq
+	21, // 74: core.Core.getTenantPlanList:input_type -> core.IDReq
+	22, // 75: core.Core.deleteTenantPlan:input_type -> core.IDsReq
+	51, // 76: core.Core.createToken:input_type -> core.TokenInfo
+	22, // 77: core.Core.deleteToken:input_type -> core.IDsReq
+	52, // 78: core.Core.getTokenList:input_type -> core.TokenListReq
+	21, // 79: core.Core.getTokenById:input_type -> core.IDReq
+	21, // 80: core.Core.blockUserAllToken:input_type -> core.IDReq
+	51, // 81: core.Core.updateToken:input_type -> core.TokenInfo
+	56, // 82: core.Core.createUser:input_type -> core.UserInfo
+	56, // 83: core.Core.updateUser:input_type -> core.UserInfo
+	57, // 84: core.Core.getUserList:input_type -> core.UserListReq
+	21, // 85: core.Core.getUserById:input_type -> core.IDReq
+	59, // 86: core.Core.getUserByUsername:input_type -> core.UsernameReq
+	22, // 87: core.Core.deleteUser:input_type -> core.IDsReq
+	3,  // 88: core.Core.createApi:output_type -> core.BaseIDResp
+	5,  // 89: core.Core.updateApi:output_type -> core.BaseResp
+	2,  // 90: core.Core.getApiList:output_type -> core.ApiListResp
+	0,  // 91: core.Core.getApiById:output_type -> core.ApiInfo
+	5,  // 92: core.Core.deleteApi:output_type -> core.BaseResp
+	41, // 93: core.Core.getMenuAuthority:output_type -> core.RoleMenuAuthorityResp
+	5,  // 94: core.Core.createOrUpdateMenuAuthority:output_type -> core.BaseResp
+	5,  // 95: core.Core.initDatabase:output_type -> core.BaseResp
+	3,  // 96: core.Core.createConfiguration:output_type -> core.BaseIDResp
+	5,  // 97: core.Core.updateConfiguration:output_type -> core.BaseResp
+	10, // 98: core.Core.getConfigurationList:output_type -> core.ConfigurationListResp
+	8,  // 99: core.Core.getConfigurationById:output_type -> core.ConfigurationInfo
+	5,  // 100: core.Core.deleteConfiguration:output_type -> core.BaseResp
+	3,  // 101: core.Core.createDepartment:output_type -> core.BaseIDResp
+	5,  // 102: core.Core.updateDepartment:output_type -> core.BaseResp
+	13, // 103: core.Core.getDepartmentList:output_type -> core.DepartmentListResp
+	11, // 104: core.Core.getDepartmentById:output_type -> core.DepartmentInfo
+	5,  // 105: core.Core.deleteDepartment:output_type -> core.BaseResp
+	3,  // 106: core.Core.createDictionary:output_type -> core.BaseIDResp
+	5,  // 107: core.Core.updateDictionary:output_type -> core.BaseResp
+	19, // 108: core.Core.getDictionaryList:output_type -> core.DictionaryListResp
+	17, // 109: core.Core.getDictionaryById:output_type -> core.DictionaryInfo
+	5,  // 110: core.Core.deleteDictionary:output_type -> core.BaseResp
+	3,  // 111: core.Core.createDictionaryDetail:output_type -> core.BaseIDResp
+	5,  // 112: core.Core.updateDictionaryDetail:output_type -> core.BaseResp
+	16, // 113: core.Core.getDictionaryDetailList:output_type -> core.DictionaryDetailListResp
+	14, // 114: core.Core.getDictionaryDetailById:output_type -> core.DictionaryDetailInfo
+	5,  // 115: core.Core.deleteDictionaryDetail:output_type -> core.BaseResp
+	16, // 116: core.Core.getDictionaryDetailByDictionaryName:output_type -> core.DictionaryDetailListResp
+	3,  // 117: core.Core.createMenu:output_type -> core.BaseIDResp
+	5,  // 118: core.Core.updateMenu:output_type -> core.BaseResp
+	5,  // 119: core.Core.deleteMenu:output_type -> core.BaseResp
+	24, // 120: core.Core.getMenuListByRole:output_type -> core.MenuInfoList
+	24, // 121: core.Core.getMenuList:output_type -> core.MenuInfoList
+	3,  // 122: core.Core.createOauthProvider:output_type -> core.BaseIDResp
+	5,  // 123: core.Core.updateOauthProvider:output_type -> core.BaseResp
+	31, // 124: core.Core.getOauthProviderList:output_type -> core.OauthProviderListResp
+	29, // 125: core.Core.getOauthProviderById:output_type -> core.OauthProviderInfo
+	5,  // 126: core.Core.deleteOauthProvider:output_type -> core.BaseResp
+	32, // 127: core.Core.oauthLogin:output_type -> core.OauthRedirectResp
+	56, // 128: core.Core.oauthCallback:output_type -> core.UserInfo
+	3,  // 129: core.Core.createPosition:output_type -> core.BaseIDResp
+	5,  // 130: core.Core.updatePosition:output_type -> core.BaseResp
+	36, // 131: core.Core.getPositionList:output_type -> core.PositionListResp
+	34, // 132: core.Core.getPositionById:output_type -> core.PositionInfo
+	5,  // 133: core.Core.deletePosition:output_type -> core.BaseResp
+	3,  // 134: core.Core.createRole:output_type -> core.BaseIDResp
+	5,  // 135: core.Core.updateRole:output_type -> core.BaseResp
+	39, // 136: core.Core.getRoleList:output_type -> core.RoleListResp
+	37, // 137: core.Core.getRoleById:output_type -> core.RoleInfo
+	5,  // 138: core.Core.deleteRole:output_type -> core.BaseResp
+	3,  // 139: core.Core.createTenant:output_type -> core.BaseIDResp
+	5,  // 140: core.Core.updateTenant:output_type -> core.BaseResp
+	44, // 141: core.Core.getTenantList:output_type -> core.TenantListResp
+	42, // 142: core.Core.getTenantById:output_type -> core.TenantInfo
+	5,  // 143: core.Core.deleteTenant:output_type -> core.BaseResp
+	3,  // 144: core.Core.createTenantPlan:output_type -> core.BaseIDResp
+	5,  // 145: core.Core.updateTenantPlan:output_type -> core.BaseResp
+	49, // 146: core.Core.getTenantPlanById:output_type -> core.TenantPlanListResp
+	46, // 147: core.Core.getTenantPlanList:output_type -> core.TenantPlanInfo
+	5,  // 148: core.Core.deleteTenantPlan:output_type -> core.BaseResp
+	3,  // 149: core.Core.createToken:output_type -> core.BaseIDResp
+	5,  // 150: core.Core.deleteToken:output_type -> core.BaseResp
+	53, // 151: core.Core.getTokenList:output_type -> core.TokenListResp
+	51, // 152: core.Core.getTokenById:output_type -> core.TokenInfo
+	5,  // 153: core.Core.blockUserAllToken:output_type -> core.BaseResp
+	5,  // 154: core.Core.updateToken:output_type -> core.BaseResp
+	3,  // 155: core.Core.createUser:output_type -> core.BaseIDResp
+	5,  // 156: core.Core.updateUser:output_type -> core.BaseResp
+	58, // 157: core.Core.getUserList:output_type -> core.UserListResp
+	56, // 158: core.Core.getUserById:output_type -> core.UserInfo
+	56, // 159: core.Core.getUserByUsername:output_type -> core.UserInfo
+	5,  // 160: core.Core.deleteUser:output_type -> core.BaseResp
+	88, // [88:161] is the sub-list for method output_type
+	15, // [15:88] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_rpc_core_proto_init() }
@@ -5018,17 +5498,17 @@ func file_rpc_core_proto_init() {
 	file_rpc_core_proto_msgTypes[38].OneofWrappers = []any{}
 	file_rpc_core_proto_msgTypes[42].OneofWrappers = []any{}
 	file_rpc_core_proto_msgTypes[43].OneofWrappers = []any{}
-	file_rpc_core_proto_msgTypes[45].OneofWrappers = []any{}
-	file_rpc_core_proto_msgTypes[46].OneofWrappers = []any{}
-	file_rpc_core_proto_msgTypes[50].OneofWrappers = []any{}
 	file_rpc_core_proto_msgTypes[51].OneofWrappers = []any{}
+	file_rpc_core_proto_msgTypes[52].OneofWrappers = []any{}
+	file_rpc_core_proto_msgTypes[56].OneofWrappers = []any{}
+	file_rpc_core_proto_msgTypes[57].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_rpc_core_proto_rawDesc), len(file_rpc_core_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   54,
+			NumMessages:   60,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

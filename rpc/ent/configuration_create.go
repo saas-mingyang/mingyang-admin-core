@@ -180,7 +180,7 @@ func (_c *ConfigurationCreate) defaults() {
 		_c.mutation.SetState(v)
 	}
 	if _, ok := _c.mutation.ID(); !ok {
-		v := configuration.DefaultID
+		v := configuration.DefaultID()
 		_c.mutation.SetID(v)
 	}
 }

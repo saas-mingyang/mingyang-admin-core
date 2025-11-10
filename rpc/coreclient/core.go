@@ -58,6 +58,12 @@ type (
 	TenantInfo               = core.TenantInfo
 	TenantListReq            = core.TenantListReq
 	TenantListResp           = core.TenantListResp
+	TenantPlanCreateReq      = core.TenantPlanCreateReq
+	TenantPlanInfo           = core.TenantPlanInfo
+	TenantPlanInfoReq        = core.TenantPlanInfoReq
+	TenantPlanListReq        = core.TenantPlanListReq
+	TenantPlanListResp       = core.TenantPlanListResp
+	TenantPlanUpdateReq      = core.TenantPlanUpdateReq
 	TokenInfo                = core.TokenInfo
 	TokenListReq             = core.TokenListReq
 	TokenListResp            = core.TokenListResp
@@ -134,6 +140,11 @@ type (
 		GetTenantList(ctx context.Context, in *TenantListReq, opts ...grpc.CallOption) (*TenantListResp, error)
 		GetTenantById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*TenantInfo, error)
 		DeleteTenant(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error)
+		CreateTenantPlan(ctx context.Context, in *TenantPlanCreateReq, opts ...grpc.CallOption) (*BaseIDResp, error)
+		UpdateTenantPlan(ctx context.Context, in *TenantPlanUpdateReq, opts ...grpc.CallOption) (*BaseResp, error)
+		GetTenantPlanById(ctx context.Context, in *TenantPlanInfoReq, opts ...grpc.CallOption) (*TenantPlanListResp, error)
+		GetTenantPlanList(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*TenantPlanInfo, error)
+		DeleteTenantPlan(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error)
 		// Token management
 		CreateToken(ctx context.Context, in *TokenInfo, opts ...grpc.CallOption) (*BaseIDResp, error)
 		DeleteToken(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error)
@@ -448,6 +459,31 @@ func (m *defaultCore) GetTenantById(ctx context.Context, in *IDReq, opts ...grpc
 func (m *defaultCore) DeleteTenant(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	client := core.NewCoreClient(m.cli.Conn())
 	return client.DeleteTenant(ctx, in, opts...)
+}
+
+func (m *defaultCore) CreateTenantPlan(ctx context.Context, in *TenantPlanCreateReq, opts ...grpc.CallOption) (*BaseIDResp, error) {
+	client := core.NewCoreClient(m.cli.Conn())
+	return client.CreateTenantPlan(ctx, in, opts...)
+}
+
+func (m *defaultCore) UpdateTenantPlan(ctx context.Context, in *TenantPlanUpdateReq, opts ...grpc.CallOption) (*BaseResp, error) {
+	client := core.NewCoreClient(m.cli.Conn())
+	return client.UpdateTenantPlan(ctx, in, opts...)
+}
+
+func (m *defaultCore) GetTenantPlanById(ctx context.Context, in *TenantPlanInfoReq, opts ...grpc.CallOption) (*TenantPlanListResp, error) {
+	client := core.NewCoreClient(m.cli.Conn())
+	return client.GetTenantPlanById(ctx, in, opts...)
+}
+
+func (m *defaultCore) GetTenantPlanList(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*TenantPlanInfo, error) {
+	client := core.NewCoreClient(m.cli.Conn())
+	return client.GetTenantPlanList(ctx, in, opts...)
+}
+
+func (m *defaultCore) DeleteTenantPlan(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error) {
+	client := core.NewCoreClient(m.cli.Conn())
+	return client.DeleteTenantPlan(ctx, in, opts...)
 }
 
 // Token management

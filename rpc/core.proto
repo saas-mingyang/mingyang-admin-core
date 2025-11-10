@@ -388,6 +388,50 @@ message TenantListResp {
   repeated TenantInfo data = 2;
 }
 
+message TenantPlanCreateReq {
+  string package_name = 1;
+  repeated string menu_ids = 2;
+  repeated string remark = 3;
+  int32 menu_check_strictly = 4;
+  int32 status = 5;
+}
+
+message TenantPlanInfo {
+  string id = 1;
+  int64 created_at = 2;
+  int64 updated_at = 3;
+  int32 status = 4;
+  string package_name = 5;
+  repeated string menu_ids = 6;
+  repeated string remark = 7;
+  int32 menu_check_strictly = 8;
+}
+
+message TenantPlanInfoReq {
+  string id = 1;
+}
+
+message TenantPlanListReq {
+  int64 page = 1;
+  int64 page_size = 2;
+  string package_name = 3;
+  int32 status = 4;
+}
+
+message TenantPlanListResp {
+  int64 total = 1;
+  repeated TenantPlanInfo data = 2;
+}
+
+message TenantPlanUpdateReq {
+  string id = 1;
+  string package_name = 2;
+  repeated string menu_ids = 3;
+  repeated string remark = 4;
+  int32 menu_check_strictly = 5;
+  int32 status = 6;
+}
+
 message TokenInfo {
   optional uint64 id = 1;
   optional int64 created_at = 2;
@@ -595,6 +639,16 @@ service Core {
   rpc getTenantById(IDReq) returns (TenantInfo);
   //  group: tenant
   rpc deleteTenant(IDsReq) returns (BaseResp);
+  //  group: tenantplan
+  rpc createTenantPlan(TenantPlanCreateReq) returns (BaseIDResp);
+  //  group: tenantplan
+  rpc updateTenantPlan(TenantPlanUpdateReq) returns (BaseResp);
+  //  group: tenantplan
+  rpc getTenantPlanById(TenantPlanInfoReq) returns (TenantPlanListResp);
+  //  group: tenantplan
+  rpc getTenantPlanList(IDReq) returns (TenantPlanInfo);
+  //  group: tenantplan
+  rpc deleteTenantPlan(IDsReq) returns (BaseResp);
   //  Token management
   //  group: token
   rpc createToken(TokenInfo) returns (BaseIDResp);

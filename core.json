@@ -2531,6 +2531,286 @@
         }
       }
     },
+    "/tenant": {
+      "post": {
+        "description": "Get Tenant by ID | 通过ID获取部门",
+        "tags": [
+          "tenant"
+        ],
+        "summary": "Get Tenant by ID | 通过ID获取部门",
+        "operationId": "GetTenantById",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/IDReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TenantInfoResp",
+            "schema": {
+              "$ref": "#/definitions/TenantInfoResp"
+            }
+          }
+        }
+      }
+    },
+    "/tenant/create": {
+      "post": {
+        "description": "Create tenant information | 创建部门",
+        "tags": [
+          "tenant"
+        ],
+        "summary": "Create tenant information | 创建部门",
+        "operationId": "CreateTenant",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/TenantInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "BaseMsgResp",
+            "schema": {
+              "$ref": "#/definitions/BaseMsgResp"
+            }
+          }
+        }
+      }
+    },
+    "/tenant/delete": {
+      "post": {
+        "description": "Delete tenant information | 删除部门信息",
+        "tags": [
+          "tenant"
+        ],
+        "summary": "Delete tenant information | 删除部门信息",
+        "operationId": "DeleteTenant",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/IDsReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "BaseMsgResp",
+            "schema": {
+              "$ref": "#/definitions/BaseMsgResp"
+            }
+          }
+        }
+      }
+    },
+    "/tenant/list": {
+      "post": {
+        "description": "Get tenant list | 获取部门列表",
+        "tags": [
+          "tenant"
+        ],
+        "summary": "Get tenant list | 获取部门列表",
+        "operationId": "GetTenantList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/TenantListReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TenantListResp",
+            "schema": {
+              "$ref": "#/definitions/TenantListResp"
+            }
+          }
+        }
+      }
+    },
+    "/tenant/update": {
+      "post": {
+        "description": "Update tenant information | 更新部门",
+        "tags": [
+          "tenant"
+        ],
+        "summary": "Update tenant information | 更新部门",
+        "operationId": "UpdateTenant",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/TenantInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "BaseMsgResp",
+            "schema": {
+              "$ref": "#/definitions/BaseMsgResp"
+            }
+          }
+        }
+      }
+    },
+    "/tenant_plan": {
+      "post": {
+        "description": "Get tenant plan by ID | 通过ID获取租户套餐",
+        "tags": [
+          "tenantplan"
+        ],
+        "summary": "Get tenant plan by ID | 通过ID获取租户套餐",
+        "operationId": "GetTenantPlanById",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/IDReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TenantPlanInfo",
+            "schema": {
+              "$ref": "#/definitions/TenantPlanInfo"
+            }
+          }
+        }
+      }
+    },
+    "/tenant_plan/create": {
+      "post": {
+        "description": "Create tenant plan | 创建租户套餐",
+        "tags": [
+          "tenantplan"
+        ],
+        "summary": "Create tenant plan | 创建租户套餐",
+        "operationId": "CreateTenantPlan",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/TenantPlanInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "BaseMsgResp",
+            "schema": {
+              "$ref": "#/definitions/BaseMsgResp"
+            }
+          }
+        }
+      }
+    },
+    "/tenant_plan/delete": {
+      "post": {
+        "description": "Delete tenant plans | 删除租户套餐",
+        "tags": [
+          "tenantplan"
+        ],
+        "summary": "Delete tenant plans | 删除租户套餐",
+        "operationId": "DeleteTenantPlan",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/IDsReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "BaseMsgResp",
+            "schema": {
+              "$ref": "#/definitions/BaseMsgResp"
+            }
+          }
+        }
+      }
+    },
+    "/tenant_plan/list": {
+      "post": {
+        "description": "Get tenant plan list | 获取租户套餐列表",
+        "tags": [
+          "tenantplan"
+        ],
+        "summary": "Get tenant plan list | 获取租户套餐列表",
+        "operationId": "GetTenantPlanList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/TenantPlanListReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TenantPlanListResp",
+            "schema": {
+              "$ref": "#/definitions/TenantPlanListResp"
+            }
+          }
+        }
+      }
+    },
+    "/tenant_plan/update": {
+      "post": {
+        "description": "Update tenant plan | 更新租户套餐",
+        "tags": [
+          "tenantplan"
+        ],
+        "summary": "Update tenant plan | 更新租户套餐",
+        "operationId": "UpdateTenantPlan",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/TenantPlanInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "BaseMsgResp",
+            "schema": {
+              "$ref": "#/definitions/BaseMsgResp"
+            }
+          }
+        }
+      }
+    },
     "/token": {
       "post": {
         "description": "Get Token by ID | 通过ID获取Token",
@@ -7123,6 +7403,320 @@
           "type": "string",
           "x-go-name": "Data",
           "$ref": "#/definitions/TaskLogListInfo"
+        },
+        "msg": {
+          "description": "Message | 提示信息",
+          "type": "string",
+          "x-go-name": "Msg"
+        }
+      },
+      "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
+    },
+    "TenantInfo": {
+      "description": "The response data of tenant information | 部门信息",
+      "type": "object",
+      "properties": {
+        "adminId": {
+          "description": "Leader | 部门负责人",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "AdminId"
+        },
+        "code": {
+          "description": "Phone | 电话号码",
+          "type": "string",
+          "maxLength": 128,
+          "x-go-name": "Code"
+        },
+        "createdAt": {
+          "description": "Create date | 创建日期",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "CreatedAt"
+        },
+        "id": {
+          "description": "ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "Id"
+        },
+        "name": {
+          "description": "Name | 部门名称",
+          "type": "string",
+          "maxLength": 50,
+          "minLength": 1,
+          "x-go-name": "Name"
+        },
+        "parentId": {
+          "description": "ParentId | 父级 ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "ParentId"
+        },
+        "status": {
+          "description": "Status | 状态",
+          "type": "integer",
+          "format": "uint32",
+          "maximum": 20,
+          "x-go-name": "Status"
+        },
+        "updatedAt": {
+          "description": "Update date | 更新日期",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "UpdatedAt"
+        }
+      },
+      "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
+    },
+    "TenantInfoResp": {
+      "description": "Tenant information response | 部门信息返回体",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code | 错误代码",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "data": {
+          "description": "Data | 数据",
+          "type": "string",
+          "x-go-name": "Data",
+          "$ref": "#/definitions/TenantInfo"
+        },
+        "msg": {
+          "description": "Message | 提示信息",
+          "type": "string",
+          "x-go-name": "Msg"
+        }
+      },
+      "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
+    },
+    "TenantListInfo": {
+      "description": "Tenant list data | 部门列表数据",
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "The API list data | 部门列表数据",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TenantInfo"
+          },
+          "x-go-name": "Data"
+        },
+        "total": {
+          "description": "The total number of data | 数据总数",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "Total"
+        }
+      },
+      "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
+    },
+    "TenantListReq": {
+      "description": "Get tenant list request params | 部门列表请求参数",
+      "type": "object",
+      "required": [
+        "page",
+        "pageSize"
+      ],
+      "properties": {
+        "adminId": {
+          "description": "Leader | 部门负责人",
+          "type": "integer",
+          "format": "uint64",
+          "maxLength": 20,
+          "x-go-name": "AdminId"
+        },
+        "name": {
+          "description": "Name | 部门名称",
+          "type": "string",
+          "maxLength": 50,
+          "x-go-name": "Name"
+        },
+        "page": {
+          "description": "Page number | 第几页",
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0,
+          "x-go-name": "Page"
+        },
+        "pageSize": {
+          "description": "Page size | 单页数据行数",
+          "type": "integer",
+          "format": "uint64",
+          "maximum": 100000,
+          "x-go-name": "PageSize"
+        },
+        "status": {
+          "description": "Status | 状态",
+          "type": "integer",
+          "format": "uint32",
+          "maximum": 20,
+          "x-go-name": "Status"
+        }
+      },
+      "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
+    },
+    "TenantListResp": {
+      "description": "The response data of tenant list | 部门列表数据",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code | 错误代码",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "data": {
+          "description": "Data | 数据",
+          "type": "string",
+          "x-go-name": "Data",
+          "$ref": "#/definitions/TenantListInfo"
+        },
+        "msg": {
+          "description": "Message | 提示信息",
+          "type": "string",
+          "x-go-name": "Msg"
+        }
+      },
+      "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
+    },
+    "TenantPlanInfo": {
+      "description": "TenantPlan info | 租户套餐信息",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "description": "Create date | 创建日期",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "CreatedAt"
+        },
+        "id": {
+          "description": "ID",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "Id"
+        },
+        "menuCheckStrictly": {
+          "description": "Menu check strictly | 菜单树选择项是否关联显示",
+          "type": "integer",
+          "format": "int32",
+          "x-go-name": "MenuCheckStrictly"
+        },
+        "menuIds": {
+          "description": "Menu IDs | 菜单ID列表",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "MenuIds"
+        },
+        "packageName": {
+          "description": "Package name | 套餐名称",
+          "type": "string",
+          "maxLength": 50,
+          "x-go-name": "PackageName"
+        },
+        "remark": {
+          "description": "Remark | 备注",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "Remark"
+        },
+        "status": {
+          "description": "Status | 状态",
+          "type": "integer",
+          "format": "uint32",
+          "maximum": 20,
+          "x-go-name": "Status"
+        },
+        "updatedAt": {
+          "description": "Update date | 更新日期",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "UpdatedAt"
+        }
+      },
+      "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
+    },
+    "TenantPlanListInfo": {
+      "description": "TenantPlan list data | 租户套餐列表数据",
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "The API list data | 租户套餐列表数据",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TenantPlanInfo"
+          },
+          "x-go-name": "Data"
+        },
+        "total": {
+          "description": "The total number of data | 数据总数",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "Total"
+        }
+      },
+      "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
+    },
+    "TenantPlanListReq": {
+      "description": "Get tenant plan list request params | 获取租户套餐列表请求参数",
+      "type": "object",
+      "required": [
+        "page",
+        "pageSize"
+      ],
+      "properties": {
+        "packageName": {
+          "description": "Package name | 套餐名称",
+          "type": "string",
+          "maxLength": 50,
+          "x-go-name": "PackageName"
+        },
+        "page": {
+          "description": "Page number | 第几页",
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0,
+          "x-go-name": "Page"
+        },
+        "pageSize": {
+          "description": "Page size | 单页数据行数",
+          "type": "integer",
+          "format": "uint64",
+          "maximum": 100000,
+          "x-go-name": "PageSize"
+        },
+        "status": {
+          "description": "Status | 状态",
+          "type": "integer",
+          "format": "uint32",
+          "maximum": 20,
+          "x-go-name": "Status"
+        }
+      },
+      "x-go-package": "github.com/saas-mingyang/mingyang-admin-core/api/internal/types"
+    },
+    "TenantPlanListResp": {
+      "description": "TenantPlan list response | 租户套餐列表返回",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code | 错误代码",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "data": {
+          "description": "Data | 数据",
+          "type": "string",
+          "x-go-name": "Data",
+          "$ref": "#/definitions/TenantPlanListInfo"
         },
         "msg": {
           "description": "Message | 提示信息",

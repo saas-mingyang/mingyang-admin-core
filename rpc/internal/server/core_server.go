@@ -18,6 +18,7 @@ import (
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/logic/position"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/logic/role"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/logic/tenant"
+	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/logic/tenantplan"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/logic/token"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/logic/user"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/svc"
@@ -322,6 +323,31 @@ func (s *CoreServer) GetTenantById(ctx context.Context, in *core.IDReq) (*core.T
 func (s *CoreServer) DeleteTenant(ctx context.Context, in *core.IDsReq) (*core.BaseResp, error) {
 	l := tenant.NewDeleteTenantLogic(ctx, s.svcCtx)
 	return l.DeleteTenant(in)
+}
+
+func (s *CoreServer) CreateTenantPlan(ctx context.Context, in *core.TenantPlanCreateReq) (*core.BaseIDResp, error) {
+	l := tenantplan.NewCreateTenantPlanLogic(ctx, s.svcCtx)
+	return l.CreateTenantPlan(in)
+}
+
+func (s *CoreServer) UpdateTenantPlan(ctx context.Context, in *core.TenantPlanUpdateReq) (*core.BaseResp, error) {
+	l := tenantplan.NewUpdateTenantPlanLogic(ctx, s.svcCtx)
+	return l.UpdateTenantPlan(in)
+}
+
+func (s *CoreServer) GetTenantPlanById(ctx context.Context, in *core.TenantPlanInfoReq) (*core.TenantPlanListResp, error) {
+	l := tenantplan.NewGetTenantPlanByIdLogic(ctx, s.svcCtx)
+	return l.GetTenantPlanById(in)
+}
+
+func (s *CoreServer) GetTenantPlanList(ctx context.Context, in *core.IDReq) (*core.TenantPlanInfo, error) {
+	l := tenantplan.NewGetTenantPlanListLogic(ctx, s.svcCtx)
+	return l.GetTenantPlanList(in)
+}
+
+func (s *CoreServer) DeleteTenantPlan(ctx context.Context, in *core.IDsReq) (*core.BaseResp, error) {
+	l := tenantplan.NewDeleteTenantPlanLogic(ctx, s.svcCtx)
+	return l.DeleteTenantPlan(in)
 }
 
 // Token management

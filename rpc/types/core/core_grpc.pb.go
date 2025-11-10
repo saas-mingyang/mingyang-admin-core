@@ -75,6 +75,11 @@ const (
 	Core_GetTenantList_FullMethodName                       = "/core.Core/getTenantList"
 	Core_GetTenantById_FullMethodName                       = "/core.Core/getTenantById"
 	Core_DeleteTenant_FullMethodName                        = "/core.Core/deleteTenant"
+	Core_CreateTenantPlan_FullMethodName                    = "/core.Core/createTenantPlan"
+	Core_UpdateTenantPlan_FullMethodName                    = "/core.Core/updateTenantPlan"
+	Core_GetTenantPlanById_FullMethodName                   = "/core.Core/getTenantPlanById"
+	Core_GetTenantPlanList_FullMethodName                   = "/core.Core/getTenantPlanList"
+	Core_DeleteTenantPlan_FullMethodName                    = "/core.Core/deleteTenantPlan"
 	Core_CreateToken_FullMethodName                         = "/core.Core/createToken"
 	Core_DeleteToken_FullMethodName                         = "/core.Core/deleteToken"
 	Core_GetTokenList_FullMethodName                        = "/core.Core/getTokenList"
@@ -214,6 +219,16 @@ type CoreClient interface {
 	GetTenantById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*TenantInfo, error)
 	// group: tenant
 	DeleteTenant(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error)
+	// group: tenantplan
+	CreateTenantPlan(ctx context.Context, in *TenantPlanCreateReq, opts ...grpc.CallOption) (*BaseIDResp, error)
+	// group: tenantplan
+	UpdateTenantPlan(ctx context.Context, in *TenantPlanUpdateReq, opts ...grpc.CallOption) (*BaseResp, error)
+	// group: tenantplan
+	GetTenantPlanById(ctx context.Context, in *TenantPlanInfoReq, opts ...grpc.CallOption) (*TenantPlanListResp, error)
+	// group: tenantplan
+	GetTenantPlanList(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*TenantPlanInfo, error)
+	// group: tenantplan
+	DeleteTenantPlan(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error)
 	// Token management
 	// group: token
 	CreateToken(ctx context.Context, in *TokenInfo, opts ...grpc.CallOption) (*BaseIDResp, error)
@@ -810,6 +825,56 @@ func (c *coreClient) DeleteTenant(ctx context.Context, in *IDsReq, opts ...grpc.
 	return out, nil
 }
 
+func (c *coreClient) CreateTenantPlan(ctx context.Context, in *TenantPlanCreateReq, opts ...grpc.CallOption) (*BaseIDResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BaseIDResp)
+	err := c.cc.Invoke(ctx, Core_CreateTenantPlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coreClient) UpdateTenantPlan(ctx context.Context, in *TenantPlanUpdateReq, opts ...grpc.CallOption) (*BaseResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BaseResp)
+	err := c.cc.Invoke(ctx, Core_UpdateTenantPlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coreClient) GetTenantPlanById(ctx context.Context, in *TenantPlanInfoReq, opts ...grpc.CallOption) (*TenantPlanListResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TenantPlanListResp)
+	err := c.cc.Invoke(ctx, Core_GetTenantPlanById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coreClient) GetTenantPlanList(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*TenantPlanInfo, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TenantPlanInfo)
+	err := c.cc.Invoke(ctx, Core_GetTenantPlanList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coreClient) DeleteTenantPlan(ctx context.Context, in *IDsReq, opts ...grpc.CallOption) (*BaseResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BaseResp)
+	err := c.cc.Invoke(ctx, Core_DeleteTenantPlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coreClient) CreateToken(ctx context.Context, in *TokenInfo, opts ...grpc.CallOption) (*BaseIDResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(BaseIDResp)
@@ -1055,6 +1120,16 @@ type CoreServer interface {
 	GetTenantById(context.Context, *IDReq) (*TenantInfo, error)
 	// group: tenant
 	DeleteTenant(context.Context, *IDsReq) (*BaseResp, error)
+	// group: tenantplan
+	CreateTenantPlan(context.Context, *TenantPlanCreateReq) (*BaseIDResp, error)
+	// group: tenantplan
+	UpdateTenantPlan(context.Context, *TenantPlanUpdateReq) (*BaseResp, error)
+	// group: tenantplan
+	GetTenantPlanById(context.Context, *TenantPlanInfoReq) (*TenantPlanListResp, error)
+	// group: tenantplan
+	GetTenantPlanList(context.Context, *IDReq) (*TenantPlanInfo, error)
+	// group: tenantplan
+	DeleteTenantPlan(context.Context, *IDsReq) (*BaseResp, error)
 	// Token management
 	// group: token
 	CreateToken(context.Context, *TokenInfo) (*BaseIDResp, error)
@@ -1258,6 +1333,21 @@ func (UnimplementedCoreServer) GetTenantById(context.Context, *IDReq) (*TenantIn
 }
 func (UnimplementedCoreServer) DeleteTenant(context.Context, *IDsReq) (*BaseResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTenant not implemented")
+}
+func (UnimplementedCoreServer) CreateTenantPlan(context.Context, *TenantPlanCreateReq) (*BaseIDResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTenantPlan not implemented")
+}
+func (UnimplementedCoreServer) UpdateTenantPlan(context.Context, *TenantPlanUpdateReq) (*BaseResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTenantPlan not implemented")
+}
+func (UnimplementedCoreServer) GetTenantPlanById(context.Context, *TenantPlanInfoReq) (*TenantPlanListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTenantPlanById not implemented")
+}
+func (UnimplementedCoreServer) GetTenantPlanList(context.Context, *IDReq) (*TenantPlanInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTenantPlanList not implemented")
+}
+func (UnimplementedCoreServer) DeleteTenantPlan(context.Context, *IDsReq) (*BaseResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTenantPlan not implemented")
 }
 func (UnimplementedCoreServer) CreateToken(context.Context, *TokenInfo) (*BaseIDResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateToken not implemented")
@@ -2324,6 +2414,96 @@ func _Core_DeleteTenant_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Core_CreateTenantPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TenantPlanCreateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoreServer).CreateTenantPlan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Core_CreateTenantPlan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoreServer).CreateTenantPlan(ctx, req.(*TenantPlanCreateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Core_UpdateTenantPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TenantPlanUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoreServer).UpdateTenantPlan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Core_UpdateTenantPlan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoreServer).UpdateTenantPlan(ctx, req.(*TenantPlanUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Core_GetTenantPlanById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TenantPlanInfoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoreServer).GetTenantPlanById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Core_GetTenantPlanById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoreServer).GetTenantPlanById(ctx, req.(*TenantPlanInfoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Core_GetTenantPlanList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IDReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoreServer).GetTenantPlanList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Core_GetTenantPlanList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoreServer).GetTenantPlanList(ctx, req.(*IDReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Core_DeleteTenantPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IDsReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoreServer).DeleteTenantPlan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Core_DeleteTenantPlan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoreServer).DeleteTenantPlan(ctx, req.(*IDsReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Core_CreateToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TokenInfo)
 	if err := dec(in); err != nil {
@@ -2770,6 +2950,26 @@ var Core_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "deleteTenant",
 			Handler:    _Core_DeleteTenant_Handler,
+		},
+		{
+			MethodName: "createTenantPlan",
+			Handler:    _Core_CreateTenantPlan_Handler,
+		},
+		{
+			MethodName: "updateTenantPlan",
+			Handler:    _Core_UpdateTenantPlan_Handler,
+		},
+		{
+			MethodName: "getTenantPlanById",
+			Handler:    _Core_GetTenantPlanById_Handler,
+		},
+		{
+			MethodName: "getTenantPlanList",
+			Handler:    _Core_GetTenantPlanList_Handler,
+		},
+		{
+			MethodName: "deleteTenantPlan",
+			Handler:    _Core_DeleteTenantPlan_Handler,
 		},
 		{
 			MethodName: "createToken",

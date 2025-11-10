@@ -202,7 +202,7 @@ func (_c *DictionaryCreate) defaults() {
 		_c.mutation.SetIsPublic(v)
 	}
 	if _, ok := _c.mutation.ID(); !ok {
-		v := dictionary.DefaultID
+		v := dictionary.DefaultID()
 		_c.mutation.SetID(v)
 	}
 }

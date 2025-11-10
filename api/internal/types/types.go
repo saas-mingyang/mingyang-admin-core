@@ -1710,3 +1710,108 @@ type ConfigurationInfoResp struct {
 	// Configuration information | 参数配置数据
 	Data ConfigurationInfo `json:"data"`
 }
+
+// The response data of tenant information | 部门信息
+// swagger:model TenantInfo
+type TenantInfo struct {
+	BaseIDInfo
+	// Status | 状态
+	// max : 20
+	Status *uint32 `json:"status,optional" validate:"omitempty,lt=20"`
+	// Name | 部门名称
+	// min length : 1
+	// max length : 50
+	Name *string `json:"name,optional" validate:"omitempty,min=1,max=50"`
+	// Leader | 部门负责人
+	AdminId *uint64 `json:"adminId,optional"`
+	// Phone | 电话号码
+	// max length : 128
+	Code *string `json:"code,optional" validate:"omitempty,max=128"`
+	// ParentId | 父级 ID
+	ParentId *uint64 `json:"parentId,optional"`
+}
+
+// The response data of tenant list | 部门列表数据
+// swagger:model TenantListResp
+type TenantListResp struct {
+	BaseDataInfo
+	// Tenant list data | 部门列表数据
+	Data TenantListInfo `json:"data"`
+}
+
+// Tenant list data | 部门列表数据
+// swagger:model TenantListInfo
+type TenantListInfo struct {
+	BaseListInfo
+	// The API list data | 部门列表数据
+	Data []TenantInfo `json:"data"`
+}
+
+// Get tenant list request params | 部门列表请求参数
+// swagger:model TenantListReq
+type TenantListReq struct {
+	PageInfo
+	// Name | 部门名称
+	// max length : 50
+	Name *string `json:"name,optional" validate:"omitempty,max=50"`
+	// Leader | 部门负责人
+	// max length : 20
+	AdminId *uint64 `json:"adminId,optional" validate:"omitempty,max=20"`
+	// Status | 状态
+	// max : 20
+	Status *uint32 `json:"status,optional" validate:"omitempty,lt=20"`
+}
+
+// Tenant information response | 部门信息返回体
+// swagger:model TenantInfoResp
+type TenantInfoResp struct {
+	BaseDataInfo
+	// Tenant information | 部门数据
+	Data TenantInfo `json:"data"`
+}
+
+// TenantPlan info | 租户套餐信息
+// swagger:model TenantPlanInfo
+type TenantPlanInfo struct {
+	BaseIDInfo
+	// Status | 状态
+	// max : 20
+	Status *uint32 `json:"status,optional" validate:"omitempty,lt=20"`
+	// Package name | 套餐名称
+	// max length : 50
+	PackageName *string `json:"packageName,optional" validate:"omitempty,max=50"`
+	// Menu IDs | 菜单ID列表
+	MenuIds []string `json:"menuIds,optional"`
+	// Remark | 备注
+	Remark []string `json:"remark,optional"`
+	// Menu check strictly | 菜单树选择项是否关联显示
+	MenuCheckStrictly *int32 `json:"menuCheckStrictly,optional"`
+}
+
+// TenantPlan list response | 租户套餐列表返回
+// swagger:model TenantPlanListResp
+type TenantPlanListResp struct {
+	BaseDataInfo
+	// TenantPlan list data | 租户套餐列表数据
+	Data TenantPlanListInfo `json:"data"`
+}
+
+// TenantPlan list data | 租户套餐列表数据
+// swagger:model TenantPlanListInfo
+type TenantPlanListInfo struct {
+	BaseListInfo
+	// The API list data | 租户套餐列表数据
+	Data []TenantPlanInfo `json:"data"`
+}
+
+// Get tenant plan list request params | 获取租户套餐列表请求参数
+// swagger:model TenantPlanListReq
+type TenantPlanListReq struct {
+	PageInfo
+	// Package name | 套餐名称
+	// max length : 50
+	PackageName *string `json:"packageName,optional" validate:"omitempty,max=50"`
+	// Status | 状态
+	// max : 20
+	Status *uint32 `json:"status,optional" validate:"omitempty,lt=20"`
+}

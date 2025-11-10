@@ -178,7 +178,7 @@ func (_c *APICreate) defaults() {
 		_c.mutation.SetIsRequired(v)
 	}
 	if _, ok := _c.mutation.ID(); !ok {
-		v := api.DefaultID
+		v := api.DefaultID()
 		_c.mutation.SetID(v)
 	}
 }

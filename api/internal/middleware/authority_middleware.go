@@ -119,6 +119,8 @@ func batchCheck(cbn *casbin.Enforcer, roleIds []string, act, obj string) bool {
 	for _, v := range roleIds {
 		checkReq = append(checkReq, []any{v, obj, act})
 	}
+	//打印数组
+	logx.Infow("Casbin check request", logx.Field("detail", checkReq))
 
 	result, err := cbn.BatchEnforce(checkReq)
 	if err != nil {
