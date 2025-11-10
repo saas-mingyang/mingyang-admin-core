@@ -2,6 +2,7 @@ package token
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/saas-mingyang/mingyang-admin-common/utils/pointy"
 	"github.com/saas-mingyang/mingyang-admin-core/rpc/internal/svc"
@@ -37,6 +38,7 @@ func (l *CreateTokenLogic) CreateToken(in *core.TokenInfo) (*core.BaseIDResp, er
 		SetNotNilExpiredAt(pointy.GetTimeMilliPointer(in.ExpiredAt)).
 		Save(l.ctx)
 	if err != nil {
+		fmt.Printf("create token error: %v", err)
 		return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
 	}
 
