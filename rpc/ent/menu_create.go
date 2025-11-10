@@ -492,7 +492,7 @@ func (_c *MenuCreate) defaults() {
 		_c.mutation.SetRealPath(v)
 	}
 	if _, ok := _c.mutation.ID(); !ok {
-		v := menu.DefaultID
+		v := menu.DefaultID()
 		_c.mutation.SetID(v)
 	}
 }

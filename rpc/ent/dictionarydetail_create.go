@@ -212,7 +212,7 @@ func (_c *DictionaryDetailCreate) defaults() {
 		_c.mutation.SetSort(v)
 	}
 	if _, ok := _c.mutation.ID(); !ok {
-		v := dictionarydetail.DefaultID
+		v := dictionarydetail.DefaultID()
 		_c.mutation.SetID(v)
 	}
 }

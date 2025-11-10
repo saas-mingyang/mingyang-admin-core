@@ -322,7 +322,10 @@ func (_c *UserCreate) defaults() error {
 		_c.mutation.SetHomePath(v)
 	}
 	if _, ok := _c.mutation.ID(); !ok {
-		v := user.DefaultID
+		if user.DefaultID == nil {
+			return fmt.Errorf("ent: uninitialized user.DefaultID (forgotten import ent/runtime?)")
+		}
+		v := user.DefaultID()
 		_c.mutation.SetID(v)
 	}
 	return nil

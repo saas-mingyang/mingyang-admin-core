@@ -98,7 +98,7 @@ var (
 	// ParentIDValidator is a validator for the "parent_id" field. It is called by the builders before save.
 	ParentIDValidator func(int64) error
 	// DefaultID holds the default value on creation for the "id" field.
-	DefaultID uint64
+	DefaultID func() uint64
 )
 
 // OrderOption defines the ordering options for the Tenant queries.

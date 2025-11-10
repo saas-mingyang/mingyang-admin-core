@@ -55,7 +55,7 @@ func init() {
 	// apiDescID is the schema descriptor for id field.
 	apiDescID := apiMixinFields0[0].Descriptor()
 	// api.DefaultID holds the default value on creation for the id field.
-	api.DefaultID = apiDescID.Default.(uint64)
+	api.DefaultID = apiDescID.Default.(func() uint64)
 	configurationMixin := schema.Configuration{}.Mixin()
 	configurationMixinFields0 := configurationMixin[0].Fields()
 	_ = configurationMixinFields0
@@ -86,7 +86,7 @@ func init() {
 	// configurationDescID is the schema descriptor for id field.
 	configurationDescID := configurationMixinFields0[0].Descriptor()
 	// configuration.DefaultID holds the default value on creation for the id field.
-	configuration.DefaultID = configurationDescID.Default.(uint64)
+	configuration.DefaultID = configurationDescID.Default.(func() uint64)
 	departmentMixin := schema.Department{}.Mixin()
 	departmentMixinFields0 := departmentMixin[0].Fields()
 	_ = departmentMixinFields0
@@ -131,7 +131,7 @@ func init() {
 	// departmentDescID is the schema descriptor for id field.
 	departmentDescID := departmentMixinFields0[0].Descriptor()
 	// department.DefaultID holds the default value on creation for the id field.
-	department.DefaultID = departmentDescID.Default.(uint64)
+	department.DefaultID = departmentDescID.Default.(func() uint64)
 	dictionaryMixin := schema.Dictionary{}.Mixin()
 	dictionaryMixinFields0 := dictionaryMixin[0].Fields()
 	_ = dictionaryMixinFields0
@@ -166,7 +166,7 @@ func init() {
 	// dictionaryDescID is the schema descriptor for id field.
 	dictionaryDescID := dictionaryMixinFields0[0].Descriptor()
 	// dictionary.DefaultID holds the default value on creation for the id field.
-	dictionary.DefaultID = dictionaryDescID.Default.(uint64)
+	dictionary.DefaultID = dictionaryDescID.Default.(func() uint64)
 	dictionarydetailMixin := schema.DictionaryDetail{}.Mixin()
 	dictionarydetailMixinFields0 := dictionarydetailMixin[0].Fields()
 	_ = dictionarydetailMixinFields0
@@ -203,7 +203,7 @@ func init() {
 	// dictionarydetailDescID is the schema descriptor for id field.
 	dictionarydetailDescID := dictionarydetailMixinFields0[0].Descriptor()
 	// dictionarydetail.DefaultID holds the default value on creation for the id field.
-	dictionarydetail.DefaultID = dictionarydetailDescID.Default.(uint64)
+	dictionarydetail.DefaultID = dictionarydetailDescID.Default.(func() uint64)
 	menuMixin := schema.Menu{}.Mixin()
 	menuMixinFields0 := menuMixin[0].Fields()
 	_ = menuMixinFields0
@@ -292,7 +292,7 @@ func init() {
 	// menuDescID is the schema descriptor for id field.
 	menuDescID := menuMixinFields0[0].Descriptor()
 	// menu.DefaultID holds the default value on creation for the id field.
-	menu.DefaultID = menuDescID.Default.(uint64)
+	menu.DefaultID = menuDescID.Default.(func() uint64)
 	oauthproviderMixin := schema.OauthProvider{}.Mixin()
 	oauthproviderMixinFields0 := oauthproviderMixin[0].Fields()
 	_ = oauthproviderMixinFields0
@@ -311,7 +311,7 @@ func init() {
 	// oauthproviderDescID is the schema descriptor for id field.
 	oauthproviderDescID := oauthproviderMixinFields0[0].Descriptor()
 	// oauthprovider.DefaultID holds the default value on creation for the id field.
-	oauthprovider.DefaultID = oauthproviderDescID.Default.(uint64)
+	oauthprovider.DefaultID = oauthproviderDescID.Default.(func() uint64)
 	positionMixin := schema.Position{}.Mixin()
 	positionMixinFields0 := positionMixin[0].Fields()
 	_ = positionMixinFields0
@@ -348,7 +348,7 @@ func init() {
 	// positionDescID is the schema descriptor for id field.
 	positionDescID := positionMixinFields0[0].Descriptor()
 	// position.DefaultID holds the default value on creation for the id field.
-	position.DefaultID = positionDescID.Default.(uint64)
+	position.DefaultID = positionDescID.Default.(func() uint64)
 	roleMixin := schema.Role{}.Mixin()
 	roleMixinFields0 := roleMixin[0].Fields()
 	_ = roleMixinFields0
@@ -381,7 +381,7 @@ func init() {
 	// roleDescID is the schema descriptor for id field.
 	roleDescID := roleMixinFields0[0].Descriptor()
 	// role.DefaultID holds the default value on creation for the id field.
-	role.DefaultID = roleDescID.Default.(uint64)
+	role.DefaultID = roleDescID.Default.(func() uint64)
 	tenantMixin := schema.Tenant{}.Mixin()
 	tenantMixinFields0 := tenantMixin[0].Fields()
 	_ = tenantMixinFields0
@@ -450,7 +450,7 @@ func init() {
 	// tenantDescID is the schema descriptor for id field.
 	tenantDescID := tenantMixinFields0[0].Descriptor()
 	// tenant.DefaultID holds the default value on creation for the id field.
-	tenant.DefaultID = tenantDescID.Default.(uint64)
+	tenant.DefaultID = tenantDescID.Default.(func() uint64)
 	tenantplanMixin := schema.TenantPlan{}.Mixin()
 	tenantplanMixinFields0 := tenantplanMixin[0].Fields()
 	_ = tenantplanMixinFields0
@@ -475,7 +475,7 @@ func init() {
 	// tenantplanDescID is the schema descriptor for id field.
 	tenantplanDescID := tenantplanMixinFields0[0].Descriptor()
 	// tenantplan.DefaultID holds the default value on creation for the id field.
-	tenantplan.DefaultID = tenantplanDescID.Default.(uint64)
+	tenantplan.DefaultID = tenantplanDescID.Default.(func() uint64)
 	tokenMixin := schema.Token{}.Mixin()
 	tokenMixinFields0 := tokenMixin[0].Fields()
 	_ = tokenMixinFields0
@@ -508,7 +508,7 @@ func init() {
 	// tokenDescID is the schema descriptor for id field.
 	tokenDescID := tokenMixinFields0[0].Descriptor()
 	// token.DefaultID holds the default value on creation for the id field.
-	token.DefaultID = tokenDescID.Default.(uint64)
+	token.DefaultID = tokenDescID.Default.(func() uint64)
 	userMixin := schema.User{}.Mixin()
 	userMixinHooks4 := userMixin[4].Hooks()
 	user.Hooks[0] = userMixinHooks4[0]
@@ -549,7 +549,7 @@ func init() {
 	// userDescID is the schema descriptor for id field.
 	userDescID := userMixinFields0[0].Descriptor()
 	// user.DefaultID holds the default value on creation for the id field.
-	user.DefaultID = userDescID.Default.(uint64)
+	user.DefaultID = userDescID.Default.(func() uint64)
 }
 
 const (

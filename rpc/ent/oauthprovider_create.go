@@ -160,7 +160,7 @@ func (_c *OauthProviderCreate) defaults() {
 		_c.mutation.SetUpdatedAt(v)
 	}
 	if _, ok := _c.mutation.ID(); !ok {
-		v := oauthprovider.DefaultID
+		v := oauthprovider.DefaultID()
 		_c.mutation.SetID(v)
 	}
 }

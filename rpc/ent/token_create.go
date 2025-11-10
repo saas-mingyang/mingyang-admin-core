@@ -178,7 +178,7 @@ func (_c *TokenCreate) defaults() {
 		_c.mutation.SetUsername(v)
 	}
 	if _, ok := _c.mutation.ID(); !ok {
-		v := token.DefaultID
+		v := token.DefaultID()
 		_c.mutation.SetID(v)
 	}
 }

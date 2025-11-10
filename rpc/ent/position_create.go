@@ -202,7 +202,7 @@ func (_c *PositionCreate) defaults() {
 		_c.mutation.SetSort(v)
 	}
 	if _, ok := _c.mutation.ID(); !ok {
-		v := position.DefaultID
+		v := position.DefaultID()
 		_c.mutation.SetID(v)
 	}
 }
