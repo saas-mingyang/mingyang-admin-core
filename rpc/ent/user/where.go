@@ -11,47 +11,47 @@ import (
 )
 
 // ID filters vertices based on their ID field.
-func ID(id uint64) predicate.User {
+func ID(id int64) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldID, id))
 }
 
 // IDEQ applies the EQ predicate on the ID field.
-func IDEQ(id uint64) predicate.User {
+func IDEQ(id int64) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldID, id))
 }
 
 // IDNEQ applies the NEQ predicate on the ID field.
-func IDNEQ(id uint64) predicate.User {
+func IDNEQ(id int64) predicate.User {
 	return predicate.User(sql.FieldNEQ(FieldID, id))
 }
 
 // IDIn applies the In predicate on the ID field.
-func IDIn(ids ...uint64) predicate.User {
+func IDIn(ids ...int64) predicate.User {
 	return predicate.User(sql.FieldIn(FieldID, ids...))
 }
 
 // IDNotIn applies the NotIn predicate on the ID field.
-func IDNotIn(ids ...uint64) predicate.User {
+func IDNotIn(ids ...int64) predicate.User {
 	return predicate.User(sql.FieldNotIn(FieldID, ids...))
 }
 
 // IDGT applies the GT predicate on the ID field.
-func IDGT(id uint64) predicate.User {
+func IDGT(id int64) predicate.User {
 	return predicate.User(sql.FieldGT(FieldID, id))
 }
 
 // IDGTE applies the GTE predicate on the ID field.
-func IDGTE(id uint64) predicate.User {
+func IDGTE(id int64) predicate.User {
 	return predicate.User(sql.FieldGTE(FieldID, id))
 }
 
 // IDLT applies the LT predicate on the ID field.
-func IDLT(id uint64) predicate.User {
+func IDLT(id int64) predicate.User {
 	return predicate.User(sql.FieldLT(FieldID, id))
 }
 
 // IDLTE applies the LTE predicate on the ID field.
-func IDLTE(id uint64) predicate.User {
+func IDLTE(id int64) predicate.User {
 	return predicate.User(sql.FieldLTE(FieldID, id))
 }
 
@@ -71,7 +71,7 @@ func TenantID(v uint64) predicate.User {
 }
 
 // DepartmentID applies equality check predicate on the "department_id" field. It's identical to DepartmentIDEQ.
-func DepartmentID(v uint64) predicate.User {
+func DepartmentID(v int64) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldDepartmentID, v))
 }
 
@@ -246,22 +246,22 @@ func TenantIDLTE(v uint64) predicate.User {
 }
 
 // DepartmentIDEQ applies the EQ predicate on the "department_id" field.
-func DepartmentIDEQ(v uint64) predicate.User {
+func DepartmentIDEQ(v int64) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldDepartmentID, v))
 }
 
 // DepartmentIDNEQ applies the NEQ predicate on the "department_id" field.
-func DepartmentIDNEQ(v uint64) predicate.User {
+func DepartmentIDNEQ(v int64) predicate.User {
 	return predicate.User(sql.FieldNEQ(FieldDepartmentID, v))
 }
 
 // DepartmentIDIn applies the In predicate on the "department_id" field.
-func DepartmentIDIn(vs ...uint64) predicate.User {
+func DepartmentIDIn(vs ...int64) predicate.User {
 	return predicate.User(sql.FieldIn(FieldDepartmentID, vs...))
 }
 
 // DepartmentIDNotIn applies the NotIn predicate on the "department_id" field.
-func DepartmentIDNotIn(vs ...uint64) predicate.User {
+func DepartmentIDNotIn(vs ...int64) predicate.User {
 	return predicate.User(sql.FieldNotIn(FieldDepartmentID, vs...))
 }
 

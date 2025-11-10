@@ -26,9 +26,9 @@ func (Tenant) Fields() []ent.Field {
 		field.String("intro").Comment("企业简介"),
 		field.String("domain").Comment("域名"),
 		field.Int("level").Comment("租户级别"),
-		field.Uint64("plan_id").Optional().Comment("套餐计划Id，外键关联 tenant_plan.id"),
+		field.Int64("plan_id").Optional().Comment("套餐计划Id，外键关联 tenant_plan.id"),
 		field.Int64("admin_id").Positive().Comment("管理员id"),
-		field.Int64("parent_id").Positive().Default(0).Comment("父级id,0为第一级"),
+		field.Int64("parent_id").Positive().Comment("父级id,0为第一级"),
 	}
 }
 
@@ -38,7 +38,7 @@ func (Tenant) Edges() []ent.Edge {
 
 func (Tenant) Mixin() []ent.Mixin {
 	return []ent.Mixin{
-		mixins.IDMixin{},
+		mixins.IdSonyFlakeMixin{},
 		mixins.StatusMixin{},
 	}
 }

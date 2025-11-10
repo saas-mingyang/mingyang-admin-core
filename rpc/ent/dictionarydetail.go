@@ -17,7 +17,7 @@ import (
 type DictionaryDetail struct {
 	config `json:"-"`
 	// ID of the ent.
-	ID uint64 `json:"id,omitempty"`
+	ID int64 `json:"id,omitempty"`
 	// Create Time | 创建日期
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	// Update Time | 修改日期
@@ -35,7 +35,7 @@ type DictionaryDetail struct {
 	// value | 值
 	Value string `json:"value,omitempty"`
 	// Dictionary ID | 字典ID
-	DictionaryID uint64 `json:"dictionary_id,omitempty"`
+	DictionaryID int64 `json:"dictionary_id,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the DictionaryDetailQuery when eager-loading is set.
 	Edges        DictionaryDetailEdges `json:"edges"`
@@ -93,7 +93,7 @@ func (_m *DictionaryDetail) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint64(value.Int64)
+			_m.ID = int64(value.Int64)
 		case dictionarydetail.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
@@ -146,7 +146,7 @@ func (_m *DictionaryDetail) assignValues(columns []string, values []any) error {
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field dictionary_id", values[i])
 			} else if value.Valid {
-				_m.DictionaryID = uint64(value.Int64)
+				_m.DictionaryID = value.Int64
 			}
 		default:
 			_m.selectValues.Set(columns[i], values[i])

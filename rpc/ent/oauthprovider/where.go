@@ -10,47 +10,47 @@ import (
 )
 
 // ID filters vertices based on their ID field.
-func ID(id uint64) predicate.OauthProvider {
+func ID(id int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldEQ(FieldID, id))
 }
 
 // IDEQ applies the EQ predicate on the ID field.
-func IDEQ(id uint64) predicate.OauthProvider {
+func IDEQ(id int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldEQ(FieldID, id))
 }
 
 // IDNEQ applies the NEQ predicate on the ID field.
-func IDNEQ(id uint64) predicate.OauthProvider {
+func IDNEQ(id int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldNEQ(FieldID, id))
 }
 
 // IDIn applies the In predicate on the ID field.
-func IDIn(ids ...uint64) predicate.OauthProvider {
+func IDIn(ids ...int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldIn(FieldID, ids...))
 }
 
 // IDNotIn applies the NotIn predicate on the ID field.
-func IDNotIn(ids ...uint64) predicate.OauthProvider {
+func IDNotIn(ids ...int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldNotIn(FieldID, ids...))
 }
 
 // IDGT applies the GT predicate on the ID field.
-func IDGT(id uint64) predicate.OauthProvider {
+func IDGT(id int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldGT(FieldID, id))
 }
 
 // IDGTE applies the GTE predicate on the ID field.
-func IDGTE(id uint64) predicate.OauthProvider {
+func IDGTE(id int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldGTE(FieldID, id))
 }
 
 // IDLT applies the LT predicate on the ID field.
-func IDLT(id uint64) predicate.OauthProvider {
+func IDLT(id int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldLT(FieldID, id))
 }
 
 // IDLTE applies the LTE predicate on the ID field.
-func IDLTE(id uint64) predicate.OauthProvider {
+func IDLTE(id int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldLTE(FieldID, id))
 }
 
@@ -100,7 +100,7 @@ func TokenURL(v string) predicate.OauthProvider {
 }
 
 // AuthStyle applies equality check predicate on the "auth_style" field. It's identical to AuthStyleEQ.
-func AuthStyle(v uint64) predicate.OauthProvider {
+func AuthStyle(v int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldEQ(FieldAuthStyle, v))
 }
 
@@ -645,42 +645,42 @@ func TokenURLContainsFold(v string) predicate.OauthProvider {
 }
 
 // AuthStyleEQ applies the EQ predicate on the "auth_style" field.
-func AuthStyleEQ(v uint64) predicate.OauthProvider {
+func AuthStyleEQ(v int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldEQ(FieldAuthStyle, v))
 }
 
 // AuthStyleNEQ applies the NEQ predicate on the "auth_style" field.
-func AuthStyleNEQ(v uint64) predicate.OauthProvider {
+func AuthStyleNEQ(v int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldNEQ(FieldAuthStyle, v))
 }
 
 // AuthStyleIn applies the In predicate on the "auth_style" field.
-func AuthStyleIn(vs ...uint64) predicate.OauthProvider {
+func AuthStyleIn(vs ...int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldIn(FieldAuthStyle, vs...))
 }
 
 // AuthStyleNotIn applies the NotIn predicate on the "auth_style" field.
-func AuthStyleNotIn(vs ...uint64) predicate.OauthProvider {
+func AuthStyleNotIn(vs ...int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldNotIn(FieldAuthStyle, vs...))
 }
 
 // AuthStyleGT applies the GT predicate on the "auth_style" field.
-func AuthStyleGT(v uint64) predicate.OauthProvider {
+func AuthStyleGT(v int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldGT(FieldAuthStyle, v))
 }
 
 // AuthStyleGTE applies the GTE predicate on the "auth_style" field.
-func AuthStyleGTE(v uint64) predicate.OauthProvider {
+func AuthStyleGTE(v int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldGTE(FieldAuthStyle, v))
 }
 
 // AuthStyleLT applies the LT predicate on the "auth_style" field.
-func AuthStyleLT(v uint64) predicate.OauthProvider {
+func AuthStyleLT(v int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldLT(FieldAuthStyle, v))
 }
 
 // AuthStyleLTE applies the LTE predicate on the "auth_style" field.
-func AuthStyleLTE(v uint64) predicate.OauthProvider {
+func AuthStyleLTE(v int64) predicate.OauthProvider {
 	return predicate.OauthProvider(sql.FieldLTE(FieldAuthStyle, v))
 }
 

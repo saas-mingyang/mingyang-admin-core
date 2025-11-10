@@ -115,13 +115,13 @@ func (_c *ConfigurationCreate) SetNillableRemark(v *string) *ConfigurationCreate
 }
 
 // SetID sets the "id" field.
-func (_c *ConfigurationCreate) SetID(v uint64) *ConfigurationCreate {
+func (_c *ConfigurationCreate) SetID(v int64) *ConfigurationCreate {
 	_c.mutation.SetID(v)
 	return _c
 }
 
 // SetNillableID sets the "id" field if the given value is not nil.
-func (_c *ConfigurationCreate) SetNillableID(v *uint64) *ConfigurationCreate {
+func (_c *ConfigurationCreate) SetNillableID(v *int64) *ConfigurationCreate {
 	if v != nil {
 		_c.SetID(*v)
 	}
@@ -224,7 +224,7 @@ func (_c *ConfigurationCreate) sqlSave(ctx context.Context) (*Configuration, err
 	}
 	if _spec.ID.Value != _node.ID {
 		id := _spec.ID.Value.(int64)
-		_node.ID = uint64(id)
+		_node.ID = int64(id)
 	}
 	_c.mutation.id = &_node.ID
 	_c.mutation.done = true
@@ -234,7 +234,7 @@ func (_c *ConfigurationCreate) sqlSave(ctx context.Context) (*Configuration, err
 func (_c *ConfigurationCreate) createSpec() (*Configuration, *sqlgraph.CreateSpec) {
 	var (
 		_node = &Configuration{config: _c.config}
-		_spec = sqlgraph.NewCreateSpec(configuration.Table, sqlgraph.NewFieldSpec(configuration.FieldID, field.TypeUint64))
+		_spec = sqlgraph.NewCreateSpec(configuration.Table, sqlgraph.NewFieldSpec(configuration.FieldID, field.TypeInt64))
 	)
 	if id, ok := _c.mutation.ID(); ok {
 		_node.ID = id
@@ -326,7 +326,7 @@ func (_c *ConfigurationCreateBulk) Save(ctx context.Context) ([]*Configuration, 
 				mutation.id = &nodes[i].ID
 				if specs[i].ID.Value != nil && nodes[i].ID == 0 {
 					id := specs[i].ID.Value.(int64)
-					nodes[i].ID = uint64(id)
+					nodes[i].ID = int64(id)
 				}
 				mutation.done = true
 				return nodes[i], nil

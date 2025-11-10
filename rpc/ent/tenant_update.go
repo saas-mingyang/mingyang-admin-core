@@ -210,14 +210,14 @@ func (_u *TenantUpdate) AddLevel(v int) *TenantUpdate {
 }
 
 // SetPlanID sets the "plan_id" field.
-func (_u *TenantUpdate) SetPlanID(v uint64) *TenantUpdate {
+func (_u *TenantUpdate) SetPlanID(v int64) *TenantUpdate {
 	_u.mutation.ResetPlanID()
 	_u.mutation.SetPlanID(v)
 	return _u
 }
 
 // SetNillablePlanID sets the "plan_id" field if the given value is not nil.
-func (_u *TenantUpdate) SetNillablePlanID(v *uint64) *TenantUpdate {
+func (_u *TenantUpdate) SetNillablePlanID(v *int64) *TenantUpdate {
 	if v != nil {
 		_u.SetPlanID(*v)
 	}
@@ -354,7 +354,7 @@ func (_u *TenantUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 	if err := _u.check(); err != nil {
 		return _node, err
 	}
-	_spec := sqlgraph.NewUpdateSpec(tenant.Table, tenant.Columns, sqlgraph.NewFieldSpec(tenant.FieldID, field.TypeUint64))
+	_spec := sqlgraph.NewUpdateSpec(tenant.Table, tenant.Columns, sqlgraph.NewFieldSpec(tenant.FieldID, field.TypeInt64))
 	if ps := _u.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
@@ -408,13 +408,13 @@ func (_u *TenantUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		_spec.AddField(tenant.FieldLevel, field.TypeInt, value)
 	}
 	if value, ok := _u.mutation.PlanID(); ok {
-		_spec.SetField(tenant.FieldPlanID, field.TypeUint64, value)
+		_spec.SetField(tenant.FieldPlanID, field.TypeInt64, value)
 	}
 	if value, ok := _u.mutation.AddedPlanID(); ok {
-		_spec.AddField(tenant.FieldPlanID, field.TypeUint64, value)
+		_spec.AddField(tenant.FieldPlanID, field.TypeInt64, value)
 	}
 	if _u.mutation.PlanIDCleared() {
-		_spec.ClearField(tenant.FieldPlanID, field.TypeUint64)
+		_spec.ClearField(tenant.FieldPlanID, field.TypeInt64)
 	}
 	if value, ok := _u.mutation.AdminID(); ok {
 		_spec.SetField(tenant.FieldAdminID, field.TypeInt64, value)
@@ -631,14 +631,14 @@ func (_u *TenantUpdateOne) AddLevel(v int) *TenantUpdateOne {
 }
 
 // SetPlanID sets the "plan_id" field.
-func (_u *TenantUpdateOne) SetPlanID(v uint64) *TenantUpdateOne {
+func (_u *TenantUpdateOne) SetPlanID(v int64) *TenantUpdateOne {
 	_u.mutation.ResetPlanID()
 	_u.mutation.SetPlanID(v)
 	return _u
 }
 
 // SetNillablePlanID sets the "plan_id" field if the given value is not nil.
-func (_u *TenantUpdateOne) SetNillablePlanID(v *uint64) *TenantUpdateOne {
+func (_u *TenantUpdateOne) SetNillablePlanID(v *int64) *TenantUpdateOne {
 	if v != nil {
 		_u.SetPlanID(*v)
 	}
@@ -788,7 +788,7 @@ func (_u *TenantUpdateOne) sqlSave(ctx context.Context) (_node *Tenant, err erro
 	if err := _u.check(); err != nil {
 		return _node, err
 	}
-	_spec := sqlgraph.NewUpdateSpec(tenant.Table, tenant.Columns, sqlgraph.NewFieldSpec(tenant.FieldID, field.TypeUint64))
+	_spec := sqlgraph.NewUpdateSpec(tenant.Table, tenant.Columns, sqlgraph.NewFieldSpec(tenant.FieldID, field.TypeInt64))
 	id, ok := _u.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "Tenant.id" for update`)}
@@ -859,13 +859,13 @@ func (_u *TenantUpdateOne) sqlSave(ctx context.Context) (_node *Tenant, err erro
 		_spec.AddField(tenant.FieldLevel, field.TypeInt, value)
 	}
 	if value, ok := _u.mutation.PlanID(); ok {
-		_spec.SetField(tenant.FieldPlanID, field.TypeUint64, value)
+		_spec.SetField(tenant.FieldPlanID, field.TypeInt64, value)
 	}
 	if value, ok := _u.mutation.AddedPlanID(); ok {
-		_spec.AddField(tenant.FieldPlanID, field.TypeUint64, value)
+		_spec.AddField(tenant.FieldPlanID, field.TypeInt64, value)
 	}
 	if _u.mutation.PlanIDCleared() {
-		_spec.ClearField(tenant.FieldPlanID, field.TypeUint64)
+		_spec.ClearField(tenant.FieldPlanID, field.TypeInt64)
 	}
 	if value, ok := _u.mutation.AdminID(); ok {
 		_spec.SetField(tenant.FieldAdminID, field.TypeInt64, value)

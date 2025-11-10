@@ -28,7 +28,7 @@ func (Dictionary) Fields() []ent.Field {
 
 func (Dictionary) Mixin() []ent.Mixin {
 	return []ent.Mixin{
-		mixins.IDMixin{},
+		mixins.IdSonyFlakeMixin{},
 		mixins.StatusMixin{},
 		mixins.TenantMixin{},
 	}

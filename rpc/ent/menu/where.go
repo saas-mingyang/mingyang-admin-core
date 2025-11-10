@@ -11,47 +11,47 @@ import (
 )
 
 // ID filters vertices based on their ID field.
-func ID(id uint64) predicate.Menu {
+func ID(id int64) predicate.Menu {
 	return predicate.Menu(sql.FieldEQ(FieldID, id))
 }
 
 // IDEQ applies the EQ predicate on the ID field.
-func IDEQ(id uint64) predicate.Menu {
+func IDEQ(id int64) predicate.Menu {
 	return predicate.Menu(sql.FieldEQ(FieldID, id))
 }
 
 // IDNEQ applies the NEQ predicate on the ID field.
-func IDNEQ(id uint64) predicate.Menu {
+func IDNEQ(id int64) predicate.Menu {
 	return predicate.Menu(sql.FieldNEQ(FieldID, id))
 }
 
 // IDIn applies the In predicate on the ID field.
-func IDIn(ids ...uint64) predicate.Menu {
+func IDIn(ids ...int64) predicate.Menu {
 	return predicate.Menu(sql.FieldIn(FieldID, ids...))
 }
 
 // IDNotIn applies the NotIn predicate on the ID field.
-func IDNotIn(ids ...uint64) predicate.Menu {
+func IDNotIn(ids ...int64) predicate.Menu {
 	return predicate.Menu(sql.FieldNotIn(FieldID, ids...))
 }
 
 // IDGT applies the GT predicate on the ID field.
-func IDGT(id uint64) predicate.Menu {
+func IDGT(id int64) predicate.Menu {
 	return predicate.Menu(sql.FieldGT(FieldID, id))
 }
 
 // IDGTE applies the GTE predicate on the ID field.
-func IDGTE(id uint64) predicate.Menu {
+func IDGTE(id int64) predicate.Menu {
 	return predicate.Menu(sql.FieldGTE(FieldID, id))
 }
 
 // IDLT applies the LT predicate on the ID field.
-func IDLT(id uint64) predicate.Menu {
+func IDLT(id int64) predicate.Menu {
 	return predicate.Menu(sql.FieldLT(FieldID, id))
 }
 
 // IDLTE applies the LTE predicate on the ID field.
-func IDLTE(id uint64) predicate.Menu {
+func IDLTE(id int64) predicate.Menu {
 	return predicate.Menu(sql.FieldLTE(FieldID, id))
 }
 
@@ -71,7 +71,7 @@ func Sort(v uint32) predicate.Menu {
 }
 
 // ParentID applies equality check predicate on the "parent_id" field. It's identical to ParentIDEQ.
-func ParentID(v uint64) predicate.Menu {
+func ParentID(v int64) predicate.Menu {
 	return predicate.Menu(sql.FieldEQ(FieldParentID, v))
 }
 
@@ -301,22 +301,22 @@ func SortLTE(v uint32) predicate.Menu {
 }
 
 // ParentIDEQ applies the EQ predicate on the "parent_id" field.
-func ParentIDEQ(v uint64) predicate.Menu {
+func ParentIDEQ(v int64) predicate.Menu {
 	return predicate.Menu(sql.FieldEQ(FieldParentID, v))
 }
 
 // ParentIDNEQ applies the NEQ predicate on the "parent_id" field.
-func ParentIDNEQ(v uint64) predicate.Menu {
+func ParentIDNEQ(v int64) predicate.Menu {
 	return predicate.Menu(sql.FieldNEQ(FieldParentID, v))
 }
 
 // ParentIDIn applies the In predicate on the "parent_id" field.
-func ParentIDIn(vs ...uint64) predicate.Menu {
+func ParentIDIn(vs ...int64) predicate.Menu {
 	return predicate.Menu(sql.FieldIn(FieldParentID, vs...))
 }
 
 // ParentIDNotIn applies the NotIn predicate on the "parent_id" field.
-func ParentIDNotIn(vs ...uint64) predicate.Menu {
+func ParentIDNotIn(vs ...int64) predicate.Menu {
 	return predicate.Menu(sql.FieldNotIn(FieldParentID, vs...))
 }
 

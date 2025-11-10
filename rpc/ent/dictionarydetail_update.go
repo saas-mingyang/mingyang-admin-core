@@ -127,13 +127,13 @@ func (_u *DictionaryDetailUpdate) SetNillableValue(v *string) *DictionaryDetailU
 }
 
 // SetDictionaryID sets the "dictionary_id" field.
-func (_u *DictionaryDetailUpdate) SetDictionaryID(v uint64) *DictionaryDetailUpdate {
+func (_u *DictionaryDetailUpdate) SetDictionaryID(v int64) *DictionaryDetailUpdate {
 	_u.mutation.SetDictionaryID(v)
 	return _u
 }
 
 // SetNillableDictionaryID sets the "dictionary_id" field if the given value is not nil.
-func (_u *DictionaryDetailUpdate) SetNillableDictionaryID(v *uint64) *DictionaryDetailUpdate {
+func (_u *DictionaryDetailUpdate) SetNillableDictionaryID(v *int64) *DictionaryDetailUpdate {
 	if v != nil {
 		_u.SetDictionaryID(*v)
 	}
@@ -147,13 +147,13 @@ func (_u *DictionaryDetailUpdate) ClearDictionaryID() *DictionaryDetailUpdate {
 }
 
 // SetDictionariesID sets the "dictionaries" edge to the Dictionary entity by ID.
-func (_u *DictionaryDetailUpdate) SetDictionariesID(id uint64) *DictionaryDetailUpdate {
+func (_u *DictionaryDetailUpdate) SetDictionariesID(id int64) *DictionaryDetailUpdate {
 	_u.mutation.SetDictionariesID(id)
 	return _u
 }
 
 // SetNillableDictionariesID sets the "dictionaries" edge to the Dictionary entity by ID if the given value is not nil.
-func (_u *DictionaryDetailUpdate) SetNillableDictionariesID(id *uint64) *DictionaryDetailUpdate {
+func (_u *DictionaryDetailUpdate) SetNillableDictionariesID(id *int64) *DictionaryDetailUpdate {
 	if id != nil {
 		_u = _u.SetDictionariesID(*id)
 	}
@@ -219,7 +219,7 @@ func (_u *DictionaryDetailUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)
 }
 
 func (_u *DictionaryDetailUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	_spec := sqlgraph.NewUpdateSpec(dictionarydetail.Table, dictionarydetail.Columns, sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeUint64))
+	_spec := sqlgraph.NewUpdateSpec(dictionarydetail.Table, dictionarydetail.Columns, sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeInt64))
 	if ps := _u.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
@@ -262,7 +262,7 @@ func (_u *DictionaryDetailUpdate) sqlSave(ctx context.Context) (_node int, err e
 			Columns: []string{dictionarydetail.DictionariesColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeInt64),
 			},
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
@@ -275,7 +275,7 @@ func (_u *DictionaryDetailUpdate) sqlSave(ctx context.Context) (_node int, err e
 			Columns: []string{dictionarydetail.DictionariesColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -402,13 +402,13 @@ func (_u *DictionaryDetailUpdateOne) SetNillableValue(v *string) *DictionaryDeta
 }
 
 // SetDictionaryID sets the "dictionary_id" field.
-func (_u *DictionaryDetailUpdateOne) SetDictionaryID(v uint64) *DictionaryDetailUpdateOne {
+func (_u *DictionaryDetailUpdateOne) SetDictionaryID(v int64) *DictionaryDetailUpdateOne {
 	_u.mutation.SetDictionaryID(v)
 	return _u
 }
 
 // SetNillableDictionaryID sets the "dictionary_id" field if the given value is not nil.
-func (_u *DictionaryDetailUpdateOne) SetNillableDictionaryID(v *uint64) *DictionaryDetailUpdateOne {
+func (_u *DictionaryDetailUpdateOne) SetNillableDictionaryID(v *int64) *DictionaryDetailUpdateOne {
 	if v != nil {
 		_u.SetDictionaryID(*v)
 	}
@@ -422,13 +422,13 @@ func (_u *DictionaryDetailUpdateOne) ClearDictionaryID() *DictionaryDetailUpdate
 }
 
 // SetDictionariesID sets the "dictionaries" edge to the Dictionary entity by ID.
-func (_u *DictionaryDetailUpdateOne) SetDictionariesID(id uint64) *DictionaryDetailUpdateOne {
+func (_u *DictionaryDetailUpdateOne) SetDictionariesID(id int64) *DictionaryDetailUpdateOne {
 	_u.mutation.SetDictionariesID(id)
 	return _u
 }
 
 // SetNillableDictionariesID sets the "dictionaries" edge to the Dictionary entity by ID if the given value is not nil.
-func (_u *DictionaryDetailUpdateOne) SetNillableDictionariesID(id *uint64) *DictionaryDetailUpdateOne {
+func (_u *DictionaryDetailUpdateOne) SetNillableDictionariesID(id *int64) *DictionaryDetailUpdateOne {
 	if id != nil {
 		_u = _u.SetDictionariesID(*id)
 	}
@@ -507,7 +507,7 @@ func (_u *DictionaryDetailUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuild
 }
 
 func (_u *DictionaryDetailUpdateOne) sqlSave(ctx context.Context) (_node *DictionaryDetail, err error) {
-	_spec := sqlgraph.NewUpdateSpec(dictionarydetail.Table, dictionarydetail.Columns, sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeUint64))
+	_spec := sqlgraph.NewUpdateSpec(dictionarydetail.Table, dictionarydetail.Columns, sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeInt64))
 	id, ok := _u.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "DictionaryDetail.id" for update`)}
@@ -567,7 +567,7 @@ func (_u *DictionaryDetailUpdateOne) sqlSave(ctx context.Context) (_node *Dictio
 			Columns: []string{dictionarydetail.DictionariesColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeInt64),
 			},
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
@@ -580,7 +580,7 @@ func (_u *DictionaryDetailUpdateOne) sqlSave(ctx context.Context) (_node *Dictio
 			Columns: []string{dictionarydetail.DictionariesColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {

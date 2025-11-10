@@ -105,13 +105,13 @@ func (_c *RoleCreate) SetNillableSort(v *uint32) *RoleCreate {
 }
 
 // SetID sets the "id" field.
-func (_c *RoleCreate) SetID(v uint64) *RoleCreate {
+func (_c *RoleCreate) SetID(v int64) *RoleCreate {
 	_c.mutation.SetID(v)
 	return _c
 }
 
 // SetNillableID sets the "id" field if the given value is not nil.
-func (_c *RoleCreate) SetNillableID(v *uint64) *RoleCreate {
+func (_c *RoleCreate) SetNillableID(v *int64) *RoleCreate {
 	if v != nil {
 		_c.SetID(*v)
 	}
@@ -119,14 +119,14 @@ func (_c *RoleCreate) SetNillableID(v *uint64) *RoleCreate {
 }
 
 // AddMenuIDs adds the "menus" edge to the Menu entity by IDs.
-func (_c *RoleCreate) AddMenuIDs(ids ...uint64) *RoleCreate {
+func (_c *RoleCreate) AddMenuIDs(ids ...int64) *RoleCreate {
 	_c.mutation.AddMenuIDs(ids...)
 	return _c
 }
 
 // AddMenus adds the "menus" edges to the Menu entity.
 func (_c *RoleCreate) AddMenus(v ...*Menu) *RoleCreate {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -134,14 +134,14 @@ func (_c *RoleCreate) AddMenus(v ...*Menu) *RoleCreate {
 }
 
 // AddUserIDs adds the "users" edge to the User entity by IDs.
-func (_c *RoleCreate) AddUserIDs(ids ...uint64) *RoleCreate {
+func (_c *RoleCreate) AddUserIDs(ids ...int64) *RoleCreate {
 	_c.mutation.AddUserIDs(ids...)
 	return _c
 }
 
 // AddUsers adds the "users" edges to the User entity.
 func (_c *RoleCreate) AddUsers(v ...*User) *RoleCreate {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -245,7 +245,7 @@ func (_c *RoleCreate) sqlSave(ctx context.Context) (*Role, error) {
 	}
 	if _spec.ID.Value != _node.ID {
 		id := _spec.ID.Value.(int64)
-		_node.ID = uint64(id)
+		_node.ID = int64(id)
 	}
 	_c.mutation.id = &_node.ID
 	_c.mutation.done = true
@@ -255,7 +255,7 @@ func (_c *RoleCreate) sqlSave(ctx context.Context) (*Role, error) {
 func (_c *RoleCreate) createSpec() (*Role, *sqlgraph.CreateSpec) {
 	var (
 		_node = &Role{config: _c.config}
-		_spec = sqlgraph.NewCreateSpec(role.Table, sqlgraph.NewFieldSpec(role.FieldID, field.TypeUint64))
+		_spec = sqlgraph.NewCreateSpec(role.Table, sqlgraph.NewFieldSpec(role.FieldID, field.TypeInt64))
 	)
 	if id, ok := _c.mutation.ID(); ok {
 		_node.ID = id
@@ -297,7 +297,7 @@ func (_c *RoleCreate) createSpec() (*Role, *sqlgraph.CreateSpec) {
 			Columns: role.MenusPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -313,7 +313,7 @@ func (_c *RoleCreate) createSpec() (*Role, *sqlgraph.CreateSpec) {
 			Columns: role.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -371,7 +371,7 @@ func (_c *RoleCreateBulk) Save(ctx context.Context) ([]*Role, error) {
 				mutation.id = &nodes[i].ID
 				if specs[i].ID.Value != nil && nodes[i].ID == 0 {
 					id := specs[i].ID.Value.(int64)
-					nodes[i].ID = uint64(id)
+					nodes[i].ID = int64(id)
 				}
 				mutation.done = true
 				return nodes[i], nil

@@ -43,7 +43,7 @@ func (User) Fields() []ent.Field {
 
 func (User) Mixin() []ent.Mixin {
 	return []ent.Mixin{
-		mixins.IDMixin{},
+		mixins.IdSonyFlakeMixin{},
 		mixins.TenantMixin{},
 		mixins2.DepartmentMixin{},
 		mixins.StatusMixin{},

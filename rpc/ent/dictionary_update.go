@@ -126,14 +126,14 @@ func (_u *DictionaryUpdate) SetNillableIsPublic(v *bool) *DictionaryUpdate {
 }
 
 // AddDictionaryDetailIDs adds the "dictionary_details" edge to the DictionaryDetail entity by IDs.
-func (_u *DictionaryUpdate) AddDictionaryDetailIDs(ids ...uint64) *DictionaryUpdate {
+func (_u *DictionaryUpdate) AddDictionaryDetailIDs(ids ...int64) *DictionaryUpdate {
 	_u.mutation.AddDictionaryDetailIDs(ids...)
 	return _u
 }
 
 // AddDictionaryDetails adds the "dictionary_details" edges to the DictionaryDetail entity.
 func (_u *DictionaryUpdate) AddDictionaryDetails(v ...*DictionaryDetail) *DictionaryUpdate {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -152,14 +152,14 @@ func (_u *DictionaryUpdate) ClearDictionaryDetails() *DictionaryUpdate {
 }
 
 // RemoveDictionaryDetailIDs removes the "dictionary_details" edge to DictionaryDetail entities by IDs.
-func (_u *DictionaryUpdate) RemoveDictionaryDetailIDs(ids ...uint64) *DictionaryUpdate {
+func (_u *DictionaryUpdate) RemoveDictionaryDetailIDs(ids ...int64) *DictionaryUpdate {
 	_u.mutation.RemoveDictionaryDetailIDs(ids...)
 	return _u
 }
 
 // RemoveDictionaryDetails removes "dictionary_details" edges to DictionaryDetail entities.
 func (_u *DictionaryUpdate) RemoveDictionaryDetails(v ...*DictionaryDetail) *DictionaryUpdate {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -209,7 +209,7 @@ func (_u *DictionaryUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *Dic
 }
 
 func (_u *DictionaryUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	_spec := sqlgraph.NewUpdateSpec(dictionary.Table, dictionary.Columns, sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeUint64))
+	_spec := sqlgraph.NewUpdateSpec(dictionary.Table, dictionary.Columns, sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeInt64))
 	if ps := _u.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
@@ -252,7 +252,7 @@ func (_u *DictionaryUpdate) sqlSave(ctx context.Context) (_node int, err error) 
 			Columns: []string{dictionary.DictionaryDetailsColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeInt64),
 			},
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
@@ -265,7 +265,7 @@ func (_u *DictionaryUpdate) sqlSave(ctx context.Context) (_node int, err error) 
 			Columns: []string{dictionary.DictionaryDetailsColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -281,7 +281,7 @@ func (_u *DictionaryUpdate) sqlSave(ctx context.Context) (_node int, err error) 
 			Columns: []string{dictionary.DictionaryDetailsColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -407,14 +407,14 @@ func (_u *DictionaryUpdateOne) SetNillableIsPublic(v *bool) *DictionaryUpdateOne
 }
 
 // AddDictionaryDetailIDs adds the "dictionary_details" edge to the DictionaryDetail entity by IDs.
-func (_u *DictionaryUpdateOne) AddDictionaryDetailIDs(ids ...uint64) *DictionaryUpdateOne {
+func (_u *DictionaryUpdateOne) AddDictionaryDetailIDs(ids ...int64) *DictionaryUpdateOne {
 	_u.mutation.AddDictionaryDetailIDs(ids...)
 	return _u
 }
 
 // AddDictionaryDetails adds the "dictionary_details" edges to the DictionaryDetail entity.
 func (_u *DictionaryUpdateOne) AddDictionaryDetails(v ...*DictionaryDetail) *DictionaryUpdateOne {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -433,14 +433,14 @@ func (_u *DictionaryUpdateOne) ClearDictionaryDetails() *DictionaryUpdateOne {
 }
 
 // RemoveDictionaryDetailIDs removes the "dictionary_details" edge to DictionaryDetail entities by IDs.
-func (_u *DictionaryUpdateOne) RemoveDictionaryDetailIDs(ids ...uint64) *DictionaryUpdateOne {
+func (_u *DictionaryUpdateOne) RemoveDictionaryDetailIDs(ids ...int64) *DictionaryUpdateOne {
 	_u.mutation.RemoveDictionaryDetailIDs(ids...)
 	return _u
 }
 
 // RemoveDictionaryDetails removes "dictionary_details" edges to DictionaryDetail entities.
 func (_u *DictionaryUpdateOne) RemoveDictionaryDetails(v ...*DictionaryDetail) *DictionaryUpdateOne {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -503,7 +503,7 @@ func (_u *DictionaryUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *
 }
 
 func (_u *DictionaryUpdateOne) sqlSave(ctx context.Context) (_node *Dictionary, err error) {
-	_spec := sqlgraph.NewUpdateSpec(dictionary.Table, dictionary.Columns, sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeUint64))
+	_spec := sqlgraph.NewUpdateSpec(dictionary.Table, dictionary.Columns, sqlgraph.NewFieldSpec(dictionary.FieldID, field.TypeInt64))
 	id, ok := _u.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "Dictionary.id" for update`)}
@@ -563,7 +563,7 @@ func (_u *DictionaryUpdateOne) sqlSave(ctx context.Context) (_node *Dictionary, 
 			Columns: []string{dictionary.DictionaryDetailsColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeInt64),
 			},
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
@@ -576,7 +576,7 @@ func (_u *DictionaryUpdateOne) sqlSave(ctx context.Context) (_node *Dictionary, 
 			Columns: []string{dictionary.DictionaryDetailsColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -592,7 +592,7 @@ func (_u *DictionaryUpdateOne) sqlSave(ctx context.Context) (_node *Dictionary, 
 			Columns: []string{dictionary.DictionaryDetailsColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {

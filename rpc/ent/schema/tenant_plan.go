@@ -25,7 +25,7 @@ func (TenantPlan) Fields() []ent.Field {
 
 func (TenantPlan) Mixin() []ent.Mixin {
 	return []ent.Mixin{
-		mixins.IDMixin{},
+		mixins.IdSonyFlakeMixin{},
 		mixins.StatusMixin{},
 	}
 }

@@ -107,8 +107,8 @@ func (_q *DictionaryDetailQuery) FirstX(ctx context.Context) *DictionaryDetail {
 
 // FirstID returns the first DictionaryDetail ID from the query.
 // Returns a *NotFoundError when no DictionaryDetail ID was found.
-func (_q *DictionaryDetailQuery) FirstID(ctx context.Context) (id uint64, err error) {
-	var ids []uint64
+func (_q *DictionaryDetailQuery) FirstID(ctx context.Context) (id int64, err error) {
+	var ids []int64
 	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
@@ -120,7 +120,7 @@ func (_q *DictionaryDetailQuery) FirstID(ctx context.Context) (id uint64, err er
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (_q *DictionaryDetailQuery) FirstIDX(ctx context.Context) uint64 {
+func (_q *DictionaryDetailQuery) FirstIDX(ctx context.Context) int64 {
 	id, err := _q.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
@@ -158,8 +158,8 @@ func (_q *DictionaryDetailQuery) OnlyX(ctx context.Context) *DictionaryDetail {
 // OnlyID is like Only, but returns the only DictionaryDetail ID in the query.
 // Returns a *NotSingularError when more than one DictionaryDetail ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (_q *DictionaryDetailQuery) OnlyID(ctx context.Context) (id uint64, err error) {
-	var ids []uint64
+func (_q *DictionaryDetailQuery) OnlyID(ctx context.Context) (id int64, err error) {
+	var ids []int64
 	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
@@ -175,7 +175,7 @@ func (_q *DictionaryDetailQuery) OnlyID(ctx context.Context) (id uint64, err err
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (_q *DictionaryDetailQuery) OnlyIDX(ctx context.Context) uint64 {
+func (_q *DictionaryDetailQuery) OnlyIDX(ctx context.Context) int64 {
 	id, err := _q.OnlyID(ctx)
 	if err != nil {
 		panic(err)
@@ -203,7 +203,7 @@ func (_q *DictionaryDetailQuery) AllX(ctx context.Context) []*DictionaryDetail {
 }
 
 // IDs executes the query and returns a list of DictionaryDetail IDs.
-func (_q *DictionaryDetailQuery) IDs(ctx context.Context) (ids []uint64, err error) {
+func (_q *DictionaryDetailQuery) IDs(ctx context.Context) (ids []int64, err error) {
 	if _q.ctx.Unique == nil && _q.path != nil {
 		_q.Unique(true)
 	}
@@ -215,7 +215,7 @@ func (_q *DictionaryDetailQuery) IDs(ctx context.Context) (ids []uint64, err err
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (_q *DictionaryDetailQuery) IDsX(ctx context.Context) []uint64 {
+func (_q *DictionaryDetailQuery) IDsX(ctx context.Context) []int64 {
 	ids, err := _q.IDs(ctx)
 	if err != nil {
 		panic(err)
@@ -407,8 +407,8 @@ func (_q *DictionaryDetailQuery) sqlAll(ctx context.Context, hooks ...queryHook)
 }
 
 func (_q *DictionaryDetailQuery) loadDictionaries(ctx context.Context, query *DictionaryQuery, nodes []*DictionaryDetail, init func(*DictionaryDetail), assign func(*DictionaryDetail, *Dictionary)) error {
-	ids := make([]uint64, 0, len(nodes))
-	nodeids := make(map[uint64][]*DictionaryDetail)
+	ids := make([]int64, 0, len(nodes))
+	nodeids := make(map[int64][]*DictionaryDetail)
 	for i := range nodes {
 		fk := nodes[i].DictionaryID
 		if _, ok := nodeids[fk]; !ok {
@@ -449,7 +449,7 @@ func (_q *DictionaryDetailQuery) sqlCount(ctx context.Context) (int, error) {
 }
 
 func (_q *DictionaryDetailQuery) querySpec() *sqlgraph.QuerySpec {
-	_spec := sqlgraph.NewQuerySpec(dictionarydetail.Table, dictionarydetail.Columns, sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeUint64))
+	_spec := sqlgraph.NewQuerySpec(dictionarydetail.Table, dictionarydetail.Columns, sqlgraph.NewFieldSpec(dictionarydetail.FieldID, field.TypeInt64))
 	_spec.From = _q.sql
 	if unique := _q.ctx.Unique; unique != nil {
 		_spec.Unique = *unique

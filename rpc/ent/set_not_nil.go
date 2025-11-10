@@ -485,7 +485,7 @@ func (_m *DepartmentCreate) SetNotNilAncestors(value *string) *DepartmentCreate 
 }
 
 // set field if value's pointer is not nil.
-func (_m *DepartmentUpdate) SetNotNilLeader(value *uint64) *DepartmentUpdate {
+func (_m *DepartmentUpdate) SetNotNilLeader(value *int64) *DepartmentUpdate {
 	if value != nil {
 		return _m.SetLeader(*value)
 	}
@@ -493,7 +493,7 @@ func (_m *DepartmentUpdate) SetNotNilLeader(value *uint64) *DepartmentUpdate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *DepartmentUpdateOne) SetNotNilLeader(value *uint64) *DepartmentUpdateOne {
+func (_m *DepartmentUpdateOne) SetNotNilLeader(value *int64) *DepartmentUpdateOne {
 	if value != nil {
 		return _m.SetLeader(*value)
 	}
@@ -501,7 +501,7 @@ func (_m *DepartmentUpdateOne) SetNotNilLeader(value *uint64) *DepartmentUpdateO
 }
 
 // set field if value's pointer is not nil.
-func (_m *DepartmentCreate) SetNotNilLeader(value *uint64) *DepartmentCreate {
+func (_m *DepartmentCreate) SetNotNilLeader(value *int64) *DepartmentCreate {
 	if value != nil {
 		return _m.SetLeader(*value)
 	}
@@ -581,7 +581,7 @@ func (_m *DepartmentCreate) SetNotNilRemark(value *string) *DepartmentCreate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *DepartmentUpdate) SetNotNilParentID(value *uint64) *DepartmentUpdate {
+func (_m *DepartmentUpdate) SetNotNilParentID(value *int64) *DepartmentUpdate {
 	if value != nil {
 		return _m.SetParentID(*value)
 	}
@@ -589,7 +589,7 @@ func (_m *DepartmentUpdate) SetNotNilParentID(value *uint64) *DepartmentUpdate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *DepartmentUpdateOne) SetNotNilParentID(value *uint64) *DepartmentUpdateOne {
+func (_m *DepartmentUpdateOne) SetNotNilParentID(value *int64) *DepartmentUpdateOne {
 	if value != nil {
 		return _m.SetParentID(*value)
 	}
@@ -597,7 +597,7 @@ func (_m *DepartmentUpdateOne) SetNotNilParentID(value *uint64) *DepartmentUpdat
 }
 
 // set field if value's pointer is not nil.
-func (_m *DepartmentCreate) SetNotNilParentID(value *uint64) *DepartmentCreate {
+func (_m *DepartmentCreate) SetNotNilParentID(value *int64) *DepartmentCreate {
 	if value != nil {
 		return _m.SetParentID(*value)
 	}
@@ -893,7 +893,7 @@ func (_m *DictionaryDetailCreate) SetNotNilValue(value *string) *DictionaryDetai
 }
 
 // set field if value's pointer is not nil.
-func (_m *DictionaryDetailUpdate) SetNotNilDictionaryID(value *uint64) *DictionaryDetailUpdate {
+func (_m *DictionaryDetailUpdate) SetNotNilDictionaryID(value *int64) *DictionaryDetailUpdate {
 	if value != nil {
 		return _m.SetDictionaryID(*value)
 	}
@@ -901,7 +901,7 @@ func (_m *DictionaryDetailUpdate) SetNotNilDictionaryID(value *uint64) *Dictiona
 }
 
 // set field if value's pointer is not nil.
-func (_m *DictionaryDetailUpdateOne) SetNotNilDictionaryID(value *uint64) *DictionaryDetailUpdateOne {
+func (_m *DictionaryDetailUpdateOne) SetNotNilDictionaryID(value *int64) *DictionaryDetailUpdateOne {
 	if value != nil {
 		return _m.SetDictionaryID(*value)
 	}
@@ -909,7 +909,7 @@ func (_m *DictionaryDetailUpdateOne) SetNotNilDictionaryID(value *uint64) *Dicti
 }
 
 // set field if value's pointer is not nil.
-func (_m *DictionaryDetailCreate) SetNotNilDictionaryID(value *uint64) *DictionaryDetailCreate {
+func (_m *DictionaryDetailCreate) SetNotNilDictionaryID(value *int64) *DictionaryDetailCreate {
 	if value != nil {
 		return _m.SetDictionaryID(*value)
 	}
@@ -965,7 +965,7 @@ func (_m *MenuCreate) SetNotNilSort(value *uint32) *MenuCreate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *MenuUpdate) SetNotNilParentID(value *uint64) *MenuUpdate {
+func (_m *MenuUpdate) SetNotNilParentID(value *int64) *MenuUpdate {
 	if value != nil {
 		return _m.SetParentID(*value)
 	}
@@ -973,7 +973,7 @@ func (_m *MenuUpdate) SetNotNilParentID(value *uint64) *MenuUpdate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *MenuUpdateOne) SetNotNilParentID(value *uint64) *MenuUpdateOne {
+func (_m *MenuUpdateOne) SetNotNilParentID(value *int64) *MenuUpdateOne {
 	if value != nil {
 		return _m.SetParentID(*value)
 	}
@@ -981,7 +981,7 @@ func (_m *MenuUpdateOne) SetNotNilParentID(value *uint64) *MenuUpdateOne {
 }
 
 // set field if value's pointer is not nil.
-func (_m *MenuCreate) SetNotNilParentID(value *uint64) *MenuCreate {
+func (_m *MenuCreate) SetNotNilParentID(value *int64) *MenuCreate {
 	if value != nil {
 		return _m.SetParentID(*value)
 	}
@@ -1685,7 +1685,7 @@ func (_m *OauthProviderCreate) SetNotNilTokenURL(value *string) *OauthProviderCr
 }
 
 // set field if value's pointer is not nil.
-func (_m *OauthProviderUpdate) SetNotNilAuthStyle(value *uint64) *OauthProviderUpdate {
+func (_m *OauthProviderUpdate) SetNotNilAuthStyle(value *int64) *OauthProviderUpdate {
 	if value != nil {
 		return _m.SetAuthStyle(*value)
 	}
@@ -1693,7 +1693,7 @@ func (_m *OauthProviderUpdate) SetNotNilAuthStyle(value *uint64) *OauthProviderU
 }
 
 // set field if value's pointer is not nil.
-func (_m *OauthProviderUpdateOne) SetNotNilAuthStyle(value *uint64) *OauthProviderUpdateOne {
+func (_m *OauthProviderUpdateOne) SetNotNilAuthStyle(value *int64) *OauthProviderUpdateOne {
 	if value != nil {
 		return _m.SetAuthStyle(*value)
 	}
@@ -1701,7 +1701,7 @@ func (_m *OauthProviderUpdateOne) SetNotNilAuthStyle(value *uint64) *OauthProvid
 }
 
 // set field if value's pointer is not nil.
-func (_m *OauthProviderCreate) SetNotNilAuthStyle(value *uint64) *OauthProviderCreate {
+func (_m *OauthProviderCreate) SetNotNilAuthStyle(value *int64) *OauthProviderCreate {
 	if value != nil {
 		return _m.SetAuthStyle(*value)
 	}
@@ -2309,7 +2309,7 @@ func (_m *TenantCreate) SetNotNilLevel(value *int) *TenantCreate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *TenantUpdate) SetNotNilPlanID(value *uint64) *TenantUpdate {
+func (_m *TenantUpdate) SetNotNilPlanID(value *int64) *TenantUpdate {
 	if value != nil {
 		return _m.SetPlanID(*value)
 	}
@@ -2317,7 +2317,7 @@ func (_m *TenantUpdate) SetNotNilPlanID(value *uint64) *TenantUpdate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *TenantUpdateOne) SetNotNilPlanID(value *uint64) *TenantUpdateOne {
+func (_m *TenantUpdateOne) SetNotNilPlanID(value *int64) *TenantUpdateOne {
 	if value != nil {
 		return _m.SetPlanID(*value)
 	}
@@ -2325,7 +2325,7 @@ func (_m *TenantUpdateOne) SetNotNilPlanID(value *uint64) *TenantUpdateOne {
 }
 
 // set field if value's pointer is not nil.
-func (_m *TenantCreate) SetNotNilPlanID(value *uint64) *TenantCreate {
+func (_m *TenantCreate) SetNotNilPlanID(value *int64) *TenantCreate {
 	if value != nil {
 		return _m.SetPlanID(*value)
 	}
@@ -2573,7 +2573,7 @@ func (_m *TokenCreate) SetNotNilStatus(value *uint8) *TokenCreate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *TokenUpdate) SetNotNilUserID(value *uint64) *TokenUpdate {
+func (_m *TokenUpdate) SetNotNilUserID(value *int64) *TokenUpdate {
 	if value != nil {
 		return _m.SetUserID(*value)
 	}
@@ -2581,7 +2581,7 @@ func (_m *TokenUpdate) SetNotNilUserID(value *uint64) *TokenUpdate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *TokenUpdateOne) SetNotNilUserID(value *uint64) *TokenUpdateOne {
+func (_m *TokenUpdateOne) SetNotNilUserID(value *int64) *TokenUpdateOne {
 	if value != nil {
 		return _m.SetUserID(*value)
 	}
@@ -2589,7 +2589,7 @@ func (_m *TokenUpdateOne) SetNotNilUserID(value *uint64) *TokenUpdateOne {
 }
 
 // set field if value's pointer is not nil.
-func (_m *TokenCreate) SetNotNilUserID(value *uint64) *TokenCreate {
+func (_m *TokenCreate) SetNotNilUserID(value *int64) *TokenCreate {
 	if value != nil {
 		return _m.SetUserID(*value)
 	}
@@ -2717,7 +2717,7 @@ func (_m *UserCreate) SetNotNilUpdatedAt(value *time.Time) *UserCreate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *UserUpdate) SetNotNilDepartmentID(value *uint64) *UserUpdate {
+func (_m *UserUpdate) SetNotNilDepartmentID(value *int64) *UserUpdate {
 	if value != nil {
 		return _m.SetDepartmentID(*value)
 	}
@@ -2725,7 +2725,7 @@ func (_m *UserUpdate) SetNotNilDepartmentID(value *uint64) *UserUpdate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *UserUpdateOne) SetNotNilDepartmentID(value *uint64) *UserUpdateOne {
+func (_m *UserUpdateOne) SetNotNilDepartmentID(value *int64) *UserUpdateOne {
 	if value != nil {
 		return _m.SetDepartmentID(*value)
 	}
@@ -2733,7 +2733,7 @@ func (_m *UserUpdateOne) SetNotNilDepartmentID(value *uint64) *UserUpdateOne {
 }
 
 // set field if value's pointer is not nil.
-func (_m *UserCreate) SetNotNilDepartmentID(value *uint64) *UserCreate {
+func (_m *UserCreate) SetNotNilDepartmentID(value *int64) *UserCreate {
 	if value != nil {
 		return _m.SetDepartmentID(*value)
 	}

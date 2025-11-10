@@ -16,7 +16,7 @@ import (
 type Tenant struct {
 	config `json:"-"`
 	// ID of the ent.
-	ID uint64 `json:"id,omitempty"`
+	ID int64 `json:"id,omitempty"`
 	// Create Time | 创建日期
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	// Update Time | 修改日期
@@ -44,7 +44,7 @@ type Tenant struct {
 	// 租户级别
 	Level int `json:"level,omitempty"`
 	// 套餐计划Id，外键关联 tenant_plan.id
-	PlanID uint64 `json:"plan_id,omitempty"`
+	PlanID int64 `json:"plan_id,omitempty"`
 	// 管理员id
 	AdminID int64 `json:"admin_id,omitempty"`
 	// 父级id,0为第一级
@@ -83,7 +83,7 @@ func (_m *Tenant) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint64(value.Int64)
+			_m.ID = int64(value.Int64)
 		case tenant.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
@@ -166,7 +166,7 @@ func (_m *Tenant) assignValues(columns []string, values []any) error {
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field plan_id", values[i])
 			} else if value.Valid {
-				_m.PlanID = uint64(value.Int64)
+				_m.PlanID = value.Int64
 			}
 		case tenant.FieldAdminID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {

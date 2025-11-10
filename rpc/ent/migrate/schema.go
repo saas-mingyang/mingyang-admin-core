@@ -11,7 +11,7 @@ import (
 var (
 	// SysApisColumns holds the columns for the "sys_apis" table.
 	SysApisColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "path", Type: field.TypeString, Comment: "API path | API 路径"},
@@ -37,7 +37,7 @@ var (
 	}
 	// SysConfigurationColumns holds the columns for the "sys_configuration" table.
 	SysConfigurationColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "sort", Type: field.TypeUint32, Comment: "Sort Number | 排序编号", Default: 1},
@@ -64,7 +64,7 @@ var (
 	}
 	// SysDepartmentsColumns holds the columns for the "sys_departments" table.
 	SysDepartmentsColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "tenant_id", Type: field.TypeUint64, Comment: "Tenant ID | 租户 ID", Default: 1},
@@ -72,11 +72,11 @@ var (
 		{Name: "sort", Type: field.TypeUint32, Comment: "Sort Number | 排序编号", Default: 1},
 		{Name: "name", Type: field.TypeString, Comment: "Department name | 部门名称"},
 		{Name: "ancestors", Type: field.TypeString, Nullable: true, Comment: "Parents' IDs | 父级列表"},
-		{Name: "leader", Type: field.TypeUint64, Nullable: true, Comment: "Department leader | 部门负责人", Default: 1},
+		{Name: "leader", Type: field.TypeInt64, Nullable: true, Comment: "Department leader | 部门负责人", Default: 1},
 		{Name: "phone", Type: field.TypeString, Nullable: true, Comment: "Leader's phone number | 负责人电话"},
 		{Name: "email", Type: field.TypeString, Nullable: true, Comment: "Leader's email | 部门负责人电子邮箱"},
 		{Name: "remark", Type: field.TypeString, Nullable: true, Comment: "Remark | 备注"},
-		{Name: "parent_id", Type: field.TypeUint64, Nullable: true, Comment: "Parent department ID | 父级部门ID", Default: 0},
+		{Name: "parent_id", Type: field.TypeInt64, Nullable: true, Comment: "Parent department ID | 父级部门ID", Default: 0},
 	}
 	// SysDepartmentsTable holds the schema information for the "sys_departments" table.
 	SysDepartmentsTable = &schema.Table{
@@ -95,7 +95,7 @@ var (
 	}
 	// SysDictionariesColumns holds the columns for the "sys_dictionaries" table.
 	SysDictionariesColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
@@ -114,7 +114,7 @@ var (
 	}
 	// SysDictionaryDetailsColumns holds the columns for the "sys_dictionary_details" table.
 	SysDictionaryDetailsColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "tenant_id", Type: field.TypeUint64, Comment: "Tenant ID | 租户 ID", Default: 1},
@@ -123,7 +123,7 @@ var (
 		{Name: "title", Type: field.TypeString, Comment: "The title shown in the ui | 展示名称 （建议配合i18n）"},
 		{Name: "key", Type: field.TypeString, Comment: "key | 键"},
 		{Name: "value", Type: field.TypeString, Comment: "value | 值"},
-		{Name: "dictionary_id", Type: field.TypeUint64, Nullable: true, Comment: "Dictionary ID | 字典ID"},
+		{Name: "dictionary_id", Type: field.TypeInt64, Nullable: true, Comment: "Dictionary ID | 字典ID"},
 	}
 	// SysDictionaryDetailsTable holds the schema information for the "sys_dictionary_details" table.
 	SysDictionaryDetailsTable = &schema.Table{
@@ -142,7 +142,7 @@ var (
 	}
 	// SysMenusColumns holds the columns for the "sys_menus" table.
 	SysMenusColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "sort", Type: field.TypeUint32, Comment: "Sort Number | 排序编号", Default: 1},
@@ -167,7 +167,7 @@ var (
 		{Name: "affix", Type: field.TypeBool, Nullable: true, Comment: "Affix tab | Tab 固定", Default: false},
 		{Name: "dynamic_level", Type: field.TypeUint32, Nullable: true, Comment: "The maximum number of pages the router can open | 能打开的子TAB数", Default: 20},
 		{Name: "real_path", Type: field.TypeString, Nullable: true, Comment: "The real path of the route without dynamic part | 菜单路由不包含参数部分", Default: ""},
-		{Name: "parent_id", Type: field.TypeUint64, Nullable: true, Comment: "Parent menu ID | 父菜单ID", Default: 100000},
+		{Name: "parent_id", Type: field.TypeInt64, Nullable: true, Comment: "Parent menu ID | 父菜单ID", Default: 100000},
 	}
 	// SysMenusTable holds the schema information for the "sys_menus" table.
 	SysMenusTable = &schema.Table{
@@ -198,7 +198,7 @@ var (
 	}
 	// SysOauthProvidersColumns holds the columns for the "sys_oauth_providers" table.
 	SysOauthProvidersColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "name", Type: field.TypeString, Unique: true, Comment: "The provider's name | 提供商名称"},
@@ -208,7 +208,7 @@ var (
 		{Name: "scopes", Type: field.TypeString, Comment: "The scopes | 权限范围"},
 		{Name: "auth_url", Type: field.TypeString, Comment: "The auth url of the provider | 认证地址"},
 		{Name: "token_url", Type: field.TypeString, Comment: "The token url of the provider | 获取 token地址"},
-		{Name: "auth_style", Type: field.TypeUint64, Comment: "The auth style, 0: auto detect 1: third party log in 2: log in with username and password | 鉴权方式 0 自动 1 第三方登录 2 使用用户名密码"},
+		{Name: "auth_style", Type: field.TypeInt64, Comment: "The auth style, 0: auto detect 1: third party log in 2: log in with username and password | 鉴权方式 0 自动 1 第三方登录 2 使用用户名密码"},
 		{Name: "info_url", Type: field.TypeString, Comment: "The URL to request user information by token | 用户信息请求地址"},
 	}
 	// SysOauthProvidersTable holds the schema information for the "sys_oauth_providers" table.
@@ -220,7 +220,7 @@ var (
 	}
 	// SysPositionsColumns holds the columns for the "sys_positions" table.
 	SysPositionsColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "tenant_id", Type: field.TypeUint64, Comment: "Tenant ID | 租户 ID", Default: 1},
@@ -246,7 +246,7 @@ var (
 	}
 	// SysRolesColumns holds the columns for the "sys_roles" table.
 	SysRolesColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
@@ -271,7 +271,7 @@ var (
 	}
 	// SysTenantsColumns holds the columns for the "sys_tenants" table.
 	SysTenantsColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
@@ -285,9 +285,9 @@ var (
 		{Name: "intro", Type: field.TypeString, Comment: "企业简介"},
 		{Name: "domain", Type: field.TypeString, Comment: "域名"},
 		{Name: "level", Type: field.TypeInt, Comment: "租户级别"},
-		{Name: "plan_id", Type: field.TypeUint64, Nullable: true, Comment: "套餐计划Id，外键关联 tenant_plan.id"},
+		{Name: "plan_id", Type: field.TypeInt64, Nullable: true, Comment: "套餐计划Id，外键关联 tenant_plan.id"},
 		{Name: "admin_id", Type: field.TypeInt64, Comment: "管理员id"},
-		{Name: "parent_id", Type: field.TypeInt64, Comment: "父级id,0为第一级", Default: 0},
+		{Name: "parent_id", Type: field.TypeInt64, Comment: "父级id,0为第一级"},
 	}
 	// SysTenantsTable holds the schema information for the "sys_tenants" table.
 	SysTenantsTable = &schema.Table{
@@ -310,7 +310,7 @@ var (
 	}
 	// SyTenantPlansColumns holds the columns for the "sy_tenant_plans" table.
 	SyTenantPlansColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
@@ -335,11 +335,11 @@ var (
 	}
 	// SysTokensColumns holds the columns for the "sys_tokens" table.
 	SysTokensColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
-		{Name: "user_id", Type: field.TypeUint64, Nullable: true, Comment: " User's ID | 用户的ID", Default: 1},
+		{Name: "user_id", Type: field.TypeInt64, Nullable: true, Comment: " User's ID | 用户的ID", Default: 1},
 		{Name: "username", Type: field.TypeString, Comment: "Username | 用户名", Default: "unknown"},
 		{Name: "token", Type: field.TypeString, Comment: "Token string | Token 字符串"},
 		{Name: "source", Type: field.TypeString, Comment: "Log in source such as GitHub | Token 来源 （本地为core, 第三方如github等）"},
@@ -366,7 +366,7 @@ var (
 	}
 	// SysUsersColumns holds the columns for the "sys_users" table.
 	SysUsersColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeUint64, Increment: true},
+		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "tenant_id", Type: field.TypeUint64, Comment: "Tenant ID | 租户 ID", Default: 1},
@@ -380,7 +380,7 @@ var (
 		{Name: "mobile", Type: field.TypeString, Nullable: true, Comment: "Mobile number | 手机号"},
 		{Name: "email", Type: field.TypeString, Nullable: true, Comment: "Email | 邮箱号"},
 		{Name: "avatar", Type: field.TypeString, Nullable: true, Comment: "Avatar | 头像路径", SchemaType: map[string]string{"mysql": "varchar(512)"}},
-		{Name: "department_id", Type: field.TypeUint64, Nullable: true, Comment: "Department ID | 部门 ID"},
+		{Name: "department_id", Type: field.TypeInt64, Nullable: true, Comment: "Department ID | 部门 ID"},
 	}
 	// SysUsersTable holds the schema information for the "sys_users" table.
 	SysUsersTable = &schema.Table{
@@ -406,8 +406,8 @@ var (
 	}
 	// RoleMenusColumns holds the columns for the "role_menus" table.
 	RoleMenusColumns = []*schema.Column{
-		{Name: "role_id", Type: field.TypeUint64},
-		{Name: "menu_id", Type: field.TypeUint64},
+		{Name: "role_id", Type: field.TypeInt64},
+		{Name: "menu_id", Type: field.TypeInt64},
 	}
 	// RoleMenusTable holds the schema information for the "role_menus" table.
 	RoleMenusTable = &schema.Table{
@@ -431,8 +431,8 @@ var (
 	}
 	// UserPositionsColumns holds the columns for the "user_positions" table.
 	UserPositionsColumns = []*schema.Column{
-		{Name: "user_id", Type: field.TypeUint64},
-		{Name: "position_id", Type: field.TypeUint64},
+		{Name: "user_id", Type: field.TypeInt64},
+		{Name: "position_id", Type: field.TypeInt64},
 	}
 	// UserPositionsTable holds the schema information for the "user_positions" table.
 	UserPositionsTable = &schema.Table{
@@ -456,8 +456,8 @@ var (
 	}
 	// UserRolesColumns holds the columns for the "user_roles" table.
 	UserRolesColumns = []*schema.Column{
-		{Name: "user_id", Type: field.TypeUint64},
-		{Name: "role_id", Type: field.TypeUint64},
+		{Name: "user_id", Type: field.TypeInt64},
+		{Name: "role_id", Type: field.TypeInt64},
 	}
 	// UserRolesTable holds the schema information for the "user_roles" table.
 	UserRolesTable = &schema.Table{

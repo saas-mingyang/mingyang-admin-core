@@ -21,14 +21,14 @@ func (DictionaryDetail) Fields() []ent.Field {
 			Comment("key | 键"),
 		field.String("value").
 			Comment("value | 值"),
-		field.Uint64("dictionary_id").Optional().
+		field.Int64("dictionary_id").Optional().
 			Comment("Dictionary ID | 字典ID"),
 	}
 }
 
 func (DictionaryDetail) Mixin() []ent.Mixin {
 	return []ent.Mixin{
-		mixins.IDMixin{},
+		mixins.IdSonyFlakeMixin{},
 		mixins.TenantMixin{},
 		mixins.StatusMixin{},
 		mixins.SortMixin{},

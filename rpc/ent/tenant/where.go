@@ -10,47 +10,47 @@ import (
 )
 
 // ID filters vertices based on their ID field.
-func ID(id uint64) predicate.Tenant {
+func ID(id int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldEQ(FieldID, id))
 }
 
 // IDEQ applies the EQ predicate on the ID field.
-func IDEQ(id uint64) predicate.Tenant {
+func IDEQ(id int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldEQ(FieldID, id))
 }
 
 // IDNEQ applies the NEQ predicate on the ID field.
-func IDNEQ(id uint64) predicate.Tenant {
+func IDNEQ(id int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldNEQ(FieldID, id))
 }
 
 // IDIn applies the In predicate on the ID field.
-func IDIn(ids ...uint64) predicate.Tenant {
+func IDIn(ids ...int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldIn(FieldID, ids...))
 }
 
 // IDNotIn applies the NotIn predicate on the ID field.
-func IDNotIn(ids ...uint64) predicate.Tenant {
+func IDNotIn(ids ...int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldNotIn(FieldID, ids...))
 }
 
 // IDGT applies the GT predicate on the ID field.
-func IDGT(id uint64) predicate.Tenant {
+func IDGT(id int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldGT(FieldID, id))
 }
 
 // IDGTE applies the GTE predicate on the ID field.
-func IDGTE(id uint64) predicate.Tenant {
+func IDGTE(id int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldGTE(FieldID, id))
 }
 
 // IDLT applies the LT predicate on the ID field.
-func IDLT(id uint64) predicate.Tenant {
+func IDLT(id int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldLT(FieldID, id))
 }
 
 // IDLTE applies the LTE predicate on the ID field.
-func IDLTE(id uint64) predicate.Tenant {
+func IDLTE(id int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldLTE(FieldID, id))
 }
 
@@ -120,7 +120,7 @@ func Level(v int) predicate.Tenant {
 }
 
 // PlanID applies equality check predicate on the "plan_id" field. It's identical to PlanIDEQ.
-func PlanID(v uint64) predicate.Tenant {
+func PlanID(v int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldEQ(FieldPlanID, v))
 }
 
@@ -890,42 +890,42 @@ func LevelLTE(v int) predicate.Tenant {
 }
 
 // PlanIDEQ applies the EQ predicate on the "plan_id" field.
-func PlanIDEQ(v uint64) predicate.Tenant {
+func PlanIDEQ(v int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldEQ(FieldPlanID, v))
 }
 
 // PlanIDNEQ applies the NEQ predicate on the "plan_id" field.
-func PlanIDNEQ(v uint64) predicate.Tenant {
+func PlanIDNEQ(v int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldNEQ(FieldPlanID, v))
 }
 
 // PlanIDIn applies the In predicate on the "plan_id" field.
-func PlanIDIn(vs ...uint64) predicate.Tenant {
+func PlanIDIn(vs ...int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldIn(FieldPlanID, vs...))
 }
 
 // PlanIDNotIn applies the NotIn predicate on the "plan_id" field.
-func PlanIDNotIn(vs ...uint64) predicate.Tenant {
+func PlanIDNotIn(vs ...int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldNotIn(FieldPlanID, vs...))
 }
 
 // PlanIDGT applies the GT predicate on the "plan_id" field.
-func PlanIDGT(v uint64) predicate.Tenant {
+func PlanIDGT(v int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldGT(FieldPlanID, v))
 }
 
 // PlanIDGTE applies the GTE predicate on the "plan_id" field.
-func PlanIDGTE(v uint64) predicate.Tenant {
+func PlanIDGTE(v int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldGTE(FieldPlanID, v))
 }
 
 // PlanIDLT applies the LT predicate on the "plan_id" field.
-func PlanIDLT(v uint64) predicate.Tenant {
+func PlanIDLT(v int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldLT(FieldPlanID, v))
 }
 
 // PlanIDLTE applies the LTE predicate on the "plan_id" field.
-func PlanIDLTE(v uint64) predicate.Tenant {
+func PlanIDLTE(v int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldLTE(FieldPlanID, v))
 }
 

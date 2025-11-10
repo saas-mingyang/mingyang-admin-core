@@ -63,13 +63,13 @@ func (_c *TokenCreate) SetNillableStatus(v *uint8) *TokenCreate {
 }
 
 // SetUserID sets the "user_id" field.
-func (_c *TokenCreate) SetUserID(v uint64) *TokenCreate {
+func (_c *TokenCreate) SetUserID(v int64) *TokenCreate {
 	_c.mutation.SetUserID(v)
 	return _c
 }
 
 // SetNillableUserID sets the "user_id" field if the given value is not nil.
-func (_c *TokenCreate) SetNillableUserID(v *uint64) *TokenCreate {
+func (_c *TokenCreate) SetNillableUserID(v *int64) *TokenCreate {
 	if v != nil {
 		_c.SetUserID(*v)
 	}
@@ -109,13 +109,13 @@ func (_c *TokenCreate) SetExpiredAt(v time.Time) *TokenCreate {
 }
 
 // SetID sets the "id" field.
-func (_c *TokenCreate) SetID(v uint64) *TokenCreate {
+func (_c *TokenCreate) SetID(v int64) *TokenCreate {
 	_c.mutation.SetID(v)
 	return _c
 }
 
 // SetNillableID sets the "id" field if the given value is not nil.
-func (_c *TokenCreate) SetNillableID(v *uint64) *TokenCreate {
+func (_c *TokenCreate) SetNillableID(v *int64) *TokenCreate {
 	if v != nil {
 		_c.SetID(*v)
 	}
@@ -219,7 +219,7 @@ func (_c *TokenCreate) sqlSave(ctx context.Context) (*Token, error) {
 	}
 	if _spec.ID.Value != _node.ID {
 		id := _spec.ID.Value.(int64)
-		_node.ID = uint64(id)
+		_node.ID = int64(id)
 	}
 	_c.mutation.id = &_node.ID
 	_c.mutation.done = true
@@ -229,7 +229,7 @@ func (_c *TokenCreate) sqlSave(ctx context.Context) (*Token, error) {
 func (_c *TokenCreate) createSpec() (*Token, *sqlgraph.CreateSpec) {
 	var (
 		_node = &Token{config: _c.config}
-		_spec = sqlgraph.NewCreateSpec(token.Table, sqlgraph.NewFieldSpec(token.FieldID, field.TypeUint64))
+		_spec = sqlgraph.NewCreateSpec(token.Table, sqlgraph.NewFieldSpec(token.FieldID, field.TypeInt64))
 	)
 	if id, ok := _c.mutation.ID(); ok {
 		_node.ID = id
@@ -248,7 +248,7 @@ func (_c *TokenCreate) createSpec() (*Token, *sqlgraph.CreateSpec) {
 		_node.Status = value
 	}
 	if value, ok := _c.mutation.UserID(); ok {
-		_spec.SetField(token.FieldUserID, field.TypeUint64, value)
+		_spec.SetField(token.FieldUserID, field.TypeInt64, value)
 		_node.UserID = value
 	}
 	if value, ok := _c.mutation.Username(); ok {
@@ -317,7 +317,7 @@ func (_c *TokenCreateBulk) Save(ctx context.Context) ([]*Token, error) {
 				mutation.id = &nodes[i].ID
 				if specs[i].ID.Value != nil && nodes[i].ID == 0 {
 					id := specs[i].ID.Value.(int64)
-					nodes[i].ID = uint64(id)
+					nodes[i].ID = int64(id)
 				}
 				mutation.done = true
 				return nodes[i], nil

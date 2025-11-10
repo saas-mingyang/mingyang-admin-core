@@ -84,7 +84,7 @@ var (
 	// DefaultSort holds the default value on creation for the "sort" field.
 	DefaultSort uint32
 	// DefaultID holds the default value on creation for the "id" field.
-	DefaultID uint64
+	DefaultID int64
 )
 
 // OrderOption defines the ordering options for the Position queries.

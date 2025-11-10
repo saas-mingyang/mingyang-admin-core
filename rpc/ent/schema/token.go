@@ -15,7 +15,7 @@ type Token struct {
 
 func (Token) Fields() []ent.Field {
 	return []ent.Field{
-		field.Uint64("user_id").Optional().Default(1).
+		field.Int64("user_id").Optional().Default(1).
 			Comment(" User's ID | 用户的ID"),
 		field.String("username").
 			Comment("Username | 用户名").
@@ -31,7 +31,7 @@ func (Token) Fields() []ent.Field {
 
 func (Token) Mixin() []ent.Mixin {
 	return []ent.Mixin{
-		mixins.IDMixin{},
+		mixins.IdSonyFlakeMixin{},
 		mixins.StatusMixin{},
 	}
 }

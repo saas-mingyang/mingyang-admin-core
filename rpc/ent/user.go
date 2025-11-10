@@ -17,7 +17,7 @@ import (
 type User struct {
 	config `json:"-"`
 	// ID of the ent.
-	ID uint64 `json:"id,omitempty"`
+	ID int64 `json:"id,omitempty"`
 	// Create Time | 创建日期
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	// Update Time | 修改日期
@@ -25,7 +25,7 @@ type User struct {
 	// Tenant ID | 租户 ID
 	TenantID uint64 `json:"tenant_id,omitempty"`
 	// Department ID | 部门 ID
-	DepartmentID uint64 `json:"department_id,omitempty"`
+	DepartmentID int64 `json:"department_id,omitempty"`
 	// Status 1: normal 2: ban | 状态 1 正常 2 禁用
 	Status uint8 `json:"status,omitempty"`
 	// Delete Time | 删除日期
@@ -125,7 +125,7 @@ func (_m *User) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint64(value.Int64)
+			_m.ID = int64(value.Int64)
 		case user.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
@@ -148,7 +148,7 @@ func (_m *User) assignValues(columns []string, values []any) error {
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field department_id", values[i])
 			} else if value.Valid {
-				_m.DepartmentID = uint64(value.Int64)
+				_m.DepartmentID = value.Int64
 			}
 		case user.FieldStatus:
 			if value, ok := values[i].(*sql.NullInt64); !ok {

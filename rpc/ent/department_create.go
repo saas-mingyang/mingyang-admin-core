@@ -112,13 +112,13 @@ func (_c *DepartmentCreate) SetNillableAncestors(v *string) *DepartmentCreate {
 }
 
 // SetLeader sets the "leader" field.
-func (_c *DepartmentCreate) SetLeader(v uint64) *DepartmentCreate {
+func (_c *DepartmentCreate) SetLeader(v int64) *DepartmentCreate {
 	_c.mutation.SetLeader(v)
 	return _c
 }
 
 // SetNillableLeader sets the "leader" field if the given value is not nil.
-func (_c *DepartmentCreate) SetNillableLeader(v *uint64) *DepartmentCreate {
+func (_c *DepartmentCreate) SetNillableLeader(v *int64) *DepartmentCreate {
 	if v != nil {
 		_c.SetLeader(*v)
 	}
@@ -168,13 +168,13 @@ func (_c *DepartmentCreate) SetNillableRemark(v *string) *DepartmentCreate {
 }
 
 // SetParentID sets the "parent_id" field.
-func (_c *DepartmentCreate) SetParentID(v uint64) *DepartmentCreate {
+func (_c *DepartmentCreate) SetParentID(v int64) *DepartmentCreate {
 	_c.mutation.SetParentID(v)
 	return _c
 }
 
 // SetNillableParentID sets the "parent_id" field if the given value is not nil.
-func (_c *DepartmentCreate) SetNillableParentID(v *uint64) *DepartmentCreate {
+func (_c *DepartmentCreate) SetNillableParentID(v *int64) *DepartmentCreate {
 	if v != nil {
 		_c.SetParentID(*v)
 	}
@@ -182,13 +182,13 @@ func (_c *DepartmentCreate) SetNillableParentID(v *uint64) *DepartmentCreate {
 }
 
 // SetID sets the "id" field.
-func (_c *DepartmentCreate) SetID(v uint64) *DepartmentCreate {
+func (_c *DepartmentCreate) SetID(v int64) *DepartmentCreate {
 	_c.mutation.SetID(v)
 	return _c
 }
 
 // SetNillableID sets the "id" field if the given value is not nil.
-func (_c *DepartmentCreate) SetNillableID(v *uint64) *DepartmentCreate {
+func (_c *DepartmentCreate) SetNillableID(v *int64) *DepartmentCreate {
 	if v != nil {
 		_c.SetID(*v)
 	}
@@ -201,14 +201,14 @@ func (_c *DepartmentCreate) SetParent(v *Department) *DepartmentCreate {
 }
 
 // AddChildIDs adds the "children" edge to the Department entity by IDs.
-func (_c *DepartmentCreate) AddChildIDs(ids ...uint64) *DepartmentCreate {
+func (_c *DepartmentCreate) AddChildIDs(ids ...int64) *DepartmentCreate {
 	_c.mutation.AddChildIDs(ids...)
 	return _c
 }
 
 // AddChildren adds the "children" edges to the Department entity.
 func (_c *DepartmentCreate) AddChildren(v ...*Department) *DepartmentCreate {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -216,14 +216,14 @@ func (_c *DepartmentCreate) AddChildren(v ...*Department) *DepartmentCreate {
 }
 
 // AddUserIDs adds the "users" edge to the User entity by IDs.
-func (_c *DepartmentCreate) AddUserIDs(ids ...uint64) *DepartmentCreate {
+func (_c *DepartmentCreate) AddUserIDs(ids ...int64) *DepartmentCreate {
 	_c.mutation.AddUserIDs(ids...)
 	return _c
 }
 
 // AddUsers adds the "users" edges to the User entity.
 func (_c *DepartmentCreate) AddUsers(v ...*User) *DepartmentCreate {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -332,7 +332,7 @@ func (_c *DepartmentCreate) sqlSave(ctx context.Context) (*Department, error) {
 	}
 	if _spec.ID.Value != _node.ID {
 		id := _spec.ID.Value.(int64)
-		_node.ID = uint64(id)
+		_node.ID = int64(id)
 	}
 	_c.mutation.id = &_node.ID
 	_c.mutation.done = true
@@ -342,7 +342,7 @@ func (_c *DepartmentCreate) sqlSave(ctx context.Context) (*Department, error) {
 func (_c *DepartmentCreate) createSpec() (*Department, *sqlgraph.CreateSpec) {
 	var (
 		_node = &Department{config: _c.config}
-		_spec = sqlgraph.NewCreateSpec(department.Table, sqlgraph.NewFieldSpec(department.FieldID, field.TypeUint64))
+		_spec = sqlgraph.NewCreateSpec(department.Table, sqlgraph.NewFieldSpec(department.FieldID, field.TypeInt64))
 	)
 	if id, ok := _c.mutation.ID(); ok {
 		_node.ID = id
@@ -377,7 +377,7 @@ func (_c *DepartmentCreate) createSpec() (*Department, *sqlgraph.CreateSpec) {
 		_node.Ancestors = value
 	}
 	if value, ok := _c.mutation.Leader(); ok {
-		_spec.SetField(department.FieldLeader, field.TypeUint64, value)
+		_spec.SetField(department.FieldLeader, field.TypeInt64, value)
 		_node.Leader = value
 	}
 	if value, ok := _c.mutation.Phone(); ok {
@@ -400,7 +400,7 @@ func (_c *DepartmentCreate) createSpec() (*Department, *sqlgraph.CreateSpec) {
 			Columns: []string{department.ParentColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(department.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(department.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -417,7 +417,7 @@ func (_c *DepartmentCreate) createSpec() (*Department, *sqlgraph.CreateSpec) {
 			Columns: []string{department.ChildrenColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(department.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(department.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -433,7 +433,7 @@ func (_c *DepartmentCreate) createSpec() (*Department, *sqlgraph.CreateSpec) {
 			Columns: []string{department.UsersColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -491,7 +491,7 @@ func (_c *DepartmentCreateBulk) Save(ctx context.Context) ([]*Department, error)
 				mutation.id = &nodes[i].ID
 				if specs[i].ID.Value != nil && nodes[i].ID == 0 {
 					id := specs[i].ID.Value.(int64)
-					nodes[i].ID = uint64(id)
+					nodes[i].ID = int64(id)
 				}
 				mutation.done = true
 				return nodes[i], nil

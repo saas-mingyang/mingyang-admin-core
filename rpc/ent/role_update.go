@@ -128,14 +128,14 @@ func (_u *RoleUpdate) AddSort(v int32) *RoleUpdate {
 }
 
 // AddMenuIDs adds the "menus" edge to the Menu entity by IDs.
-func (_u *RoleUpdate) AddMenuIDs(ids ...uint64) *RoleUpdate {
+func (_u *RoleUpdate) AddMenuIDs(ids ...int64) *RoleUpdate {
 	_u.mutation.AddMenuIDs(ids...)
 	return _u
 }
 
 // AddMenus adds the "menus" edges to the Menu entity.
 func (_u *RoleUpdate) AddMenus(v ...*Menu) *RoleUpdate {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -143,14 +143,14 @@ func (_u *RoleUpdate) AddMenus(v ...*Menu) *RoleUpdate {
 }
 
 // AddUserIDs adds the "users" edge to the User entity by IDs.
-func (_u *RoleUpdate) AddUserIDs(ids ...uint64) *RoleUpdate {
+func (_u *RoleUpdate) AddUserIDs(ids ...int64) *RoleUpdate {
 	_u.mutation.AddUserIDs(ids...)
 	return _u
 }
 
 // AddUsers adds the "users" edges to the User entity.
 func (_u *RoleUpdate) AddUsers(v ...*User) *RoleUpdate {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -169,14 +169,14 @@ func (_u *RoleUpdate) ClearMenus() *RoleUpdate {
 }
 
 // RemoveMenuIDs removes the "menus" edge to Menu entities by IDs.
-func (_u *RoleUpdate) RemoveMenuIDs(ids ...uint64) *RoleUpdate {
+func (_u *RoleUpdate) RemoveMenuIDs(ids ...int64) *RoleUpdate {
 	_u.mutation.RemoveMenuIDs(ids...)
 	return _u
 }
 
 // RemoveMenus removes "menus" edges to Menu entities.
 func (_u *RoleUpdate) RemoveMenus(v ...*Menu) *RoleUpdate {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -190,14 +190,14 @@ func (_u *RoleUpdate) ClearUsers() *RoleUpdate {
 }
 
 // RemoveUserIDs removes the "users" edge to User entities by IDs.
-func (_u *RoleUpdate) RemoveUserIDs(ids ...uint64) *RoleUpdate {
+func (_u *RoleUpdate) RemoveUserIDs(ids ...int64) *RoleUpdate {
 	_u.mutation.RemoveUserIDs(ids...)
 	return _u
 }
 
 // RemoveUsers removes "users" edges to User entities.
 func (_u *RoleUpdate) RemoveUsers(v ...*User) *RoleUpdate {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -247,7 +247,7 @@ func (_u *RoleUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *RoleUpdat
 }
 
 func (_u *RoleUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	_spec := sqlgraph.NewUpdateSpec(role.Table, role.Columns, sqlgraph.NewFieldSpec(role.FieldID, field.TypeUint64))
+	_spec := sqlgraph.NewUpdateSpec(role.Table, role.Columns, sqlgraph.NewFieldSpec(role.FieldID, field.TypeInt64))
 	if ps := _u.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
@@ -290,7 +290,7 @@ func (_u *RoleUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 			Columns: role.MenusPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeInt64),
 			},
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
@@ -303,7 +303,7 @@ func (_u *RoleUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 			Columns: role.MenusPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -319,7 +319,7 @@ func (_u *RoleUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 			Columns: role.MenusPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -335,7 +335,7 @@ func (_u *RoleUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 			Columns: role.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt64),
 			},
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
@@ -348,7 +348,7 @@ func (_u *RoleUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 			Columns: role.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -364,7 +364,7 @@ func (_u *RoleUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 			Columns: role.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -491,14 +491,14 @@ func (_u *RoleUpdateOne) AddSort(v int32) *RoleUpdateOne {
 }
 
 // AddMenuIDs adds the "menus" edge to the Menu entity by IDs.
-func (_u *RoleUpdateOne) AddMenuIDs(ids ...uint64) *RoleUpdateOne {
+func (_u *RoleUpdateOne) AddMenuIDs(ids ...int64) *RoleUpdateOne {
 	_u.mutation.AddMenuIDs(ids...)
 	return _u
 }
 
 // AddMenus adds the "menus" edges to the Menu entity.
 func (_u *RoleUpdateOne) AddMenus(v ...*Menu) *RoleUpdateOne {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -506,14 +506,14 @@ func (_u *RoleUpdateOne) AddMenus(v ...*Menu) *RoleUpdateOne {
 }
 
 // AddUserIDs adds the "users" edge to the User entity by IDs.
-func (_u *RoleUpdateOne) AddUserIDs(ids ...uint64) *RoleUpdateOne {
+func (_u *RoleUpdateOne) AddUserIDs(ids ...int64) *RoleUpdateOne {
 	_u.mutation.AddUserIDs(ids...)
 	return _u
 }
 
 // AddUsers adds the "users" edges to the User entity.
 func (_u *RoleUpdateOne) AddUsers(v ...*User) *RoleUpdateOne {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -532,14 +532,14 @@ func (_u *RoleUpdateOne) ClearMenus() *RoleUpdateOne {
 }
 
 // RemoveMenuIDs removes the "menus" edge to Menu entities by IDs.
-func (_u *RoleUpdateOne) RemoveMenuIDs(ids ...uint64) *RoleUpdateOne {
+func (_u *RoleUpdateOne) RemoveMenuIDs(ids ...int64) *RoleUpdateOne {
 	_u.mutation.RemoveMenuIDs(ids...)
 	return _u
 }
 
 // RemoveMenus removes "menus" edges to Menu entities.
 func (_u *RoleUpdateOne) RemoveMenus(v ...*Menu) *RoleUpdateOne {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -553,14 +553,14 @@ func (_u *RoleUpdateOne) ClearUsers() *RoleUpdateOne {
 }
 
 // RemoveUserIDs removes the "users" edge to User entities by IDs.
-func (_u *RoleUpdateOne) RemoveUserIDs(ids ...uint64) *RoleUpdateOne {
+func (_u *RoleUpdateOne) RemoveUserIDs(ids ...int64) *RoleUpdateOne {
 	_u.mutation.RemoveUserIDs(ids...)
 	return _u
 }
 
 // RemoveUsers removes "users" edges to User entities.
 func (_u *RoleUpdateOne) RemoveUsers(v ...*User) *RoleUpdateOne {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -623,7 +623,7 @@ func (_u *RoleUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *RoleUp
 }
 
 func (_u *RoleUpdateOne) sqlSave(ctx context.Context) (_node *Role, err error) {
-	_spec := sqlgraph.NewUpdateSpec(role.Table, role.Columns, sqlgraph.NewFieldSpec(role.FieldID, field.TypeUint64))
+	_spec := sqlgraph.NewUpdateSpec(role.Table, role.Columns, sqlgraph.NewFieldSpec(role.FieldID, field.TypeInt64))
 	id, ok := _u.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "Role.id" for update`)}
@@ -683,7 +683,7 @@ func (_u *RoleUpdateOne) sqlSave(ctx context.Context) (_node *Role, err error) {
 			Columns: role.MenusPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeInt64),
 			},
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
@@ -696,7 +696,7 @@ func (_u *RoleUpdateOne) sqlSave(ctx context.Context) (_node *Role, err error) {
 			Columns: role.MenusPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -712,7 +712,7 @@ func (_u *RoleUpdateOne) sqlSave(ctx context.Context) (_node *Role, err error) {
 			Columns: role.MenusPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(menu.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -728,7 +728,7 @@ func (_u *RoleUpdateOne) sqlSave(ctx context.Context) (_node *Role, err error) {
 			Columns: role.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt64),
 			},
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
@@ -741,7 +741,7 @@ func (_u *RoleUpdateOne) sqlSave(ctx context.Context) (_node *Role, err error) {
 			Columns: role.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -757,7 +757,7 @@ func (_u *RoleUpdateOne) sqlSave(ctx context.Context) (_node *Role, err error) {
 			Columns: role.UsersPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {

@@ -33,7 +33,7 @@ func (Configuration) Edges() []ent.Edge {
 // Mixin of the Configuration.
 func (Configuration) Mixin() []ent.Mixin {
 	return []ent.Mixin{
-		mixins.IDMixin{},
+		mixins.IdSonyFlakeMixin{},
 		mixins.SortMixin{},
 		mixins.StateMixin{},
 	}

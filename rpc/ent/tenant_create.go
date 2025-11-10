@@ -123,13 +123,13 @@ func (_c *TenantCreate) SetLevel(v int) *TenantCreate {
 }
 
 // SetPlanID sets the "plan_id" field.
-func (_c *TenantCreate) SetPlanID(v uint64) *TenantCreate {
+func (_c *TenantCreate) SetPlanID(v int64) *TenantCreate {
 	_c.mutation.SetPlanID(v)
 	return _c
 }
 
 // SetNillablePlanID sets the "plan_id" field if the given value is not nil.
-func (_c *TenantCreate) SetNillablePlanID(v *uint64) *TenantCreate {
+func (_c *TenantCreate) SetNillablePlanID(v *int64) *TenantCreate {
 	if v != nil {
 		_c.SetPlanID(*v)
 	}
@@ -148,22 +148,14 @@ func (_c *TenantCreate) SetParentID(v int64) *TenantCreate {
 	return _c
 }
 
-// SetNillableParentID sets the "parent_id" field if the given value is not nil.
-func (_c *TenantCreate) SetNillableParentID(v *int64) *TenantCreate {
-	if v != nil {
-		_c.SetParentID(*v)
-	}
-	return _c
-}
-
 // SetID sets the "id" field.
-func (_c *TenantCreate) SetID(v uint64) *TenantCreate {
+func (_c *TenantCreate) SetID(v int64) *TenantCreate {
 	_c.mutation.SetID(v)
 	return _c
 }
 
 // SetNillableID sets the "id" field if the given value is not nil.
-func (_c *TenantCreate) SetNillableID(v *uint64) *TenantCreate {
+func (_c *TenantCreate) SetNillableID(v *int64) *TenantCreate {
 	if v != nil {
 		_c.SetID(*v)
 	}
@@ -216,10 +208,6 @@ func (_c *TenantCreate) defaults() {
 	if _, ok := _c.mutation.Status(); !ok {
 		v := tenant.DefaultStatus
 		_c.mutation.SetStatus(v)
-	}
-	if _, ok := _c.mutation.ParentID(); !ok {
-		v := tenant.DefaultParentID
-		_c.mutation.SetParentID(v)
 	}
 	if _, ok := _c.mutation.ID(); !ok {
 		v := tenant.DefaultID
@@ -307,7 +295,7 @@ func (_c *TenantCreate) sqlSave(ctx context.Context) (*Tenant, error) {
 	}
 	if _spec.ID.Value != _node.ID {
 		id := _spec.ID.Value.(int64)
-		_node.ID = uint64(id)
+		_node.ID = int64(id)
 	}
 	_c.mutation.id = &_node.ID
 	_c.mutation.done = true
@@ -317,7 +305,7 @@ func (_c *TenantCreate) sqlSave(ctx context.Context) (*Tenant, error) {
 func (_c *TenantCreate) createSpec() (*Tenant, *sqlgraph.CreateSpec) {
 	var (
 		_node = &Tenant{config: _c.config}
-		_spec = sqlgraph.NewCreateSpec(tenant.Table, sqlgraph.NewFieldSpec(tenant.FieldID, field.TypeUint64))
+		_spec = sqlgraph.NewCreateSpec(tenant.Table, sqlgraph.NewFieldSpec(tenant.FieldID, field.TypeInt64))
 	)
 	if id, ok := _c.mutation.ID(); ok {
 		_node.ID = id
@@ -376,7 +364,7 @@ func (_c *TenantCreate) createSpec() (*Tenant, *sqlgraph.CreateSpec) {
 		_node.Level = value
 	}
 	if value, ok := _c.mutation.PlanID(); ok {
-		_spec.SetField(tenant.FieldPlanID, field.TypeUint64, value)
+		_spec.SetField(tenant.FieldPlanID, field.TypeInt64, value)
 		_node.PlanID = value
 	}
 	if value, ok := _c.mutation.AdminID(); ok {
@@ -437,7 +425,7 @@ func (_c *TenantCreateBulk) Save(ctx context.Context) ([]*Tenant, error) {
 				mutation.id = &nodes[i].ID
 				if specs[i].ID.Value != nil && nodes[i].ID == 0 {
 					id := specs[i].ID.Value.(int64)
-					nodes[i].ID = uint64(id)
+					nodes[i].ID = int64(id)
 				}
 				mutation.done = true
 				return nodes[i], nil

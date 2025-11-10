@@ -17,7 +17,7 @@ type Menu struct {
 
 func (Menu) Fields() []ent.Field {
 	return []ent.Field{
-		field.Uint64("parent_id").Default(100000).Optional().
+		field.Int64("parent_id").Default(100000).Optional().
 			Comment("Parent menu ID | 父菜单ID"),
 		field.Uint32("menu_level").
 			Comment("Menu level | 菜单层级"),
@@ -68,7 +68,7 @@ func (Menu) Fields() []ent.Field {
 
 func (Menu) Mixin() []ent.Mixin {
 	return []ent.Mixin{
-		mixins.IDMixin{},
+		mixins.IdSonyFlakeMixin{},
 		mixins.SortMixin{},
 	}
 }

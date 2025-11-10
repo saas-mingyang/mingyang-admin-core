@@ -134,14 +134,14 @@ func (_u *OauthProviderUpdate) SetNillableTokenURL(v *string) *OauthProviderUpda
 }
 
 // SetAuthStyle sets the "auth_style" field.
-func (_u *OauthProviderUpdate) SetAuthStyle(v uint64) *OauthProviderUpdate {
+func (_u *OauthProviderUpdate) SetAuthStyle(v int64) *OauthProviderUpdate {
 	_u.mutation.ResetAuthStyle()
 	_u.mutation.SetAuthStyle(v)
 	return _u
 }
 
 // SetNillableAuthStyle sets the "auth_style" field if the given value is not nil.
-func (_u *OauthProviderUpdate) SetNillableAuthStyle(v *uint64) *OauthProviderUpdate {
+func (_u *OauthProviderUpdate) SetNillableAuthStyle(v *int64) *OauthProviderUpdate {
 	if v != nil {
 		_u.SetAuthStyle(*v)
 	}
@@ -216,7 +216,7 @@ func (_u *OauthProviderUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *
 }
 
 func (_u *OauthProviderUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	_spec := sqlgraph.NewUpdateSpec(oauthprovider.Table, oauthprovider.Columns, sqlgraph.NewFieldSpec(oauthprovider.FieldID, field.TypeUint64))
+	_spec := sqlgraph.NewUpdateSpec(oauthprovider.Table, oauthprovider.Columns, sqlgraph.NewFieldSpec(oauthprovider.FieldID, field.TypeInt64))
 	if ps := _u.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
@@ -249,10 +249,10 @@ func (_u *OauthProviderUpdate) sqlSave(ctx context.Context) (_node int, err erro
 		_spec.SetField(oauthprovider.FieldTokenURL, field.TypeString, value)
 	}
 	if value, ok := _u.mutation.AuthStyle(); ok {
-		_spec.SetField(oauthprovider.FieldAuthStyle, field.TypeUint64, value)
+		_spec.SetField(oauthprovider.FieldAuthStyle, field.TypeInt64, value)
 	}
 	if value, ok := _u.mutation.AddedAuthStyle(); ok {
-		_spec.AddField(oauthprovider.FieldAuthStyle, field.TypeUint64, value)
+		_spec.AddField(oauthprovider.FieldAuthStyle, field.TypeInt64, value)
 	}
 	if value, ok := _u.mutation.InfoURL(); ok {
 		_spec.SetField(oauthprovider.FieldInfoURL, field.TypeString, value)
@@ -384,14 +384,14 @@ func (_u *OauthProviderUpdateOne) SetNillableTokenURL(v *string) *OauthProviderU
 }
 
 // SetAuthStyle sets the "auth_style" field.
-func (_u *OauthProviderUpdateOne) SetAuthStyle(v uint64) *OauthProviderUpdateOne {
+func (_u *OauthProviderUpdateOne) SetAuthStyle(v int64) *OauthProviderUpdateOne {
 	_u.mutation.ResetAuthStyle()
 	_u.mutation.SetAuthStyle(v)
 	return _u
 }
 
 // SetNillableAuthStyle sets the "auth_style" field if the given value is not nil.
-func (_u *OauthProviderUpdateOne) SetNillableAuthStyle(v *uint64) *OauthProviderUpdateOne {
+func (_u *OauthProviderUpdateOne) SetNillableAuthStyle(v *int64) *OauthProviderUpdateOne {
 	if v != nil {
 		_u.SetAuthStyle(*v)
 	}
@@ -479,7 +479,7 @@ func (_u *OauthProviderUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)
 }
 
 func (_u *OauthProviderUpdateOne) sqlSave(ctx context.Context) (_node *OauthProvider, err error) {
-	_spec := sqlgraph.NewUpdateSpec(oauthprovider.Table, oauthprovider.Columns, sqlgraph.NewFieldSpec(oauthprovider.FieldID, field.TypeUint64))
+	_spec := sqlgraph.NewUpdateSpec(oauthprovider.Table, oauthprovider.Columns, sqlgraph.NewFieldSpec(oauthprovider.FieldID, field.TypeInt64))
 	id, ok := _u.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "OauthProvider.id" for update`)}
@@ -529,10 +529,10 @@ func (_u *OauthProviderUpdateOne) sqlSave(ctx context.Context) (_node *OauthProv
 		_spec.SetField(oauthprovider.FieldTokenURL, field.TypeString, value)
 	}
 	if value, ok := _u.mutation.AuthStyle(); ok {
-		_spec.SetField(oauthprovider.FieldAuthStyle, field.TypeUint64, value)
+		_spec.SetField(oauthprovider.FieldAuthStyle, field.TypeInt64, value)
 	}
 	if value, ok := _u.mutation.AddedAuthStyle(); ok {
-		_spec.AddField(oauthprovider.FieldAuthStyle, field.TypeUint64, value)
+		_spec.AddField(oauthprovider.FieldAuthStyle, field.TypeInt64, value)
 	}
 	if value, ok := _u.mutation.InfoURL(); ok {
 		_spec.SetField(oauthprovider.FieldInfoURL, field.TypeString, value)

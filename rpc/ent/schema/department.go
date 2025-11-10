@@ -19,7 +19,7 @@ func (Department) Fields() []ent.Field {
 			Comment("Department name | 部门名称"),
 		field.String("ancestors").Optional().
 			Comment("Parents' IDs | 父级列表"),
-		field.Uint64("leader").Optional().Default(1).
+		field.Int64("leader").Optional().Default(1).
 			Comment("Department leader | 部门负责人"),
 		field.String("phone").
 			Comment("Leader's phone number | 负责人电话").Optional(),
@@ -27,14 +27,14 @@ func (Department) Fields() []ent.Field {
 			Comment("Leader's email | 部门负责人电子邮箱").Optional(),
 		field.String("remark").Optional().
 			Comment("Remark | 备注"),
-		field.Uint64("parent_id").Optional().Default(0).
+		field.Int64("parent_id").Optional().Default(0).
 			Comment("Parent department ID | 父级部门ID"),
 	}
 }
 
 func (Department) Mixin() []ent.Mixin {
 	return []ent.Mixin{
-		mixins.IDMixin{},
+		mixins.IdSonyFlakeMixin{},
 		mixins.TenantMixin{},
 		mixins.StatusMixin{},
 		mixins.SortMixin{},

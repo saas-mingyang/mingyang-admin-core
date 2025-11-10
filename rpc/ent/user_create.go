@@ -66,13 +66,13 @@ func (_c *UserCreate) SetNillableTenantID(v *uint64) *UserCreate {
 }
 
 // SetDepartmentID sets the "department_id" field.
-func (_c *UserCreate) SetDepartmentID(v uint64) *UserCreate {
+func (_c *UserCreate) SetDepartmentID(v int64) *UserCreate {
 	_c.mutation.SetDepartmentID(v)
 	return _c
 }
 
 // SetNillableDepartmentID sets the "department_id" field if the given value is not nil.
-func (_c *UserCreate) SetNillableDepartmentID(v *uint64) *UserCreate {
+func (_c *UserCreate) SetNillableDepartmentID(v *int64) *UserCreate {
 	if v != nil {
 		_c.SetDepartmentID(*v)
 	}
@@ -196,13 +196,13 @@ func (_c *UserCreate) SetNillableAvatar(v *string) *UserCreate {
 }
 
 // SetID sets the "id" field.
-func (_c *UserCreate) SetID(v uint64) *UserCreate {
+func (_c *UserCreate) SetID(v int64) *UserCreate {
 	_c.mutation.SetID(v)
 	return _c
 }
 
 // SetNillableID sets the "id" field if the given value is not nil.
-func (_c *UserCreate) SetNillableID(v *uint64) *UserCreate {
+func (_c *UserCreate) SetNillableID(v *int64) *UserCreate {
 	if v != nil {
 		_c.SetID(*v)
 	}
@@ -210,13 +210,13 @@ func (_c *UserCreate) SetNillableID(v *uint64) *UserCreate {
 }
 
 // SetDepartmentsID sets the "departments" edge to the Department entity by ID.
-func (_c *UserCreate) SetDepartmentsID(id uint64) *UserCreate {
+func (_c *UserCreate) SetDepartmentsID(id int64) *UserCreate {
 	_c.mutation.SetDepartmentsID(id)
 	return _c
 }
 
 // SetNillableDepartmentsID sets the "departments" edge to the Department entity by ID if the given value is not nil.
-func (_c *UserCreate) SetNillableDepartmentsID(id *uint64) *UserCreate {
+func (_c *UserCreate) SetNillableDepartmentsID(id *int64) *UserCreate {
 	if id != nil {
 		_c = _c.SetDepartmentsID(*id)
 	}
@@ -229,14 +229,14 @@ func (_c *UserCreate) SetDepartments(v *Department) *UserCreate {
 }
 
 // AddPositionIDs adds the "positions" edge to the Position entity by IDs.
-func (_c *UserCreate) AddPositionIDs(ids ...uint64) *UserCreate {
+func (_c *UserCreate) AddPositionIDs(ids ...int64) *UserCreate {
 	_c.mutation.AddPositionIDs(ids...)
 	return _c
 }
 
 // AddPositions adds the "positions" edges to the Position entity.
 func (_c *UserCreate) AddPositions(v ...*Position) *UserCreate {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -244,14 +244,14 @@ func (_c *UserCreate) AddPositions(v ...*Position) *UserCreate {
 }
 
 // AddRoleIDs adds the "roles" edge to the Role entity by IDs.
-func (_c *UserCreate) AddRoleIDs(ids ...uint64) *UserCreate {
+func (_c *UserCreate) AddRoleIDs(ids ...int64) *UserCreate {
 	_c.mutation.AddRoleIDs(ids...)
 	return _c
 }
 
 // AddRoles adds the "roles" edges to the Role entity.
 func (_c *UserCreate) AddRoles(v ...*Role) *UserCreate {
-	ids := make([]uint64, len(v))
+	ids := make([]int64, len(v))
 	for i := range v {
 		ids[i] = v[i].ID
 	}
@@ -367,7 +367,7 @@ func (_c *UserCreate) sqlSave(ctx context.Context) (*User, error) {
 	}
 	if _spec.ID.Value != _node.ID {
 		id := _spec.ID.Value.(int64)
-		_node.ID = uint64(id)
+		_node.ID = int64(id)
 	}
 	_c.mutation.id = &_node.ID
 	_c.mutation.done = true
@@ -377,7 +377,7 @@ func (_c *UserCreate) sqlSave(ctx context.Context) (*User, error) {
 func (_c *UserCreate) createSpec() (*User, *sqlgraph.CreateSpec) {
 	var (
 		_node = &User{config: _c.config}
-		_spec = sqlgraph.NewCreateSpec(user.Table, sqlgraph.NewFieldSpec(user.FieldID, field.TypeUint64))
+		_spec = sqlgraph.NewCreateSpec(user.Table, sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt64))
 	)
 	if id, ok := _c.mutation.ID(); ok {
 		_node.ID = id
@@ -443,7 +443,7 @@ func (_c *UserCreate) createSpec() (*User, *sqlgraph.CreateSpec) {
 			Columns: []string{user.DepartmentsColumn},
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(department.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(department.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -460,7 +460,7 @@ func (_c *UserCreate) createSpec() (*User, *sqlgraph.CreateSpec) {
 			Columns: user.PositionsPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(position.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(position.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -476,7 +476,7 @@ func (_c *UserCreate) createSpec() (*User, *sqlgraph.CreateSpec) {
 			Columns: user.RolesPrimaryKey,
 			Bidi:    false,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(role.FieldID, field.TypeUint64),
+				IDSpec: sqlgraph.NewFieldSpec(role.FieldID, field.TypeInt64),
 			},
 		}
 		for _, k := range nodes {
@@ -534,7 +534,7 @@ func (_c *UserCreateBulk) Save(ctx context.Context) ([]*User, error) {
 				mutation.id = &nodes[i].ID
 				if specs[i].ID.Value != nil && nodes[i].ID == 0 {
 					id := specs[i].ID.Value.(int64)
-					nodes[i].ID = uint64(id)
+					nodes[i].ID = int64(id)
 				}
 				mutation.done = true
 				return nodes[i], nil

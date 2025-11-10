@@ -95,12 +95,10 @@ var (
 	CodeValidator func(string) error
 	// AdminIDValidator is a validator for the "admin_id" field. It is called by the builders before save.
 	AdminIDValidator func(int64) error
-	// DefaultParentID holds the default value on creation for the "parent_id" field.
-	DefaultParentID int64
 	// ParentIDValidator is a validator for the "parent_id" field. It is called by the builders before save.
 	ParentIDValidator func(int64) error
 	// DefaultID holds the default value on creation for the "id" field.
-	DefaultID uint64
+	DefaultID int64
 )
 
 // OrderOption defines the ordering options for the Tenant queries.
