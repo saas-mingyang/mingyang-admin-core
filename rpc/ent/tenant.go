@@ -42,7 +42,7 @@ type Tenant struct {
 	// 域名
 	Domain string `json:"domain,omitempty"`
 	// 租户级别
-	Level int `json:"level,omitempty"`
+	Level uint32 `json:"level,omitempty"`
 	// 套餐计划Id，外键关联 tenant_plan.id
 	PlanID int64 `json:"plan_id,omitempty"`
 	// 管理员id
@@ -160,7 +160,7 @@ func (_m *Tenant) assignValues(columns []string, values []any) error {
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field level", values[i])
 			} else if value.Valid {
-				_m.Level = int(value.Int64)
+				_m.Level = uint32(value.Int64)
 			}
 		case tenant.FieldPlanID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {

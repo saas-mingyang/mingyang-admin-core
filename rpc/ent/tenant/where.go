@@ -115,7 +115,7 @@ func Domain(v string) predicate.Tenant {
 }
 
 // Level applies equality check predicate on the "level" field. It's identical to LevelEQ.
-func Level(v int) predicate.Tenant {
+func Level(v uint32) predicate.Tenant {
 	return predicate.Tenant(sql.FieldEQ(FieldLevel, v))
 }
 
@@ -514,6 +514,16 @@ func ContactEmailHasSuffix(v string) predicate.Tenant {
 	return predicate.Tenant(sql.FieldHasSuffix(FieldContactEmail, v))
 }
 
+// ContactEmailIsNil applies the IsNil predicate on the "contact_email" field.
+func ContactEmailIsNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldIsNull(FieldContactEmail))
+}
+
+// ContactEmailNotNil applies the NotNil predicate on the "contact_email" field.
+func ContactEmailNotNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldNotNull(FieldContactEmail))
+}
+
 // ContactEmailEqualFold applies the EqualFold predicate on the "contact_email" field.
 func ContactEmailEqualFold(v string) predicate.Tenant {
 	return predicate.Tenant(sql.FieldEqualFold(FieldContactEmail, v))
@@ -577,6 +587,16 @@ func CompanyNameHasPrefix(v string) predicate.Tenant {
 // CompanyNameHasSuffix applies the HasSuffix predicate on the "company_name" field.
 func CompanyNameHasSuffix(v string) predicate.Tenant {
 	return predicate.Tenant(sql.FieldHasSuffix(FieldCompanyName, v))
+}
+
+// CompanyNameIsNil applies the IsNil predicate on the "company_name" field.
+func CompanyNameIsNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldIsNull(FieldCompanyName))
+}
+
+// CompanyNameNotNil applies the NotNil predicate on the "company_name" field.
+func CompanyNameNotNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldNotNull(FieldCompanyName))
 }
 
 // CompanyNameEqualFold applies the EqualFold predicate on the "company_name" field.
@@ -644,6 +664,16 @@ func LicenseNumberHasSuffix(v string) predicate.Tenant {
 	return predicate.Tenant(sql.FieldHasSuffix(FieldLicenseNumber, v))
 }
 
+// LicenseNumberIsNil applies the IsNil predicate on the "license_number" field.
+func LicenseNumberIsNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldIsNull(FieldLicenseNumber))
+}
+
+// LicenseNumberNotNil applies the NotNil predicate on the "license_number" field.
+func LicenseNumberNotNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldNotNull(FieldLicenseNumber))
+}
+
 // LicenseNumberEqualFold applies the EqualFold predicate on the "license_number" field.
 func LicenseNumberEqualFold(v string) predicate.Tenant {
 	return predicate.Tenant(sql.FieldEqualFold(FieldLicenseNumber, v))
@@ -707,6 +737,16 @@ func AddressHasPrefix(v string) predicate.Tenant {
 // AddressHasSuffix applies the HasSuffix predicate on the "address" field.
 func AddressHasSuffix(v string) predicate.Tenant {
 	return predicate.Tenant(sql.FieldHasSuffix(FieldAddress, v))
+}
+
+// AddressIsNil applies the IsNil predicate on the "address" field.
+func AddressIsNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldIsNull(FieldAddress))
+}
+
+// AddressNotNil applies the NotNil predicate on the "address" field.
+func AddressNotNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldNotNull(FieldAddress))
 }
 
 // AddressEqualFold applies the EqualFold predicate on the "address" field.
@@ -774,6 +814,16 @@ func IntroHasSuffix(v string) predicate.Tenant {
 	return predicate.Tenant(sql.FieldHasSuffix(FieldIntro, v))
 }
 
+// IntroIsNil applies the IsNil predicate on the "intro" field.
+func IntroIsNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldIsNull(FieldIntro))
+}
+
+// IntroNotNil applies the NotNil predicate on the "intro" field.
+func IntroNotNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldNotNull(FieldIntro))
+}
+
 // IntroEqualFold applies the EqualFold predicate on the "intro" field.
 func IntroEqualFold(v string) predicate.Tenant {
 	return predicate.Tenant(sql.FieldEqualFold(FieldIntro, v))
@@ -839,6 +889,16 @@ func DomainHasSuffix(v string) predicate.Tenant {
 	return predicate.Tenant(sql.FieldHasSuffix(FieldDomain, v))
 }
 
+// DomainIsNil applies the IsNil predicate on the "domain" field.
+func DomainIsNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldIsNull(FieldDomain))
+}
+
+// DomainNotNil applies the NotNil predicate on the "domain" field.
+func DomainNotNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldNotNull(FieldDomain))
+}
+
 // DomainEqualFold applies the EqualFold predicate on the "domain" field.
 func DomainEqualFold(v string) predicate.Tenant {
 	return predicate.Tenant(sql.FieldEqualFold(FieldDomain, v))
@@ -850,42 +910,42 @@ func DomainContainsFold(v string) predicate.Tenant {
 }
 
 // LevelEQ applies the EQ predicate on the "level" field.
-func LevelEQ(v int) predicate.Tenant {
+func LevelEQ(v uint32) predicate.Tenant {
 	return predicate.Tenant(sql.FieldEQ(FieldLevel, v))
 }
 
 // LevelNEQ applies the NEQ predicate on the "level" field.
-func LevelNEQ(v int) predicate.Tenant {
+func LevelNEQ(v uint32) predicate.Tenant {
 	return predicate.Tenant(sql.FieldNEQ(FieldLevel, v))
 }
 
 // LevelIn applies the In predicate on the "level" field.
-func LevelIn(vs ...int) predicate.Tenant {
+func LevelIn(vs ...uint32) predicate.Tenant {
 	return predicate.Tenant(sql.FieldIn(FieldLevel, vs...))
 }
 
 // LevelNotIn applies the NotIn predicate on the "level" field.
-func LevelNotIn(vs ...int) predicate.Tenant {
+func LevelNotIn(vs ...uint32) predicate.Tenant {
 	return predicate.Tenant(sql.FieldNotIn(FieldLevel, vs...))
 }
 
 // LevelGT applies the GT predicate on the "level" field.
-func LevelGT(v int) predicate.Tenant {
+func LevelGT(v uint32) predicate.Tenant {
 	return predicate.Tenant(sql.FieldGT(FieldLevel, v))
 }
 
 // LevelGTE applies the GTE predicate on the "level" field.
-func LevelGTE(v int) predicate.Tenant {
+func LevelGTE(v uint32) predicate.Tenant {
 	return predicate.Tenant(sql.FieldGTE(FieldLevel, v))
 }
 
 // LevelLT applies the LT predicate on the "level" field.
-func LevelLT(v int) predicate.Tenant {
+func LevelLT(v uint32) predicate.Tenant {
 	return predicate.Tenant(sql.FieldLT(FieldLevel, v))
 }
 
 // LevelLTE applies the LTE predicate on the "level" field.
-func LevelLTE(v int) predicate.Tenant {
+func LevelLTE(v uint32) predicate.Tenant {
 	return predicate.Tenant(sql.FieldLTE(FieldLevel, v))
 }
 
@@ -979,6 +1039,16 @@ func AdminIDLTE(v int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldLTE(FieldAdminID, v))
 }
 
+// AdminIDIsNil applies the IsNil predicate on the "admin_id" field.
+func AdminIDIsNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldIsNull(FieldAdminID))
+}
+
+// AdminIDNotNil applies the NotNil predicate on the "admin_id" field.
+func AdminIDNotNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldNotNull(FieldAdminID))
+}
+
 // ParentIDEQ applies the EQ predicate on the "parent_id" field.
 func ParentIDEQ(v int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldEQ(FieldParentID, v))
@@ -1017,6 +1087,16 @@ func ParentIDLT(v int64) predicate.Tenant {
 // ParentIDLTE applies the LTE predicate on the "parent_id" field.
 func ParentIDLTE(v int64) predicate.Tenant {
 	return predicate.Tenant(sql.FieldLTE(FieldParentID, v))
+}
+
+// ParentIDIsNil applies the IsNil predicate on the "parent_id" field.
+func ParentIDIsNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldIsNull(FieldParentID))
+}
+
+// ParentIDNotNil applies the NotNil predicate on the "parent_id" field.
+func ParentIDNotNil() predicate.Tenant {
+	return predicate.Tenant(sql.FieldNotNull(FieldParentID))
 }
 
 // And groups predicates with the AND operator between them.

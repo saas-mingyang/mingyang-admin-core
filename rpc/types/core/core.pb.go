@@ -3097,10 +3097,7 @@ func (x *RoleMenuAuthorityResp) GetMenuIds() []uint64 {
 }
 
 type TenantInfo struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	Id        *uint64                `protobuf:"varint,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	CreatedAt *int64                 `protobuf:"varint,2,opt,name=created_at,json=createdAt,proto3,oneof" json:"created_at,omitempty"`
-	UpdatedAt *int64                 `protobuf:"varint,3,opt,name=updated_at,json=updatedAt,proto3,oneof" json:"updated_at,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
 	// Status 1: normal 2: ban | 状态 1 正常 2 禁用
 	Status *uint32 `protobuf:"varint,4,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	// 名称，不能为空
@@ -3110,7 +3107,25 @@ type TenantInfo struct {
 	// 管理员id，不能为空，创建租户的时候顺便创建用户
 	AdminId *int64 `protobuf:"varint,7,opt,name=admin_id,json=adminId,proto3,oneof" json:"admin_id,omitempty"`
 	// 父级id，不能为空,0为第一级
-	ParentId      *int64 `protobuf:"varint,8,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
+	ParentId *int64 `protobuf:"varint,8,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
+	// 公司名称，不能为空
+	CompanyName *string `protobuf:"bytes,9,opt,name=company_name,json=companyName,proto3,oneof" json:"company_name,omitempty"`
+	// 企业社会信用代码，不能为空
+	LicenseNumber *string `protobuf:"bytes,10,opt,name=license_number,json=licenseNumber,proto3,oneof" json:"license_number,omitempty"`
+	// 地址，不能为空
+	Address *string `protobuf:"bytes,11,opt,name=address,proto3,oneof" json:"address,omitempty"`
+	// 简介，不能为空
+	Intro *string `protobuf:"bytes,12,opt,name=intro,proto3,oneof" json:"intro,omitempty"`
+	// 域名，不能为空
+	Domain *string `protobuf:"bytes,13,opt,name=domain,proto3,oneof" json:"domain,omitempty"`
+	// 层级，不能为空
+	Level *uint32 `protobuf:"varint,14,opt,name=level,proto3,oneof" json:"level,omitempty"`
+	// 套餐id，不能为空
+	PlanId *int64 `protobuf:"varint,15,opt,name=plan_id,json=planId,proto3,oneof" json:"plan_id,omitempty"`
+	// 联系人手机号，不能为空
+	ContactPhone *string `protobuf:"bytes,16,opt,name=contact_phone,json=contactPhone,proto3,oneof" json:"contact_phone,omitempty"`
+	// 联系人邮箱，不能为空
+	ContactEmail  *string `protobuf:"bytes,17,opt,name=contact_email,json=contactEmail,proto3,oneof" json:"contact_email,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3143,27 +3158,6 @@ func (x *TenantInfo) ProtoReflect() protoreflect.Message {
 // Deprecated: Use TenantInfo.ProtoReflect.Descriptor instead.
 func (*TenantInfo) Descriptor() ([]byte, []int) {
 	return file_rpc_core_proto_rawDescGZIP(), []int{42}
-}
-
-func (x *TenantInfo) GetId() uint64 {
-	if x != nil && x.Id != nil {
-		return *x.Id
-	}
-	return 0
-}
-
-func (x *TenantInfo) GetCreatedAt() int64 {
-	if x != nil && x.CreatedAt != nil {
-		return *x.CreatedAt
-	}
-	return 0
-}
-
-func (x *TenantInfo) GetUpdatedAt() int64 {
-	if x != nil && x.UpdatedAt != nil {
-		return *x.UpdatedAt
-	}
-	return 0
 }
 
 func (x *TenantInfo) GetStatus() uint32 {
@@ -3199,6 +3193,69 @@ func (x *TenantInfo) GetParentId() int64 {
 		return *x.ParentId
 	}
 	return 0
+}
+
+func (x *TenantInfo) GetCompanyName() string {
+	if x != nil && x.CompanyName != nil {
+		return *x.CompanyName
+	}
+	return ""
+}
+
+func (x *TenantInfo) GetLicenseNumber() string {
+	if x != nil && x.LicenseNumber != nil {
+		return *x.LicenseNumber
+	}
+	return ""
+}
+
+func (x *TenantInfo) GetAddress() string {
+	if x != nil && x.Address != nil {
+		return *x.Address
+	}
+	return ""
+}
+
+func (x *TenantInfo) GetIntro() string {
+	if x != nil && x.Intro != nil {
+		return *x.Intro
+	}
+	return ""
+}
+
+func (x *TenantInfo) GetDomain() string {
+	if x != nil && x.Domain != nil {
+		return *x.Domain
+	}
+	return ""
+}
+
+func (x *TenantInfo) GetLevel() uint32 {
+	if x != nil && x.Level != nil {
+		return *x.Level
+	}
+	return 0
+}
+
+func (x *TenantInfo) GetPlanId() int64 {
+	if x != nil && x.PlanId != nil {
+		return *x.PlanId
+	}
+	return 0
+}
+
+func (x *TenantInfo) GetContactPhone() string {
+	if x != nil && x.ContactPhone != nil {
+		return *x.ContactPhone
+	}
+	return ""
+}
+
+func (x *TenantInfo) GetContactEmail() string {
+	if x != nil && x.ContactEmail != nil {
+		return *x.ContactEmail
+	}
+	return ""
 }
 
 type TenantListReq struct {
@@ -4961,28 +5018,42 @@ const file_rpc_core_proto_rawDesc = "" +
 	"\arole_id\x18\x01 \x01(\x04R\x06roleId\x12\x19\n" +
 	"\bmenu_ids\x18\x02 \x03(\x04R\amenuIds\"2\n" +
 	"\x15RoleMenuAuthorityResp\x12\x19\n" +
-	"\bmenu_ids\x18\x01 \x03(\x04R\amenuIds\"\xd7\x02\n" +
+	"\bmenu_ids\x18\x01 \x03(\x04R\amenuIds\"\x8c\x05\n" +
 	"\n" +
-	"TenantInfo\x12\x13\n" +
-	"\x02id\x18\x01 \x01(\x04H\x00R\x02id\x88\x01\x01\x12\"\n" +
-	"\n" +
-	"created_at\x18\x02 \x01(\x03H\x01R\tcreatedAt\x88\x01\x01\x12\"\n" +
-	"\n" +
-	"updated_at\x18\x03 \x01(\x03H\x02R\tupdatedAt\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\x04 \x01(\rH\x03R\x06status\x88\x01\x01\x12\x17\n" +
-	"\x04name\x18\x05 \x01(\tH\x04R\x04name\x88\x01\x01\x12\x17\n" +
-	"\x04code\x18\x06 \x01(\tH\x05R\x04code\x88\x01\x01\x12\x1e\n" +
-	"\badmin_id\x18\a \x01(\x03H\x06R\aadminId\x88\x01\x01\x12 \n" +
-	"\tparent_id\x18\b \x01(\x03H\aR\bparentId\x88\x01\x01B\x05\n" +
-	"\x03_idB\r\n" +
-	"\v_created_atB\r\n" +
-	"\v_updated_atB\t\n" +
+	"TenantInfo\x12\x1b\n" +
+	"\x06status\x18\x04 \x01(\rH\x00R\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x05 \x01(\tH\x01R\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x06 \x01(\tH\x02R\x04code\x88\x01\x01\x12\x1e\n" +
+	"\badmin_id\x18\a \x01(\x03H\x03R\aadminId\x88\x01\x01\x12 \n" +
+	"\tparent_id\x18\b \x01(\x03H\x04R\bparentId\x88\x01\x01\x12&\n" +
+	"\fcompany_name\x18\t \x01(\tH\x05R\vcompanyName\x88\x01\x01\x12*\n" +
+	"\x0elicense_number\x18\n" +
+	" \x01(\tH\x06R\rlicenseNumber\x88\x01\x01\x12\x1d\n" +
+	"\aaddress\x18\v \x01(\tH\aR\aaddress\x88\x01\x01\x12\x19\n" +
+	"\x05intro\x18\f \x01(\tH\bR\x05intro\x88\x01\x01\x12\x1b\n" +
+	"\x06domain\x18\r \x01(\tH\tR\x06domain\x88\x01\x01\x12\x19\n" +
+	"\x05level\x18\x0e \x01(\rH\n" +
+	"R\x05level\x88\x01\x01\x12\x1c\n" +
+	"\aplan_id\x18\x0f \x01(\x03H\vR\x06planId\x88\x01\x01\x12(\n" +
+	"\rcontact_phone\x18\x10 \x01(\tH\fR\fcontactPhone\x88\x01\x01\x12(\n" +
+	"\rcontact_email\x18\x11 \x01(\tH\rR\fcontactEmail\x88\x01\x01B\t\n" +
 	"\a_statusB\a\n" +
 	"\x05_nameB\a\n" +
 	"\x05_codeB\v\n" +
 	"\t_admin_idB\f\n" +
 	"\n" +
-	"_parent_id\"\xa2\x03\n" +
+	"_parent_idB\x0f\n" +
+	"\r_company_nameB\x11\n" +
+	"\x0f_license_numberB\n" +
+	"\n" +
+	"\b_addressB\b\n" +
+	"\x06_introB\t\n" +
+	"\a_domainB\b\n" +
+	"\x06_levelB\n" +
+	"\n" +
+	"\b_plan_idB\x10\n" +
+	"\x0e_contact_phoneB\x10\n" +
+	"\x0e_contact_email\"\xa2\x03\n" +
 	"\rTenantListReq\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x04R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x04R\bpageSize\x12\"\n" +

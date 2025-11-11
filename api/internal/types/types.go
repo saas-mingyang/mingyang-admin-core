@@ -1723,12 +1723,39 @@ type TenantInfo struct {
 	// max length : 50
 	Name *string `json:"name,optional" validate:"omitempty,min=1,max=50"`
 	// Leader | 部门负责人
-	AdminId *uint64 `json:"adminId,optional"`
+	AdminId *int64 `json:"adminId,optional"`
 	// Phone | 电话号码
 	// max length : 128
 	Code *string `json:"code,optional" validate:"omitempty,max=128"`
 	// ParentId | 父级 ID
-	ParentId *uint64 `json:"parentId,optional"`
+	ParentId *int64 `json:"parentId,optional"`
+	// Company_name | 公司名称，不能为空
+	// min length : 1
+	// max length : 50
+	CompanyName *string `json:"companyName,optional" validate:"omitempty,min=1,max=50"`
+	// LicenseNumber | 企业社会信用代码
+	// max length : 255
+	LicenseNumber *string `json:"licenseNumber,optional" validate:"omitempty,max=255"`
+	// Address | 地址
+	// max length : 255
+	Address *string `json:"address,optional" validate:"omitempty,max=255"`
+	// Intro | 简介
+	// max length : 255
+	Intro *string `json:"intro,optional" validate:"omitempty,max=255"`
+	// Logo | logo
+	// max length : 255
+	Domain *string `json:"domain,optional" validate:"omitempty,max=255"`
+	// Level | 层级
+	// max : 20
+	Level *uint32 `json:"level,optional" validate:"omitempty,lt=20"`
+	// PlanId | 套餐计划id
+	PlanId *int64 `json:"planId,optional"`
+	// ContactPhone | 联系人手机号
+	// max length : 20
+	ContactPhone *string `json:"contactPhone,optional" validate:"omitempty,max=20"`
+	// ContactEmail | 联系人邮箱
+	// max length : 255
+	ContactEmail *string `json:"contactEmail,optional" validate:"omitempty,max=255"`
 }
 
 // The response data of tenant list | 部门列表数据

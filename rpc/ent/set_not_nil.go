@@ -2285,7 +2285,7 @@ func (_m *TenantCreate) SetNotNilDomain(value *string) *TenantCreate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *TenantUpdate) SetNotNilLevel(value *int) *TenantUpdate {
+func (_m *TenantUpdate) SetNotNilLevel(value *uint32) *TenantUpdate {
 	if value != nil {
 		return _m.SetLevel(*value)
 	}
@@ -2293,7 +2293,7 @@ func (_m *TenantUpdate) SetNotNilLevel(value *int) *TenantUpdate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *TenantUpdateOne) SetNotNilLevel(value *int) *TenantUpdateOne {
+func (_m *TenantUpdateOne) SetNotNilLevel(value *uint32) *TenantUpdateOne {
 	if value != nil {
 		return _m.SetLevel(*value)
 	}
@@ -2301,7 +2301,7 @@ func (_m *TenantUpdateOne) SetNotNilLevel(value *int) *TenantUpdateOne {
 }
 
 // set field if value's pointer is not nil.
-func (_m *TenantCreate) SetNotNilLevel(value *int) *TenantCreate {
+func (_m *TenantCreate) SetNotNilLevel(value *uint32) *TenantCreate {
 	if value != nil {
 		return _m.SetLevel(*value)
 	}

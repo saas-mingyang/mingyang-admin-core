@@ -12,16 +12,43 @@ type (
         Name *string `json:"name,optional" validate:"omitempty,min=1,max=50"`
 
         // Leader | 部门负责人
-        AdminId *uint64 `json:"adminId,optional"`
+        AdminId *int64 `json:"adminId,optional"`
 
         // Phone | 电话号码
         Code *string `json:"code,optional" validate:"omitempty,max=128"`
 
         // ParentId | 父级 ID
-        ParentId *uint64 `json:"parentId,optional"`
+        ParentId *int64 `json:"parentId,optional"`
+
+        // Company_name | 公司名称，不能为空
+        CompanyName *string `json:"companyName,optional" validate:"omitempty,min=1,max=50"`
+
+        // LicenseNumber | 企业社会信用代码
+        LicenseNumber *string `json:"licenseNumber,optional" validate:"omitempty,max=255"`
+
+        // Address | 地址
+        Address *string `json:"address,optional" validate:"omitempty,max=255"`
+
+        // Intro | 简介
+        Intro *string `json:"intro,optional" validate:"omitempty,max=255"`
+
+        // Logo | logo
+        Domain *string `json:"domain,optional" validate:"omitempty,max=255"`
+
+        // Level | 层级
+        Level *uint32 `json:"level,optional" validate:"omitempty,lt=20"`
+
+        // PlanId | 套餐计划id
+        PlanId *int64 `json:"planId,optional"`
+
+        // ContactPhone | 联系人手机号
+        ContactPhone *string `json:"contactPhone,optional" validate:"omitempty,max=20"`
+
+        // ContactEmail | 联系人邮箱
+        ContactEmail *string `json:"contactEmail,optional" validate:"omitempty,max=255"`
     }
 
-    // The response data of tenant list | 部门列表数据
+        // The response data of tenant list | 部门列表数据
     TenantListResp {
         BaseDataInfo
 
@@ -29,15 +56,15 @@ type (
         Data TenantListInfo `json:"data"`
     }
 
-    // Tenant list data | 部门列表数据
+        // Tenant list data | 部门列表数据
     TenantListInfo {
         BaseListInfo
 
         // The API list data | 部门列表数据
-        Data  []TenantInfo  `json:"data"`
+        Data []TenantInfo `json:"data"`
     }
 
-    // Get tenant list request params | 部门列表请求参数
+        // Get tenant list request params | 部门列表请求参数
     TenantListReq {
         PageInfo
 
@@ -51,7 +78,7 @@ type (
         Status *uint32 `json:"status,optional" validate:"omitempty,lt=20"`
     }
 
-    // Tenant information response | 部门信息返回体
+        // Tenant information response | 部门信息返回体
     TenantInfoResp {
         BaseDataInfo
 

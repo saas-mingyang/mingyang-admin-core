@@ -7416,10 +7416,16 @@
       "description": "The response data of tenant information | 部门信息",
       "type": "object",
       "properties": {
+        "address": {
+          "description": "Address | 地址",
+          "type": "string",
+          "maxLength": 255,
+          "x-go-name": "Address"
+        },
         "adminId": {
           "description": "Leader | 部门负责人",
           "type": "integer",
-          "format": "uint64",
+          "format": "int64",
           "x-go-name": "AdminId"
         },
         "code": {
@@ -7428,17 +7434,49 @@
           "maxLength": 128,
           "x-go-name": "Code"
         },
+        "companyName": {
+          "description": "Company_name | 公司名称，不能为空",
+          "type": "string",
+          "maxLength": 50,
+          "minLength": 1,
+          "x-go-name": "CompanyName"
+        },
         "createdAt": {
           "description": "Create date | 创建日期",
           "type": "integer",
           "format": "int64",
           "x-go-name": "CreatedAt"
         },
+        "domain": {
+          "description": "Logo | logo",
+          "type": "string",
+          "maxLength": 255,
+          "x-go-name": "Domain"
+        },
         "id": {
           "description": "ID",
           "type": "integer",
           "format": "uint64",
           "x-go-name": "Id"
+        },
+        "intro": {
+          "description": "Intro | 简介",
+          "type": "string",
+          "maxLength": 255,
+          "x-go-name": "Intro"
+        },
+        "level": {
+          "description": "Level | 层级",
+          "type": "integer",
+          "format": "uint32",
+          "maximum": 20,
+          "x-go-name": "Level"
+        },
+        "licenseNumber": {
+          "description": "LicenseNumber | 企业社会信用代码",
+          "type": "string",
+          "maxLength": 255,
+          "x-go-name": "LicenseNumber"
         },
         "name": {
           "description": "Name | 部门名称",
@@ -7450,8 +7488,14 @@
         "parentId": {
           "description": "ParentId | 父级 ID",
           "type": "integer",
-          "format": "uint64",
+          "format": "int64",
           "x-go-name": "ParentId"
+        },
+        "planId": {
+          "description": "PlanId | 套餐计划id",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "PlanId"
         },
         "status": {
           "description": "Status | 状态",

@@ -86,9 +86,25 @@ func (_c *TenantCreate) SetContactEmail(v string) *TenantCreate {
 	return _c
 }
 
+// SetNillableContactEmail sets the "contact_email" field if the given value is not nil.
+func (_c *TenantCreate) SetNillableContactEmail(v *string) *TenantCreate {
+	if v != nil {
+		_c.SetContactEmail(*v)
+	}
+	return _c
+}
+
 // SetCompanyName sets the "company_name" field.
 func (_c *TenantCreate) SetCompanyName(v string) *TenantCreate {
 	_c.mutation.SetCompanyName(v)
+	return _c
+}
+
+// SetNillableCompanyName sets the "company_name" field if the given value is not nil.
+func (_c *TenantCreate) SetNillableCompanyName(v *string) *TenantCreate {
+	if v != nil {
+		_c.SetCompanyName(*v)
+	}
 	return _c
 }
 
@@ -98,9 +114,25 @@ func (_c *TenantCreate) SetLicenseNumber(v string) *TenantCreate {
 	return _c
 }
 
+// SetNillableLicenseNumber sets the "license_number" field if the given value is not nil.
+func (_c *TenantCreate) SetNillableLicenseNumber(v *string) *TenantCreate {
+	if v != nil {
+		_c.SetLicenseNumber(*v)
+	}
+	return _c
+}
+
 // SetAddress sets the "address" field.
 func (_c *TenantCreate) SetAddress(v string) *TenantCreate {
 	_c.mutation.SetAddress(v)
+	return _c
+}
+
+// SetNillableAddress sets the "address" field if the given value is not nil.
+func (_c *TenantCreate) SetNillableAddress(v *string) *TenantCreate {
+	if v != nil {
+		_c.SetAddress(*v)
+	}
 	return _c
 }
 
@@ -110,14 +142,30 @@ func (_c *TenantCreate) SetIntro(v string) *TenantCreate {
 	return _c
 }
 
+// SetNillableIntro sets the "intro" field if the given value is not nil.
+func (_c *TenantCreate) SetNillableIntro(v *string) *TenantCreate {
+	if v != nil {
+		_c.SetIntro(*v)
+	}
+	return _c
+}
+
 // SetDomain sets the "domain" field.
 func (_c *TenantCreate) SetDomain(v string) *TenantCreate {
 	_c.mutation.SetDomain(v)
 	return _c
 }
 
+// SetNillableDomain sets the "domain" field if the given value is not nil.
+func (_c *TenantCreate) SetNillableDomain(v *string) *TenantCreate {
+	if v != nil {
+		_c.SetDomain(*v)
+	}
+	return _c
+}
+
 // SetLevel sets the "level" field.
-func (_c *TenantCreate) SetLevel(v int) *TenantCreate {
+func (_c *TenantCreate) SetLevel(v uint32) *TenantCreate {
 	_c.mutation.SetLevel(v)
 	return _c
 }
@@ -142,9 +190,25 @@ func (_c *TenantCreate) SetAdminID(v int64) *TenantCreate {
 	return _c
 }
 
+// SetNillableAdminID sets the "admin_id" field if the given value is not nil.
+func (_c *TenantCreate) SetNillableAdminID(v *int64) *TenantCreate {
+	if v != nil {
+		_c.SetAdminID(*v)
+	}
+	return _c
+}
+
 // SetParentID sets the "parent_id" field.
 func (_c *TenantCreate) SetParentID(v int64) *TenantCreate {
 	_c.mutation.SetParentID(v)
+	return _c
+}
+
+// SetNillableParentID sets the "parent_id" field if the given value is not nil.
+func (_c *TenantCreate) SetNillableParentID(v *int64) *TenantCreate {
+	if v != nil {
+		_c.SetParentID(*v)
+	}
 	return _c
 }
 
@@ -242,41 +306,12 @@ func (_c *TenantCreate) check() error {
 	if _, ok := _c.mutation.ContactPhone(); !ok {
 		return &ValidationError{Name: "contact_phone", err: errors.New(`ent: missing required field "Tenant.contact_phone"`)}
 	}
-	if _, ok := _c.mutation.ContactEmail(); !ok {
-		return &ValidationError{Name: "contact_email", err: errors.New(`ent: missing required field "Tenant.contact_email"`)}
-	}
-	if _, ok := _c.mutation.CompanyName(); !ok {
-		return &ValidationError{Name: "company_name", err: errors.New(`ent: missing required field "Tenant.company_name"`)}
-	}
-	if _, ok := _c.mutation.LicenseNumber(); !ok {
-		return &ValidationError{Name: "license_number", err: errors.New(`ent: missing required field "Tenant.license_number"`)}
-	}
-	if _, ok := _c.mutation.Address(); !ok {
-		return &ValidationError{Name: "address", err: errors.New(`ent: missing required field "Tenant.address"`)}
-	}
-	if _, ok := _c.mutation.Intro(); !ok {
-		return &ValidationError{Name: "intro", err: errors.New(`ent: missing required field "Tenant.intro"`)}
-	}
-	if _, ok := _c.mutation.Domain(); !ok {
-		return &ValidationError{Name: "domain", err: errors.New(`ent: missing required field "Tenant.domain"`)}
-	}
 	if _, ok := _c.mutation.Level(); !ok {
 		return &ValidationError{Name: "level", err: errors.New(`ent: missing required field "Tenant.level"`)}
-	}
-	if _, ok := _c.mutation.AdminID(); !ok {
-		return &ValidationError{Name: "admin_id", err: errors.New(`ent: missing required field "Tenant.admin_id"`)}
 	}
 	if v, ok := _c.mutation.AdminID(); ok {
 		if err := tenant.AdminIDValidator(v); err != nil {
 			return &ValidationError{Name: "admin_id", err: fmt.Errorf(`ent: validator failed for field "Tenant.admin_id": %w`, err)}
-		}
-	}
-	if _, ok := _c.mutation.ParentID(); !ok {
-		return &ValidationError{Name: "parent_id", err: errors.New(`ent: missing required field "Tenant.parent_id"`)}
-	}
-	if v, ok := _c.mutation.ParentID(); ok {
-		if err := tenant.ParentIDValidator(v); err != nil {
-			return &ValidationError{Name: "parent_id", err: fmt.Errorf(`ent: validator failed for field "Tenant.parent_id": %w`, err)}
 		}
 	}
 	return nil
@@ -360,7 +395,7 @@ func (_c *TenantCreate) createSpec() (*Tenant, *sqlgraph.CreateSpec) {
 		_node.Domain = value
 	}
 	if value, ok := _c.mutation.Level(); ok {
-		_spec.SetField(tenant.FieldLevel, field.TypeInt, value)
+		_spec.SetField(tenant.FieldLevel, field.TypeUint32, value)
 		_node.Level = value
 	}
 	if value, ok := _c.mutation.PlanID(); ok {

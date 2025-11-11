@@ -118,6 +118,12 @@ func (_u *TenantUpdate) SetNillableContactEmail(v *string) *TenantUpdate {
 	return _u
 }
 
+// ClearContactEmail clears the value of the "contact_email" field.
+func (_u *TenantUpdate) ClearContactEmail() *TenantUpdate {
+	_u.mutation.ClearContactEmail()
+	return _u
+}
+
 // SetCompanyName sets the "company_name" field.
 func (_u *TenantUpdate) SetCompanyName(v string) *TenantUpdate {
 	_u.mutation.SetCompanyName(v)
@@ -129,6 +135,12 @@ func (_u *TenantUpdate) SetNillableCompanyName(v *string) *TenantUpdate {
 	if v != nil {
 		_u.SetCompanyName(*v)
 	}
+	return _u
+}
+
+// ClearCompanyName clears the value of the "company_name" field.
+func (_u *TenantUpdate) ClearCompanyName() *TenantUpdate {
+	_u.mutation.ClearCompanyName()
 	return _u
 }
 
@@ -146,6 +158,12 @@ func (_u *TenantUpdate) SetNillableLicenseNumber(v *string) *TenantUpdate {
 	return _u
 }
 
+// ClearLicenseNumber clears the value of the "license_number" field.
+func (_u *TenantUpdate) ClearLicenseNumber() *TenantUpdate {
+	_u.mutation.ClearLicenseNumber()
+	return _u
+}
+
 // SetAddress sets the "address" field.
 func (_u *TenantUpdate) SetAddress(v string) *TenantUpdate {
 	_u.mutation.SetAddress(v)
@@ -157,6 +175,12 @@ func (_u *TenantUpdate) SetNillableAddress(v *string) *TenantUpdate {
 	if v != nil {
 		_u.SetAddress(*v)
 	}
+	return _u
+}
+
+// ClearAddress clears the value of the "address" field.
+func (_u *TenantUpdate) ClearAddress() *TenantUpdate {
+	_u.mutation.ClearAddress()
 	return _u
 }
 
@@ -174,6 +198,12 @@ func (_u *TenantUpdate) SetNillableIntro(v *string) *TenantUpdate {
 	return _u
 }
 
+// ClearIntro clears the value of the "intro" field.
+func (_u *TenantUpdate) ClearIntro() *TenantUpdate {
+	_u.mutation.ClearIntro()
+	return _u
+}
+
 // SetDomain sets the "domain" field.
 func (_u *TenantUpdate) SetDomain(v string) *TenantUpdate {
 	_u.mutation.SetDomain(v)
@@ -188,15 +218,21 @@ func (_u *TenantUpdate) SetNillableDomain(v *string) *TenantUpdate {
 	return _u
 }
 
+// ClearDomain clears the value of the "domain" field.
+func (_u *TenantUpdate) ClearDomain() *TenantUpdate {
+	_u.mutation.ClearDomain()
+	return _u
+}
+
 // SetLevel sets the "level" field.
-func (_u *TenantUpdate) SetLevel(v int) *TenantUpdate {
+func (_u *TenantUpdate) SetLevel(v uint32) *TenantUpdate {
 	_u.mutation.ResetLevel()
 	_u.mutation.SetLevel(v)
 	return _u
 }
 
 // SetNillableLevel sets the "level" field if the given value is not nil.
-func (_u *TenantUpdate) SetNillableLevel(v *int) *TenantUpdate {
+func (_u *TenantUpdate) SetNillableLevel(v *uint32) *TenantUpdate {
 	if v != nil {
 		_u.SetLevel(*v)
 	}
@@ -204,7 +240,7 @@ func (_u *TenantUpdate) SetNillableLevel(v *int) *TenantUpdate {
 }
 
 // AddLevel adds value to the "level" field.
-func (_u *TenantUpdate) AddLevel(v int) *TenantUpdate {
+func (_u *TenantUpdate) AddLevel(v int32) *TenantUpdate {
 	_u.mutation.AddLevel(v)
 	return _u
 }
@@ -257,6 +293,12 @@ func (_u *TenantUpdate) AddAdminID(v int64) *TenantUpdate {
 	return _u
 }
 
+// ClearAdminID clears the value of the "admin_id" field.
+func (_u *TenantUpdate) ClearAdminID() *TenantUpdate {
+	_u.mutation.ClearAdminID()
+	return _u
+}
+
 // SetParentID sets the "parent_id" field.
 func (_u *TenantUpdate) SetParentID(v int64) *TenantUpdate {
 	_u.mutation.ResetParentID()
@@ -275,6 +317,12 @@ func (_u *TenantUpdate) SetNillableParentID(v *int64) *TenantUpdate {
 // AddParentID adds value to the "parent_id" field.
 func (_u *TenantUpdate) AddParentID(v int64) *TenantUpdate {
 	_u.mutation.AddParentID(v)
+	return _u
+}
+
+// ClearParentID clears the value of the "parent_id" field.
+func (_u *TenantUpdate) ClearParentID() *TenantUpdate {
+	_u.mutation.ClearParentID()
 	return _u
 }
 
@@ -336,11 +384,6 @@ func (_u *TenantUpdate) check() error {
 			return &ValidationError{Name: "admin_id", err: fmt.Errorf(`ent: validator failed for field "Tenant.admin_id": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.ParentID(); ok {
-		if err := tenant.ParentIDValidator(v); err != nil {
-			return &ValidationError{Name: "parent_id", err: fmt.Errorf(`ent: validator failed for field "Tenant.parent_id": %w`, err)}
-		}
-	}
 	return nil
 }
 
@@ -386,26 +429,44 @@ func (_u *TenantUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 	if value, ok := _u.mutation.ContactEmail(); ok {
 		_spec.SetField(tenant.FieldContactEmail, field.TypeString, value)
 	}
+	if _u.mutation.ContactEmailCleared() {
+		_spec.ClearField(tenant.FieldContactEmail, field.TypeString)
+	}
 	if value, ok := _u.mutation.CompanyName(); ok {
 		_spec.SetField(tenant.FieldCompanyName, field.TypeString, value)
+	}
+	if _u.mutation.CompanyNameCleared() {
+		_spec.ClearField(tenant.FieldCompanyName, field.TypeString)
 	}
 	if value, ok := _u.mutation.LicenseNumber(); ok {
 		_spec.SetField(tenant.FieldLicenseNumber, field.TypeString, value)
 	}
+	if _u.mutation.LicenseNumberCleared() {
+		_spec.ClearField(tenant.FieldLicenseNumber, field.TypeString)
+	}
 	if value, ok := _u.mutation.Address(); ok {
 		_spec.SetField(tenant.FieldAddress, field.TypeString, value)
+	}
+	if _u.mutation.AddressCleared() {
+		_spec.ClearField(tenant.FieldAddress, field.TypeString)
 	}
 	if value, ok := _u.mutation.Intro(); ok {
 		_spec.SetField(tenant.FieldIntro, field.TypeString, value)
 	}
+	if _u.mutation.IntroCleared() {
+		_spec.ClearField(tenant.FieldIntro, field.TypeString)
+	}
 	if value, ok := _u.mutation.Domain(); ok {
 		_spec.SetField(tenant.FieldDomain, field.TypeString, value)
 	}
+	if _u.mutation.DomainCleared() {
+		_spec.ClearField(tenant.FieldDomain, field.TypeString)
+	}
 	if value, ok := _u.mutation.Level(); ok {
-		_spec.SetField(tenant.FieldLevel, field.TypeInt, value)
+		_spec.SetField(tenant.FieldLevel, field.TypeUint32, value)
 	}
 	if value, ok := _u.mutation.AddedLevel(); ok {
-		_spec.AddField(tenant.FieldLevel, field.TypeInt, value)
+		_spec.AddField(tenant.FieldLevel, field.TypeUint32, value)
 	}
 	if value, ok := _u.mutation.PlanID(); ok {
 		_spec.SetField(tenant.FieldPlanID, field.TypeInt64, value)
@@ -422,11 +483,17 @@ func (_u *TenantUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 	if value, ok := _u.mutation.AddedAdminID(); ok {
 		_spec.AddField(tenant.FieldAdminID, field.TypeInt64, value)
 	}
+	if _u.mutation.AdminIDCleared() {
+		_spec.ClearField(tenant.FieldAdminID, field.TypeInt64)
+	}
 	if value, ok := _u.mutation.ParentID(); ok {
 		_spec.SetField(tenant.FieldParentID, field.TypeInt64, value)
 	}
 	if value, ok := _u.mutation.AddedParentID(); ok {
 		_spec.AddField(tenant.FieldParentID, field.TypeInt64, value)
+	}
+	if _u.mutation.ParentIDCleared() {
+		_spec.ClearField(tenant.FieldParentID, field.TypeInt64)
 	}
 	_spec.AddModifiers(_u.modifiers...)
 	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
@@ -539,6 +606,12 @@ func (_u *TenantUpdateOne) SetNillableContactEmail(v *string) *TenantUpdateOne {
 	return _u
 }
 
+// ClearContactEmail clears the value of the "contact_email" field.
+func (_u *TenantUpdateOne) ClearContactEmail() *TenantUpdateOne {
+	_u.mutation.ClearContactEmail()
+	return _u
+}
+
 // SetCompanyName sets the "company_name" field.
 func (_u *TenantUpdateOne) SetCompanyName(v string) *TenantUpdateOne {
 	_u.mutation.SetCompanyName(v)
@@ -550,6 +623,12 @@ func (_u *TenantUpdateOne) SetNillableCompanyName(v *string) *TenantUpdateOne {
 	if v != nil {
 		_u.SetCompanyName(*v)
 	}
+	return _u
+}
+
+// ClearCompanyName clears the value of the "company_name" field.
+func (_u *TenantUpdateOne) ClearCompanyName() *TenantUpdateOne {
+	_u.mutation.ClearCompanyName()
 	return _u
 }
 
@@ -567,6 +646,12 @@ func (_u *TenantUpdateOne) SetNillableLicenseNumber(v *string) *TenantUpdateOne 
 	return _u
 }
 
+// ClearLicenseNumber clears the value of the "license_number" field.
+func (_u *TenantUpdateOne) ClearLicenseNumber() *TenantUpdateOne {
+	_u.mutation.ClearLicenseNumber()
+	return _u
+}
+
 // SetAddress sets the "address" field.
 func (_u *TenantUpdateOne) SetAddress(v string) *TenantUpdateOne {
 	_u.mutation.SetAddress(v)
@@ -578,6 +663,12 @@ func (_u *TenantUpdateOne) SetNillableAddress(v *string) *TenantUpdateOne {
 	if v != nil {
 		_u.SetAddress(*v)
 	}
+	return _u
+}
+
+// ClearAddress clears the value of the "address" field.
+func (_u *TenantUpdateOne) ClearAddress() *TenantUpdateOne {
+	_u.mutation.ClearAddress()
 	return _u
 }
 
@@ -595,6 +686,12 @@ func (_u *TenantUpdateOne) SetNillableIntro(v *string) *TenantUpdateOne {
 	return _u
 }
 
+// ClearIntro clears the value of the "intro" field.
+func (_u *TenantUpdateOne) ClearIntro() *TenantUpdateOne {
+	_u.mutation.ClearIntro()
+	return _u
+}
+
 // SetDomain sets the "domain" field.
 func (_u *TenantUpdateOne) SetDomain(v string) *TenantUpdateOne {
 	_u.mutation.SetDomain(v)
@@ -609,15 +706,21 @@ func (_u *TenantUpdateOne) SetNillableDomain(v *string) *TenantUpdateOne {
 	return _u
 }
 
+// ClearDomain clears the value of the "domain" field.
+func (_u *TenantUpdateOne) ClearDomain() *TenantUpdateOne {
+	_u.mutation.ClearDomain()
+	return _u
+}
+
 // SetLevel sets the "level" field.
-func (_u *TenantUpdateOne) SetLevel(v int) *TenantUpdateOne {
+func (_u *TenantUpdateOne) SetLevel(v uint32) *TenantUpdateOne {
 	_u.mutation.ResetLevel()
 	_u.mutation.SetLevel(v)
 	return _u
 }
 
 // SetNillableLevel sets the "level" field if the given value is not nil.
-func (_u *TenantUpdateOne) SetNillableLevel(v *int) *TenantUpdateOne {
+func (_u *TenantUpdateOne) SetNillableLevel(v *uint32) *TenantUpdateOne {
 	if v != nil {
 		_u.SetLevel(*v)
 	}
@@ -625,7 +728,7 @@ func (_u *TenantUpdateOne) SetNillableLevel(v *int) *TenantUpdateOne {
 }
 
 // AddLevel adds value to the "level" field.
-func (_u *TenantUpdateOne) AddLevel(v int) *TenantUpdateOne {
+func (_u *TenantUpdateOne) AddLevel(v int32) *TenantUpdateOne {
 	_u.mutation.AddLevel(v)
 	return _u
 }
@@ -678,6 +781,12 @@ func (_u *TenantUpdateOne) AddAdminID(v int64) *TenantUpdateOne {
 	return _u
 }
 
+// ClearAdminID clears the value of the "admin_id" field.
+func (_u *TenantUpdateOne) ClearAdminID() *TenantUpdateOne {
+	_u.mutation.ClearAdminID()
+	return _u
+}
+
 // SetParentID sets the "parent_id" field.
 func (_u *TenantUpdateOne) SetParentID(v int64) *TenantUpdateOne {
 	_u.mutation.ResetParentID()
@@ -696,6 +805,12 @@ func (_u *TenantUpdateOne) SetNillableParentID(v *int64) *TenantUpdateOne {
 // AddParentID adds value to the "parent_id" field.
 func (_u *TenantUpdateOne) AddParentID(v int64) *TenantUpdateOne {
 	_u.mutation.AddParentID(v)
+	return _u
+}
+
+// ClearParentID clears the value of the "parent_id" field.
+func (_u *TenantUpdateOne) ClearParentID() *TenantUpdateOne {
+	_u.mutation.ClearParentID()
 	return _u
 }
 
@@ -770,11 +885,6 @@ func (_u *TenantUpdateOne) check() error {
 			return &ValidationError{Name: "admin_id", err: fmt.Errorf(`ent: validator failed for field "Tenant.admin_id": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.ParentID(); ok {
-		if err := tenant.ParentIDValidator(v); err != nil {
-			return &ValidationError{Name: "parent_id", err: fmt.Errorf(`ent: validator failed for field "Tenant.parent_id": %w`, err)}
-		}
-	}
 	return nil
 }
 
@@ -837,26 +947,44 @@ func (_u *TenantUpdateOne) sqlSave(ctx context.Context) (_node *Tenant, err erro
 	if value, ok := _u.mutation.ContactEmail(); ok {
 		_spec.SetField(tenant.FieldContactEmail, field.TypeString, value)
 	}
+	if _u.mutation.ContactEmailCleared() {
+		_spec.ClearField(tenant.FieldContactEmail, field.TypeString)
+	}
 	if value, ok := _u.mutation.CompanyName(); ok {
 		_spec.SetField(tenant.FieldCompanyName, field.TypeString, value)
+	}
+	if _u.mutation.CompanyNameCleared() {
+		_spec.ClearField(tenant.FieldCompanyName, field.TypeString)
 	}
 	if value, ok := _u.mutation.LicenseNumber(); ok {
 		_spec.SetField(tenant.FieldLicenseNumber, field.TypeString, value)
 	}
+	if _u.mutation.LicenseNumberCleared() {
+		_spec.ClearField(tenant.FieldLicenseNumber, field.TypeString)
+	}
 	if value, ok := _u.mutation.Address(); ok {
 		_spec.SetField(tenant.FieldAddress, field.TypeString, value)
+	}
+	if _u.mutation.AddressCleared() {
+		_spec.ClearField(tenant.FieldAddress, field.TypeString)
 	}
 	if value, ok := _u.mutation.Intro(); ok {
 		_spec.SetField(tenant.FieldIntro, field.TypeString, value)
 	}
+	if _u.mutation.IntroCleared() {
+		_spec.ClearField(tenant.FieldIntro, field.TypeString)
+	}
 	if value, ok := _u.mutation.Domain(); ok {
 		_spec.SetField(tenant.FieldDomain, field.TypeString, value)
 	}
+	if _u.mutation.DomainCleared() {
+		_spec.ClearField(tenant.FieldDomain, field.TypeString)
+	}
 	if value, ok := _u.mutation.Level(); ok {
-		_spec.SetField(tenant.FieldLevel, field.TypeInt, value)
+		_spec.SetField(tenant.FieldLevel, field.TypeUint32, value)
 	}
 	if value, ok := _u.mutation.AddedLevel(); ok {
-		_spec.AddField(tenant.FieldLevel, field.TypeInt, value)
+		_spec.AddField(tenant.FieldLevel, field.TypeUint32, value)
 	}
 	if value, ok := _u.mutation.PlanID(); ok {
 		_spec.SetField(tenant.FieldPlanID, field.TypeInt64, value)
@@ -873,11 +1001,17 @@ func (_u *TenantUpdateOne) sqlSave(ctx context.Context) (_node *Tenant, err erro
 	if value, ok := _u.mutation.AddedAdminID(); ok {
 		_spec.AddField(tenant.FieldAdminID, field.TypeInt64, value)
 	}
+	if _u.mutation.AdminIDCleared() {
+		_spec.ClearField(tenant.FieldAdminID, field.TypeInt64)
+	}
 	if value, ok := _u.mutation.ParentID(); ok {
 		_spec.SetField(tenant.FieldParentID, field.TypeInt64, value)
 	}
 	if value, ok := _u.mutation.AddedParentID(); ok {
 		_spec.AddField(tenant.FieldParentID, field.TypeInt64, value)
+	}
+	if _u.mutation.ParentIDCleared() {
+		_spec.ClearField(tenant.FieldParentID, field.TypeInt64)
 	}
 	_spec.AddModifiers(_u.modifiers...)
 	_node = &Tenant{config: _u.config}

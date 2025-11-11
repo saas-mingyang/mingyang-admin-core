@@ -443,10 +443,6 @@ func init() {
 	tenantDescAdminID := tenantFields[11].Descriptor()
 	// tenant.AdminIDValidator is a validator for the "admin_id" field. It is called by the builders before save.
 	tenant.AdminIDValidator = tenantDescAdminID.Validators[0].(func(int64) error)
-	// tenantDescParentID is the schema descriptor for parent_id field.
-	tenantDescParentID := tenantFields[12].Descriptor()
-	// tenant.ParentIDValidator is a validator for the "parent_id" field. It is called by the builders before save.
-	tenant.ParentIDValidator = tenantDescParentID.Validators[0].(func(int64) error)
 	// tenantDescID is the schema descriptor for id field.
 	tenantDescID := tenantMixinFields0[0].Descriptor()
 	// tenant.DefaultID holds the default value on creation for the id field.

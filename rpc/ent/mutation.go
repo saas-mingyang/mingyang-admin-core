@@ -10022,8 +10022,8 @@ type TenantMutation struct {
 	address        *string
 	intro          *string
 	domain         *string
-	level          *int
-	addlevel       *int
+	level          *uint32
+	addlevel       *int32
 	plan_id        *int64
 	addplan_id     *int64
 	admin_id       *int64
@@ -10421,9 +10421,22 @@ func (m *TenantMutation) OldContactEmail(ctx context.Context) (v string, err err
 	return oldValue.ContactEmail, nil
 }
 
+// ClearContactEmail clears the value of the "contact_email" field.
+func (m *TenantMutation) ClearContactEmail() {
+	m.contact_email = nil
+	m.clearedFields[tenant.FieldContactEmail] = struct{}{}
+}
+
+// ContactEmailCleared returns if the "contact_email" field was cleared in this mutation.
+func (m *TenantMutation) ContactEmailCleared() bool {
+	_, ok := m.clearedFields[tenant.FieldContactEmail]
+	return ok
+}
+
 // ResetContactEmail resets all changes to the "contact_email" field.
 func (m *TenantMutation) ResetContactEmail() {
 	m.contact_email = nil
+	delete(m.clearedFields, tenant.FieldContactEmail)
 }
 
 // SetCompanyName sets the "company_name" field.
@@ -10457,9 +10470,22 @@ func (m *TenantMutation) OldCompanyName(ctx context.Context) (v string, err erro
 	return oldValue.CompanyName, nil
 }
 
+// ClearCompanyName clears the value of the "company_name" field.
+func (m *TenantMutation) ClearCompanyName() {
+	m.company_name = nil
+	m.clearedFields[tenant.FieldCompanyName] = struct{}{}
+}
+
+// CompanyNameCleared returns if the "company_name" field was cleared in this mutation.
+func (m *TenantMutation) CompanyNameCleared() bool {
+	_, ok := m.clearedFields[tenant.FieldCompanyName]
+	return ok
+}
+
 // ResetCompanyName resets all changes to the "company_name" field.
 func (m *TenantMutation) ResetCompanyName() {
 	m.company_name = nil
+	delete(m.clearedFields, tenant.FieldCompanyName)
 }
 
 // SetLicenseNumber sets the "license_number" field.
@@ -10493,9 +10519,22 @@ func (m *TenantMutation) OldLicenseNumber(ctx context.Context) (v string, err er
 	return oldValue.LicenseNumber, nil
 }
 
+// ClearLicenseNumber clears the value of the "license_number" field.
+func (m *TenantMutation) ClearLicenseNumber() {
+	m.license_number = nil
+	m.clearedFields[tenant.FieldLicenseNumber] = struct{}{}
+}
+
+// LicenseNumberCleared returns if the "license_number" field was cleared in this mutation.
+func (m *TenantMutation) LicenseNumberCleared() bool {
+	_, ok := m.clearedFields[tenant.FieldLicenseNumber]
+	return ok
+}
+
 // ResetLicenseNumber resets all changes to the "license_number" field.
 func (m *TenantMutation) ResetLicenseNumber() {
 	m.license_number = nil
+	delete(m.clearedFields, tenant.FieldLicenseNumber)
 }
 
 // SetAddress sets the "address" field.
@@ -10529,9 +10568,22 @@ func (m *TenantMutation) OldAddress(ctx context.Context) (v string, err error) {
 	return oldValue.Address, nil
 }
 
+// ClearAddress clears the value of the "address" field.
+func (m *TenantMutation) ClearAddress() {
+	m.address = nil
+	m.clearedFields[tenant.FieldAddress] = struct{}{}
+}
+
+// AddressCleared returns if the "address" field was cleared in this mutation.
+func (m *TenantMutation) AddressCleared() bool {
+	_, ok := m.clearedFields[tenant.FieldAddress]
+	return ok
+}
+
 // ResetAddress resets all changes to the "address" field.
 func (m *TenantMutation) ResetAddress() {
 	m.address = nil
+	delete(m.clearedFields, tenant.FieldAddress)
 }
 
 // SetIntro sets the "intro" field.
@@ -10565,9 +10617,22 @@ func (m *TenantMutation) OldIntro(ctx context.Context) (v string, err error) {
 	return oldValue.Intro, nil
 }
 
+// ClearIntro clears the value of the "intro" field.
+func (m *TenantMutation) ClearIntro() {
+	m.intro = nil
+	m.clearedFields[tenant.FieldIntro] = struct{}{}
+}
+
+// IntroCleared returns if the "intro" field was cleared in this mutation.
+func (m *TenantMutation) IntroCleared() bool {
+	_, ok := m.clearedFields[tenant.FieldIntro]
+	return ok
+}
+
 // ResetIntro resets all changes to the "intro" field.
 func (m *TenantMutation) ResetIntro() {
 	m.intro = nil
+	delete(m.clearedFields, tenant.FieldIntro)
 }
 
 // SetDomain sets the "domain" field.
@@ -10601,19 +10666,32 @@ func (m *TenantMutation) OldDomain(ctx context.Context) (v string, err error) {
 	return oldValue.Domain, nil
 }
 
+// ClearDomain clears the value of the "domain" field.
+func (m *TenantMutation) ClearDomain() {
+	m.domain = nil
+	m.clearedFields[tenant.FieldDomain] = struct{}{}
+}
+
+// DomainCleared returns if the "domain" field was cleared in this mutation.
+func (m *TenantMutation) DomainCleared() bool {
+	_, ok := m.clearedFields[tenant.FieldDomain]
+	return ok
+}
+
 // ResetDomain resets all changes to the "domain" field.
 func (m *TenantMutation) ResetDomain() {
 	m.domain = nil
+	delete(m.clearedFields, tenant.FieldDomain)
 }
 
 // SetLevel sets the "level" field.
-func (m *TenantMutation) SetLevel(i int) {
-	m.level = &i
+func (m *TenantMutation) SetLevel(u uint32) {
+	m.level = &u
 	m.addlevel = nil
 }
 
 // Level returns the value of the "level" field in the mutation.
-func (m *TenantMutation) Level() (r int, exists bool) {
+func (m *TenantMutation) Level() (r uint32, exists bool) {
 	v := m.level
 	if v == nil {
 		return
@@ -10624,7 +10702,7 @@ func (m *TenantMutation) Level() (r int, exists bool) {
 // OldLevel returns the old "level" field's value of the Tenant entity.
 // If the Tenant object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *TenantMutation) OldLevel(ctx context.Context) (v int, err error) {
+func (m *TenantMutation) OldLevel(ctx context.Context) (v uint32, err error) {
 	if !m.op.Is(OpUpdateOne) {
 		return v, errors.New("OldLevel is only allowed on UpdateOne operations")
 	}
@@ -10638,17 +10716,17 @@ func (m *TenantMutation) OldLevel(ctx context.Context) (v int, err error) {
 	return oldValue.Level, nil
 }
 
-// AddLevel adds i to the "level" field.
-func (m *TenantMutation) AddLevel(i int) {
+// AddLevel adds u to the "level" field.
+func (m *TenantMutation) AddLevel(u int32) {
 	if m.addlevel != nil {
-		*m.addlevel += i
+		*m.addlevel += u
 	} else {
-		m.addlevel = &i
+		m.addlevel = &u
 	}
 }
 
 // AddedLevel returns the value that was added to the "level" field in this mutation.
-func (m *TenantMutation) AddedLevel() (r int, exists bool) {
+func (m *TenantMutation) AddedLevel() (r int32, exists bool) {
 	v := m.addlevel
 	if v == nil {
 		return
@@ -10782,10 +10860,24 @@ func (m *TenantMutation) AddedAdminID() (r int64, exists bool) {
 	return *v, true
 }
 
+// ClearAdminID clears the value of the "admin_id" field.
+func (m *TenantMutation) ClearAdminID() {
+	m.admin_id = nil
+	m.addadmin_id = nil
+	m.clearedFields[tenant.FieldAdminID] = struct{}{}
+}
+
+// AdminIDCleared returns if the "admin_id" field was cleared in this mutation.
+func (m *TenantMutation) AdminIDCleared() bool {
+	_, ok := m.clearedFields[tenant.FieldAdminID]
+	return ok
+}
+
 // ResetAdminID resets all changes to the "admin_id" field.
 func (m *TenantMutation) ResetAdminID() {
 	m.admin_id = nil
 	m.addadmin_id = nil
+	delete(m.clearedFields, tenant.FieldAdminID)
 }
 
 // SetParentID sets the "parent_id" field.
@@ -10838,10 +10930,24 @@ func (m *TenantMutation) AddedParentID() (r int64, exists bool) {
 	return *v, true
 }
 
+// ClearParentID clears the value of the "parent_id" field.
+func (m *TenantMutation) ClearParentID() {
+	m.parent_id = nil
+	m.addparent_id = nil
+	m.clearedFields[tenant.FieldParentID] = struct{}{}
+}
+
+// ParentIDCleared returns if the "parent_id" field was cleared in this mutation.
+func (m *TenantMutation) ParentIDCleared() bool {
+	_, ok := m.clearedFields[tenant.FieldParentID]
+	return ok
+}
+
 // ResetParentID resets all changes to the "parent_id" field.
 func (m *TenantMutation) ResetParentID() {
 	m.parent_id = nil
 	m.addparent_id = nil
+	delete(m.clearedFields, tenant.FieldParentID)
 }
 
 // Where appends a list predicates to the TenantMutation builder.
@@ -11102,7 +11208,7 @@ func (m *TenantMutation) SetField(name string, value ent.Value) error {
 		m.SetDomain(v)
 		return nil
 	case tenant.FieldLevel:
-		v, ok := value.(int)
+		v, ok := value.(uint32)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
@@ -11187,7 +11293,7 @@ func (m *TenantMutation) AddField(name string, value ent.Value) error {
 		m.AddStatus(v)
 		return nil
 	case tenant.FieldLevel:
-		v, ok := value.(int)
+		v, ok := value.(int32)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
@@ -11225,8 +11331,32 @@ func (m *TenantMutation) ClearedFields() []string {
 	if m.FieldCleared(tenant.FieldStatus) {
 		fields = append(fields, tenant.FieldStatus)
 	}
+	if m.FieldCleared(tenant.FieldContactEmail) {
+		fields = append(fields, tenant.FieldContactEmail)
+	}
+	if m.FieldCleared(tenant.FieldCompanyName) {
+		fields = append(fields, tenant.FieldCompanyName)
+	}
+	if m.FieldCleared(tenant.FieldLicenseNumber) {
+		fields = append(fields, tenant.FieldLicenseNumber)
+	}
+	if m.FieldCleared(tenant.FieldAddress) {
+		fields = append(fields, tenant.FieldAddress)
+	}
+	if m.FieldCleared(tenant.FieldIntro) {
+		fields = append(fields, tenant.FieldIntro)
+	}
+	if m.FieldCleared(tenant.FieldDomain) {
+		fields = append(fields, tenant.FieldDomain)
+	}
 	if m.FieldCleared(tenant.FieldPlanID) {
 		fields = append(fields, tenant.FieldPlanID)
+	}
+	if m.FieldCleared(tenant.FieldAdminID) {
+		fields = append(fields, tenant.FieldAdminID)
+	}
+	if m.FieldCleared(tenant.FieldParentID) {
+		fields = append(fields, tenant.FieldParentID)
 	}
 	return fields
 }
@@ -11245,8 +11375,32 @@ func (m *TenantMutation) ClearField(name string) error {
 	case tenant.FieldStatus:
 		m.ClearStatus()
 		return nil
+	case tenant.FieldContactEmail:
+		m.ClearContactEmail()
+		return nil
+	case tenant.FieldCompanyName:
+		m.ClearCompanyName()
+		return nil
+	case tenant.FieldLicenseNumber:
+		m.ClearLicenseNumber()
+		return nil
+	case tenant.FieldAddress:
+		m.ClearAddress()
+		return nil
+	case tenant.FieldIntro:
+		m.ClearIntro()
+		return nil
+	case tenant.FieldDomain:
+		m.ClearDomain()
+		return nil
 	case tenant.FieldPlanID:
 		m.ClearPlanID()
+		return nil
+	case tenant.FieldAdminID:
+		m.ClearAdminID()
+		return nil
+	case tenant.FieldParentID:
+		m.ClearParentID()
 		return nil
 	}
 	return fmt.Errorf("unknown Tenant nullable field %s", name)
