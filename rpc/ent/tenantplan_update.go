@@ -89,6 +89,18 @@ func (_u *TenantPlanUpdate) AppendMenuIds(v []string) *TenantPlanUpdate {
 	return _u
 }
 
+// SetAPIIds sets the "api_ids" field.
+func (_u *TenantPlanUpdate) SetAPIIds(v []string) *TenantPlanUpdate {
+	_u.mutation.SetAPIIds(v)
+	return _u
+}
+
+// AppendAPIIds appends value to the "api_ids" field.
+func (_u *TenantPlanUpdate) AppendAPIIds(v []string) *TenantPlanUpdate {
+	_u.mutation.AppendAPIIds(v)
+	return _u
+}
+
 // SetRemark sets the "remark" field.
 func (_u *TenantPlanUpdate) SetRemark(v []string) *TenantPlanUpdate {
 	_u.mutation.SetRemark(v)
@@ -102,14 +114,14 @@ func (_u *TenantPlanUpdate) AppendRemark(v []string) *TenantPlanUpdate {
 }
 
 // SetMenuCheckStrictly sets the "menu_check_strictly" field.
-func (_u *TenantPlanUpdate) SetMenuCheckStrictly(v int) *TenantPlanUpdate {
+func (_u *TenantPlanUpdate) SetMenuCheckStrictly(v uint32) *TenantPlanUpdate {
 	_u.mutation.ResetMenuCheckStrictly()
 	_u.mutation.SetMenuCheckStrictly(v)
 	return _u
 }
 
 // SetNillableMenuCheckStrictly sets the "menu_check_strictly" field if the given value is not nil.
-func (_u *TenantPlanUpdate) SetNillableMenuCheckStrictly(v *int) *TenantPlanUpdate {
+func (_u *TenantPlanUpdate) SetNillableMenuCheckStrictly(v *uint32) *TenantPlanUpdate {
 	if v != nil {
 		_u.SetMenuCheckStrictly(*v)
 	}
@@ -117,7 +129,7 @@ func (_u *TenantPlanUpdate) SetNillableMenuCheckStrictly(v *int) *TenantPlanUpda
 }
 
 // AddMenuCheckStrictly adds value to the "menu_check_strictly" field.
-func (_u *TenantPlanUpdate) AddMenuCheckStrictly(v int) *TenantPlanUpdate {
+func (_u *TenantPlanUpdate) AddMenuCheckStrictly(v int32) *TenantPlanUpdate {
 	_u.mutation.AddMenuCheckStrictly(v)
 	return _u
 }
@@ -201,6 +213,14 @@ func (_u *TenantPlanUpdate) sqlSave(ctx context.Context) (_node int, err error) 
 			sqljson.Append(u, tenantplan.FieldMenuIds, value)
 		})
 	}
+	if value, ok := _u.mutation.APIIds(); ok {
+		_spec.SetField(tenantplan.FieldAPIIds, field.TypeJSON, value)
+	}
+	if value, ok := _u.mutation.AppendedAPIIds(); ok {
+		_spec.AddModifier(func(u *sql.UpdateBuilder) {
+			sqljson.Append(u, tenantplan.FieldAPIIds, value)
+		})
+	}
 	if value, ok := _u.mutation.Remark(); ok {
 		_spec.SetField(tenantplan.FieldRemark, field.TypeJSON, value)
 	}
@@ -210,10 +230,10 @@ func (_u *TenantPlanUpdate) sqlSave(ctx context.Context) (_node int, err error) 
 		})
 	}
 	if value, ok := _u.mutation.MenuCheckStrictly(); ok {
-		_spec.SetField(tenantplan.FieldMenuCheckStrictly, field.TypeInt, value)
+		_spec.SetField(tenantplan.FieldMenuCheckStrictly, field.TypeUint32, value)
 	}
 	if value, ok := _u.mutation.AddedMenuCheckStrictly(); ok {
-		_spec.AddField(tenantplan.FieldMenuCheckStrictly, field.TypeInt, value)
+		_spec.AddField(tenantplan.FieldMenuCheckStrictly, field.TypeUint32, value)
 	}
 	_spec.AddModifiers(_u.modifiers...)
 	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
@@ -296,6 +316,18 @@ func (_u *TenantPlanUpdateOne) AppendMenuIds(v []string) *TenantPlanUpdateOne {
 	return _u
 }
 
+// SetAPIIds sets the "api_ids" field.
+func (_u *TenantPlanUpdateOne) SetAPIIds(v []string) *TenantPlanUpdateOne {
+	_u.mutation.SetAPIIds(v)
+	return _u
+}
+
+// AppendAPIIds appends value to the "api_ids" field.
+func (_u *TenantPlanUpdateOne) AppendAPIIds(v []string) *TenantPlanUpdateOne {
+	_u.mutation.AppendAPIIds(v)
+	return _u
+}
+
 // SetRemark sets the "remark" field.
 func (_u *TenantPlanUpdateOne) SetRemark(v []string) *TenantPlanUpdateOne {
 	_u.mutation.SetRemark(v)
@@ -309,14 +341,14 @@ func (_u *TenantPlanUpdateOne) AppendRemark(v []string) *TenantPlanUpdateOne {
 }
 
 // SetMenuCheckStrictly sets the "menu_check_strictly" field.
-func (_u *TenantPlanUpdateOne) SetMenuCheckStrictly(v int) *TenantPlanUpdateOne {
+func (_u *TenantPlanUpdateOne) SetMenuCheckStrictly(v uint32) *TenantPlanUpdateOne {
 	_u.mutation.ResetMenuCheckStrictly()
 	_u.mutation.SetMenuCheckStrictly(v)
 	return _u
 }
 
 // SetNillableMenuCheckStrictly sets the "menu_check_strictly" field if the given value is not nil.
-func (_u *TenantPlanUpdateOne) SetNillableMenuCheckStrictly(v *int) *TenantPlanUpdateOne {
+func (_u *TenantPlanUpdateOne) SetNillableMenuCheckStrictly(v *uint32) *TenantPlanUpdateOne {
 	if v != nil {
 		_u.SetMenuCheckStrictly(*v)
 	}
@@ -324,7 +356,7 @@ func (_u *TenantPlanUpdateOne) SetNillableMenuCheckStrictly(v *int) *TenantPlanU
 }
 
 // AddMenuCheckStrictly adds value to the "menu_check_strictly" field.
-func (_u *TenantPlanUpdateOne) AddMenuCheckStrictly(v int) *TenantPlanUpdateOne {
+func (_u *TenantPlanUpdateOne) AddMenuCheckStrictly(v int32) *TenantPlanUpdateOne {
 	_u.mutation.AddMenuCheckStrictly(v)
 	return _u
 }
@@ -438,6 +470,14 @@ func (_u *TenantPlanUpdateOne) sqlSave(ctx context.Context) (_node *TenantPlan, 
 			sqljson.Append(u, tenantplan.FieldMenuIds, value)
 		})
 	}
+	if value, ok := _u.mutation.APIIds(); ok {
+		_spec.SetField(tenantplan.FieldAPIIds, field.TypeJSON, value)
+	}
+	if value, ok := _u.mutation.AppendedAPIIds(); ok {
+		_spec.AddModifier(func(u *sql.UpdateBuilder) {
+			sqljson.Append(u, tenantplan.FieldAPIIds, value)
+		})
+	}
 	if value, ok := _u.mutation.Remark(); ok {
 		_spec.SetField(tenantplan.FieldRemark, field.TypeJSON, value)
 	}
@@ -447,10 +487,10 @@ func (_u *TenantPlanUpdateOne) sqlSave(ctx context.Context) (_node *TenantPlan, 
 		})
 	}
 	if value, ok := _u.mutation.MenuCheckStrictly(); ok {
-		_spec.SetField(tenantplan.FieldMenuCheckStrictly, field.TypeInt, value)
+		_spec.SetField(tenantplan.FieldMenuCheckStrictly, field.TypeUint32, value)
 	}
 	if value, ok := _u.mutation.AddedMenuCheckStrictly(); ok {
-		_spec.AddField(tenantplan.FieldMenuCheckStrictly, field.TypeInt, value)
+		_spec.AddField(tenantplan.FieldMenuCheckStrictly, field.TypeUint32, value)
 	}
 	_spec.AddModifiers(_u.modifiers...)
 	_node = &TenantPlan{config: _u.config}

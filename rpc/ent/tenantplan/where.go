@@ -75,7 +75,7 @@ func PackageName(v string) predicate.TenantPlan {
 }
 
 // MenuCheckStrictly applies equality check predicate on the "menu_check_strictly" field. It's identical to MenuCheckStrictlyEQ.
-func MenuCheckStrictly(v int) predicate.TenantPlan {
+func MenuCheckStrictly(v uint32) predicate.TenantPlan {
 	return predicate.TenantPlan(sql.FieldEQ(FieldMenuCheckStrictly, v))
 }
 
@@ -275,42 +275,42 @@ func PackageNameContainsFold(v string) predicate.TenantPlan {
 }
 
 // MenuCheckStrictlyEQ applies the EQ predicate on the "menu_check_strictly" field.
-func MenuCheckStrictlyEQ(v int) predicate.TenantPlan {
+func MenuCheckStrictlyEQ(v uint32) predicate.TenantPlan {
 	return predicate.TenantPlan(sql.FieldEQ(FieldMenuCheckStrictly, v))
 }
 
 // MenuCheckStrictlyNEQ applies the NEQ predicate on the "menu_check_strictly" field.
-func MenuCheckStrictlyNEQ(v int) predicate.TenantPlan {
+func MenuCheckStrictlyNEQ(v uint32) predicate.TenantPlan {
 	return predicate.TenantPlan(sql.FieldNEQ(FieldMenuCheckStrictly, v))
 }
 
 // MenuCheckStrictlyIn applies the In predicate on the "menu_check_strictly" field.
-func MenuCheckStrictlyIn(vs ...int) predicate.TenantPlan {
+func MenuCheckStrictlyIn(vs ...uint32) predicate.TenantPlan {
 	return predicate.TenantPlan(sql.FieldIn(FieldMenuCheckStrictly, vs...))
 }
 
 // MenuCheckStrictlyNotIn applies the NotIn predicate on the "menu_check_strictly" field.
-func MenuCheckStrictlyNotIn(vs ...int) predicate.TenantPlan {
+func MenuCheckStrictlyNotIn(vs ...uint32) predicate.TenantPlan {
 	return predicate.TenantPlan(sql.FieldNotIn(FieldMenuCheckStrictly, vs...))
 }
 
 // MenuCheckStrictlyGT applies the GT predicate on the "menu_check_strictly" field.
-func MenuCheckStrictlyGT(v int) predicate.TenantPlan {
+func MenuCheckStrictlyGT(v uint32) predicate.TenantPlan {
 	return predicate.TenantPlan(sql.FieldGT(FieldMenuCheckStrictly, v))
 }
 
 // MenuCheckStrictlyGTE applies the GTE predicate on the "menu_check_strictly" field.
-func MenuCheckStrictlyGTE(v int) predicate.TenantPlan {
+func MenuCheckStrictlyGTE(v uint32) predicate.TenantPlan {
 	return predicate.TenantPlan(sql.FieldGTE(FieldMenuCheckStrictly, v))
 }
 
 // MenuCheckStrictlyLT applies the LT predicate on the "menu_check_strictly" field.
-func MenuCheckStrictlyLT(v int) predicate.TenantPlan {
+func MenuCheckStrictlyLT(v uint32) predicate.TenantPlan {
 	return predicate.TenantPlan(sql.FieldLT(FieldMenuCheckStrictly, v))
 }
 
 // MenuCheckStrictlyLTE applies the LTE predicate on the "menu_check_strictly" field.
-func MenuCheckStrictlyLTE(v int) predicate.TenantPlan {
+func MenuCheckStrictlyLTE(v uint32) predicate.TenantPlan {
 	return predicate.TenantPlan(sql.FieldLTE(FieldMenuCheckStrictly, v))
 }
 

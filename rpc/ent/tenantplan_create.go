@@ -74,6 +74,12 @@ func (_c *TenantPlanCreate) SetMenuIds(v []string) *TenantPlanCreate {
 	return _c
 }
 
+// SetAPIIds sets the "api_ids" field.
+func (_c *TenantPlanCreate) SetAPIIds(v []string) *TenantPlanCreate {
+	_c.mutation.SetAPIIds(v)
+	return _c
+}
+
 // SetRemark sets the "remark" field.
 func (_c *TenantPlanCreate) SetRemark(v []string) *TenantPlanCreate {
 	_c.mutation.SetRemark(v)
@@ -81,7 +87,7 @@ func (_c *TenantPlanCreate) SetRemark(v []string) *TenantPlanCreate {
 }
 
 // SetMenuCheckStrictly sets the "menu_check_strictly" field.
-func (_c *TenantPlanCreate) SetMenuCheckStrictly(v int) *TenantPlanCreate {
+func (_c *TenantPlanCreate) SetMenuCheckStrictly(v uint32) *TenantPlanCreate {
 	_c.mutation.SetMenuCheckStrictly(v)
 	return _c
 }
@@ -167,6 +173,9 @@ func (_c *TenantPlanCreate) check() error {
 	if _, ok := _c.mutation.MenuIds(); !ok {
 		return &ValidationError{Name: "menu_ids", err: errors.New(`ent: missing required field "TenantPlan.menu_ids"`)}
 	}
+	if _, ok := _c.mutation.APIIds(); !ok {
+		return &ValidationError{Name: "api_ids", err: errors.New(`ent: missing required field "TenantPlan.api_ids"`)}
+	}
 	if _, ok := _c.mutation.Remark(); !ok {
 		return &ValidationError{Name: "remark", err: errors.New(`ent: missing required field "TenantPlan.remark"`)}
 	}
@@ -225,12 +234,16 @@ func (_c *TenantPlanCreate) createSpec() (*TenantPlan, *sqlgraph.CreateSpec) {
 		_spec.SetField(tenantplan.FieldMenuIds, field.TypeJSON, value)
 		_node.MenuIds = value
 	}
+	if value, ok := _c.mutation.APIIds(); ok {
+		_spec.SetField(tenantplan.FieldAPIIds, field.TypeJSON, value)
+		_node.APIIds = value
+	}
 	if value, ok := _c.mutation.Remark(); ok {
 		_spec.SetField(tenantplan.FieldRemark, field.TypeJSON, value)
 		_node.Remark = value
 	}
 	if value, ok := _c.mutation.MenuCheckStrictly(); ok {
-		_spec.SetField(tenantplan.FieldMenuCheckStrictly, field.TypeInt, value)
+		_spec.SetField(tenantplan.FieldMenuCheckStrictly, field.TypeUint32, value)
 		_node.MenuCheckStrictly = value
 	}
 	return _node, _spec

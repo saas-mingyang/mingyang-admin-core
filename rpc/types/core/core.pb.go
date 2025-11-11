@@ -3371,11 +3371,12 @@ func (x *TenantListResp) GetData() []*TenantInfo {
 
 type TenantPlanCreateReq struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	PackageName       string                 `protobuf:"bytes,1,opt,name=package_name,json=packageName,proto3" json:"package_name,omitempty"`
+	PackageName       *string                `protobuf:"bytes,1,opt,name=package_name,json=packageName,proto3,oneof" json:"package_name,omitempty"`
 	MenuIds           []string               `protobuf:"bytes,2,rep,name=menu_ids,json=menuIds,proto3" json:"menu_ids,omitempty"`
 	Remark            []string               `protobuf:"bytes,3,rep,name=remark,proto3" json:"remark,omitempty"`
-	MenuCheckStrictly int32                  `protobuf:"varint,4,opt,name=menu_check_strictly,json=menuCheckStrictly,proto3" json:"menu_check_strictly,omitempty"`
-	Status            int32                  `protobuf:"varint,5,opt,name=status,proto3" json:"status,omitempty"`
+	MenuCheckStrictly *uint32                `protobuf:"varint,4,opt,name=menu_check_strictly,json=menuCheckStrictly,proto3,oneof" json:"menu_check_strictly,omitempty"`
+	Status            *uint32                `protobuf:"varint,5,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	ApiIds            []string               `protobuf:"bytes,6,rep,name=api_ids,json=apiIds,proto3" json:"api_ids,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -3411,8 +3412,8 @@ func (*TenantPlanCreateReq) Descriptor() ([]byte, []int) {
 }
 
 func (x *TenantPlanCreateReq) GetPackageName() string {
-	if x != nil {
-		return x.PackageName
+	if x != nil && x.PackageName != nil {
+		return *x.PackageName
 	}
 	return ""
 }
@@ -3431,18 +3432,25 @@ func (x *TenantPlanCreateReq) GetRemark() []string {
 	return nil
 }
 
-func (x *TenantPlanCreateReq) GetMenuCheckStrictly() int32 {
-	if x != nil {
-		return x.MenuCheckStrictly
+func (x *TenantPlanCreateReq) GetMenuCheckStrictly() uint32 {
+	if x != nil && x.MenuCheckStrictly != nil {
+		return *x.MenuCheckStrictly
 	}
 	return 0
 }
 
-func (x *TenantPlanCreateReq) GetStatus() int32 {
-	if x != nil {
-		return x.Status
+func (x *TenantPlanCreateReq) GetStatus() uint32 {
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return 0
+}
+
+func (x *TenantPlanCreateReq) GetApiIds() []string {
+	if x != nil {
+		return x.ApiIds
+	}
+	return nil
 }
 
 type TenantPlanInfo struct {
@@ -5001,13 +5009,17 @@ const file_rpc_core_proto_rawDesc = "" +
 	"_parent_id\"L\n" +
 	"\x0eTenantListResp\x12\x14\n" +
 	"\x05total\x18\x01 \x01(\x04R\x05total\x12$\n" +
-	"\x04data\x18\x02 \x03(\v2\x10.core.TenantInfoR\x04data\"\xb3\x01\n" +
-	"\x13TenantPlanCreateReq\x12!\n" +
-	"\fpackage_name\x18\x01 \x01(\tR\vpackageName\x12\x19\n" +
+	"\x04data\x18\x02 \x03(\v2\x10.core.TenantInfoR\x04data\"\x8f\x02\n" +
+	"\x13TenantPlanCreateReq\x12&\n" +
+	"\fpackage_name\x18\x01 \x01(\tH\x00R\vpackageName\x88\x01\x01\x12\x19\n" +
 	"\bmenu_ids\x18\x02 \x03(\tR\amenuIds\x12\x16\n" +
-	"\x06remark\x18\x03 \x03(\tR\x06remark\x12.\n" +
-	"\x13menu_check_strictly\x18\x04 \x01(\x05R\x11menuCheckStrictly\x12\x16\n" +
-	"\x06status\x18\x05 \x01(\x05R\x06status\"\xfc\x01\n" +
+	"\x06remark\x18\x03 \x03(\tR\x06remark\x123\n" +
+	"\x13menu_check_strictly\x18\x04 \x01(\rH\x01R\x11menuCheckStrictly\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x05 \x01(\rH\x02R\x06status\x88\x01\x01\x12\x17\n" +
+	"\aapi_ids\x18\x06 \x03(\tR\x06apiIdsB\x0f\n" +
+	"\r_package_nameB\x16\n" +
+	"\x14_menu_check_strictlyB\t\n" +
+	"\a_status\"\xfc\x01\n" +
 	"\x0eTenantPlanInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -5498,6 +5510,7 @@ func file_rpc_core_proto_init() {
 	file_rpc_core_proto_msgTypes[38].OneofWrappers = []any{}
 	file_rpc_core_proto_msgTypes[42].OneofWrappers = []any{}
 	file_rpc_core_proto_msgTypes[43].OneofWrappers = []any{}
+	file_rpc_core_proto_msgTypes[45].OneofWrappers = []any{}
 	file_rpc_core_proto_msgTypes[51].OneofWrappers = []any{}
 	file_rpc_core_proto_msgTypes[52].OneofWrappers = []any{}
 	file_rpc_core_proto_msgTypes[56].OneofWrappers = []any{}

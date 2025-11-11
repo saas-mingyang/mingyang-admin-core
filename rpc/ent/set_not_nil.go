@@ -2477,6 +2477,30 @@ func (_m *TenantPlanCreate) SetNotNilMenuIds(value []string) *TenantPlanCreate {
 }
 
 // set field if value's pointer is not nil.
+func (_m *TenantPlanUpdate) SetNotNilAPIIds(value []string) *TenantPlanUpdate {
+	if value != nil {
+		return _m.SetAPIIds(value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanUpdateOne) SetNotNilAPIIds(value []string) *TenantPlanUpdateOne {
+	if value != nil {
+		return _m.SetAPIIds(value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
+func (_m *TenantPlanCreate) SetNotNilAPIIds(value []string) *TenantPlanCreate {
+	if value != nil {
+		return _m.SetAPIIds(value)
+	}
+	return _m
+}
+
+// set field if value's pointer is not nil.
 func (_m *TenantPlanUpdate) SetNotNilRemark(value []string) *TenantPlanUpdate {
 	if value != nil {
 		return _m.SetRemark(value)
@@ -2501,7 +2525,7 @@ func (_m *TenantPlanCreate) SetNotNilRemark(value []string) *TenantPlanCreate {
 }
 
 // set field if value's pointer is not nil.
-func (_m *TenantPlanUpdate) SetNotNilMenuCheckStrictly(value *int) *TenantPlanUpdate {
+func (_m *TenantPlanUpdate) SetNotNilMenuCheckStrictly(value *uint32) *TenantPlanUpdate {
 	if value != nil {
 		return _m.SetMenuCheckStrictly(*value)
 	}
@@ -2509,7 +2533,7 @@ func (_m *TenantPlanUpdate) SetNotNilMenuCheckStrictly(value *int) *TenantPlanUp
 }
 
 // set field if value's pointer is not nil.
-func (_m *TenantPlanUpdateOne) SetNotNilMenuCheckStrictly(value *int) *TenantPlanUpdateOne {
+func (_m *TenantPlanUpdateOne) SetNotNilMenuCheckStrictly(value *uint32) *TenantPlanUpdateOne {
 	if value != nil {
 		return _m.SetMenuCheckStrictly(*value)
 	}
@@ -2517,7 +2541,7 @@ func (_m *TenantPlanUpdateOne) SetNotNilMenuCheckStrictly(value *int) *TenantPla
 }
 
 // set field if value's pointer is not nil.
-func (_m *TenantPlanCreate) SetNotNilMenuCheckStrictly(value *int) *TenantPlanCreate {
+func (_m *TenantPlanCreate) SetNotNilMenuCheckStrictly(value *uint32) *TenantPlanCreate {
 	if value != nil {
 		return _m.SetMenuCheckStrictly(*value)
 	}

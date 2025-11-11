@@ -7587,6 +7587,14 @@
       "description": "TenantPlan info | 租户套餐信息",
       "type": "object",
       "properties": {
+        "apiIds": {
+          "description": "API IDs | API列表",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "ApiIds"
+        },
         "createdAt": {
           "description": "Create date | 创建日期",
           "type": "integer",
@@ -7602,7 +7610,7 @@
         "menuCheckStrictly": {
           "description": "Menu check strictly | 菜单树选择项是否关联显示",
           "type": "integer",
-          "format": "int32",
+          "format": "uint32",
           "x-go-name": "MenuCheckStrictly"
         },
         "menuIds": {

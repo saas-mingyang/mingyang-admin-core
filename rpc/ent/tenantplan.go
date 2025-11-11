@@ -28,10 +28,12 @@ type TenantPlan struct {
 	PackageName string `json:"package_name,omitempty"`
 	// 菜单ID
 	MenuIds []string `json:"menu_ids,omitempty"`
+	// API ID
+	APIIds []string `json:"api_ids,omitempty"`
 	// 备注
 	Remark []string `json:"remark,omitempty"`
 	// 菜单树选择项是否关联显示
-	MenuCheckStrictly int `json:"menu_check_strictly,omitempty"`
+	MenuCheckStrictly uint32 `json:"menu_check_strictly,omitempty"`
 	selectValues      sql.SelectValues
 }
 
@@ -40,7 +42,7 @@ func (*TenantPlan) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case tenantplan.FieldMenuIds, tenantplan.FieldRemark:
+		case tenantplan.FieldMenuIds, tenantplan.FieldAPIIds, tenantplan.FieldRemark:
 			values[i] = new([]byte)
 		case tenantplan.FieldID, tenantplan.FieldStatus, tenantplan.FieldMenuCheckStrictly:
 			values[i] = new(sql.NullInt64)
@@ -101,6 +103,14 @@ func (_m *TenantPlan) assignValues(columns []string, values []any) error {
 					return fmt.Errorf("unmarshal field menu_ids: %w", err)
 				}
 			}
+		case tenantplan.FieldAPIIds:
+			if value, ok := values[i].(*[]byte); !ok {
+				return fmt.Errorf("unexpected type %T for field api_ids", values[i])
+			} else if value != nil && len(*value) > 0 {
+				if err := json.Unmarshal(*value, &_m.APIIds); err != nil {
+					return fmt.Errorf("unmarshal field api_ids: %w", err)
+				}
+			}
 		case tenantplan.FieldRemark:
 			if value, ok := values[i].(*[]byte); !ok {
 				return fmt.Errorf("unexpected type %T for field remark", values[i])
@@ -113,7 +123,7 @@ func (_m *TenantPlan) assignValues(columns []string, values []any) error {
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field menu_check_strictly", values[i])
 			} else if value.Valid {
-				_m.MenuCheckStrictly = int(value.Int64)
+				_m.MenuCheckStrictly = uint32(value.Int64)
 			}
 		default:
 			_m.selectValues.Set(columns[i], values[i])
@@ -165,6 +175,9 @@ func (_m *TenantPlan) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("menu_ids=")
 	builder.WriteString(fmt.Sprintf("%v", _m.MenuIds))
+	builder.WriteString(", ")
+	builder.WriteString("api_ids=")
+	builder.WriteString(fmt.Sprintf("%v", _m.APIIds))
 	builder.WriteString(", ")
 	builder.WriteString("remark=")
 	builder.WriteString(fmt.Sprintf("%v", _m.Remark))

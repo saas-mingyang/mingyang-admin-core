@@ -13,13 +13,16 @@ type (
         PackageName *string `json:"packageName,optional" validate:"omitempty,max=50"`
 
         // Menu IDs | 菜单ID列表
-        MenuIds []string `json:"menuIds,optional"`
+        MenuIds []string `json:"menuIds"`
+
+        // API IDs | API列表
+        ApiIds []string `json:"apiIds"`
 
         // Remark | 备注
-        Remark []string `json:"remark,optional"`
+        Remark []string `json:"remark"`
 
         // Menu check strictly | 菜单树选择项是否关联显示
-        MenuCheckStrictly *int32 `json:"menuCheckStrictly,optional"`
+        MenuCheckStrictly *uint32 `json:"menuCheckStrictly,optional"`
     }
 
         // TenantPlan list response | 租户套餐列表返回

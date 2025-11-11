@@ -2,7 +2,6 @@ package authority
 
 import (
 	"context"
-
 	"github.com/zeromicro/go-zero/core/errorx"
 
 	"github.com/saas-mingyang/mingyang-admin-common/i18n"
@@ -29,11 +28,14 @@ func NewCreateOrUpdateApiAuthorityLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *CreateOrUpdateApiAuthorityLogic) CreateOrUpdateApiAuthority(req *types.CreateOrUpdateApiAuthorityReq) (resp *types.BaseMsgResp, err error) {
+	// 方法1: 直接判断长度
+	if len(req.Data) == 0 {
+		return nil, errorx.NewInvalidArgumentError("data is empty")
+	}
 	data, err := l.svcCtx.CoreRpc.GetRoleById(l.ctx, &core.IDReq{Id: req.RoleId})
 	if err != nil {
 		return nil, err
 	}
-
 	// clear old policies
 	var oldPolicies [][]string
 	oldPolicies, err = l.svcCtx.Casbin.GetFilteredPolicy(0, *data.Code)

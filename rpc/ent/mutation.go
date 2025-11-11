@@ -11369,10 +11369,12 @@ type TenantPlanMutation struct {
 	package_name           *string
 	menu_ids               *[]string
 	appendmenu_ids         []string
+	api_ids                *[]string
+	appendapi_ids          []string
 	remark                 *[]string
 	appendremark           []string
-	menu_check_strictly    *int
-	addmenu_check_strictly *int
+	menu_check_strictly    *uint32
+	addmenu_check_strictly *int32
 	clearedFields          map[string]struct{}
 	done                   bool
 	oldValue               func(context.Context) (*TenantPlan, error)
@@ -11712,6 +11714,57 @@ func (m *TenantPlanMutation) ResetMenuIds() {
 	m.appendmenu_ids = nil
 }
 
+// SetAPIIds sets the "api_ids" field.
+func (m *TenantPlanMutation) SetAPIIds(s []string) {
+	m.api_ids = &s
+	m.appendapi_ids = nil
+}
+
+// APIIds returns the value of the "api_ids" field in the mutation.
+func (m *TenantPlanMutation) APIIds() (r []string, exists bool) {
+	v := m.api_ids
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldAPIIds returns the old "api_ids" field's value of the TenantPlan entity.
+// If the TenantPlan object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *TenantPlanMutation) OldAPIIds(ctx context.Context) (v []string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldAPIIds is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldAPIIds requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldAPIIds: %w", err)
+	}
+	return oldValue.APIIds, nil
+}
+
+// AppendAPIIds adds s to the "api_ids" field.
+func (m *TenantPlanMutation) AppendAPIIds(s []string) {
+	m.appendapi_ids = append(m.appendapi_ids, s...)
+}
+
+// AppendedAPIIds returns the list of values that were appended to the "api_ids" field in this mutation.
+func (m *TenantPlanMutation) AppendedAPIIds() ([]string, bool) {
+	if len(m.appendapi_ids) == 0 {
+		return nil, false
+	}
+	return m.appendapi_ids, true
+}
+
+// ResetAPIIds resets all changes to the "api_ids" field.
+func (m *TenantPlanMutation) ResetAPIIds() {
+	m.api_ids = nil
+	m.appendapi_ids = nil
+}
+
 // SetRemark sets the "remark" field.
 func (m *TenantPlanMutation) SetRemark(s []string) {
 	m.remark = &s
@@ -11764,13 +11817,13 @@ func (m *TenantPlanMutation) ResetRemark() {
 }
 
 // SetMenuCheckStrictly sets the "menu_check_strictly" field.
-func (m *TenantPlanMutation) SetMenuCheckStrictly(i int) {
-	m.menu_check_strictly = &i
+func (m *TenantPlanMutation) SetMenuCheckStrictly(u uint32) {
+	m.menu_check_strictly = &u
 	m.addmenu_check_strictly = nil
 }
 
 // MenuCheckStrictly returns the value of the "menu_check_strictly" field in the mutation.
-func (m *TenantPlanMutation) MenuCheckStrictly() (r int, exists bool) {
+func (m *TenantPlanMutation) MenuCheckStrictly() (r uint32, exists bool) {
 	v := m.menu_check_strictly
 	if v == nil {
 		return
@@ -11781,7 +11834,7 @@ func (m *TenantPlanMutation) MenuCheckStrictly() (r int, exists bool) {
 // OldMenuCheckStrictly returns the old "menu_check_strictly" field's value of the TenantPlan entity.
 // If the TenantPlan object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *TenantPlanMutation) OldMenuCheckStrictly(ctx context.Context) (v int, err error) {
+func (m *TenantPlanMutation) OldMenuCheckStrictly(ctx context.Context) (v uint32, err error) {
 	if !m.op.Is(OpUpdateOne) {
 		return v, errors.New("OldMenuCheckStrictly is only allowed on UpdateOne operations")
 	}
@@ -11795,17 +11848,17 @@ func (m *TenantPlanMutation) OldMenuCheckStrictly(ctx context.Context) (v int, e
 	return oldValue.MenuCheckStrictly, nil
 }
 
-// AddMenuCheckStrictly adds i to the "menu_check_strictly" field.
-func (m *TenantPlanMutation) AddMenuCheckStrictly(i int) {
+// AddMenuCheckStrictly adds u to the "menu_check_strictly" field.
+func (m *TenantPlanMutation) AddMenuCheckStrictly(u int32) {
 	if m.addmenu_check_strictly != nil {
-		*m.addmenu_check_strictly += i
+		*m.addmenu_check_strictly += u
 	} else {
-		m.addmenu_check_strictly = &i
+		m.addmenu_check_strictly = &u
 	}
 }
 
 // AddedMenuCheckStrictly returns the value that was added to the "menu_check_strictly" field in this mutation.
-func (m *TenantPlanMutation) AddedMenuCheckStrictly() (r int, exists bool) {
+func (m *TenantPlanMutation) AddedMenuCheckStrictly() (r int32, exists bool) {
 	v := m.addmenu_check_strictly
 	if v == nil {
 		return
@@ -11853,7 +11906,7 @@ func (m *TenantPlanMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *TenantPlanMutation) Fields() []string {
-	fields := make([]string, 0, 7)
+	fields := make([]string, 0, 8)
 	if m.created_at != nil {
 		fields = append(fields, tenantplan.FieldCreatedAt)
 	}
@@ -11868,6 +11921,9 @@ func (m *TenantPlanMutation) Fields() []string {
 	}
 	if m.menu_ids != nil {
 		fields = append(fields, tenantplan.FieldMenuIds)
+	}
+	if m.api_ids != nil {
+		fields = append(fields, tenantplan.FieldAPIIds)
 	}
 	if m.remark != nil {
 		fields = append(fields, tenantplan.FieldRemark)
@@ -11893,6 +11949,8 @@ func (m *TenantPlanMutation) Field(name string) (ent.Value, bool) {
 		return m.PackageName()
 	case tenantplan.FieldMenuIds:
 		return m.MenuIds()
+	case tenantplan.FieldAPIIds:
+		return m.APIIds()
 	case tenantplan.FieldRemark:
 		return m.Remark()
 	case tenantplan.FieldMenuCheckStrictly:
@@ -11916,6 +11974,8 @@ func (m *TenantPlanMutation) OldField(ctx context.Context, name string) (ent.Val
 		return m.OldPackageName(ctx)
 	case tenantplan.FieldMenuIds:
 		return m.OldMenuIds(ctx)
+	case tenantplan.FieldAPIIds:
+		return m.OldAPIIds(ctx)
 	case tenantplan.FieldRemark:
 		return m.OldRemark(ctx)
 	case tenantplan.FieldMenuCheckStrictly:
@@ -11964,6 +12024,13 @@ func (m *TenantPlanMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetMenuIds(v)
 		return nil
+	case tenantplan.FieldAPIIds:
+		v, ok := value.([]string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetAPIIds(v)
+		return nil
 	case tenantplan.FieldRemark:
 		v, ok := value.([]string)
 		if !ok {
@@ -11972,7 +12039,7 @@ func (m *TenantPlanMutation) SetField(name string, value ent.Value) error {
 		m.SetRemark(v)
 		return nil
 	case tenantplan.FieldMenuCheckStrictly:
-		v, ok := value.(int)
+		v, ok := value.(uint32)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
@@ -12021,7 +12088,7 @@ func (m *TenantPlanMutation) AddField(name string, value ent.Value) error {
 		m.AddStatus(v)
 		return nil
 	case tenantplan.FieldMenuCheckStrictly:
-		v, ok := value.(int)
+		v, ok := value.(int32)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
@@ -12077,6 +12144,9 @@ func (m *TenantPlanMutation) ResetField(name string) error {
 		return nil
 	case tenantplan.FieldMenuIds:
 		m.ResetMenuIds()
+		return nil
+	case tenantplan.FieldAPIIds:
+		m.ResetAPIIds()
 		return nil
 	case tenantplan.FieldRemark:
 		m.ResetRemark()

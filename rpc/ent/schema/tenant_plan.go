@@ -16,10 +16,11 @@ type TenantPlan struct {
 
 func (TenantPlan) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("package_name").Unique().Comment("套餐名称"),
+		field.String("package_name").Comment("套餐名称"),
 		field.Strings("menu_ids").Comment("菜单ID"),
+		field.Strings("api_ids").Comment("API ID"),
 		field.Strings("remark").Comment("备注"),
-		field.Int("menu_check_strictly").Comment("菜单树选择项是否关联显示"),
+		field.Uint32("menu_check_strictly").Comment("菜单树选择项是否关联显示"),
 	}
 }
 

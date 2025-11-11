@@ -389,11 +389,12 @@ message TenantListResp {
 }
 
 message TenantPlanCreateReq {
-  string package_name = 1;
+  optional string package_name = 1;
   repeated string menu_ids = 2;
   repeated string remark = 3;
-  int32 menu_check_strictly = 4;
-  int32 status = 5;
+  optional uint32 menu_check_strictly = 4;
+  optional uint32 status = 5;
+  repeated string api_ids = 6;
 }
 
 message TenantPlanInfo {

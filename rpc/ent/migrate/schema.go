@@ -314,10 +314,11 @@ var (
 		{Name: "created_at", Type: field.TypeTime, Comment: "Create Time | 创建日期"},
 		{Name: "updated_at", Type: field.TypeTime, Comment: "Update Time | 修改日期"},
 		{Name: "status", Type: field.TypeUint8, Nullable: true, Comment: "Status 1: normal 2: ban | 状态 1 正常 2 禁用", Default: 1},
-		{Name: "package_name", Type: field.TypeString, Unique: true, Comment: "套餐名称"},
+		{Name: "package_name", Type: field.TypeString, Comment: "套餐名称"},
 		{Name: "menu_ids", Type: field.TypeJSON, Comment: "菜单ID"},
+		{Name: "api_ids", Type: field.TypeJSON, Comment: "API ID"},
 		{Name: "remark", Type: field.TypeJSON, Comment: "备注"},
-		{Name: "menu_check_strictly", Type: field.TypeInt, Comment: "菜单树选择项是否关联显示"},
+		{Name: "menu_check_strictly", Type: field.TypeUint32, Comment: "菜单树选择项是否关联显示"},
 	}
 	// SyTenantPlansTable holds the schema information for the "sy_tenant_plans" table.
 	SyTenantPlansTable = &schema.Table{

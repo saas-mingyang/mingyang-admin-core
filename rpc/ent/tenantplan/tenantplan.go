@@ -23,6 +23,8 @@ const (
 	FieldPackageName = "package_name"
 	// FieldMenuIds holds the string denoting the menu_ids field in the database.
 	FieldMenuIds = "menu_ids"
+	// FieldAPIIds holds the string denoting the api_ids field in the database.
+	FieldAPIIds = "api_ids"
 	// FieldRemark holds the string denoting the remark field in the database.
 	FieldRemark = "remark"
 	// FieldMenuCheckStrictly holds the string denoting the menu_check_strictly field in the database.
@@ -39,6 +41,7 @@ var Columns = []string{
 	FieldStatus,
 	FieldPackageName,
 	FieldMenuIds,
+	FieldAPIIds,
 	FieldRemark,
 	FieldMenuCheckStrictly,
 }
