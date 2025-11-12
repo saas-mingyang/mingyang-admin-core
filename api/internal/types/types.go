@@ -1783,7 +1783,7 @@ type TenantListReq struct {
 	Name *string `json:"name,optional" validate:"omitempty,max=50"`
 	// Leader | 部门负责人
 	// max length : 20
-	AdminId *uint64 `json:"adminId,optional" validate:"omitempty,max=20"`
+	AdminId *int64 `json:"adminId,optional" validate:"omitempty,max=20"`
 	// Status | 状态
 	// max : 20
 	Status *uint32 `json:"status,optional" validate:"omitempty,lt=20"`
